@@ -1,19 +1,66 @@
 <ion-menu [content]="content">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+  
+
+<ion-content class="side">
+<section class="sideAccount">
+    <ion-item no-lines>
+      <button menuClose clear ion-button item-right>
+        <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>
       </button>
-    </ion-list>
-  </ion-content>
+    </ion-item>
+  <table class="sideAccountTable">
+    <tr>
+      <td rowspan="2">
+        <img src="assets/img/user.png" width="50px"/>
+      </td>
+      <td>
+        홍길동
+      </td>
+    </tr>
+    <tr>
+      <td>
+        201300000
+      </td>
+    </tr>
+  </table>
+  <ion-item no-lines>
+      <button clear ion-button item-right>
+        <ion-icon name="md-mail" class="account-icon"></ion-icon>
+      </button>
+      <button clear ion-button item-right>
+        <ion-icon name="ios-apps" class="account-icon"></ion-icon>
+      </button>
+  </ion-item>
+</section>
 
+  <table class="sideTable">
+      <tr>
+        <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>
+        <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>
+      </tr>
+      <tr>
+          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>
+      </tr>
+      <tr>
+          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>
+      </tr>
+      <tr>
+          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>
+      </tr>
+      <tr>
+          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>
+      </tr>
+    </table>
+
+
+  </ion-content>
 </ion-menu>
+
 
 <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
 <ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

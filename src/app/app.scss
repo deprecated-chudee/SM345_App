@@ -14,3 +14,64 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+ion-content.side.content.content-ios,
+ion-content.side.content.content-md,
+ion-content.side.content.content-wp {
+    background: #38484f;
+}
+
+.sideTable {
+    margin: 10%;
+    width: 80%;
+}
+
+.sideTable img {
+    width: 25px;
+    vertical-align: top;
+    line-height: 30px;
+    margin-top: 0.3px;
+}
+
+.sideTable td {
+    vertical-align: middle;
+    color: whitesmoke;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 30px;
+    height: 30px;
+    margin: 10px;
+    padding-bottom: 30px;
+    color: #A4AAAB;
+}
+
+.sideAccount {
+    background: #273338;
+
+    ion-item.item.item-block.item-ios,
+    ion-item.item.item-block.item-md {
+        background: none;
+    }
+
+    table.sideAccountTable {
+        margin-left: 10%;
+        width: 80%;
+    }
+
+    .sideAccountTable td{
+        width: 35px;
+        color: white;
+        font-weight: bold;
+    }
+
+    .account-icon {
+        color: #2dfffe;
+    }
+
+    .item-ios .item-button,
+    .item-md .item-button {
+        padding: 3px;
+        height: 24px;
+        font-size: 15px;
+    }
+}
