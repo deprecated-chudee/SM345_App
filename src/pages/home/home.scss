@@ -1,3 +1,223 @@
-page-home {
+.page-home {
+    background : #EDEDED;
+    
+    table.calendarText {
+        width: 100%;
+        background: white;
+    }
 
+    table.calendarText tr:first-child  {
+            border-bottom: 0.55px solid lightgray;
+        
+    }
+
+    .calendarText tr td:first-child {
+        text-align: right;
+        padding-right:10px;
+        width: 50%;
+    }
+    
+    table.calendarText tr:first-child td {
+        text-align: center;
+        padding-bottom: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #38484f;
+        padding-top: 15px;
+    }
+
+    .calendarText tr td:nth-child(2) {
+        padding-left:10px;
+        width: 50%;
+    }
+
+
+    .calendarText td {
+        padding:5px;
+        font-size: 13px;
+    }
+
+    .calendarText tr:nth-child(2) td {
+        padding-top: 15px;
+    }
+
+    .calendarText tr:last-child td {
+        padding-bottom: 15px;
+    }
+
+    //멘토방 슬라이드 
+    table.mentorTable {
+        width: 100%;
+        background: white;
+        margin-top: 10px;
+    }
+
+
+    .mentorTable tr td:first-child {
+        text-align: right;
+        padding-right:10px;
+        width: 50%;
+    }
+    
+    table.mentorTable tr:first-child td {
+        text-align: center;
+        padding-bottom: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #38484f;
+        padding-top: 15px;
+    }
+
+    .mentorTable td {
+        padding:5px;
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .mentorTable tr:nth-child(2) td {
+        padding-top: 15px;
+    }
+
+    .mentorTable tr:last-child td {
+        padding-bottom: 15px;
+    }
+
+
+    ion-slide img {
+        width: 100px;
+        height:100px;
+    }
+
+    .mentor-banner {
+        background: white;
+        width: 100%;
+    }
+
+    .mentor-banner-in {
+        width: 100%;
+    }
+
+    .mentor-banner-in tr td {
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .mentor-banner-in tr:nth-child(2) td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    ion-slide.swiper-slide.swiper-slide-active {
+        width: 100%;
+    }
+
+    //공지사항
+    table.noticeTable {
+        width: 100%;
+        background: white;
+        margin-top: 10px;
+    }
+
+    table.noticeTable tr:first-child  {
+            border-bottom: 0.55px solid lightgray;
+        
+    }
+
+    .noticeTable tr td:first-child {
+        text-align: right;
+        padding-right:10px;
+        width: 50%;
+    }
+    
+    table.noticeTable tr:first-child td {
+        text-align: center;
+        padding-bottom: 15px;
+        font-size: 20px;
+        font-weight: bold;
+        color: #38484f;
+        padding-top: 15px;
+    }
+
+    .noticeTable tr td:nth-child(2) {
+        padding-left:10px;
+        width: 50%;
+    }
+
+
+    .noticeTable td {
+        padding:5px;
+        font-size: 13px;
+    }
+
+    .noticeTable tr:nth-child(2) td {
+        padding-top: 15px;
+    }
+
+    .noticeTable tr:last-child td {
+        padding-bottom: 15px;
+    }
+
+    ion-icon.icon.icon-ios.ion-ios-add-circle-outline,
+    ion-icon.icon.icon-md.ion-ios-add-circle-outline  {
+        margin-right: 5px;
+        line-height: 10px;
+        vertical-align: middle;
+        color: gray;
+    }
+
+
+    .more {
+        color: gray;
+        font-size: 13px;
+    }
+
+    .document {
+        width: 100%;
+    }
+
+    ion-list.list.list-md,
+    ion-list.list.list-ios {
+        padding: 5px;
+        font-size: 13px;
+        text-align: center;
+        border-bottom: 0.55px solid #F0F0F0;
+        height: 40px;
+        line-height: 30px;
+        margin: 0px;
+        max-width: 330px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+    }
+
+    .label-ios {
+        margin: 0px;
+    }
+
+    ion-label.label.label-md {
+        margin: 0px;
+        margin-top: 5px;
+    }
+
+}
+
+.toolbar-background.toolbar-background-md,
+.toolbar-background.toolbar-background-wp,
+.toolbar-background.toolbar-background-ios {
+    background: #38484f;
+}
+
+.bar-button-default-ios, .bar-button-default.bar-button-ios-default, .bar-button-clear-ios-default,
+.bar-button-default-md, .bar-button-default.bar-button-md-default, .bar-button-clear-md-default {
+    color: white;
+    background-color: transparent;
+}
+
+img.home-logo {
+    width: 50%;
+}
+
+.home_logo_wrapper {
+    text-align: center;
+    width: 88%;
 }

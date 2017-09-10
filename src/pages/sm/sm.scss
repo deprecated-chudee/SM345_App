@@ -1,0 +1,42 @@
+.page-sm {
+    font-size: 13px;
+
+    ul {
+        margin-left: 0px;
+        padding-left: 20px;
+        padding-top: 0px;
+        margin-top: 0px;
+        font-size: 13px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+
+    li {
+        font-size: 13px;
+    }
+
+    div {
+        font-size: 13px;
+    }
+
+    ion-list-header.item.item-ios.list-header.list-header-ios,
+    ion-list-header.item.item-md.list-header.list-header-md {
+        border-bottom: none;
+        background: #F4F4F4;
+    }
+
+    ion-label.label.label-ios,
+    ion-label.label.label-md {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .list-header-md {
+        padding-left: 16px;
+        margin-bottom: 0px;
+        min-height: 4.5rem;
+        border-top: 1px solid #dedede;
+        font-size: 1.4rem;
+        color: #757575;
+    }
+}

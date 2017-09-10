@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { SmPage } from '../pages/sm/sm';
+import { NoticePage } from '../pages/notice/notice';
 
 @Component({
   templateUrl: 'app.html'
@@ -22,9 +24,9 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: '대시보드', component: HomePage }, //0
-      { title: '설명소개서', component: ListPage }, //1
-      { title: '공지사항', component: ListPage }, //2
+      { title: 'HOME', component: HomePage }, //0
+      { title: 'SM사업소개', component: SmPage }, //1
+      { title: '공지사항', component: NoticePage }, //2
       { title: '멘토방', component: ListPage }, //3
       { title: '관리페이지', component: ListPage }, //4
     ];

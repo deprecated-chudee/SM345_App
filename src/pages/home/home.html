@@ -3,16 +3,166 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <div class="home_logo_wrapper" (click)="openHomePage()">
+      <img src="assets/img/Logo2.png" class="home-logo"/>
+    </div>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+<ion-content class="page-home">
+  <!--sm사업 신청기간-->
+  <table class="calendarText">
+    <tr>
+      <td colspan="2">
+          SCHEDULE
+      </td>
+    </tr>
+    <tr>
+        <td>
+          2017.09.01 ~ 09.10
+        </td>
+        <td>
+          2학기 멘토 신청기간
+        </td>
+      </tr>
+    <tr>
+      <td>
+        2017.09.11 ~ 09.20
+      </td>
+      <td>
+        2학기 멘티 신청기간
+      </td>
+    </tr>
+    <tr>
+        <td>
+          2017.09.21 ~ 12.10
+        </td>
+        <td>
+          멘토링 활동기간
+        </td>
+      </tr>
+    <tr>
+        <td>
+          2017.12.11 ~ 12.20
+        </td>
+        <td>
+          2학기 설문조사 기간
+        </td>
+    </tr>
+  </table>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <!--공지사항-->
+  <table class="noticeTable">
+      <tr>
+        <td colspan="2">
+            NOTICE
+        </td>
+      </tr>
+      <tr>
+          <ion-item no-lines class="notice">
+              <span>
+                <ion-list>
+                  2학기 멘토 신청방법 및 유의사항 안내
+                </ion-list>
+                <ion-list>
+                  2학기 멘티 신청방법 및 유의사항 안내
+                </ion-list>
+                <ion-list>
+                  2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내 반드시 필독
+                </ion-list>
+                <ion-list (click)="openNoticePage()">
+                    <ion-icon name="ios-add-circle-outline"></ion-icon><span class="more">더 보기</span>
+                </ion-list>
+              </span>
+            </ion-item>
+      </tr>
+  </table>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <!--멘토방 사진 슬라이드-->
+  <table class="mentorTable">
+      <tr>
+        <td colspan="2">
+            MENTOR ROOM
+        </td>
+      </tr>
+  </table>
+  <table class="mentor-banner">
+      <tr>
+          <ion-slides pager loop="true" autoplay="5000" speed="500">
+              <ion-slide>
+                <table class="mentor-banner-in">
+                  <tr>
+                    <td>
+                      <img src="assets/img/book/algo.png" />
+                    </td>
+                    <td>
+                      <img src="assets/img/book/c.png" />
+                    </td>
+                    <td>
+                      <img src="assets/img/book/java.png" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>[주제] 알고리즘</td>
+                    <td>[주제] C언어</td>
+                    <td>[주제] JAVA</td>
+                  </tr>
+                </table>
+              </ion-slide>
+              <ion-slide>
+                <table class="mentor-banner-in">
+                  <tr>
+                    <td>
+                      <img src="assets/img/book/c.png" />
+                    </td>
+                    <td>
+                      <img src="assets/img/book/algo.png" />
+                    </td>    
+                    <td>
+                      <img src="assets/img/book/java.png" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>[주제] C언어</td>
+                    <td>[주제] 알고리즘</td>
+                    <td>[주제] JAVA</td>
+                  </tr>
+                </table>
+              </ion-slide>
+              <ion-slide>
+                <table class="mentor-banner-in">
+                  <tr>
+                    <td>
+                      <img src="assets/img/book/algo.png" />
+                    </td>
+                    <td>
+                      <img src="assets/img/book/java.png" />
+                    </td>
+                    <td>
+                      <img src="assets/img/book/c.png" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>[주제] 알고리즘</td>
+                    <td>[주제] JAVA</td>
+                    <td>[주제] C언어</td>
+                  </tr>
+                </table>
+              </ion-slide>
+             
+            </ion-slides>
+      </tr>
+  </table>
+
+    <!--설명서 바로가기-->
+    <table class="noticeTable">
+        <tr>
+          <td colspan="2">
+              DOCUMENT
+          </td>
+        </tr>
+        <tr>
+          <img src="assets/img/document.png" class="document" (click)="openSmPage()"/>
+        </tr>
+    </table>
 </ion-content>
