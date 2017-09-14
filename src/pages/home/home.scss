@@ -20,7 +20,7 @@
     table.calendarText tr:first-child td {
         text-align: center;
         padding-bottom: 15px;
-        font-size: 20px;
+        font-size: 15px;
         font-weight: bold;
         color: #38484f;
         padding-top: 15px;
@@ -62,7 +62,7 @@
     table.mentorTable tr:first-child td {
         text-align: center;
         padding-bottom: 15px;
-        font-size: 20px;
+        font-size: 15px;
         font-weight: bold;
         color: #38484f;
         padding-top: 15px;
@@ -132,7 +132,7 @@
     table.noticeTable tr:first-child td {
         text-align: center;
         padding-bottom: 15px;
-        font-size: 20px;
+        font-size: 15px;
         font-weight: bold;
         color: #38484f;
         padding-top: 15px;
@@ -184,7 +184,7 @@
         height: 40px;
         line-height: 30px;
         margin: 0px;
-        max-width: 330px;
+        max-width: 300px;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -220,4 +220,13 @@ img.home-logo {
 .home_logo_wrapper {
     text-align: center;
     width: 88%;
+}
+
+.toolbar-title.toolbar-title-ios,
+.toolbar-title.toolbar-title-md {
+    color: white;
+}
+
+.toolbar-title.toolbar-title-md {
+    font-size: 15px;
 }

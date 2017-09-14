@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 import { SmPage } from '../sm/sm';
 import { NoticePage } from '../notice/notice';
 
@@ -24,4 +24,6 @@ export class HomePage {
   openNoticePage() {
     this.navCtrl.setRoot(NoticePage);
   }
+
+
 }

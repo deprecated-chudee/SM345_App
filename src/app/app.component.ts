@@ -4,10 +4,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { SmPage } from '../pages/sm/sm';
 import { NoticePage } from '../pages/notice/notice';
+import { QuestionPage } from '../pages/question/question';
+import { RoomPage } from '../pages/room/room';
+import { ManagerPage } from '../pages/manager/manager';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,8 +29,9 @@ export class MyApp {
       { title: 'HOME', component: HomePage }, //0
       { title: 'SM사업소개', component: SmPage }, //1
       { title: '공지사항', component: NoticePage }, //2
-      { title: '멘토방', component: ListPage }, //3
-      { title: '관리페이지', component: ListPage }, //4
+      { title: '멘토방', component: RoomPage }, //3
+      { title: 'Q&A', component: QuestionPage }, //4
+      { title: '관리페이지', component: ManagerPage }, //5
     ];
 
   }

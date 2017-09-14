@@ -8,7 +8,7 @@
         background: white;
         width: calc(100% - 60px);
         margin-left: 30px;
-        margin-top: 100px;
+        margin-top: 80px;
         border-radius: 30px;
         box-shadow: 1px 1px 1px 1px #E3E2E2;
     }
@@ -37,10 +37,17 @@
         width: 60%;
         margin-left: 20%;
         margin-top: 10%;
-        margin-bottom: 15%;
         box-shadow: 1px 1px 1px 1px #E3E2E2;
         background : linear-gradient(to right, #fc6d8c , #fd8e5a );
         font-weight: 600;
+    }
+
+    .smLoginP {
+        text-align: center;
+        margin-top: 5px;
+        font-size: 12px;
+        color: dodgerblue;
+        padding-bottom: 15%;
     }
 
 }
