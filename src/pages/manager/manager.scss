@@ -1,0 +1,68 @@
+.segment-ios .segment-button.segment-activated {
+    color: #fff;
+    background-color: #91A0AB;
+    opacity: 1;
+    -webkit-transition: 100ms all linear;
+    transition: 100ms all linear;
+}
+
+.segment-ios .segment-button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    height: 3.2rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #91A0AB;
+    font-size: 1.3rem;
+    line-height: 3rem;
+    color: #91A0AB;
+    background-color: transparent;
+}
+
+.segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+    border-color: #273338;
+    color: #273338;
+    opacity: 1;
+}
+
+.segment-md .segment-button {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    height: 4.2rem;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    font-weight: 500;
+    line-height: 4rem;
+    text-transform: uppercase;
+    color: #38484f;
+    background-color: transparent;
+    opacity: 0.7;
+    -webkit-transition: 100ms all linear;
+    transition: 100ms all linear;
+    padding: 0 6px;
+}
+
+ion-segment.segment.segment-ios.ng-valid.ng-touched.ng-dirty {
+    padding: 10px;
+    border-bottom: none;
+}
+
+ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
+    padding: 10px;
+}
+
+.mentorRoomButton {
+    background: #91A0AB;
+    margin-left: 13px;
+    margin-top: 13px;
+    margin-right: 13px;
+    width: calc(100% - 26px);
+}

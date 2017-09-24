@@ -9,6 +9,142 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content class="page-manager">
-      manager
+<ion-content class="page-manager">
+    <div>
+      <ion-segment [(ngModel)]="manager">
+        <ion-segment-button value="mentorRoom">
+            멘토방설정
+        </ion-segment-button>
+        <ion-segment-button value="roomList">
+            멘토방목록
+          </ion-segment-button>
+        <ion-segment-button value="users">
+            사용자관리
+        </ion-segment-button>
+        <ion-segment-button value="report">
+            보고서목록
+        </ion-segment-button>
+        <ion-segment-button value="survey">
+            설문조사
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    
+    <div [ngSwitch]="manager">
+      <ion-list *ngSwitchCase="'mentorRoom'">
+          <ion-item>
+              <ion-label>멘토신청 시작일</ion-label>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label>멘토신청 마감일</ion-label>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label>멘티신청 시작일</ion-label>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label>멘티신청 마감일</ion-label>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label>최대 멘토인원</ion-label>
+            <ion-select>
+              <ion-option>10명</ion-option>
+              <ion-option>15명</ion-option>
+              <ion-option>20명</ion-option>
+              <ion-option>25명</ion-option>
+              <ion-option>30명</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>최대 멘티인원</ion-label>
+            <ion-select>
+              <ion-option>3명</ion-option>
+              <ion-option>4명</ion-option>
+              <ion-option>5명</ion-option>
+              <ion-option>6명</ion-option>
+              <ion-option>7명</ion-option>
+              <ion-option>8명</ion-option>
+              <ion-option>9명</ion-option>
+              <ion-option>10명</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>모임기간</ion-label>
+            <ion-select>
+              <ion-option>7일</ion-option>
+              <ion-option>30일</ion-option>
+              <ion-option>1학기</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>모임횟수</ion-label>
+            <ion-select>
+              <ion-option>1회</ion-option>
+              <ion-option>2회</ion-option>
+              <ion-option>3회</ion-option>
+              <ion-option>4회</ion-option>
+              <ion-option>5회</ion-option>
+              <ion-option>6회</ion-option>
+              <ion-option>7회</ion-option>
+              <ion-option>8회</ion-option>
+              <ion-option>9회</ion-option>
+              <ion-option>10회</ion-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+              <ion-label>설문조사 시작일</ion-label>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>
+          </ion-item>
+          <ion-item>
+              <ion-label>설문조사 마감일</ion-label>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>
+          </ion-item>
+
+
+          <button ion-button block class="mentorRoomButton" (click)="writeSubmit()">저장</button>
+
+      </ion-list>
+    
+      <ion-list *ngSwitchCase="'roomList'">
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img src="img/thumbnail-kitten-1.jpg">
+            </ion-thumbnail>
+            <h2>Luna</h2>
+          </ion-item>
+        </ion-list>
+
+      <ion-list *ngSwitchCase="'users'">
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src="img/thumbnail-kitten-1.jpg">
+          </ion-thumbnail>
+          <h2>Luna</h2>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'report'">
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src="img/thumbnail-kitten-1.jpg">
+          </ion-thumbnail>
+          <h2>Luna</h2>
+        </ion-item>
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'survey'">
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src="img/thumbnail-kitten-1.jpg">
+          </ion-thumbnail>
+          <h2>Luna</h2>
+        </ion-item>
+      </ion-list>
+
+    </div>
+
   </ion-content>

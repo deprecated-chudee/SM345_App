@@ -1,0 +1,71 @@
+.header-question {
+    
+        .home_logo_wrapper {
+            text-align: center;
+            width: 100%;
+        }
+    }
+    
+    .page-question {
+        //공지사항
+        table.noticeTable {
+            width: 100%;
+            background: white;
+        }
+    
+        table.noticeTable tr  {
+                border-bottom: 0.55px solid lightgray;
+            
+        }
+        
+        table.noticeTable tr td {
+            text-align: center;
+            padding-bottom: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #38484f;
+            padding-top: 15px;
+            padding-left: 15%;
+        }
+
+        .noticeTable tr td:last-child {
+            width: 15%;
+            padding-left: 15px;
+            text-align: center;
+        }    
+    
+        .noticeTable-in td {
+            text-align: left;
+            padding:5px;
+            font-size: 13px;
+        }
+
+        .noticeTable-in td.question_Answer {
+            text-align: center;
+            vertical-align: top;
+            width: 15%;
+        }
+    
+        .noticeTable-in {
+            margin-top: 15px;
+            margin-left: 10px;
+            margin-right: 10px;
+            width: calc(100% - 20px);
+            border-bottom: 0.55px solid #F0F0F0;
+        }
+    
+        .noticeTable-in tr:nth-child(2) td{
+            color: #A9A9A9;
+            font-size: 12px;
+            padding-bottom: 15px;
+        }
+    
+        .label-ios {
+            margin: 0px;
+        }
+    
+        ion-label.label.label-md {
+            margin: 0px;
+            margin-top: 5px;
+        }
+    }

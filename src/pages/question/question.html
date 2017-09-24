@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="header-question">
     <ion-navbar>
       <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
@@ -6,9 +6,89 @@
       <div class="home_logo_wrapper" (click)="openHomePage()">
         <img src="assets/img/Logo2.png" class="home-logo"/>
       </div>
+      <ion-buttons end> <!-- 네비게이션 바에 가장 오른쪽에 만들겠다는 뜻 -->
+        <button ion-button icon-only (click)="showReadyAlert()">
+            <ion-icon name='search'></ion-icon>
+        </button>
+    </ion-buttons>
     </ion-navbar>
-  </ion-header>
-  
-  <ion-content class="page-question">
-      question
-  </ion-content>
+    </ion-header>
+    
+    <ion-content class="page-question">
+            <table class="noticeTable">
+                    <tr>
+                      <td>
+                          Q & A
+                      </td>
+                      <td>
+                          <ion-icon name="md-create"></ion-icon>
+                      </td>
+                    </tr>
+            </table>
+            <table class="noticeTable-in" (click)="openReadingPage()">
+                    <tr>
+                        <td>
+                            기한 내에 보고서를 제출하지 못했는데 어떻게 해야하는지 알려주세요.
+                        </td>
+                        <td rowspan="2" class="question_Answer">답변<br/>완료</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2017-08-30 14:30
+                        </td>
+                    </tr>
+            </table>
+            <table class="noticeTable-in" (click)="openReadingPage()">
+                    <tr>
+                        <td>
+                            멘토 자격조건이 어떻게 되나요?
+                        </td>
+                        <td rowspan="2" class="question_Answer">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2017-08-30 14:30
+                        </td>
+                    </tr>
+            </table>
+            <table class="noticeTable-in" (click)="openReadingPage()">
+                    <tr>
+                        <td>
+                            멘토 장학금은 언제 들어오나요?
+                        </td>
+                        <td rowspan="2" class="question_Answer">답변<br/>완료</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2017-08-30 14:30
+                        </td>
+                    </tr>
+            </table>
+            <table class="noticeTable-in" (click)="openReadingPage()">
+                    <tr>
+                        <td>
+                            멘티 신청을 취소하고 싶은데 어떻게 해야하나요?
+                        </td>
+                        <td rowspan="2" class="question_Answer">답변<br/>완료</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2017-08-30 14:30
+                        </td>
+                    </tr>
+            </table>
+            <table class="noticeTable-in" (click)="openReadingPage()">
+                    <tr>
+                        <td>
+                            멘토 신청을 취소하고 싶습니다.
+                        </td>
+                        <td rowspan="2" class="question_Answer">답변<br/>완료</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            2017-08-30 14:30
+                        </td>
+                    </tr>
+            </table>
+           
+    </ion-content>

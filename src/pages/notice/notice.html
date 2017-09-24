@@ -17,12 +17,15 @@
 <ion-content class="page-notice">
         <table class="noticeTable">
                 <tr>
-                  <td colspan="2">
+                  <td>
                       NOTICE
+                  </td>
+                  <td (click)="openWritePage()">
+                      <ion-icon name="md-create"></ion-icon>
                   </td>
                 </tr>
         </table>
-        <table class="noticeTable-in">
+        <table class="noticeTable-in" (click)="openReadingPage()">
                 <tr>
                     <td>
                         2학기 멘토 신청방법 및 유의사항 안내
@@ -34,7 +37,7 @@
                     </td>
                 </tr>
         </table>
-        <table class="noticeTable-in">
+        <table class="noticeTable-in" (click)="openReadingPage()">
                 <tr>
                     <td>
                         2학기 멘티 신청방법 및 유의사항 안내
@@ -46,7 +49,7 @@
                     </td>
                 </tr>
         </table>
-        <table class="noticeTable-in">
+        <table class="noticeTable-in" (click)="openReadingPage()">
                 <tr>
                     <td>
                         2017년 2학기 멘토 장학금 안내
@@ -58,7 +61,7 @@
                     </td>
                 </tr>
         </table>
-        <table class="noticeTable-in">
+        <table class="noticeTable-in" (click)="openReadingPage()">
                 <tr>
                     <td>
                         2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내 멘티 설문조사 방법 안내 반드시 필독
@@ -70,7 +73,7 @@
                     </td>
                 </tr>
         </table>
-        <table class="noticeTable-in">
+        <table class="noticeTable-in" (click)="openReadingPage()">
                 <tr>
                     <td>
                         2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내

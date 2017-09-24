@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, ModalController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,6 +10,7 @@ import { NoticePage } from '../pages/notice/notice';
 import { QuestionPage } from '../pages/question/question';
 import { RoomPage } from '../pages/room/room';
 import { ManagerPage } from '../pages/manager/manager';
+import { MessagePage } from '../pages/message/message';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,7 +22,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public alertCtrl: AlertController, public modalCtrl: ModalController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -50,4 +51,47 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
-}
+
+  openMessage() {
+    let modal = this.modalCtrl.create(MessagePage);
+    modal.present();
+  }
+
+  showPasswordAlert() {
+    let prompt = this.alertCtrl.create({
+      title: '비밀번호 변경',
+      inputs: [
+           {
+             name: 'password',
+             type: 'password', 
+             placeholder: '기존 비밀번호',
+          },
+          {
+             name: 'newPassword',
+             type: 'password', 
+             placeholder: '새 비밀번호',
+          },
+          {
+             name: 'newPasswordCheck',
+             type: 'password', 
+             placeholder: '비밀번호 확인',
+         }
+      ],
+      buttons: [
+         {
+            text: '취소',
+            handler: data => {
+            }
+         },
+         {
+            text: '확인',
+            handler: data => {
+            }
+           
+         }
+      ]
+   });
+   prompt.present();
+   }
+  }
+

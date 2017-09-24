@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <div class="home_logo_wrapper" (click)="openHomePage()">
+      <img src="assets/img/Logo2.png" class="home-logo"/>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="page-reading">
+    <table class="reading-top">
+      <tr>
+        <td>
+            2학기 멘토 신청방법 및 유의사항 안내
+        </td>
+      </tr>
+      <tr>
+        <td>
+          홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35
+        </td>
+      </tr>
+    </table>
+    <hr/>
+    <div id="contentDiv">파이썬의 왕도를 안내하는 최고의 교과서!따라 하기 쉬운 예제로 이론과 실무를 동시에 익힌다!
+
+        입문서 잘 만들기로 정평이 난 일본에서 파이썬 입문 분야 베스트셀러!파이썬을 처음 접하는 독자와 다시 배우고자 하는 독자 모두를 위한 책!이 책은 파이썬의 기본을 탄탄한 이론과 상세한 해설, 실용적 예제로 재미있게 구성되어 있다. 또한, 파이썬의 기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.
+        따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.
+
+        그리고 이론 → 코드 → 해설의 구성은 빠른 이해를 도와줄 것이다.
+    </div>
+
+    <!--댓글-->
+    <section class="commentTableWrapper">
+        <ion-list (press)="presentCommentSheet()"> 
+            <table class="commentListTable">
+                <tr>
+                    <td>
+                      홍길동
+                    </td>
+                    <td>
+                        <span>2017-08-30 14:30</span>
+                    </td>
+                </tr>         
+                <tr>	
+                    <td colspan="2"><div id="commentDiv">기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.</div></td>		
+                </tr>
+            </table>
+        </ion-list>
+        <ion-list (press)="presentCommentSheet()"> 
+            <table class="commentListTable">
+                <tr>
+                    <td>
+                      홍길동
+                    </td>
+                    <td>
+                        <span>2017-08-30 14:30</span>
+                    </td>
+                </tr>         
+                <tr>	
+                    <td colspan="2"><div id="commentDiv">따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.</div></td>		
+                </tr>
+            </table>
+        </ion-list>
+        <ion-list (press)="presentCommentSheet()"> 
+            <table class="commentListTable">
+                <tr>
+                    <td>
+                      홍길동
+                    </td>
+                    <td>
+                        <span>2017-08-30 14:30</span>
+                    </td>
+                </tr>         
+                <tr>	
+                    <td colspan="2"><div id="commentDiv">안녕하세요. 댓글 예시입니다.</div></td>		
+                </tr>
+            </table>
+        </ion-list>
+        
+    </section>
+
+    <section class="commentWriteWrapper commentTableWrapper">
+      <table class="comment_textarea_table">
+        <tr>
+          <td>
+              <ion-item no-lines>
+                  <ion-textarea class="comment_textarea" placeholder="댓글을 입력하세요."></ion-textarea>
+              </ion-item>
+          </td>
+          <td>
+              <button ion-button outline><ion-icon name="ios-send"></ion-icon></button>
+          </td>
+        </tr>
+      </table>
+
+  </section>
+  <div class="buttonWrapper">
+    <!--
+    <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->
+    <button ion-button block class="editButton" (click)="WriteDelete()">답변완료</button>
+    <button ion-button block class="deleteButton" (click)="WriteDelete()">삭제</button>
+  </div>
+
+    <br/>
+    <br/>
+</ion-content>

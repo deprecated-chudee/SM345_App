@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
-import { ReadingPage } from '.././reading/reading';
 
 @Component({
-  templateUrl: 'question.html'
+  templateUrl: 'write.html'
 })
-export class QuestionPage {
+export class WritePage {
 
   constructor(public navCtrl: NavController) {
 
@@ -16,7 +15,8 @@ export class QuestionPage {
     this.navCtrl.setRoot(HomePage);
   }
 
-  openReadingPage() {
-    this.navCtrl.push(ReadingPage);
+  writeSubmit() {
+      this.navCtrl.pop();
   }
+
 }

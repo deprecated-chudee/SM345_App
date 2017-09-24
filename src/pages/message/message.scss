@@ -1,12 +1,8 @@
-.header-notice {
-
-    .home_logo_wrapper {
-        text-align: center;
-        width: 100%;
-    }
+ion-icon.icon.icon-md.ion-md-mail {
+    vertical-align: middle;
 }
 
-.page-notice {
+.page-message {
     //공지사항
     table.noticeTable {
         width: 100%;
@@ -19,13 +15,13 @@
     }
     
     table.noticeTable tr td {
-        text-align: center;
+        text-align: left;
         padding-bottom: 15px;
         font-size: 20px;
         font-weight: bold;
         color: #38484f;
         padding-top: 15px;
-        padding-left: 15%;
+        padding-left: 15px;
     }
 
     .noticeTable tr td:last-child {

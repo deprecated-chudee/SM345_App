@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>멘토신청</ion-title> 
+        <ion-buttons end>
+            <button ion-button (click)="dismiss()">
+                <span ion-text><ion-icon name="close"></ion-icon></span>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-mentorAdd">
+    <ion-list>
+        <ion-item>
+                <ion-input type="text" name="팀명" placeholder="팀명"></ion-input> 
+        </ion-item>
+        <ion-item>
+                <ion-input type="text" placeholder="주제"></ion-input> 
+        </ion-item>
+        <ion-item>
+                <ion-textarea placeholder="팀 소개 및 설명"></ion-textarea>
+       </ion-item>
+       <div class="addLabel">
+            <p><ion-icon name="md-attach" class="attach"></ion-icon>&nbsp;&nbsp;팀 광고사진 첨부</p>
+       </div>
+       <ion-item>
+            <input type="file" id="upload" name="uploadFile" file-upload multiple/>
+       </ion-item>
+       <div class="addLabel">
+            <p><ion-icon name="md-attach" class="attach"></ion-icon>&nbsp;&nbsp;자격증명파일 첨부</p>
+       </div>
+       <ion-item>
+            <input type="file" id="upload" name="uploadFile" file-upload multiple/>
+       </ion-item>
+    </ion-list>
+
+    <button ion-button block (click)="openRoomPage()">멘토신청완료</button>
+
+</ion-content>

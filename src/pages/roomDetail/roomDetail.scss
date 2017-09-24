@@ -1,0 +1,178 @@
+.page-roomDetail {
+    table.roomDetailTable {
+        width: 100%;
+        margin-top:15px;
+        margin-bottom: 15px;
+    }
+
+    .roomDetailTable tr td {
+        padding-left:15px;
+        font-size: 14px;
+    }
+
+    .roomDetailTable tr td b {
+        font-size: 14px;
+    }
+
+    .roomDetailTable tr:first-child td:first-child {
+        width:40%;
+        padding-left: 5%;
+    }
+
+    .list-header-md {
+        padding-left: 16px;
+        margin-bottom: 1px;
+        min-height: 4.5rem;
+        border-top: 1px solid #dedede;
+        font-size: 14px;
+        color: black;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .list-header-ios {
+        padding-left: 16px;
+        position: relative;
+        border-top: 0.55px solid #c8c7cc;
+        border-bottom: none;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+        color: #333;
+        background: transparent;
+        margin-top: 10px;
+        margin-bottom: 1px;
+    }
+
+    div.teamInfo {
+        padding-top: 0px;
+        white-space: pre-line;
+        font-size: 13px;
+        line-height: 18px;
+    }
+
+    button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: lightcoral;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton span.button-inner {
+        font-size: 10px;
+    }
+
+    ion-item.item.item-block.item-md,
+    ion-item.item.item-block.item-ios {
+        padding-left: 0px;
+        text-align: right;
+    }
+
+    button.teamOk span.button-inner,
+    button.teamNo span.button-inner {
+        font-size: 14px;
+        padding: 10%;
+    }
+
+    .teamOk {
+        background: #005800;
+    }
+
+    .teamNo {
+        background: #9B0000;
+    }
+
+    .menteeButton.button-ios, 
+    .menteeButton.button-md {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background : linear-gradient(to right, #91A0AB, #38484f );
+        margin-top: 10px;
+    }
+
+    table.reportTable {
+        width: calc(100% - 16px - 16px);
+        margin-left: 16px;
+        margin-right: 16px;
+        border: 0.55px solid black;
+        margin-top: -1px;
+    }
+
+    .reportTable td {
+        font-size: 13px;
+    }
+
+    .reportTable tr:first-child td:first-child {
+        padding-top: 10px;
+        padding-bottom: 2px;
+        padding-left: 10px;
+    }
+
+    .reportTable tr:last-child td {
+        padding-top: 2px;
+        padding-bottom: 10px;
+        padding-left: 10px;
+    }
+
+    .reportTable td span.reportTime {
+        font-size: 10px;
+        color: gray;
+    }
+
+    .reportTable td:nth-child(2) {
+        width: 15%;
+        text-align: center;
+    }
+
+    .reportTable tr:first-child td:last-child {
+        width:20%;
+        vertical-align: middle;
+        text-align: center;
+        color:white;
+    }
+
+    .report-end {
+        background: #100057;
+    }
+
+    .report-ing {
+        background: #004100;
+    }
+
+    .report-reject {
+        background: #6D0101;
+    }
+    
+    ion-icon.icon.icon-md.ion-md-download,
+    ion-icon.icon.icon-ios.ion-md-download {
+        color: black;
+    }
+
+    ion-item.item.item-block.item-md.item-range {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    .range-md [range-left] {
+        margin: 5px 12px 0 0;
+        vertical-align: middle;
+        color: black;
+    }
+    
+    .range-md [range-right] {
+        margin: 5px 0 0 12px;
+        color: #0883F7;
+    }
+
+    .poll {
+        font-size: 13px;
+        padding-left: 16px;
+        padding-top: 16px;
+    }
+
+}

@@ -11,6 +11,11 @@ import { QuestionPage } from '../pages/question/question';
 import { SmLoginPage } from '../pages/smLogin/smLogin';
 import { ManagerPage } from '../pages/manager/manager';
 import { RoomPage } from '../pages/room/room';
+import { RoomDetailPage } from '../pages/roomDetail/roomDetail';
+import { MentorAddPage } from '../pages/mentorAdd/mentorAdd';
+import { MessagePage } from '../pages/message/message';
+import { ReadingPage } from '../pages/reading/reading';
+import { WritePage } from '../pages/write/write';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,6 +31,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SmLoginPage,
     RoomPage,
     ManagerPage,
+    RoomDetailPage,
+    MentorAddPage,
+    MessagePage,
+    ReadingPage,
+    WritePage,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +52,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SmLoginPage,
     RoomPage,
     ManagerPage,
+    RoomDetailPage,
+    MentorAddPage,
+    MessagePage,
+    ReadingPage,
+    WritePage,
   ],
   providers: [
     StatusBar,

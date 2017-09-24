@@ -51,3 +51,33 @@
     }
 
 }
+
+
+.alert-md .alert-wrapper {
+    border-radius: 20px;
+    max-width: 280px;
+    background-color: #fafafa;
+    -webkit-box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 16px 20px rgba(0, 0, 0, 0.4);
+}
+
+.alert-md .alert-title {
+    font-size: 18px;
+}
+
+.alert-md .alert-head {
+    text-align: left;
+    text-align: start;
+    padding: 24px 24px 10px;
+}
+
+.alert-md .alert-message {
+    max-height: 240px;
+    font-size: 15px;
+    color: darkgray;
+    overflow: hidden;
+}
+
+.alert-ios .alert-message {
+    overflow: hidden;
+}

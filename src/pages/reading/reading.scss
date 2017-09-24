@@ -1,0 +1,196 @@
+.page-reading {
+    table.reading-top {
+        width: calc(100% - 30px);
+        margin: 15px;
+        color: gray;
+    }
+
+    .reading-top tr:first-child td {
+        font-size: 18px;
+        font-weight: bold;
+        color: black;
+    }
+
+    .reading-top tr:nth-child(2) td {
+        font-size:13px;
+    }
+
+    .commentTableWrapper {
+        background-color: #f3f4f3;
+        width: 100%;
+    }
+    
+    .commentListTable {
+        width: calc(100% - 30px);
+        margin-bottom: 0px;
+        font-size: 12px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .commentListTable tr td {
+        font-size: 13px;
+    }
+
+    .commentListTable tr:first-child td span {
+        font-size: 11px;
+        color: gray;
+    }
+
+    .commentListTable tr:first-child td:last-child {
+        text-align: right;
+    }
+
+    .commentListTable tr:first-child td:first-child {
+        font-weight: bold;
+    }
+    
+    
+    .commentListTable tr {
+        width:100%;
+    }
+    
+    .commentListTable img {
+        margin-left:10px;
+        margin-top:10px;
+    }
+
+    .list-md, .list-ios {
+        padding: 10px 0px 10px 0px;
+        margin: 0px;
+        border-bottom: 1px solid lightgray;
+    }
+    
+    .commentWriteWrapper {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+
+.comment_textarea textarea.text-input.text-input-ios,
+.comment_textarea textarea.text-input.text-input-md {
+	margin-bottom: 0px;
+	height: 50px;
+    margin-top: 0px;
+    padding-top: 16px;
+    font-size: 12px;
+    line-height: 18px;
+    overflow: auto;
+}
+
+.commentTableWrapper {
+	ion-item.item.item-block.item-ios.item-input.item-textarea,
+	ion-item.item.item-block.item-md.item-input.item-textarea {
+		padding-left: 0px;
+		background: white;
+		margin-left: 10px;
+		margin-right: 10px;
+		width: calc(100% - 20px);
+		padding-right: 0px;
+		border: 1px solid lightgray;
+	}
+
+	.item-ios.item-block .item-inner,
+	.item-md.item-block .item-inner {
+		padding-right: 0px;
+	}
+}
+
+.boardRead {
+	.item-ios.item-block .item-inner,
+	.item-md.item-block .item-inner {
+		border-bottom: none;
+	}
+
+	span.button-inner {
+		line-height: 30px;
+		vertical-align: middle;
+	}
+}
+
+    .button-outline-ios,
+    .button-outline-md {
+        border-radius: 4px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: gray;
+        color: gray;
+        font-family: '나눔고딕';
+        background-color: transparent;
+    }
+
+    .button-clear-ios,
+    .button-clear-md {
+        color: gray;
+    }
+
+    .checkbox-ios-dark .checkbox-checked,
+    .checkbox-md-dark .checkbox-checked {
+        border-color: gray;
+        background-color: gray;
+    }
+
+    .commentWriteWrapper {
+        padding-top: 10px;
+    }
+
+    button.comment_commit.disable-hover.item-button.button.button-ios.button-outline.button-outline-ios,
+    button.comment_commit.disable-hover.item-button.button.button-md.button-outline.button-outline-md {
+        margin-right: 10px;
+    }
+
+    .comment_textarea_table {
+        width: 100%;
+    }
+
+    .comment_textarea_table tr td:last-child {
+        width: 58px;
+    }
+
+    textarea.text-input.text-input-md {
+        width: calc(100% - 8px);
+    }
+
+    button.editButton.disable-hover.button.button-md.button-default.button-default-md.button-block.button-block-md,
+    button.editButton.disable-hover.button.button-ios.button-default.button-default-ios.button-block.button-block-ios {
+        background: #91A0AB;
+        width: 46%;
+        margin: 2%;
+        margin-right: 1%;
+        display: inline-block;
+    }
+
+    button.deleteButton.disable-hover.button.button-md.button-default.button-default-md.button-block.button-block-md,
+    button.deleteButton.disable-hover.button.button-ios.button-default.button-default-ios.button-block.button-block-ios {
+        margin: 2%;
+        margin-left: 1%;
+        width: 46%;
+        display: inline-block;
+        background: #38484f;
+    }
+    .buttonWrapper {
+        width: 100%;
+        text-align: center;
+    }
+
+    textarea.text-input.text-input-ios {
+        margin-left: 5px;
+    }
+}
+
+#contentDiv {
+    white-space: pre-line;
+    font-size: 13px;
+    line-height: 18px;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: calc(100% - 30px);
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+#commentDiv {
+    white-space: pre-line;
+    font-size: 13px;
+    line-height: 18px;
+}

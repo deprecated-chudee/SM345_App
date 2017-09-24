@@ -1,0 +1,155 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>[썬] 멘토방</ion-title> 
+        <ion-buttons end>
+            <button ion-button (click)="dismiss()">
+                <span ion-text><ion-icon name="close"></ion-icon></span>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="page-roomDetail">
+    <table class="roomDetailTable">
+        <tr>
+            <td rowspan="7"><img src="assets/img/book/python.png" /></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td><b>멘토 : </b>홍길동</td>
+        </tr>
+        <tr>
+            <td><b>팀명 : </b>썬</td>
+        </tr>
+        <tr>
+            <td><b>주제 : </b>Python</td>
+        </tr>
+        <tr>
+            <td><b>현재팀원 : </b>1명</td>
+        </tr>
+        <tr>
+            <td><b>자격증명 파일 : </b><button ion-button class="fileButton">다운로드</button></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+    <ion-list-header>
+            팀 소개 및 설명                
+    </ion-list-header>
+    <div padding class="teamInfo">파이썬의 왕도를 안내하는 최고의 교과서!따라 하기 쉬운 예제로 이론과 실무를 동시에 익힌다!
+            입문서 잘 만들기로 정평이 난 일본에서 파이썬 입문 분야 베스트셀러!파이썬을 처음 접하는 독자와 다시 배우고자 하는 독자 모두를 위한 책!이 책은 파이썬의 기본을 탄탄한 이론과 상세한 해설, 실용적 예제로 재미있게 구성되어 있다. 또한, 파이썬의 기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.
+            따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.
+            그리고 이론 → 코드 → 해설의 구성은 빠른 이해를 도와줄 것이다.
+    </div>
+
+    
+    <ion-list-header>
+            모임 결과보고서            
+    </ion-list-header>
+    <table class="reportTable">
+            <tr>
+                <td>3차 모임 결과보고서</td>
+                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
+                <td rowspan="2" class="report-ing">확인중</td>
+            </tr>
+            <tr>
+                <td><span class="reportTime">2017-10-04</span></td>
+            </tr>
+    </table>
+    <table class="reportTable">
+            <tr>
+                <td>3차 모임 결과보고서</td>
+                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
+                <td rowspan="2" class="report-reject">반려</td>
+            </tr>
+            <tr>
+                <td><span class="reportTime">2017-09-20</span></td>
+            </tr>
+    </table>
+    <table class="reportTable">
+            <tr>
+                <td>2차 모임 결과보고서</td>
+                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
+                <td rowspan="2" class="report-end">확인<br/>완료</td>
+            </tr>
+            <tr>
+                <td><span class="reportTime">2017-09-20</span></td>
+            </tr>
+    </table>
+    <table class="reportTable">
+            <tr>
+                <td>1차 모임 결과보고서</td>
+                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
+                <td rowspan="2" class="report-end">확인<br/>완료</td>
+            </tr>
+            <tr>
+                <td><span class="reportTime">2017-09-20</span></td>
+            </tr>
+    </table>
+
+    <!--멘토 인터페이스-->
+    
+    <ion-item no-lines>
+            <button ion-button class="teamOk" (click)="openRoomPage()">보고서 제출</button>
+    </ion-item>
+    
+
+    <!--관리자 인터페이스-->
+    <!--
+    <ion-item no-lines>
+        <button ion-button class="teamOk" (click)="openRoomPage()">멘토방 개설승낙</button>
+        <button ion-button class="teamNo" (click)="dismiss()">개설거절</button>
+    </ion-item>
+-->
+
+    <!--멘티 인터페이스-->
+    <!--
+    <button ion-button block class="menteeButton" (click)="showMenteeAlert()">멘티신청</button>
+    -->
+
+    <!--멘티 인터페이스-->
+    <!--
+    <button ion-button block class="menteeButton" (click)="showMenteeAlert()">멘티신청취소</button>
+    -->
+    
+    <ion-list-header>
+            설문조사                
+    </ion-list-header>
+    <div class="poll">
+        <b>Q1.</b> 멘토링 활동에 만족하셨나요?
+    </div>
+    <ion-item>
+      <ion-range min="1" max="5" pin="true" step="1" snaps="true">
+        <ion-icon range-left name="md-sad"></ion-icon>
+        <ion-icon range-right name="md-happy"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+    <div class="poll">
+        <b>Q2.</b> 성실히 참여했나요?
+    </div>
+    <ion-item>
+      <ion-range min="1" max="5" pin="true" step="1" snaps="true">
+        <ion-icon range-left name="md-sad"></ion-icon>
+        <ion-icon range-right name="md-happy"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+    <div class="poll">
+        <b>Q3.</b> 다음에 또 멘토링 활동에 참여하고 싶은가요?
+    </div>
+    <ion-item>
+      <ion-range min="1" max="5" pin="true" step="1" snaps="true">
+        <ion-icon range-left name="md-sad"></ion-icon>
+        <ion-icon range-right name="md-happy"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+    <ion-item no-lines>
+            <button ion-button class="teamOk" (click)="openRoomPage()">설문 완료</button>
+    </ion-item>
+
+    
+</ion-content>

@@ -25,10 +25,10 @@
     </tr>
   </table>
   <ion-item no-lines>
-      <button clear ion-button item-right>
+      <button menuClose clear ion-button item-right (click)="openMessage()">
         <ion-icon name="md-mail" class="account-icon"></ion-icon>
       </button>
-      <button clear ion-button item-right>
+      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">
         <ion-icon name="ios-apps" class="account-icon"></ion-icon>
       </button>
   </ion-item>
@@ -40,23 +40,23 @@
         <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>
       </tr>
       <tr>
-          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>
           <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>
       </tr>
       <tr>
-          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>
           <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>
       </tr>
       <tr>
-          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>
           <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>
       </tr>
       <tr>
-          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>
           <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>
       </tr>
       <tr>
-          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/home.png"/></td>
+          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>
           <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>
       </tr>
     </table>

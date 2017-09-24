@@ -9,6 +9,65 @@
     </ion-navbar>
   </ion-header>
   
-  <ion-content class="page-room">
-      room
+  <ion-content padding class="page-room">
+      
+
+      <table class="roomTable">
+        <tr>
+          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>
+          <td>[팀명] CC</td>
+          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>
+        </tr>
+        <tr>
+          <td>[주제] C프로그래밍</td>
+        </tr>
+        <tr>
+          <td>[현재팀원] 1명</td>
+        </tr>
+      </table>
+
+      <table class="roomTable">
+        <tr>
+          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/java.png" /></td>
+          <td>[팀명] 자바를 잡아</td>
+          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>
+        </tr>
+        <tr>
+          <td>[주제] JAVA</td>
+        </tr>
+        <tr>
+          <td>[현재팀원] 3명</td>
+        </tr>
+      </table>
+
+      <table class="roomTable">
+        <tr>
+          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/algo.png" /></td>
+          <td>[팀명] ALGO</td>
+          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>
+        </tr>
+        <tr>
+          <td>[주제] 알고리즘</td>
+        </tr>
+        <tr>
+          <td>[현재팀원] 2명</td>
+        </tr>
+      </table>
+
+      <table class="roomTable">
+        <tr>
+          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/python.png" /></td>
+          <td>[팀명] 썬</td>
+          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>
+        </tr>
+        <tr>
+          <td>[주제] Python</td>
+        </tr>
+        <tr>
+          <td>[현재팀원] 1명</td>
+        </tr>
+      </table>
+
+      <button ion-button block (click)="openMentorAddPage()">멘토신청</button>
+
   </ion-content>

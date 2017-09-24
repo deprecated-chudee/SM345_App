@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
+import { WritePage } from '../write/write';
+import { ReadingPage } from '../reading/reading';
 
 @Component({
   templateUrl: 'notice.html'
@@ -22,6 +24,14 @@ export class NoticePage {
         buttons: ['OK'],
     });
     alert.present();
+  }
+
+  openWritePage() {
+    this.navCtrl.push(WritePage);
+  }
+
+  openReadingPage() {
+    this.navCtrl.push(ReadingPage);
   }
 
 }
