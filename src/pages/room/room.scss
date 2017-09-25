@@ -83,4 +83,62 @@
         max-width: 50px;
         max-height: 62.66px;
     }
+    button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #61A5FF;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton span.button-inner {
+        font-size: 10px;
+    }
+
+    button.fileButton2.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton2.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #575757;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton2 span.button-inner {
+        font-size: 10px;
+    }
+
+    button.fileButton3.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton3.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #FF5555;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton3 span.button-inner {
+        font-size: 10px;
+    }
+    
+    button.fileButton4.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton4.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #BBBBBB;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton4 span.button-inner {
+        font-size: 10px;
+    }
+}
+
+.alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group {
+    overflow: auto;
+    max-height: 240px;
+    border-top: 0.55px solid #dbdbdf;
+    -webkit-overflow-scrolling: touch;
 }

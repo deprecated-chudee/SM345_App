@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { ReadingPage } from '.././reading/reading';
 
@@ -8,7 +8,7 @@ import { ReadingPage } from '.././reading/reading';
 })
 export class QuestionPage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
 
   }
 
@@ -18,5 +18,13 @@ export class QuestionPage {
 
   openReadingPage() {
     this.navCtrl.push(ReadingPage);
+  }
+
+  showReadyAlert() {
+    let alert = this.alertCtrl.create({
+        title: '준비 중입니다',
+        buttons: ['OK'],
+    });
+    alert.present();
   }
 }

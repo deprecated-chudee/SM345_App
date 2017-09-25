@@ -1,0 +1,25 @@
+<ion-header>
+        <ion-toolbar>
+            <ion-title>쪽지보내기</ion-title> 
+            <ion-buttons end>
+                <button ion-button (click)="dismiss()">
+                    <span ion-text><ion-icon name="close"></ion-icon></span>
+                </button>
+            </ion-buttons>
+        </ion-toolbar>
+</ion-header>    
+
+<ion-content class="page-messageAdd">
+    <ion-list>
+        <ion-item>
+            수신인 : 홍길동, 김길동, 이길동
+        </ion-item>
+        <ion-item>
+            <ion-input type="text" placeholder="제목을 입력해주세요."></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-textarea placeholder="내용을 입력해주세요." class="write_textarea"></ion-textarea>
+        </ion-item>
+        <button ion-button block (click)="messageAdd()" (click)="dismiss()">전송</button>
+    </ion-list>
+</ion-content>

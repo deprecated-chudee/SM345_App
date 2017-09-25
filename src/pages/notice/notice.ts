@@ -20,7 +20,6 @@ export class NoticePage {
   showReadyAlert() {
     let alert = this.alertCtrl.create({
         title: '준비 중입니다',
-        subTitle: '빠른 시일 내에 준비하겠습니다.',
         buttons: ['OK'],
     });
     alert.present();

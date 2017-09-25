@@ -1,0 +1,84 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>SM사업소개 수정</ion-title> 
+        <ion-buttons end>
+            <button ion-button (click)="dismiss()">
+                <span ion-text><ion-icon name="close"></ion-icon></span>
+            </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-smEdit">
+        <div class="addBox">
+            <ion-item>
+                <ion-label>제목</ion-label>
+                <ion-input type="text" placeholder="제목을 입력해주세요." value="SM 사업이란?"></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>내용</ion-label>
+                <ion-textarea placeholder="내용을 입력해주세요." value="소프트웨어공학과 멘토링 사업이라는 말로 성공회대 소프트웨어공학과 내에서 선후배간 지식 공유가 이루어지는 것을 의미한다."></ion-textarea>
+            </ion-item>
+        </div>
+        <div class="addBox">
+            <ion-item>
+                <ion-label>제목</ion-label>
+                <ion-input type="text" placeholder="제목을 입력해주세요."></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>내용</ion-label>
+                <ion-textarea placeholder="내용을 입력해주세요."></ion-textarea>
+            </ion-item>
+        </div>
+        <div class="addBox" *ngIf="count>1">
+            <ion-item>
+                <ion-label>제목</ion-label>
+                <ion-input type="text" placeholder="제목을 입력해주세요."></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>내용</ion-label>
+                <ion-textarea placeholder="내용을 입력해주세요."></ion-textarea>
+            </ion-item>
+        </div>
+        <div class="addBox" *ngIf="count>2">
+            <ion-item>
+                <ion-label>제목</ion-label>
+                <ion-input type="text" placeholder="제목을 입력해주세요."></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>내용</ion-label>
+                <ion-textarea placeholder="내용을 입력해주세요."></ion-textarea>
+            </ion-item>
+        </div>
+        <div class="addBox" *ngIf="count>3">
+            <ion-item>
+                <ion-label>제목</ion-label>
+                <ion-input type="text" placeholder="제목을 입력해주세요."></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>내용</ion-label>
+                <ion-textarea placeholder="내용을 입력해주세요."></ion-textarea>
+            </ion-item>
+        </div>
+        <div class="addBox" *ngIf="count>4">
+            <ion-item>
+                <ion-label>제목</ion-label>
+                <ion-input type="text" placeholder="제목을 입력해주세요."></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label>내용</ion-label>
+                <ion-textarea placeholder="내용을 입력해주세요."></ion-textarea>
+            </ion-item>
+        </div>
+        
+        <ion-item no-lines class="timeaddbutton">
+            <button ion-button outline item-right icon-left (click)="addSurvey()">
+                설명 항목추가
+            </button>
+            <button ion-button outline item-right icon-left class="surveyTrash" (click)="minusSurvey()">
+                항목삭제
+            </button>
+        </ion-item>
+
+        <button ion-button block class="mentorRoomButton" (click)="dismiss()">저장</button>
+</ion-content>

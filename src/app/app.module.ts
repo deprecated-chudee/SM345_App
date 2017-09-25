@@ -16,6 +16,9 @@ import { MentorAddPage } from '../pages/mentorAdd/mentorAdd';
 import { MessagePage } from '../pages/message/message';
 import { ReadingPage } from '../pages/reading/reading';
 import { WritePage } from '../pages/write/write';
+import { MessageAddPage } from '../pages/messageAdd/messageAdd';
+import { SurveyPage } from '../pages/survey/survey';
+import { SmEditPage } from '../pages/smEdit/smEdit';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,6 +39,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MessagePage,
     ReadingPage,
     WritePage,
+    MessageAddPage,
+    SurveyPage,
+    SmEditPage,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +63,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MessagePage,
     ReadingPage,
     WritePage,
+    MessageAddPage,
+    SurveyPage,
+    SmEditPage,
   ],
   providers: [
     StatusBar,

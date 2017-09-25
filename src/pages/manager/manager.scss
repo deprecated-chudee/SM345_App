@@ -66,3 +66,183 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
     margin-right: 13px;
     width: calc(100% - 26px);
 }
+
+.page-manager {
+    span.sort {
+        color: lightgray;
+    }
+
+    ion-item.item.item-block.item-ios.item-select.input-has-value.item-input-has-value,
+    ion-item.item.item-block.item-md.item-select.input-has-value.item-input-has-value  {
+        padding-left: 18px;
+        border-bottom: 0.55px solid #c8c7cc;
+
+    }
+
+
+    button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #61A5FF;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton span.button-inner {
+        font-size: 10px;
+    }
+
+    button.fileButton2.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton2.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #575757;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton2 span.button-inner {
+        font-size: 10px;
+    }
+
+    button.fileButton3.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton3.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #FF5555;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton3 span.button-inner {
+        font-size: 10px;
+    }
+    
+    button.fileButton4.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton4.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #BBBBBB;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton4 span.button-inner {
+        font-size: 10px;
+    }
+
+    button.fileButton0.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton0.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: lightcoral;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.fileButton0 span.button-inner {
+        font-size: 10px;
+    }
+
+    .list-ios > .item-block:first-child {
+        border-top: none;
+    }
+
+    button.editButton.disable-hover.button.button-md.button-default.button-default-md.button-block.button-block-md,
+    button.editButton.disable-hover.button.button-ios.button-default.button-default-ios.button-block.button-block-ios {
+        background: #91A0AB;
+        width: 46%;
+        margin: 2%;
+        margin-right: 1%;
+        display: inline-block;
+    }
+
+    button.deleteButton.disable-hover.button.button-md.button-default.button-default-md.button-block.button-block-md,
+    button.deleteButton.disable-hover.button.button-ios.button-default.button-default-ios.button-block.button-block-ios {
+        margin: 2%;
+        margin-left: 1%;
+        width: 46%;
+        display: inline-block;
+        background: #38484f;
+    }
+    .buttonWrapper {
+        width: 100%;
+        text-align: center;
+    }
+
+    .userTable {
+        width: 100%;
+    }
+
+    .userTable tr:nth-child(2) td {
+        color: gray;
+        padding-left: 55px;
+        font-size: 12px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid lightgray;
+    }
+
+    span.yes {
+        color : blue;
+        font-size: 13px;
+    }
+
+    span.no {
+        color: red;
+        font-size: 13px;
+    }
+
+    .input-wrapper {
+        font-size: 13px;
+    }
+
+    ion-datetime.datetime.datetime-ios.ng-untouched.ng-pristine.ng-valid,
+    ion-datetime.datetime.datetime-md.ng-untouched.ng-pristine.ng-valid {
+        font-size: 13px;
+    }
+
+    ion-select.select.select-ios,
+    ion-select.select.select-md {
+        font-size: 13px;
+    }
+
+    span.teamName {
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    ion-item.timeaddbutton.item.item-block.item-ios,
+    ion-item.timeaddbutton.item.item-block.item-md {
+        background: white;
+        padding-top: 0px;
+    }
+    
+    button.trashbutton.disable-hover.item-button.button.button-ios.button-clear.button-clear-ios,
+    button.trashbutton.disable-hover.item-button.button.button-md.button-clear.button-clear-md {
+        font-size: 20px;
+        margin-left: -5px;
+        color: indianred;
+    }
+
+    .item-ios [item-right], .item-ios [item-end] {
+        margin: 5px;
+    }
+
+    button.surveyTrash.disable-hover.item-button.button.button-ios.button-outline.button-outline-ios {
+        border-color: orangered;
+        color: orangered;
+    }
+
+    button.surveyTrash.button-outline-ios.activated {
+        background: #FCCBB9;
+    }
+
+    .mentorRoomButton2 {
+        background: #38484f;
+        margin-left: 13px;
+        margin-top: 10px;
+        margin-right: 13px;
+        width: calc(100% - 26px);
+    }
+}

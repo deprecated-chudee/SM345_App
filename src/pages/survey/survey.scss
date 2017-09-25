@@ -1,0 +1,30 @@
+.page-survey {
+    .list-header-ios,
+    .list-header-md {
+        padding-left: 16px;
+        position: relative;
+        border-bottom: none;
+        font-size: 1.2rem;
+        font-weight: 500;
+        letter-spacing: 0.1rem;
+        text-transform: uppercase;
+        color: #333;
+        background: transparent;
+        background: #f3f4f3;
+    }
+
+    ion-app.ios [padding], ion-app.ios [padding] .scroll-content {
+        padding: 0px;
+    }
+
+    .item-ios.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: none;
+    }
+
+    ion-item.item.item-block.item-ios {
+        padding: 0px;
+        padding-left: 50px;
+        border-bottom: none;
+    }
+}

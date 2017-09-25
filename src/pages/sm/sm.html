@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="header-sm">
 <ion-navbar>
   <button ion-button menuToggle>
     <ion-icon name="menu"></ion-icon>
@@ -6,6 +6,11 @@
   <div class="home_logo_wrapper" (click)="openHomePage()">
     <img src="assets/img/Logo2.png" class="home-logo"/>
   </div>
+  <ion-buttons end> <!-- 네비게이션 바에 가장 오른쪽에 만들겠다는 뜻 -->
+    <button ion-button icon-only (click)="OpenSmEditPage()">
+        <ion-icon name='md-create'></ion-icon>
+    </button>
+  </ion-buttons>
 </ion-navbar>
 </ion-header>
 

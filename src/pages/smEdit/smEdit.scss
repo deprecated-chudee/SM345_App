@@ -1,0 +1,42 @@
+.header-smEdit {
+    .home_logo_wrapper {
+        text-align: center;
+        width: 100%;
+    }
+}
+
+.page-smEdit {
+    textarea.text-input.text-input-ios {
+        height: 100px;
+        font-size: 13px;
+    }
+
+    ion-textarea.input.input-ios {
+        height: 100px;
+    }
+
+    ion-input.input.input-ios {
+        font-size: 13px;
+    }
+
+    button.surveyTrash.disable-hover.item-button.button.button-ios.button-outline.button-outline-ios {
+        border-color: orangered;
+        color: orangered;
+    }
+
+    button.surveyTrash.button-outline-ios.activated {
+        background: #926F63;
+    }
+
+    span.button-inner {
+        font-size: 14px;
+    }
+
+    .item-ios [item-right], .item-ios [item-end] {
+        margin: 5px;
+    }
+
+    ion-label {
+        font-size: 14px;
+    }
+}
