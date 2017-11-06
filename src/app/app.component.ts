@@ -20,9 +20,9 @@ export class MyApp implements OnInit{
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-  private USERID: number;
-  private USERNAME: string;
-  private USERAUTH: number;
+  USERID: number;
+  USERNAME: string;
+  USERAUTH: number;
   serverService: ServerService;
 
   pages: Array<{title: string, component: any}>;

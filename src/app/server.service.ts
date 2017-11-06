@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Rx';
 import { Message } from '../models/message';
 import { Article } from '../models/article';
 import { User } from '../models/user';
+import { Mentoroom } from '../models/mentoroom';
 
 @Injectable()
 export class ServerService {
@@ -28,19 +29,19 @@ export class ServerService {
                 response.json() as Message)
               .catch(this.handleError);
   }
-/*
-  getList(id: number, sp:number, st:string): Promise<Nutee_article[]> {
-    let url = this.URL + 'list/' + id+ '/' + sp + '/' + st;
-    return this.http.get(url)
-              .toPromise()
-              .then(response => response.json() as Nutee_article[])
-              .catch(this.handleError);
-  }
-  */
 
   updatePassword(user: User): Promise<Message>{
     let url = this.URL + 'update_password';
     return this.http.post(url, user)
+              .toPromise()
+              .then(response => 
+                response.json() as Message)
+              .catch(this.handleError);
+  }
+
+  insertMentoroom(mentoroom: Mentoroom): Promise<Message>{
+    let url = this.URL + 'insert_mentoroom';
+    return this.http.post(url, mentoroom)
               .toPromise()
               .then(response => 
                 response.json() as Message)
