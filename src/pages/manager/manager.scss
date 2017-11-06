@@ -245,4 +245,8 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
         margin-right: 13px;
         width: calc(100% - 26px);
     }
+
+    ion-datetime.datetime.datetime-ios.ng-valid.ng-touched.ng-dirty {
+        font-size: 13px;
+    }
 }

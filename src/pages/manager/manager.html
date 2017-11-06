@@ -164,6 +164,7 @@
               </ion-select>
           </ion-item>
           <!-- 멘토 검색-->
+          <!--
           <table class="userTable">
               <tr>
                   <td>
@@ -224,9 +225,9 @@
                     </td>
                 </tr>
             </table>
-
+        -->
           <!--멘티/관리자 검색-->
-          <!--
+          
           <ion-item (press)="showMentorAlert()">
               <ion-label>201300000 김길동</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
@@ -251,14 +252,16 @@
               <ion-label>201300000 최길동</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
           </ion-item> 
-        -->
+        
 
           <div class="buttonWrapper">
               <!--
               <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->
               <button ion-button block class="editButton" (click)="openMessagePage()">쪽지보내기</button>
+              
               <button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자지정</button>
-              <!--<button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자삭제</button>-->
+              <!--
+              <button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자삭제</button>-->
           </div>
           
       </ion-list>
