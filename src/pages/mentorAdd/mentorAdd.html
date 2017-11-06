@@ -1,9 +1,14 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons left>
+        <button ion-button (click)="dismiss()">
+                <span ion-text><ion-icon name="ios-close-circle-outline"></ion-icon></span>  
+        </button>
+        </ion-buttons>
         <ion-title>멘토신청</ion-title> 
         <ion-buttons end>
-            <button ion-button (click)="dismiss()">
-                <span ion-text><ion-icon name="close"></ion-icon></span>
+            <button ion-button (click)="openRoomPage()">
+                <span ion-text><ion-icon name="ios-checkmark-circle-outline"></ion-icon></span>
             </button>
         </ion-buttons>
     </ion-toolbar>
@@ -21,11 +26,7 @@
                 <ion-input type="text" placeholder="주제"></ion-input> 
         </ion-item>
 
-        <!--팀 소개 및 설명-->
-        <ion-item>
-                <ion-textarea placeholder="팀 소개 및 설명"></ion-textarea>
-        </ion-item>
-
+        <!--첨부-->
         <ion-item class="fileTitle">
             <ion-icon name="logo-youtube" class="youtube-icon" (click)="fileClick(0)"></ion-icon><p (click)="fileClick(0)">영상링크</p>
             <ion-icon name="md-photos" class="photos-icon" (click)="fileClick(1)"></ion-icon><p (click)="fileClick(1)">팀광고사진</p>
@@ -49,8 +50,13 @@
                 <ion-icon name="ios-link" class="link-icon"></ion-icon>
                 <input type="file" id="upload" name="uploadFile" file-upload multiple/>
         </ion-item>
+
+        <!--팀 소개 및 설명-->
+        <ion-item>
+                <ion-textarea placeholder="팀 소개 및 설명"></ion-textarea>
+        </ion-item>
+
     </ion-list>
 
-    <button ion-button block (click)="openRoomPage()">멘토신청완료</button>
 
 </ion-content>

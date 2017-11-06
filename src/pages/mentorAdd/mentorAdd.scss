@@ -34,10 +34,10 @@
 
     textarea.text-input.text-input-md,
     textarea.text-input.text-input-ios {
-        height: 250px;
+        height: 450px;
         line-height: 18px;
         overflow: auto;
-        font-size: 13px;
+        font-size: 14px;
         padding: 0;
         margin: 0;
         padding-right: 0;
@@ -51,7 +51,7 @@
         margin: 13px 13px 13px 13px;
         padding: 0;
         width: calc(100% - 26px);
-        font-size: 13px;
+        font-size: 14px;
     }
 
     ion-textarea.input.input-md,
@@ -62,7 +62,7 @@
     ion-label.label.label-md,
     ion-label.label.label-ios {
         padding-left: 13px;
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .addLabel {
@@ -74,7 +74,7 @@
         margin-top: 0px;
         padding: 10px 13px 0px;
         color: dimgray;
-        font-size: 13px;
+        font-size: 14px;
         margin-bottom: 0px;
     }
 
@@ -119,10 +119,6 @@
     input#upload {
         padding-left: 8px;
     }
-
-    .fileTitle {
-        text-align: center;
-    }
     
     .fileTitle p {
         display: inline;
@@ -131,4 +127,10 @@
         vertical-align: middle;
         color: black;
     }
+}
+
+
+ion-buttons.bar-buttons.bar-buttons-ios {
+    margin-right: 5px;
+    margin-left: 5px;
 }

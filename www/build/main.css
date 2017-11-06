@@ -25861,10 +25861,10 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
 
 .page-mentorAdd textarea.text-input.text-input-md,
 .page-mentorAdd textarea.text-input.text-input-ios {
-  height: 250px;
+  height: 450px;
   line-height: 18px;
   overflow: auto;
-  font-size: 13px;
+  font-size: 14px;
   padding: 0;
   margin: 0;
   padding-right: 0;
@@ -25878,7 +25878,7 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
   margin: 13px 13px 13px 13px;
   padding: 0;
   width: calc(100% - 26px);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .page-mentorAdd ion-textarea.input.input-md,
@@ -25889,7 +25889,7 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
 .page-mentorAdd ion-label.label.label-md,
 .page-mentorAdd ion-label.label.label-ios {
   padding-left: 13px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .page-mentorAdd .addLabel {
@@ -25901,7 +25901,7 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
   margin-top: 0px;
   padding: 10px 13px 0px;
   color: dimgray;
-  font-size: 13px;
+  font-size: 14px;
   margin-bottom: 0px;
 }
 
@@ -25948,16 +25948,17 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
   padding-left: 8px;
 }
 
-.page-mentorAdd .fileTitle {
-  text-align: center;
-}
-
 .page-mentorAdd .fileTitle p {
   display: inline;
   padding-left: 5px;
   padding-right: 15px;
   vertical-align: middle;
   color: black;
+}
+
+ion-buttons.bar-buttons.bar-buttons-ios {
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 ion-icon.icon.icon-md.ion-md-mail {
