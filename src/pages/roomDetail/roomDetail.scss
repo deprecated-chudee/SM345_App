@@ -46,10 +46,10 @@
     }
 
     div.teamInfo {
-        padding-top: 0px;
+        padding-top: 5px;
         white-space: pre-line;
-        font-size: 13px;
-        line-height: 18px;
+        font-size: 14px;
+        line-height: 20px;
     }
 
     button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
@@ -104,7 +104,7 @@
     }
 
     .reportTable td {
-        font-size: 13px;
+        font-size: 14px;
     }
 
     .reportTable tr:first-child td:first-child {
@@ -170,9 +170,23 @@
     }
 
     .poll {
-        font-size: 13px;
+        font-size: 14px;
         padding-left: 16px;
         padding-top: 16px;
     }
 
+    .youtube-icon {
+        display: inline-block;
+        vertical-align: middle;
+        color: indianred;
+        padding-left: 16px;
+        padding-right: 5px;
+    }
+
+    span.youtube-span {
+        vertical-align: middle;
+        font-size: 14px;
+        color: cornflowerblue;
+        text-decoration: underline;
+    }
 }

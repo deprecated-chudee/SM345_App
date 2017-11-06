@@ -26598,10 +26598,10 @@ ion-icon.icon.icon-md.ion-md-mail {
 }
 
 .page-roomDetail div.teamInfo {
-  padding-top: 0px;
+  padding-top: 5px;
   white-space: pre-line;
-  font-size: 13px;
-  line-height: 18px;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .page-roomDetail button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
@@ -26657,7 +26657,7 @@ ion-icon.icon.icon-md.ion-md-mail {
 }
 
 .page-roomDetail .reportTable td {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .page-roomDetail .reportTable tr:first-child td:first-child {
@@ -26723,9 +26723,24 @@ ion-icon.icon.icon-md.ion-md-mail {
 }
 
 .page-roomDetail .poll {
-  font-size: 13px;
+  font-size: 14px;
   padding-left: 16px;
   padding-top: 16px;
+}
+
+.page-roomDetail .youtube-icon {
+  display: inline-block;
+  vertical-align: middle;
+  color: indianred;
+  padding-left: 16px;
+  padding-right: 5px;
+}
+
+.page-roomDetail span.youtube-span {
+  vertical-align: middle;
+  font-size: 14px;
+  color: cornflowerblue;
+  text-decoration: underline;
 }
 
 .page-sm {
