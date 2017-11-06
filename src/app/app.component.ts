@@ -57,6 +57,28 @@ export class MyApp {
     modal.present();
   }
 
+  openLogout() {
+    let prompt = this.alertCtrl.create({
+      title: '로그아웃 하시겠습니까?',
+      buttons: [
+         {
+            text: '취소',
+            handler: data => {
+            }
+         },
+         {
+            text: '로그아웃',
+            handler: data => {
+                window.location.reload();
+            }
+         }
+      ]
+   });
+   prompt.present();
+   }
+  
+
+
   showPasswordAlert() {
     let prompt = this.alertCtrl.create({
       title: '비밀번호 변경',
