@@ -25905,10 +25905,27 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
   margin-bottom: 0px;
 }
 
-.page-mentorAdd .attach {
+.page-mentorAdd .youtube-icon {
   display: inline-block;
   vertical-align: middle;
   color: indianred;
+}
+
+.page-mentorAdd .photos-icon {
+  display: inline-block;
+  vertical-align: middle;
+  color: #438BDD;
+}
+
+.page-mentorAdd .link-icon {
+  display: inline-block;
+  vertical-align: middle;
+  color: #008A1E;
+}
+
+.page-mentorAdd .youtube-input input.text-input.text-input-ios,
+.page-mentorAdd .youtube-input input.text-input.text-input-md {
+  margin-left: 4px;
 }
 
 .page-mentorAdd input#upload {
@@ -25925,6 +25942,22 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
   margin-left: 13px;
   margin-right: 13px;
   width: calc(100% - 26px);
+}
+
+.page-mentorAdd input#upload {
+  padding-left: 8px;
+}
+
+.page-mentorAdd .fileTitle {
+  text-align: center;
+}
+
+.page-mentorAdd .fileTitle p {
+  display: inline;
+  padding-left: 5px;
+  padding-right: 15px;
+  vertical-align: middle;
+  color: black;
 }
 
 ion-icon.icon.icon-md.ion-md-mail {

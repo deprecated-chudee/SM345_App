@@ -7,6 +7,9 @@ import { RoomPage } from '.././room/room';
 })
 export class MentorAddPage {
 
+  sort: number = 0;
+  sortArray: boolean[] = [];
+
   constructor(public appCtrl: App, public viewCtrl: ViewController, public navCtrl: NavController) {
 
   }
@@ -19,4 +22,10 @@ export class MentorAddPage {
     this.appCtrl.getRootNav().setRoot(RoomPage);
     this.viewCtrl.dismiss();
   }
+
+  fileClick(sort) {
+    this.sortArray[sort] = !this.sortArray[sort];
+  }
+
+  
 }

@@ -11,27 +11,44 @@
 
 <ion-content class="page-mentorAdd">
     <ion-list>
+        <!--팀명-->
         <ion-item>
                 <ion-input type="text" name="팀명" placeholder="팀명"></ion-input> 
         </ion-item>
+
+        <!--주제-->
         <ion-item>
                 <ion-input type="text" placeholder="주제"></ion-input> 
         </ion-item>
+
+        <!--팀 소개 및 설명-->
         <ion-item>
                 <ion-textarea placeholder="팀 소개 및 설명"></ion-textarea>
-       </ion-item>
-       <div class="addLabel">
-            <p><ion-icon name="md-attach" class="attach"></ion-icon>&nbsp;&nbsp;팀 광고사진 첨부</p>
-       </div>
-       <ion-item>
-            <input type="file" id="upload" name="uploadFile" file-upload multiple/>
-       </ion-item>
-       <div class="addLabel">
-            <p><ion-icon name="md-attach" class="attach"></ion-icon>&nbsp;&nbsp;자격증명파일 첨부</p>
-       </div>
-       <ion-item>
-            <input type="file" id="upload" name="uploadFile" file-upload multiple/>
-       </ion-item>
+        </ion-item>
+
+        <ion-item class="fileTitle">
+            <ion-icon name="logo-youtube" class="youtube-icon" (click)="fileClick(0)"></ion-icon><p (click)="fileClick(0)">영상링크</p>
+            <ion-icon name="md-photos" class="photos-icon" (click)="fileClick(1)"></ion-icon><p (click)="fileClick(1)">팀광고사진</p>
+            <ion-icon name="ios-link" class="link-icon" (click)="fileClick(2)"></ion-icon><p (click)="fileClick(2)">자격증명파일</p>
+        </ion-item>
+
+        <!--동영상 링크-->
+        <ion-item *ngIf="sortArray[0]==true">
+                <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>
+                <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input"></ion-input>
+        </ion-item>
+
+        <!--팀 광고사진-->
+        <ion-item *ngIf="sortArray[1]==true">
+                <ion-icon name="md-photos" class="photos-icon"></ion-icon>
+                <input type="file" id="upload" name="uploadFile" file-upload multiple/>
+        </ion-item>
+
+        <!--자격증명파일-->
+        <ion-item *ngIf="sortArray[2]==true">
+                <ion-icon name="ios-link" class="link-icon"></ion-icon>
+                <input type="file" id="upload" name="uploadFile" file-upload multiple/>
+        </ion-item>
     </ion-list>
 
     <button ion-button block (click)="openRoomPage()">멘토신청완료</button>
