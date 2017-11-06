@@ -6,7 +6,7 @@
                     <td>
                         <ion-item>
                                 <ion-label floating>ID</ion-label>
-                                <ion-input type="text"></ion-input>
+                                <ion-input type="text" [(ngModel)]="user.user_id"></ion-input>
                         </ion-item>
                     </td>
                 </tr>
@@ -14,12 +14,12 @@
                     <td>
                         <ion-item>
                             <ion-label floating>Password</ion-label>
-                            <ion-input type="password"></ion-input>
+                            <ion-input type="password" [(ngModel)]="user.user_password"></ion-input>
                         </ion-item>
                     </td>
                 </tr>
         </table>
-        <button ion-button (click)="showPasswordAlert()" class="login-button">로그인</button>
+        <button ion-button (click)="signIn()" class="login-button">로그인</button>
 
         <p class="smLoginP" (click)="openSmLoginPage()"><ion-icon end name='help-circle'></ion-icon>&nbsp;&nbsp;SM사업이란?</p>
     </section>

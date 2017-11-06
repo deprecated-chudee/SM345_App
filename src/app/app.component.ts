@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Nav, Platform, ModalController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -11,20 +11,25 @@ import { QuestionPage } from '../pages/question/question';
 import { RoomPage } from '../pages/room/room';
 import { ManagerPage } from '../pages/manager/manager';
 import { MessagePage } from '../pages/message/message';
+import { ServerService } from '../app/server.service';
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
+export class MyApp implements OnInit{
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
+  private USERID: number;
+  private USERNAME: string;
+  private USERAUTH: number;
+  serverService: ServerService;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public alertCtrl: AlertController, public modalCtrl: ModalController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public alertCtrl: AlertController, serverService: ServerService, public modalCtrl: ModalController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-
+    this.serverService = serverService;
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'HOME', component: HomePage }, //0
@@ -35,6 +40,15 @@ export class MyApp {
       { title: '관리페이지', component: ManagerPage }, //5
     ];
 
+  }
+
+  ngOnInit() {
+    this.USERID = ServerService.USERID;
+    this.USERNAME = ServerService.USERNAME;
+    this.USERAUTH = ServerService.USERAUTH;
+    
+    console.log("온잇이름"+this.USERNAME);
+    console.log("온잇아이디"+this.USERID);
   }
 
   initializeApp() {
