@@ -619,7 +619,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 //import { CoolLocalStorage } from 'angular2-cool-storage';
 var LoginPage = (function () {
-    //localStorage: CoolLocalStorage;
     function LoginPage(app, serverService, http, navCtrl, appCtrl, toastCtrl, alertCtrl, modalCtrl) {
         this.app = app;
         this.navCtrl = navCtrl;
@@ -627,6 +626,9 @@ var LoginPage = (function () {
         this.toastCtrl = toastCtrl;
         this.alertCtrl = alertCtrl;
         this.modalCtrl = modalCtrl;
+        //localStorage: CoolLocalStorage;
+        this.login_record = 0;
+        this.password = "";
         this.http = http;
         this.serverService = serverService;
         this.user = new __WEBPACK_IMPORTED_MODULE_7__models_user__["a" /* User */]("", "", 0, "");
@@ -634,10 +636,14 @@ var LoginPage = (function () {
         this.message = new __WEBPACK_IMPORTED_MODULE_8__models_message__["a" /* Message */];
         //this.localStorage = localStorage;   
     }
-    //로그인 버튼 눌렀을 때
+    //로그인
     LoginPage.prototype.signIn = function () {
         var _this = this;
-        if (this.user.user_password == '0000')
+        this.serverService.getLoginrecord(this.user.user_id)
+            .then(function (message) {
+            _this.login_record = message.login_record;
+        });
+        if (this.login_record == 0)
             this.showPasswordAlert();
         else {
             this.serverService.makeLogin(this.user)
@@ -683,7 +689,6 @@ var LoginPage = (function () {
                 {
                     name: 'password',
                     type: 'password',
-                    value: '0000',
                     placeholder: '기존 비밀번호',
                 },
                 {
@@ -706,6 +711,7 @@ var LoginPage = (function () {
                 {
                     text: '확인',
                     handler: function (data) {
+                        //비번이 기존꺼랑 일치하는지 여부 틀리면 틀리다.
                         _this.user.user_password = data['newPassword'];
                         _this.serverService.updatePassword(_this.user)
                             .then(function (message) {
@@ -730,9 +736,10 @@ var LoginPage = (function () {
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\login\login.html"*/'<ion-content class="page-login">\n\n    <section class="loginSection">\n\n        <img src="assets/img/Logo1.jpg" class="sm-logo" />\n\n        <table class="loginTable">\n\n                <tr>\n\n                    <td>\n\n                        <ion-item>\n\n                                <ion-label floating>ID</ion-label>\n\n                                <ion-input type="text" [(ngModel)]="user.user_id"></ion-input>\n\n                        </ion-item>\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        <ion-item>\n\n                            <ion-label floating>Password</ion-label>\n\n                            <ion-input type="password" [(ngModel)]="user.user_password"></ion-input>\n\n                        </ion-item>\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n        <button ion-button (click)="signIn()" class="login-button">로그인</button>\n\n\n\n        <p class="smLoginP" (click)="openSmLoginPage()"><ion-icon end name=\'help-circle\'></ion-icon>&nbsp;&nbsp;SM사업이란?</p>\n\n    </section>\n\n</ion-content>\n\n  '/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\login\login.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_5__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_5__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__angular_http__["a" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]) === "function" && _h || Object])
 ], LoginPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=login.js.map
 
 /***/ }),
@@ -883,7 +890,7 @@ var MentorAddPage = (function () {
     MentorAddPage.prototype.openRoomPage = function () {
         var _this = this;
         this.mentoroom.mento_id = this.USERID;
-        this.serverService.insertMentoroom(this.mentoroom)
+        this.serverService.createMentoroom(this.mentoroom)
             .then(function (message) {
             _this.presentToast(message);
         });
@@ -909,9 +916,10 @@ var MentorAddPage = (function () {
 MentorAddPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\mentorAdd\mentorAdd.html"*/'<ion-header>\n\n    <ion-toolbar>\n\n        <ion-buttons left>\n\n        <button ion-button (click)="dismiss()">\n\n                <span ion-text><ion-icon name="ios-close-circle-outline"></ion-icon></span>  \n\n        </button>\n\n        </ion-buttons>\n\n        <ion-title>멘토신청</ion-title> \n\n        <ion-buttons end>\n\n            <button ion-button (click)="openRoomPage()">\n\n                <span ion-text><ion-icon name="ios-checkmark-circle-outline"></ion-icon></span>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-mentorAdd">\n\n    <ion-list>\n\n        \n\n        <!--팀명-->\n\n        <ion-item>\n\n                <ion-input type="text" name="팀명" placeholder="팀명" [(ngModel)]="mentoroom.team_name"></ion-input> \n\n        </ion-item>\n\n\n\n        <!--주제-->\n\n        <ion-item>\n\n                <ion-input type="text" placeholder="주제" [(ngModel)]="mentoroom.team_theme"></ion-input> \n\n        </ion-item>\n\n\n\n        <!--첨부-->\n\n        <ion-item class="fileTitle">\n\n            <ion-icon name="logo-youtube" class="youtube-icon" (click)="fileClick(0)"></ion-icon><p (click)="fileClick(0)">영상링크</p>\n\n            <ion-icon name="md-photos" class="photos-icon" (click)="fileClick(1)"></ion-icon><p (click)="fileClick(1)">팀광고사진</p>\n\n            <ion-icon name="ios-link" class="link-icon" (click)="fileClick(2)"></ion-icon><p (click)="fileClick(2)">자격증명파일</p>\n\n        </ion-item>\n\n\n\n        <!--동영상 링크-->\n\n        <ion-item *ngIf="sortArray[0]==true">\n\n                <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>\n\n                <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input" [(ngModel)]="mentoroom.team_link"></ion-input>\n\n        </ion-item>\n\n\n\n        <!--팀 광고사진-->\n\n        <ion-item *ngIf="sortArray[1]==true">\n\n                <ion-icon name="md-photos" class="photos-icon"></ion-icon>\n\n                <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n\n        </ion-item>\n\n\n\n        <!--자격증명파일-->\n\n        <ion-item *ngIf="sortArray[2]==true">\n\n                <ion-icon name="ios-link" class="link-icon"></ion-icon>\n\n                <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n\n        </ion-item>\n\n\n\n        <!--팀 소개 및 설명-->\n\n        <ion-item>\n\n                <ion-textarea placeholder="팀 소개 및 설명" [(ngModel)]="mentoroom.team_about"></ion-textarea>\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\mentorAdd\mentorAdd.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */]) === "function" && _f || Object])
 ], MentorAddPage);
 
+var _a, _b, _c, _d, _e, _f;
 //# sourceMappingURL=mentorAdd.js.map
 
 /***/ }),
@@ -1437,7 +1445,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ServerService = (function () {
     function ServerService(http) {
-        this.URL = 'http://localhost:8085/sm345/api/app/';
+        this.URL = 'http://localhost:8085/sm345/api/';
         this.http = http;
     }
     ServerService.prototype.makeLogin = function (user) {
@@ -1449,8 +1457,17 @@ var ServerService = (function () {
         })
             .catch(this.handleError);
     };
+    ServerService.prototype.getLoginrecord = function (user_id) {
+        var url = this.URL + 'login_record/' + user_id;
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) {
+            return response.json();
+        })
+            .catch(this.handleError);
+    };
     ServerService.prototype.updatePassword = function (user) {
-        var url = this.URL + 'update_password';
+        var url = this.URL + 'updatepassword';
         return this.http.post(url, user)
             .toPromise()
             .then(function (response) {
@@ -1458,8 +1475,8 @@ var ServerService = (function () {
         })
             .catch(this.handleError);
     };
-    ServerService.prototype.insertMentoroom = function (mentoroom) {
-        var url = this.URL + 'insert_mentoroom';
+    ServerService.prototype.createMentoroom = function (mentoroom) {
+        var url = this.URL + 'mentoroom/create';
         return this.http.post(url, mentoroom)
             .toPromise()
             .then(function (response) {
@@ -1482,9 +1499,10 @@ var ServerService = (function () {
 }());
 ServerService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
 ], ServerService);
 
+var _a;
 //# sourceMappingURL=server.service.js.map
 
 /***/ }),

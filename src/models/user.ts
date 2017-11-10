@@ -3,6 +3,7 @@ export class User{
     user_password: string;
     user_auth: number;
     user_name: string;
+    login_record: number;
 
     constructor(user_id: string, user_password: string, user_auth: number, user_name: string){
         this.user_id = user_id;

@@ -44,7 +44,7 @@ export class MentorAddPage implements OnInit {
 
   openRoomPage() {
     this.mentoroom.mento_id = this.USERID;
-    this.serverService.insertMentoroom(this.mentoroom)
+    this.serverService.createMentoroom(this.mentoroom)
     .then(message =>
     {
       this.presentToast(message);

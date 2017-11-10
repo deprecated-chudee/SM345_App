@@ -4,4 +4,6 @@ export class Message{
     user_id: number;
     user_name: string;
     user_auth: number;
+    user_password: string;
+    login_record: number;
 }

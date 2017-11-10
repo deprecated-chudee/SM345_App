@@ -19,6 +19,8 @@ export class LoginPage {
   serverService: ServerService;
   private message: Message;
   //localStorage: CoolLocalStorage;
+  private login_record: number =0;
+  private password: string = "";
 
   constructor(public app: App, serverService: ServerService, http: Http, public navCtrl: NavController, public appCtrl: App, public toastCtrl: ToastController, public alertCtrl: AlertController, public modalCtrl: ModalController, /*localStorage: CoolLocalStorage*/) {
     this.http = http;
@@ -29,9 +31,15 @@ export class LoginPage {
     //this.localStorage = localStorage;   
   }
 
-  //로그인 버튼 눌렀을 때
+  //로그인
   signIn(){
-    if(this.user.user_password == '0000')
+    this.serverService.getLoginrecord(this.user.user_id)
+    .then(message =>
+    {
+      this.login_record = message.login_record;
+    });
+
+    if(this.login_record == 0)
       this.showPasswordAlert();
     else{
     this.serverService.makeLogin(this.user)
@@ -87,7 +95,6 @@ export class LoginPage {
             {
               name: 'password',
               type: 'password',
-              value: '0000', 
               placeholder: '기존 비밀번호',
            },
            {
@@ -110,6 +117,8 @@ export class LoginPage {
           {
              text: '확인',
              handler: data => {
+              //비번이 기존꺼랑 일치하는지 여부 틀리면 틀리다.
+              
               this.user.user_password = data['newPassword'];
               this.serverService.updatePassword(this.user)
               .then(message =>

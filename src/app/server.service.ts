@@ -10,7 +10,7 @@ import { Mentoroom } from '../models/mentoroom';
 @Injectable()
 export class ServerService {
   
-  private URL = 'http://localhost:8085/sm345/api/app/';
+  private URL = 'http://localhost:8085/sm345/api/';
 
   private http: Http;
   static USERID: number;
@@ -30,8 +30,17 @@ export class ServerService {
               .catch(this.handleError);
   }
 
+  getLoginrecord(user_id: string): Promise<Message> {
+    let url = this.URL + 'login_record/' + user_id;
+    return this.http.get(url)
+              .toPromise()
+              .then(response => 
+                response.json() as Message)
+              .catch(this.handleError);
+  }
+
   updatePassword(user: User): Promise<Message>{
-    let url = this.URL + 'update_password';
+    let url = this.URL + 'updatepassword';
     return this.http.post(url, user)
               .toPromise()
               .then(response => 
@@ -39,8 +48,8 @@ export class ServerService {
               .catch(this.handleError);
   }
 
-  insertMentoroom(mentoroom: Mentoroom): Promise<Message>{
-    let url = this.URL + 'insert_mentoroom';
+  createMentoroom(mentoroom: Mentoroom): Promise<Message>{
+    let url = this.URL + 'mentoroom/create';
     return this.http.post(url, mentoroom)
               .toPromise()
               .then(response => 
