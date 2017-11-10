@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 101:
+/***/ 102:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46,7 +46,7 @@ SmPage = __decorate([
 
 /***/ }),
 
-/***/ 102:
+/***/ 103:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -54,8 +54,8 @@ SmPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__write_write__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reading_reading__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__write_write__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reading_reading__ = __webpack_require__(105);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -103,7 +103,7 @@ NoticePage = __decorate([
 
 /***/ }),
 
-/***/ 103:
+/***/ 104:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -145,7 +145,7 @@ WritePage = __decorate([
 
 /***/ }),
 
-/***/ 104:
+/***/ 105:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -153,7 +153,7 @@ WritePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__write_write__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__write_write__ = __webpack_require__(104);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -215,14 +215,14 @@ ReadingPage = __decorate([
 
 /***/ }),
 
-/***/ 105:
+/***/ 106:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoomDetailPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(51);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -259,7 +259,7 @@ RoomDetailPage = __decorate([
 
 /***/ }),
 
-/***/ 114:
+/***/ 115:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -272,11 +272,11 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 114;
+webpackEmptyAsyncContext.id = 115;
 
 /***/ }),
 
-/***/ 155:
+/***/ 156:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -289,7 +289,7 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 155;
+webpackEmptyAsyncContext.id = 156;
 
 /***/ }),
 
@@ -300,8 +300,8 @@ webpackEmptyAsyncContext.id = 155;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sm_sm__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notice_notice__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sm_sm__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notice_notice__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -342,74 +342,6 @@ var HomePage_1;
 
 /***/ }),
 
-/***/ 195:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServerService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var ServerService = (function () {
-    function ServerService(http) {
-        this.URL = 'http://localhost:8085/sm345/api/app/';
-        this.http = http;
-    }
-    ServerService.prototype.makeLogin = function (user) {
-        var url = this.URL + 'login';
-        return this.http.post(url, user)
-            .toPromise()
-            .then(function (response) {
-            return response.json();
-        })
-            .catch(this.handleError);
-    };
-    ServerService.prototype.updatePassword = function (user) {
-        var url = this.URL + 'update_password';
-        return this.http.post(url, user)
-            .toPromise()
-            .then(function (response) {
-            return response.json();
-        })
-            .catch(this.handleError);
-    };
-    ServerService.prototype.insertMentoroom = function (mentoroom) {
-        var url = this.URL + 'insert_mentoroom';
-        return this.http.post(url, mentoroom)
-            .toPromise()
-            .then(function (response) {
-            return response.json();
-        })
-            .catch(this.handleError);
-    };
-    ServerService.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
-    };
-    return ServerService;
-}());
-ServerService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
-], ServerService);
-
-//# sourceMappingURL=server.service.js.map
-
-/***/ }),
-
 /***/ 196:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -421,13 +353,13 @@ ServerService = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(200);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_sm_sm__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_notice_notice__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_sm_sm__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_notice_notice__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_question_question__ = __webpack_require__(204);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_room_room__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_room_room__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_message_message__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__app_server_service__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__app_server_service__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -450,16 +382,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//import { CoolLocalStorage } from 'angular2-cool-storage';
 var MyApp = (function () {
-    function MyApp(alertCtrl, serverService, modalCtrl, platform, statusBar, splashScreen) {
+    function MyApp(toastCtrl, alertCtrl, serverService, modalCtrl, platform, statusBar, splashScreen) {
+        this.toastCtrl = toastCtrl;
         this.alertCtrl = alertCtrl;
         this.modalCtrl = modalCtrl;
         this.platform = platform;
         this.statusBar = statusBar;
         this.splashScreen = splashScreen;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */];
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         this.initializeApp();
         this.serverService = serverService;
+        //this.localStorage = localStorage;
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'HOME', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
@@ -470,13 +405,6 @@ var MyApp = (function () {
             { title: '관리페이지', component: __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__["a" /* ManagerPage */] },
         ];
     }
-    MyApp.prototype.ngOnInit = function () {
-        this.USERID = __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */].USERID;
-        this.USERNAME = __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */].USERNAME;
-        this.USERAUTH = __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */].USERAUTH;
-        console.log("온잇이름" + this.USERNAME);
-        console.log("온잇아이디" + this.USERID);
-    };
     MyApp.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
@@ -496,6 +424,7 @@ var MyApp = (function () {
         modal.present();
     };
     MyApp.prototype.openLogout = function () {
+        var _this = this;
         var prompt = this.alertCtrl.create({
             title: '로그아웃 하시겠습니까?',
             buttons: [
@@ -507,12 +436,26 @@ var MyApp = (function () {
                 {
                     text: '로그아웃',
                     handler: function (data) {
+                        _this.presentLogoutToast('bottom');
+                        // this.localStorage.clear();
                         window.location.reload();
                     }
                 }
             ]
         });
         prompt.present();
+    };
+    MyApp.prototype.loginOpen = function () {
+        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */]);
+        modal.present();
+    };
+    MyApp.prototype.presentLogoutToast = function (position) {
+        var toast = this.toastCtrl.create({
+            message: '로그아웃 되었습니다.',
+            duration: 3000,
+            position: position,
+        });
+        toast.present();
     };
     MyApp.prototype.showPasswordAlert = function () {
         var prompt = this.alertCtrl.create({
@@ -549,6 +492,21 @@ var MyApp = (function () {
         });
         prompt.present();
     };
+    MyApp.prototype.ngOnInit = function () {
+        /*
+       if(this.localStorage.getItem('USERID') != null){
+         this.USERID = Number(this.localStorage.getItem('USERID'));
+         this.USERNAME = this.localStorage.getItem('USERNAME');
+         this.USERAUTH = Number(this.localStorage.getItem('USERAUTH'));
+       }
+       
+       if(this.localStorage.getItem('USERID')==null){
+         this.USERID = null;
+         this.USERNAME = null;
+         this.USERAUTH = null;
+       }
+       */
+    };
     return MyApp;
 }());
 __decorate([
@@ -556,9 +514,9 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\app\app.html"*/'<ion-menu [content]="content">\n\n\n\n  \n\n\n\n<ion-content class="side">\n\n<section class="sideAccount">\n\n    <ion-item no-lines>\n\n      <button menuClose clear ion-button item-right>\n\n        <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n  <table class="sideAccountTable">\n\n    <tr>\n\n      <td rowspan="2">\n\n        <img src="assets/img/user.png" width="50px"/>\n\n      </td>\n\n      <td>\n\n        {{USERNAME}}\n\n      </td>\n\n    </tr>\n\n    <tr>\n\n      <td>\n\n        {{USERID}}\n\n      </td>\n\n    </tr>\n\n  </table>\n\n  <ion-item no-lines>\n\n      <button menuClose clear ion-button item-right (click)="openLogout()">\n\n          <ion-icon name="md-log-out" class="account-icon"></ion-icon>\n\n      </button>\n\n      <button menuClose clear ion-button item-right (click)="openMessage()">\n\n        <ion-icon name="md-mail" class="account-icon"></ion-icon>\n\n      </button>\n\n      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">\n\n        <ion-icon name="ios-apps" class="account-icon"></ion-icon>\n\n      </button>\n\n  </ion-item>\n\n</section>\n\n\n\n  <table class="sideTable">\n\n      <tr>\n\n        <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>\n\n        <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>\n\n          <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>\n\n          <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>\n\n          <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>\n\n          <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>\n\n          <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>\n\n      </tr>\n\n    </table>\n\n\n\n\n\n  </ion-content>\n\n</ion-menu>\n\n\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\app\app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\app\app.html"*/'<ion-menu [content]="content">\n\n\n\n  \n\n\n\n<ion-content class="side">\n\n<section class="sideAccount">\n\n    <ion-item no-lines>\n\n      <button menuClose clear ion-button item-right>\n\n        <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n  <table class="sideAccountTable">\n\n    <tr>\n\n      <td rowspan="2">\n\n        <img src="assets/img/user.png" width="50px"/>\n\n      </td>\n\n         <!--로그인 안했을 경우-->\n\n         <td *ngIf="USERID == null" class="account_user" (click)="loginOpen()">로그인 해주세요</td>\n\n         \n\n          <!--로그인 했을 경우-->\n\n         <td *ngIf="USERID != null" class="account_user"><b>{{USERNAME}}</b></td>\n\n    </tr>\n\n    <tr>\n\n         <td *ngIf="USERID == null" class="account_user"></td>\n\n    </tr>\n\n  </table>\n\n\n\n  <ion-item no-lines>\n\n      <button menuClose clear ion-button item-right (click)="openLogout()">\n\n          <ion-icon name="md-log-out" class="account-icon"></ion-icon>\n\n      </button>\n\n      <button menuClose clear ion-button item-right (click)="openMessage()">\n\n        <ion-icon name="md-mail" class="account-icon"></ion-icon>\n\n      </button>\n\n      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">\n\n        <ion-icon name="ios-apps" class="account-icon"></ion-icon>\n\n      </button>\n\n  </ion-item>\n\n</section>\n\n\n\n  <table class="sideTable">\n\n      <tr>\n\n        <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>\n\n        <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>\n\n          <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>\n\n          <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>\n\n          <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>\n\n          <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>\n\n          <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>\n\n      </tr>\n\n    </table>\n\n\n\n\n\n  </ion-content>\n\n</ion-menu>\n\n\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\app\app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
@@ -636,10 +594,11 @@ SmEditPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smLogin_smLogin__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_user__ = __webpack_require__(280);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_message__ = __webpack_require__(281);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(40);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_app_component__ = __webpack_require__(196);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_user__ = __webpack_require__(280);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__models_message__ = __webpack_require__(281);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -657,8 +616,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+//import { CoolLocalStorage } from 'angular2-cool-storage';
 var LoginPage = (function () {
-    function LoginPage(serverService, http, navCtrl, appCtrl, toastCtrl, alertCtrl, modalCtrl) {
+    //localStorage: CoolLocalStorage;
+    function LoginPage(app, serverService, http, navCtrl, appCtrl, toastCtrl, alertCtrl, modalCtrl) {
+        this.app = app;
         this.navCtrl = navCtrl;
         this.appCtrl = appCtrl;
         this.toastCtrl = toastCtrl;
@@ -666,9 +629,10 @@ var LoginPage = (function () {
         this.modalCtrl = modalCtrl;
         this.http = http;
         this.serverService = serverService;
-        this.user = new __WEBPACK_IMPORTED_MODULE_6__models_user__["a" /* User */]("", "", 0, "");
+        this.user = new __WEBPACK_IMPORTED_MODULE_7__models_user__["a" /* User */]("", "", 0, "");
         this.navCtrl = navCtrl;
-        this.message = new __WEBPACK_IMPORTED_MODULE_7__models_message__["a" /* Message */];
+        this.message = new __WEBPACK_IMPORTED_MODULE_8__models_message__["a" /* Message */];
+        //this.localStorage = localStorage;   
     }
     //로그인 버튼 눌렀을 때
     LoginPage.prototype.signIn = function () {
@@ -683,16 +647,15 @@ var LoginPage = (function () {
                 if (message.key == 2)
                     _this.presentLoginToast(message);
                 if (message.key == 0) {
+                    //this.localStorage.setItem('USERID', message.user_id.toString());
+                    //this.localStorage.setItem('USERAUTH', message.user_auth.toString());
+                    //this.localStorage.setItem('USERNAME', message.user_name);
                     __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERID = message.user_id;
-                    __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERAUTH = message.user_auth;
                     __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERNAME = message.user_name;
-                    console.log('아이디', __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERID);
-                    console.log('권한', __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERAUTH);
-                    console.log('이름', __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERNAME);
-                    _this.presentLoginToast(message.title);
-                    setTimeout(function () {
-                        _this.openHomePage();
-                    }, 300);
+                    __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERAUTH = message.user_auth;
+                    _this.presentLoginToast(message);
+                    _this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_6__app_app_component__["a" /* MyApp */]);
+                    window.location.reload();
                 }
             });
         }
@@ -747,15 +710,14 @@ var LoginPage = (function () {
                         _this.serverService.updatePassword(_this.user)
                             .then(function (message) {
                             _this.presentLoginToast(message);
+                            //this.localStorage.setItem('USERID', message.user_id.toString());
+                            // this.localStorage.setItem('USERAUTH', message.user_auth.toString());
+                            //this.localStorage.setItem('USERNAME', message.user_name);
                             __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERID = message.user_id;
-                            __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERAUTH = message.user_auth;
                             __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERNAME = message.user_name;
-                            console.log('아이디', __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERID);
-                            console.log('권한', __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERAUTH);
-                            console.log('이름', __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERNAME);
-                            setTimeout(function () {
-                                _this.openHomePage();
-                            }, 300);
+                            __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERAUTH = message.user_auth;
+                            _this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_6__app_app_component__["a" /* MyApp */]);
+                            window.location.reload();
                         });
                     }
                 }
@@ -768,7 +730,7 @@ var LoginPage = (function () {
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\login\login.html"*/'<ion-content class="page-login">\n\n    <section class="loginSection">\n\n        <img src="assets/img/Logo1.jpg" class="sm-logo" />\n\n        <table class="loginTable">\n\n                <tr>\n\n                    <td>\n\n                        <ion-item>\n\n                                <ion-label floating>ID</ion-label>\n\n                                <ion-input type="text" [(ngModel)]="user.user_id"></ion-input>\n\n                        </ion-item>\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        <ion-item>\n\n                            <ion-label floating>Password</ion-label>\n\n                            <ion-input type="password" [(ngModel)]="user.user_password"></ion-input>\n\n                        </ion-item>\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n        <button ion-button (click)="signIn()" class="login-button">로그인</button>\n\n\n\n        <p class="smLoginP" (click)="openSmLoginPage()"><ion-icon end name=\'help-circle\'></ion-icon>&nbsp;&nbsp;SM사업이란?</p>\n\n    </section>\n\n</ion-content>\n\n  '/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\login\login.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_5__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_5__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
 ], LoginPage);
 
 //# sourceMappingURL=login.js.map
@@ -820,7 +782,7 @@ SmLoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reading_reading__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reading_reading__ = __webpack_require__(105);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -871,9 +833,9 @@ QuestionPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MentorAddPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_mentoroom__ = __webpack_require__(282);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -888,8 +850,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//import { CoolLocalStorage } from 'angular2-cool-storage';
 var MentorAddPage = (function () {
-    function MentorAddPage(appCtrl, viewCtrl, toastCtrl, navCtrl, serverService) {
+    //localStorage: CoolLocalStorage;
+    function MentorAddPage(app, appCtrl, viewCtrl, toastCtrl, navCtrl, serverService) {
+        this.app = app;
         this.appCtrl = appCtrl;
         this.viewCtrl = viewCtrl;
         this.toastCtrl = toastCtrl;
@@ -898,10 +863,19 @@ var MentorAddPage = (function () {
         this.sortArray = [];
         this.mentoroom = new __WEBPACK_IMPORTED_MODULE_3__models_mentoroom__["a" /* Mentoroom */]("", "", "", 0, "", 0, 0, 0);
         this.serverService = serverService;
+        //this.localStorage = localStorage;
     }
     MentorAddPage.prototype.ngOnInit = function () {
+        /*
+        if(this.localStorage.getItem('USERID') != null){
+          this.USERID = Number(this.localStorage.getItem('USERID'));
+        }
+        
+        if(this.localStorage.getItem('USERID')==null){
+          this.USERID = null;
+        }
+        */
         this.USERID = __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERID;
-        console.log("멘토신청아이디" + this.USERID);
     };
     MentorAddPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
@@ -913,8 +887,11 @@ var MentorAddPage = (function () {
             .then(function (message) {
             _this.presentToast(message);
         });
-        this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_2__room_room__["a" /* RoomPage */]);
-        this.viewCtrl.dismiss();
+        //this.navCtrl.setRoot(RoomPage);
+        setTimeout(function () {
+            _this.app.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_2__room_room__["a" /* RoomPage */]);
+        }, 300);
+        this.dismiss();
     };
     MentorAddPage.prototype.fileClick = function (sort) {
         this.sortArray[sort] = !this.sortArray[sort];
@@ -930,9 +907,9 @@ var MentorAddPage = (function () {
     return MentorAddPage;
 }());
 MentorAddPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\mentorAdd\mentorAdd.html"*/'<ion-header>\n\n    <ion-toolbar>\n\n        <ion-buttons left>\n\n        <button ion-button (click)="dismiss()">\n\n                <span ion-text><ion-icon name="ios-close-circle-outline"></ion-icon></span>  \n\n        </button>\n\n        </ion-buttons>\n\n        <ion-title>멘토신청</ion-title> \n\n        <ion-buttons end>\n\n            <button ion-button (click)="openRoomPage()">\n\n                <span ion-text><ion-icon name="ios-checkmark-circle-outline"></ion-icon></span>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-mentorAdd">\n\n    <ion-list>\n\n        <!--연도, 학기-->\n\n        <ion-item>\n\n                <ion-label>기간선택</ion-label>\n\n                <ion-select>\n\n                    <ion-option value="2017-1">2017-1</ion-option>\n\n                    <ion-option value="2017-2">2017-2</ion-option>\n\n                </ion-select>       \n\n        </ion-item>\n\n\n\n        <!--팀명-->\n\n        <ion-item>\n\n                <ion-input type="text" name="팀명" placeholder="팀명" [(ngModel)]="mentoroom.team_name"></ion-input> \n\n        </ion-item>\n\n\n\n        <!--주제-->\n\n        <ion-item>\n\n                <ion-input type="text" placeholder="주제" [(ngModel)]="mentoroom.team_theme"></ion-input> \n\n        </ion-item>\n\n\n\n        <!--첨부-->\n\n        <ion-item class="fileTitle">\n\n            <ion-icon name="logo-youtube" class="youtube-icon" (click)="fileClick(0)"></ion-icon><p (click)="fileClick(0)">영상링크</p>\n\n            <ion-icon name="md-photos" class="photos-icon" (click)="fileClick(1)"></ion-icon><p (click)="fileClick(1)">팀광고사진</p>\n\n            <ion-icon name="ios-link" class="link-icon" (click)="fileClick(2)"></ion-icon><p (click)="fileClick(2)">자격증명파일</p>\n\n        </ion-item>\n\n\n\n        <!--동영상 링크-->\n\n        <ion-item *ngIf="sortArray[0]==true">\n\n                <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>\n\n                <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input" [(ngModel)]="mentoroom.team_link"></ion-input>\n\n        </ion-item>\n\n\n\n        <!--팀 광고사진-->\n\n        <ion-item *ngIf="sortArray[1]==true">\n\n                <ion-icon name="md-photos" class="photos-icon"></ion-icon>\n\n                <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n\n        </ion-item>\n\n\n\n        <!--자격증명파일-->\n\n        <ion-item *ngIf="sortArray[2]==true">\n\n                <ion-icon name="ios-link" class="link-icon"></ion-icon>\n\n                <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n\n        </ion-item>\n\n\n\n        <!--팀 소개 및 설명-->\n\n        <ion-item>\n\n                <ion-textarea placeholder="팀 소개 및 설명" [(ngModel)]="mentoroom.team_about"></ion-textarea>\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\mentorAdd\mentorAdd.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\mentorAdd\mentorAdd.html"*/'<ion-header>\n\n    <ion-toolbar>\n\n        <ion-buttons left>\n\n        <button ion-button (click)="dismiss()">\n\n                <span ion-text><ion-icon name="ios-close-circle-outline"></ion-icon></span>  \n\n        </button>\n\n        </ion-buttons>\n\n        <ion-title>멘토신청</ion-title> \n\n        <ion-buttons end>\n\n            <button ion-button (click)="openRoomPage()">\n\n                <span ion-text><ion-icon name="ios-checkmark-circle-outline"></ion-icon></span>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-toolbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-mentorAdd">\n\n    <ion-list>\n\n        \n\n        <!--팀명-->\n\n        <ion-item>\n\n                <ion-input type="text" name="팀명" placeholder="팀명" [(ngModel)]="mentoroom.team_name"></ion-input> \n\n        </ion-item>\n\n\n\n        <!--주제-->\n\n        <ion-item>\n\n                <ion-input type="text" placeholder="주제" [(ngModel)]="mentoroom.team_theme"></ion-input> \n\n        </ion-item>\n\n\n\n        <!--첨부-->\n\n        <ion-item class="fileTitle">\n\n            <ion-icon name="logo-youtube" class="youtube-icon" (click)="fileClick(0)"></ion-icon><p (click)="fileClick(0)">영상링크</p>\n\n            <ion-icon name="md-photos" class="photos-icon" (click)="fileClick(1)"></ion-icon><p (click)="fileClick(1)">팀광고사진</p>\n\n            <ion-icon name="ios-link" class="link-icon" (click)="fileClick(2)"></ion-icon><p (click)="fileClick(2)">자격증명파일</p>\n\n        </ion-item>\n\n\n\n        <!--동영상 링크-->\n\n        <ion-item *ngIf="sortArray[0]==true">\n\n                <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>\n\n                <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input" [(ngModel)]="mentoroom.team_link"></ion-input>\n\n        </ion-item>\n\n\n\n        <!--팀 광고사진-->\n\n        <ion-item *ngIf="sortArray[1]==true">\n\n                <ion-icon name="md-photos" class="photos-icon"></ion-icon>\n\n                <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n\n        </ion-item>\n\n\n\n        <!--자격증명파일-->\n\n        <ion-item *ngIf="sortArray[2]==true">\n\n                <ion-icon name="ios-link" class="link-icon"></ion-icon>\n\n                <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n\n        </ion-item>\n\n\n\n        <!--팀 소개 및 설명-->\n\n        <ion-item>\n\n                <ion-textarea placeholder="팀 소개 및 설명" [(ngModel)]="mentoroom.team_about"></ion-textarea>\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\mentorAdd\mentorAdd.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */]])
 ], MentorAddPage);
 
 //# sourceMappingURL=mentorAdd.js.map
@@ -947,7 +924,7 @@ MentorAddPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roomDetail_roomDetail__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roomDetail_roomDetail__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__messageAdd_messageAdd__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__survey_survey__ = __webpack_require__(208);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1260,22 +1237,22 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__server_service__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__server_service__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_login_login__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_sm_sm__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_notice_notice__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_sm_sm__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_notice_notice__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_question_question__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_smLogin_smLogin__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_manager_manager__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_room_room__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_roomDetail_roomDetail__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_room_room__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_roomDetail_roomDetail__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_mentorAdd_mentorAdd__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_message_message__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_reading_reading__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_write_write__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_reading_reading__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_write_write__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_messageAdd_messageAdd__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_survey_survey__ = __webpack_require__(208);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_smEdit_smEdit__ = __webpack_require__(201);
@@ -1312,6 +1289,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+//import { CoolStorageModule } from 'angular2-cool-storage';
+//import { IonicStorageModule } from '@ionic/storage';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -1342,7 +1321,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */]),
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* HttpModule */]
+            __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* HttpModule */],
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicApp */]],
         entryComponents: [
@@ -1368,6 +1347,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_23__ionic_native_status_bar__["a" /* StatusBar */],
             __WEBPACK_IMPORTED_MODULE_24__ionic_native_splash_screen__["a" /* SplashScreen */],
             __WEBPACK_IMPORTED_MODULE_5__server_service__["a" /* ServerService */],
+            //CoolStorageModule,
             { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicErrorHandler */] }
         ]
     })
@@ -1434,7 +1414,82 @@ var Mentoroom = (function () {
 
 /***/ }),
 
-/***/ 50:
+/***/ 40:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServerService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ServerService = (function () {
+    function ServerService(http) {
+        this.URL = 'http://localhost:8085/sm345/api/app/';
+        this.http = http;
+    }
+    ServerService.prototype.makeLogin = function (user) {
+        var url = this.URL + 'login';
+        return this.http.post(url, user)
+            .toPromise()
+            .then(function (response) {
+            return response.json();
+        })
+            .catch(this.handleError);
+    };
+    ServerService.prototype.updatePassword = function (user) {
+        var url = this.URL + 'update_password';
+        return this.http.post(url, user)
+            .toPromise()
+            .then(function (response) {
+            return response.json();
+        })
+            .catch(this.handleError);
+    };
+    ServerService.prototype.insertMentoroom = function (mentoroom) {
+        var url = this.URL + 'insert_mentoroom';
+        return this.http.post(url, mentoroom)
+            .toPromise()
+            .then(function (response) {
+            return response.json();
+        })
+            .catch(this.handleError);
+    };
+    ServerService.prototype.getMentoroomList = function () {
+        var url = this.URL + 'mentoroom';
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ServerService.prototype.handleError = function (error) {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    };
+    return ServerService;
+}());
+ServerService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+], ServerService);
+
+//# sourceMappingURL=server.service.js.map
+
+/***/ }),
+
+/***/ 51:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1442,8 +1497,9 @@ var Mentoroom = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roomDetail_roomDetail__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roomDetail_roomDetail__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mentorAdd_mentorAdd__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(40);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1458,11 +1514,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RoomPage = (function () {
-    function RoomPage(navCtrl, modalCtrl) {
+    function RoomPage(serverService, navCtrl, modalCtrl) {
         this.navCtrl = navCtrl;
         this.modalCtrl = modalCtrl;
+        this.mentorooms = [];
+        this.serverService = serverService;
     }
+    RoomPage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.serverService.getMentoroomList().then(function (mentoroom) {
+            _this.mentorooms = mentoroom;
+        });
+    };
     RoomPage.prototype.openHomePage = function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
     };
@@ -1477,9 +1542,9 @@ var RoomPage = (function () {
     return RoomPage;
 }());
 RoomPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\room\room.html"*/'<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n\n      </div>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding class="page-room">\n\n      \n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>\n\n          <td>[팀명] CC&nbsp;&nbsp;<button ion-button class="fileButton4">대기중</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] C프로그래밍</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 1명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/java.png" /></td>\n\n          <td>[팀명] 자바를 잡아&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] JAVA</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 3명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/algo.png" /></td>\n\n          <td>[팀명] ALGO&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] 알고리즘</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 2명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/python.png" /></td>\n\n          <td>[팀명] 썬&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] Python</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 1명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <button ion-button block (click)="openMentorAddPage()">멘토신청</button>\n\n\n\n  </ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\room\room.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\room\room.html"*/'<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n\n      </div>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding class="page-room">\n\n      \n\n\n\n      <table class="roomTable" *ngFor="let m of mentorooms">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>\n\n          <td>[팀명] {{m.team_name}}&nbsp;&nbsp;<button ion-button class="fileButton4">대기중</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] {{m.team_theme}}</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 1명</td>\n\n        </tr>\n\n      </table>\n\n<!--\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/java.png" /></td>\n\n          <td>[팀명] 자바를 잡아&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] JAVA</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 3명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/algo.png" /></td>\n\n          <td>[팀명] ALGO&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] 알고리즘</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 2명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/python.png" /></td>\n\n          <td>[팀명] 썬&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] Python</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 1명</td>\n\n        </tr>\n\n      </table>\n\n    -->\n\n      <button ion-button block (click)="openMentorAddPage()">멘토신청</button>\n\n\n\n  </ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\room\room.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
 ], RoomPage);
 
 //# sourceMappingURL=room.js.map

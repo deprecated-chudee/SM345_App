@@ -14,16 +14,17 @@
       <td rowspan="2">
         <img src="assets/img/user.png" width="50px"/>
       </td>
-      <td>
-        {{USERNAME}}
-      </td>
+         <!--로그인 안했을 경우-->
+         <td *ngIf="USERID == null" class="account_user" (click)="loginOpen()">로그인 해주세요</td>
+         
+          <!--로그인 했을 경우-->
+         <td *ngIf="USERID != null" class="account_user"><b>{{USERNAME}}</b></td>
     </tr>
     <tr>
-      <td>
-        {{USERID}}
-      </td>
+         <td *ngIf="USERID == null" class="account_user"></td>
     </tr>
   </table>
+
   <ion-item no-lines>
       <button menuClose clear ion-button item-right (click)="openLogout()">
           <ion-icon name="md-log-out" class="account-icon"></ion-icon>

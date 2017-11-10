@@ -3,6 +3,7 @@ import { App, NavController, ViewController, ToastController } from 'ionic-angul
 import { RoomPage } from '.././room/room';
 import { Mentoroom } from '../../models/mentoroom';
 import { ServerService } from '../../app/server.service';
+//import { CoolLocalStorage } from 'angular2-cool-storage';
 
 @Component({
   templateUrl: 'mentorAdd.html'
@@ -16,15 +17,25 @@ export class MentorAddPage implements OnInit {
   USERID: number;
   USERNAME: string;
   USERAUTH: number;
+  //localStorage: CoolLocalStorage;
 
-  constructor(public appCtrl: App, public viewCtrl: ViewController, public toastCtrl: ToastController, public navCtrl: NavController, serverService: ServerService) {
+  constructor(public app: App, public appCtrl: App, public viewCtrl: ViewController, public toastCtrl: ToastController, public navCtrl: NavController, serverService: ServerService, /*localStorage: CoolLocalStorage*/) {
     this.mentoroom = new Mentoroom("","","",0,"",0,0,0);
     this.serverService = serverService;
+    //this.localStorage = localStorage;
   }
 
   ngOnInit() {
+    /*
+    if(this.localStorage.getItem('USERID') != null){
+      this.USERID = Number(this.localStorage.getItem('USERID'));
+    }
+    
+    if(this.localStorage.getItem('USERID')==null){
+      this.USERID = null;
+    }
+    */
     this.USERID = ServerService.USERID;
-    console.log("멘토신청아이디"+this.USERID);
   }
 
   dismiss() {
@@ -39,8 +50,12 @@ export class MentorAddPage implements OnInit {
       this.presentToast(message);
     });
            
-    this.appCtrl.getRootNav().setRoot(RoomPage);
-    this.viewCtrl.dismiss();
+    //this.navCtrl.setRoot(RoomPage);
+    setTimeout(() => { 
+      this.app.getRootNav().setRoot(RoomPage);
+      }, 300);
+      this.dismiss();
+
   }
 
   fileClick(sort) {

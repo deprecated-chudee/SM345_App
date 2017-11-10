@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { Nav, Platform, ModalController, AlertController } from 'ionic-angular';
+import { Nav, Platform, ModalController, AlertController, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -12,6 +12,7 @@ import { RoomPage } from '../pages/room/room';
 import { ManagerPage } from '../pages/manager/manager';
 import { MessagePage } from '../pages/message/message';
 import { ServerService } from '../app/server.service';
+//import { CoolLocalStorage } from 'angular2-cool-storage';
 
 @Component({
   templateUrl: 'app.html'
@@ -19,17 +20,20 @@ import { ServerService } from '../app/server.service';
 export class MyApp implements OnInit{
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = HomePage;
+
   USERID: number;
   USERNAME: string;
   USERAUTH: number;
   serverService: ServerService;
+  //localStorage: CoolLocalStorage;
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public alertCtrl: AlertController, serverService: ServerService, public modalCtrl: ModalController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public toastCtrl: ToastController, public alertCtrl: AlertController, serverService: ServerService, public modalCtrl: ModalController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, /*localStorage: CoolLocalStorage*/) {
     this.initializeApp();
     this.serverService = serverService;
+    //this.localStorage = localStorage;
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'HOME', component: HomePage }, //0
@@ -40,15 +44,6 @@ export class MyApp implements OnInit{
       { title: '관리페이지', component: ManagerPage }, //5
     ];
 
-  }
-
-  ngOnInit() {
-    this.USERID = ServerService.USERID;
-    this.USERNAME = ServerService.USERNAME;
-    this.USERAUTH = ServerService.USERAUTH;
-    
-    console.log("온잇이름"+this.USERNAME);
-    console.log("온잇아이디"+this.USERID);
   }
 
   initializeApp() {
@@ -71,6 +66,8 @@ export class MyApp implements OnInit{
     modal.present();
   }
 
+  
+
   openLogout() {
     let prompt = this.alertCtrl.create({
       title: '로그아웃 하시겠습니까?',
@@ -83,6 +80,8 @@ export class MyApp implements OnInit{
          {
             text: '로그아웃',
             handler: data => {
+                this.presentLogoutToast('bottom');
+               // this.localStorage.clear();
                 window.location.reload();
             }
          }
@@ -90,8 +89,20 @@ export class MyApp implements OnInit{
    });
    prompt.present();
    }
-  
 
+   loginOpen() {
+    let modal = this.modalCtrl.create(LoginPage);
+    modal.present();
+   }
+  
+   presentLogoutToast(position: string) {
+    let toast = this.toastCtrl.create({
+    message: '로그아웃 되었습니다.',
+    duration: 3000,
+    position: position,
+    });
+    toast.present();
+  }
 
   showPasswordAlert() {
     let prompt = this.alertCtrl.create({
@@ -129,5 +140,23 @@ export class MyApp implements OnInit{
    });
    prompt.present();
    }
+
+   ngOnInit() {
+     /*
+    if(this.localStorage.getItem('USERID') != null){
+      this.USERID = Number(this.localStorage.getItem('USERID'));
+      this.USERNAME = this.localStorage.getItem('USERNAME');
+      this.USERAUTH = Number(this.localStorage.getItem('USERAUTH'));
+    }
+    
+    if(this.localStorage.getItem('USERID')==null){
+      this.USERID = null;
+      this.USERNAME = null;
+      this.USERAUTH = null;
+    }
+    */
   }
+  
+
+}
 

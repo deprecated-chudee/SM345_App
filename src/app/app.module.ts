@@ -25,6 +25,8 @@ import { SmEditPage } from '../pages/smEdit/smEdit';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+//import { CoolStorageModule } from 'angular2-cool-storage';
+//import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     FormsModule,
-    HttpModule
+    HttpModule,
+    //CoolStorageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -76,6 +79,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     ServerService,
+    //CoolStorageModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -7,6 +7,7 @@ import { Http } from '@angular/http';
 import { MyApp } from '../../app/app.component';
 import { User } from '../../models/user';
 import { Message } from '../../models/message';
+//import { CoolLocalStorage } from 'angular2-cool-storage';
 
 @Component({
   templateUrl: 'login.html'
@@ -17,13 +18,15 @@ export class LoginPage {
   private http: Http;
   serverService: ServerService;
   private message: Message;
+  //localStorage: CoolLocalStorage;
 
-  constructor(serverService: ServerService, http: Http, public navCtrl: NavController, public appCtrl: App, public toastCtrl: ToastController, public alertCtrl: AlertController, public modalCtrl: ModalController) {
+  constructor(public app: App, serverService: ServerService, http: Http, public navCtrl: NavController, public appCtrl: App, public toastCtrl: ToastController, public alertCtrl: AlertController, public modalCtrl: ModalController, /*localStorage: CoolLocalStorage*/) {
     this.http = http;
     this.serverService = serverService;          
     this.user = new User("","",0,"");
     this.navCtrl = navCtrl;
     this.message = new Message;
+    //this.localStorage = localStorage;   
   }
 
   //로그인 버튼 눌렀을 때
@@ -40,17 +43,20 @@ export class LoginPage {
           this.presentLoginToast(message);
         if(message.key == 0){
         
+         
+          //this.localStorage.setItem('USERID', message.user_id.toString());
+          //this.localStorage.setItem('USERAUTH', message.user_auth.toString());
+          //this.localStorage.setItem('USERNAME', message.user_name);
+         
           ServerService.USERID = message.user_id;
-          ServerService.USERAUTH = message.user_auth;
           ServerService.USERNAME = message.user_name;
-      
-          console.log('아이디', ServerService.USERID);
-          console.log('권한', ServerService.USERAUTH);
-          console.log('이름', ServerService.USERNAME);
-          this.presentLoginToast(message.title);
-          setTimeout(() => { 
-            this.openHomePage();
-            }, 300);
+          ServerService.USERAUTH = message.user_auth;
+
+          this.presentLoginToast(message);
+          
+          this.appCtrl.getRootNav().setRoot(MyApp);
+          window.location.reload();
+         
         }
       });
     }
@@ -110,17 +116,17 @@ export class LoginPage {
               {
                 this.presentLoginToast(message);
 
+                //this.localStorage.setItem('USERID', message.user_id.toString());
+               // this.localStorage.setItem('USERAUTH', message.user_auth.toString());
+                //this.localStorage.setItem('USERNAME', message.user_name);
+
                 ServerService.USERID = message.user_id;
-                ServerService.USERAUTH = message.user_auth;
                 ServerService.USERNAME = message.user_name;
-            
-                console.log('아이디', ServerService.USERID);
-                console.log('권한', ServerService.USERAUTH);
-                console.log('이름', ServerService.USERNAME);
+                ServerService.USERAUTH = message.user_auth;
               
-                setTimeout(() => { 
-                this.openHomePage();
-                }, 300); 
+                this.appCtrl.getRootNav().setRoot(MyApp);
+                window.location.reload();
+               
             });
             }                   
           }

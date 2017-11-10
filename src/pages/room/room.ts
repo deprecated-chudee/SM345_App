@@ -1,16 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
 import { MentorAddPage } from '.././mentorAdd/mentorAdd';
+import { ServerService } from '../../app/server.service';
+import { Mentoroom } from '../../models/mentoroom';
 
 @Component({
   templateUrl: 'room.html'
 })
-export class RoomPage {
+export class RoomPage  implements OnInit {
+  serverService: ServerService;
+  private mentorooms: Mentoroom[] = [];
 
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController) {
+  constructor( serverService: ServerService, public navCtrl: NavController, public modalCtrl: ModalController) {
+    this.serverService = serverService;
+  }
 
+  ngOnInit() {
+    this.serverService.getMentoroomList().then(
+      mentoroom => { this.mentorooms = mentoroom;
+    });
   }
 
   openHomePage() {
