@@ -125,23 +125,24 @@
               </ion-select>
           </ion-item>
           <ion-item (press)="openRoomDetail()">
-              <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;JAVA&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;자바를 잡아&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;5명</ion-label>
+              <ion-label><button ion-button class="fileButton">개설완료</button><b>&nbsp;&nbsp;[자바를 잡아]&nbsp;&nbsp;</b><span class="sort">|</span>&nbsp;&nbsp;JAVA&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;5명</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
-              <ion-thumbnail item-end>
-                <ion-icon name="home">
-            </ion-thumbnail>
+              <ion-icon item-end name="ios-arrow-forward" (click)="openRoomDetail()" ></ion-icon>
           </ion-item>  
           <ion-item>
-              <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;C프로그래밍&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;CC&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
+              <ion-label><button ion-button class="fileButton">개설완료</button><b>&nbsp;&nbsp;[CC]&nbsp;&nbsp;</b><span class="sort">|</span>&nbsp;&nbsp;C프로그래밍&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
+              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>
           </ion-item> 
           <ion-item>
-              <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;알고리즘&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;ALGO&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;4명</ion-label>
+              <ion-label><button ion-button class="fileButton4">대기중</button><b>&nbsp;&nbsp;[ALGO]&nbsp;&nbsp;</b><span class="sort">|</span>&nbsp;&nbsp;알고리즘&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;4명</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
+              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>
           </ion-item> 
           <ion-item>
-              <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;Python&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;썬&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>
+              <ion-label><button ion-button class="fileButton4">대기중</button><b>&nbsp;&nbsp;[썬]&nbsp;&nbsp;</b><span class="sort">|</span>&nbsp;&nbsp;Python&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
+              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>
           </ion-item>  
           <button ion-button block class="mentorRoomButton">목록에서 삭제</button>
       </ion-list> 
