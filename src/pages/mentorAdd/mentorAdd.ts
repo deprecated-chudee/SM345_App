@@ -36,6 +36,7 @@ export class MentorAddPage implements OnInit {
     }
     */
     this.USERID = ServerService.USERID;
+    console.log('유저아이디'+this.USERID);
   }
 
   dismiss() {

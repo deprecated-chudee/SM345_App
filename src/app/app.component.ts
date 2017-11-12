@@ -155,6 +155,7 @@ export class MyApp implements OnInit{
       this.USERAUTH = null;
     }
     */
+    console.log(ServerService.USERID);
   }
   
 

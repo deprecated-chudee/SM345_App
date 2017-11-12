@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, ToastController, ModalController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { Platform } from 'ionic-angular';
+import { ServerService } from '../../app/server.service';
+import { Mentoroom } from '../../models/mentoroom';
 
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
 import { MessageAddPage } from '.././messageAdd/messageAdd';
@@ -10,20 +12,28 @@ import { SurveyPage } from '.././survey/survey';
 @Component({
   templateUrl: 'manager.html'
 })
-export class ManagerPage {
+export class ManagerPage implements OnInit{
   manager: string = "mentorRoom";
   isAndroid: boolean = false;
   private count:number=1;
+  private mentorooms: Mentoroom[] = [];
+  serverService: ServerService;
 
   public event = {
     month: '2017-01-01',
     timeEnds: '2017-01-01'
   }
 
-  constructor(public modalCtrl: ModalController, public navCtrl: NavController, platform: Platform, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+  constructor(serverService: ServerService, public modalCtrl: ModalController, public navCtrl: NavController, platform: Platform, public alertCtrl: AlertController, public toastCtrl: ToastController) {
       this.isAndroid = platform.is('android');
+      this.serverService = serverService;
   }
 
+  ngOnInit() {
+    this.serverService.getMentoroomList().then(
+      mentoroom => { this.mentorooms = mentoroom;
+    });
+  }
 
   openHomePage() {
     this.navCtrl.setRoot(HomePage);

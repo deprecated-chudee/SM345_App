@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, AlertController, ToastController, App } from 'ionic-angular';
+import { NavController, ModalController, AlertController, ToastController, App, ViewController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { SmLoginPage } from '../smLogin/smLogin';
 import { ServerService } from '../../app/server.service';
@@ -22,10 +22,10 @@ export class LoginPage {
   private login_record: number =0;
   private password: string = "";
 
-  constructor(public app: App, serverService: ServerService, http: Http, public navCtrl: NavController, public appCtrl: App, public toastCtrl: ToastController, public alertCtrl: AlertController, public modalCtrl: ModalController, /*localStorage: CoolLocalStorage*/) {
+  constructor(public viewCtrl: ViewController, public app: App, serverService: ServerService, http: Http, public navCtrl: NavController, public appCtrl: App, public toastCtrl: ToastController, public alertCtrl: AlertController, public modalCtrl: ModalController, /*localStorage: CoolLocalStorage*/) {
     this.http = http;
     this.serverService = serverService;          
-    this.user = new User("","",0,"");
+    this.user = new User(0,"",0,"");
     this.navCtrl = navCtrl;
     this.message = new Message;
     //this.localStorage = localStorage;   
@@ -37,13 +37,12 @@ export class LoginPage {
     .then(message =>
     {
       this.login_record = message.login_record;
-    });
-
-    if(this.login_record == 0)
+      console.log('로그인기록'+this.login_record);
+      if(this.login_record == 0)
       this.showPasswordAlert();
-    else{
-    this.serverService.makeLogin(this.user)
-    .then(message =>
+      else{
+      this.serverService.makeLogin(this.user)
+      .then(message =>
       { 
         if(message.key == -1)
           this.presentLoginToast(message);
@@ -62,13 +61,25 @@ export class LoginPage {
 
           this.presentLoginToast(message);
           
-          this.appCtrl.getRootNav().setRoot(MyApp);
-          window.location.reload();
+          //this.navCtrl.push(HomePage);
+          //this.appCtrl.getRootNav().setRoot(HomePage);
+          //window.location.reload();
+
+          setTimeout(() => { 
+            this.app.getRootNav().setRoot(HomePage);
+            }, 300);
+            this.dismiss();
+      
          
         }
       });
     }
+  });
     }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
 
   presentLoginToast(message) {
       let toast = this.toastCtrl.create({
@@ -133,8 +144,13 @@ export class LoginPage {
                 ServerService.USERNAME = message.user_name;
                 ServerService.USERAUTH = message.user_auth;
               
-                this.appCtrl.getRootNav().setRoot(MyApp);
-                window.location.reload();
+               // this.navCtrl.push(HomePage);
+                //this.appCtrl.getRootNav().setRoot(HomePage);
+                //window.location.reload();
+                setTimeout(() => { 
+                  this.app.getRootNav().setRoot(HomePage);
+                  }, 300);
+                  this.dismiss();
                
             });
             }                   

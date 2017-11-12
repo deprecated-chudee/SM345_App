@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
 import { MentorAddPage } from '.././mentorAdd/mentorAdd';
@@ -27,9 +27,13 @@ export class RoomPage  implements OnInit {
     this.navCtrl.setRoot(HomePage);
   }
 
-  openRoomDetailPage() {
-    let modal = this.modalCtrl.create(RoomDetailPage);
-    modal.present();
+  openRoomDetailPage(mentoroom) {
+    this.navCtrl.push(RoomDetailPage, {
+      mentoroom_id: mentoroom.mentoroom_id,
+    });
+    
+    //let modal = this.modalCtrl.create(RoomDetailPage);
+   // modal.present();
   }
 
   openMentorAddPage() {

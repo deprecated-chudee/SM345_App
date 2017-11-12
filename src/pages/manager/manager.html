@@ -124,30 +124,28 @@
                 <ion-option>전체학기</ion-option>
               </ion-select>
           </ion-item>
-          <ion-item (press)="openRoomDetail()">
-              <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;JAVA&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;자바를 잡아&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;5명</ion-label>
+          <div *ngFor="let m of mentorooms">
+            <div *ngIf= "m.team_confirm == 1">
+              <ion-item (press)="openRoomDetail()">
+              <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item>  
-          <ion-item>
-              <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;C프로그래밍&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;CC&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
+              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>
+              </ion-item>
+            </div>
+            <div *ngIf= "m.team_confirm == 0">
+              <ion-item>
+              <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-          <ion-item>
-              <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;알고리즘&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;ALGO&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;4명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-          <ion-item>
-              <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;Python&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;썬&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
+              </ion-item>
+            </div>
+          </div>
+         
+          <!--해당학기 끝나면 폐설됨으로 바뀌게해야함
           <ion-item>
               <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;UNIX&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you팀&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>
               <ion-checkbox color="dark" checked="false"></ion-checkbox>
           </ion-item> 
-          <ion-item>
-              <ion-label><button ion-button class="fileButton2">개설거절</button>&nbsp;&nbsp;게임프로그래밍&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;game&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item>   
+        -->
           <button ion-button block class="mentorRoomButton">목록에서 삭제</button>
       </ion-list> 
 
