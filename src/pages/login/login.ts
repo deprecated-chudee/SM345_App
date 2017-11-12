@@ -21,7 +21,7 @@ import { ServerService } from '../../app/server.service';
 export class LoginPage {
     private user: User = new User("","",0,"");
     private message: Message = new Message;
-    private login_record: number =0;
+    private login_record: number = 0;
     private password: string = "";
 
     constructor(
@@ -46,14 +46,17 @@ export class LoginPage {
         else {
             this.serverService.makeLogin(this.user)
                 .then(message => { 
+                  console.log(message)
                     if(message.key === -1)
                        this.presentLoginToast(message);
                     if(message.key === 2)
                        this.presentLoginToast(message);
                     if(message.key === 0) {
-                        ServerService.USERID = message.user_id;
-                        ServerService.USERNAME = message.user_name;
-                        ServerService.USERAUTH = message.user_auth;
+                        localStorage.setItem('currentUser', JSON.stringify({ 
+                            USERID: message.user_id,
+                            USERNAME: message.user_name,
+                            USERAUTH: message.user_auth
+                        }));
 
                         this.presentLoginToast(message);
           
@@ -115,12 +118,17 @@ export class LoginPage {
                         this.user.user_password = data['newPassword'];
                         this.serverService.updatePassword(this.user)
                         .then(message => {
+                            // { title: 비밀번호가 변경 되었습니다 } 
+                            // 만 나옴 message.user 정보가 없음
+                            console.log(message);
+                            localStorage.setItem('currentUser', JSON.stringify({ 
+                                USERID: message.user_id,
+                                USERNAME: message.user_name,
+                                USERAUTH: message.user_auth
+                            }));
+
                             this.presentLoginToast(message);
 
-                            ServerService.USERID = message.user_id;
-                            ServerService.USERNAME = message.user_name;
-                            ServerService.USERAUTH = message.user_auth;
-                          
                             this.appCtrl.getRootNav().setRoot(MyApp);
                             window.location.reload();
                         });

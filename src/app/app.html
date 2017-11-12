@@ -15,13 +15,13 @@
         <img src="assets/img/user.png" width="50px"/>
       </td>
          <!--로그인 안했을 경우-->
-         <td *ngIf="USERID == null" class="account_user" (click)="loginOpen()">로그인 해주세요</td>
+         <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>
          
           <!--로그인 했을 경우-->
-         <td *ngIf="USERID != null" class="account_user"><b>{{USERNAME}}</b></td>
+         <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERNAME}}</b></td>
     </tr>
     <tr>
-         <td *ngIf="USERID == null" class="account_user"></td>
+         <td *ngIf="currentUser == undefined" class="account_user"></td>
     </tr>
   </table>
 

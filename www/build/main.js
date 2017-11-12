@@ -382,7 +382,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { CoolLocalStorage } from 'angular2-cool-storage';
 var MyApp = (function () {
     function MyApp(toastCtrl, alertCtrl, serverService, modalCtrl, platform, statusBar, splashScreen) {
         this.toastCtrl = toastCtrl;
@@ -394,7 +393,6 @@ var MyApp = (function () {
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         this.initializeApp();
         this.serverService = serverService;
-        //this.localStorage = localStorage;
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'HOME', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
@@ -404,6 +402,7 @@ var MyApp = (function () {
             { title: 'Q&A', component: __WEBPACK_IMPORTED_MODULE_8__pages_question_question__["a" /* QuestionPage */] },
             { title: '관리페이지', component: __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__["a" /* ManagerPage */] },
         ];
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     MyApp.prototype.initializeApp = function () {
         var _this = this;
@@ -430,14 +429,13 @@ var MyApp = (function () {
             buttons: [
                 {
                     text: '취소',
-                    handler: function (data) {
-                    }
+                    handler: function (data) { }
                 },
                 {
                     text: '로그아웃',
                     handler: function (data) {
                         _this.presentLogoutToast('bottom');
-                        // this.localStorage.clear();
+                        localStorage.removeItem('currentUser');
                         window.location.reload();
                     }
                 }
@@ -480,45 +478,31 @@ var MyApp = (function () {
             buttons: [
                 {
                     text: '취소',
-                    handler: function (data) {
-                    }
+                    handler: function (data) { }
                 },
                 {
                     text: '확인',
-                    handler: function (data) {
-                    }
+                    handler: function (data) { }
                 }
             ]
         });
         prompt.present();
     };
     MyApp.prototype.ngOnInit = function () {
-        /*
-       if(this.localStorage.getItem('USERID') != null){
-         this.USERID = Number(this.localStorage.getItem('USERID'));
-         this.USERNAME = this.localStorage.getItem('USERNAME');
-         this.USERAUTH = Number(this.localStorage.getItem('USERAUTH'));
-       }
-       
-       if(this.localStorage.getItem('USERID')==null){
-         this.USERID = null;
-         this.USERNAME = null;
-         this.USERAUTH = null;
-       }
-       */
     };
     return MyApp;
 }());
 __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]) === "function" && _a || Object)
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/user/git/sm345_app/src/app/app.html"*/'<ion-menu [content]="content">\n\n  \n\n<ion-content class="side">\n<section class="sideAccount">\n    <ion-item no-lines>\n      <button menuClose clear ion-button item-right>\n        <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>\n      </button>\n    </ion-item>\n  <table class="sideAccountTable">\n    <tr>\n      <td rowspan="2">\n        <img src="assets/img/user.png" width="50px"/>\n      </td>\n         <!--로그인 안했을 경우-->\n         <td *ngIf="USERID == null" class="account_user" (click)="loginOpen()">로그인 해주세요</td>\n         \n          <!--로그인 했을 경우-->\n         <td *ngIf="USERID != null" class="account_user"><b>{{USERNAME}}</b></td>\n    </tr>\n    <tr>\n         <td *ngIf="USERID == null" class="account_user"></td>\n    </tr>\n  </table>\n\n  <ion-item no-lines>\n      <button menuClose clear ion-button item-right (click)="openLogout()">\n          <ion-icon name="md-log-out" class="account-icon"></ion-icon>\n      </button>\n      <button menuClose clear ion-button item-right (click)="openMessage()">\n        <ion-icon name="md-mail" class="account-icon"></ion-icon>\n      </button>\n      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">\n        <ion-icon name="ios-apps" class="account-icon"></ion-icon>\n      </button>\n  </ion-item>\n</section>\n\n  <table class="sideTable">\n      <tr>\n        <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>\n        <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>\n          <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>\n          <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>\n          <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>\n          <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>\n          <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>\n      </tr>\n    </table>\n\n\n  </ion-content>\n</ion-menu>\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/user/git/sm345_app/src/app/app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/user/git/sm345_app/src/app/app.html"*/'<ion-menu [content]="content">\n\n  \n\n<ion-content class="side">\n<section class="sideAccount">\n    <ion-item no-lines>\n      <button menuClose clear ion-button item-right>\n        <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>\n      </button>\n    </ion-item>\n  <table class="sideAccountTable">\n    <tr>\n      <td rowspan="2">\n        <img src="assets/img/user.png" width="50px"/>\n      </td>\n         <!--로그인 안했을 경우-->\n         <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>\n         \n          <!--로그인 했을 경우-->\n         <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERNAME}}</b></td>\n    </tr>\n    <tr>\n         <td *ngIf="currentUser == undefined" class="account_user"></td>\n    </tr>\n  </table>\n\n  <ion-item no-lines>\n      <button menuClose clear ion-button item-right (click)="openLogout()">\n          <ion-icon name="md-log-out" class="account-icon"></ion-icon>\n      </button>\n      <button menuClose clear ion-button item-right (click)="openMessage()">\n        <ion-icon name="md-mail" class="account-icon"></ion-icon>\n      </button>\n      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">\n        <ion-icon name="ios-apps" class="account-icon"></ion-icon>\n      </button>\n  </ion-item>\n</section>\n\n  <table class="sideTable">\n      <tr>\n        <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>\n        <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>\n          <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>\n          <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>\n          <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>\n          <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>\n          <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>\n      </tr>\n    </table>\n\n\n  </ion-content>\n</ion-menu>\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/user/git/sm345_app/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ToastController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _h || Object])
 ], MyApp);
 
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
@@ -644,14 +628,17 @@ var LoginPage = (function () {
         else {
             this.serverService.makeLogin(this.user)
                 .then(function (message) {
+                console.log(message);
                 if (message.key === -1)
                     _this.presentLoginToast(message);
                 if (message.key === 2)
                     _this.presentLoginToast(message);
                 if (message.key === 0) {
-                    __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */].USERID = message.user_id;
-                    __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */].USERNAME = message.user_name;
-                    __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */].USERAUTH = message.user_auth;
+                    localStorage.setItem('currentUser', JSON.stringify({
+                        USERID: message.user_id,
+                        USERNAME: message.user_name,
+                        USERAUTH: message.user_auth
+                    }));
                     _this.presentLoginToast(message);
                     _this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_5__app_app_component__["a" /* MyApp */]);
                     window.location.reload();
@@ -707,10 +694,15 @@ var LoginPage = (function () {
                         _this.user.user_password = data['newPassword'];
                         _this.serverService.updatePassword(_this.user)
                             .then(function (message) {
+                            // { title: 비밀번호가 변경 되었습니다 } 
+                            // 만 나옴 message.user 정보가 없음
+                            console.log(message);
+                            localStorage.setItem('currentUser', JSON.stringify({
+                                USERID: message.user_id,
+                                USERNAME: message.user_name,
+                                USERAUTH: message.user_auth
+                            }));
                             _this.presentLoginToast(message);
-                            __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */].USERID = message.user_id;
-                            __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */].USERNAME = message.user_name;
-                            __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */].USERAUTH = message.user_auth;
                             _this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_5__app_app_component__["a" /* MyApp */]);
                             window.location.reload();
                         });
@@ -725,16 +717,10 @@ var LoginPage = (function () {
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/user/git/sm345_app/src/pages/login/login.html"*/'<ion-content class="page-login">\n    <section class="loginSection">\n        <img src="assets/img/Logo1.jpg" class="sm-logo" />\n        <table class="loginTable">\n                <tr>\n                    <td>\n                        <ion-item>\n                                <ion-label floating>ID</ion-label>\n                                <ion-input type="text" [(ngModel)]="user.user_id"></ion-input>\n                        </ion-item>\n                    </td>\n                </tr>\n                <tr>\n                    <td>\n                        <ion-item>\n                            <ion-label floating>Password</ion-label>\n                            <ion-input type="password" [(ngModel)]="user.user_password"></ion-input>\n                        </ion-item>\n                    </td>\n                </tr>\n        </table>\n        <button ion-button (click)="signIn()" class="login-button">로그인</button>\n\n        <p class="smLoginP" (click)="openSmLoginPage()"><ion-icon end name=\'help-circle\'></ion-icon>&nbsp;&nbsp;SM사업이란?</p>\n    </section>\n</ion-content>\n  '/*ion-inline-end:"/Users/user/git/sm345_app/src/pages/login/login.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* App */],
-        __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */],
-        __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* App */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* App */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* App */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["k" /* ToastController */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */]) === "function" && _h || Object])
 ], LoginPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h;
 //# sourceMappingURL=login.js.map
 
 /***/ }),
@@ -1489,10 +1475,10 @@ var ServerService = ServerService_1 = (function () {
 }());
 ServerService = ServerService_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
 ], ServerService);
 
-var ServerService_1, _a;
+var ServerService_1;
 //# sourceMappingURL=server.service.js.map
 
 /***/ }),
