@@ -10,7 +10,8 @@ import { Mentoroom } from '../models/mentoroom';
 @Injectable()
 export class ServerService {
   
-  private URL = 'http://localhost:8085/sm345/api/';
+  //private URL = 'http://localhost:8085/sm345/api/';
+  private URL = 'http://220.230.112.31:8081/sm345/api'
 
   private http: Http;
   static USERID: number;
