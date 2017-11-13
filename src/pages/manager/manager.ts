@@ -4,6 +4,7 @@ import { HomePage } from '.././home/home';
 import { Platform } from 'ionic-angular';
 import { ServerService } from '../../app/server.service';
 import { Mentoroom } from '../../models/mentoroom';
+import { MentoRoomInfo } from '../../models/mentoRoomInfo';
 import { User } from '../../models/user';
 
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
@@ -21,24 +22,21 @@ export class ManagerPage implements OnInit{
     private count:number = 1;
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
+    private mentoRoomInfo: MentoRoomInfo; //관리자 페이지 - 멘토방 설정
+    USERID: number;
+    USERNAME: string;
+    USERAUTH: number;
+    private currentUser;
 
     selectDefualtAuth: number = 1;
 
-    public event = {
-        month: '2017-01-01',
-        timeEnds: '2017-01-01'
-    }
-
-    constructor(
-        private serverService: ServerService, 
-        private adminService: AdminService,
-        public modalCtrl: ModalController, 
-        public navCtrl: NavController, 
-        platform: Platform, 
-        public alertCtrl: AlertController, 
-        public toastCtrl: ToastController
-    ) {
+    constructor(private serverService: ServerService, private adminService: AdminService, public modalCtrl: ModalController, public navCtrl: NavController, platform: Platform, public alertCtrl: AlertController, public toastCtrl: ToastController) {
         this.isAndroid = platform.is('android');
+        this.mentoRoomInfo = new MentoRoomInfo(0,0,0,0,0,0,0,0,0,0);
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.USERID = this.currentUser.USERID;
+        this.USERAUTH = this.currentUser.USERAUTH;
+        this.serverService = serverService;
     }
 
     ngOnInit() {
@@ -46,6 +44,34 @@ export class ManagerPage implements OnInit{
             .then(mentoroom => this.mentorooms = mentoroom);
         this.adminService.userList(1)
             .then(users => this.users = users);
+    }
+
+    //멘토방 설정 저장
+    mentoRoomInfoSave() {
+        this.serverService.createMentoRoomInfo(this.mentoRoomInfo)
+        .then(message =>
+        {
+          this.presentToast();
+        });
+        console.log(typeof(this.mentoRoomInfo.mento_start));
+        console.log(typeof(this.mentoRoomInfo.mento_end));
+        console.log(typeof(this.mentoRoomInfo.menti_start));
+        console.log(typeof(this.mentoRoomInfo.menti_end));
+        console.log(typeof(this.mentoRoomInfo.max_mento));
+        console.log(typeof(this.mentoRoomInfo.max_menti));
+        console.log(typeof(this.mentoRoomInfo.meeting_period));
+        console.log(typeof(this.mentoRoomInfo.meeting_number));
+        console.log(typeof(this.mentoRoomInfo.survey_start));
+        console.log(typeof(this.mentoRoomInfo.survey_end));
+    }
+
+    presentToast() {
+        let toast = this.toastCtrl.create({
+        message: '멘토방 설정이 완료되었습니다.',
+        duration: 3000,
+        position: 'top',
+        });
+        toast.present();
     }
 
     userList(e) {
