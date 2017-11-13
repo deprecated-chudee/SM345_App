@@ -33,7 +33,7 @@ export class RoomPage  implements OnInit {
 
   openRoomDetailPage(mentoroom) {
     this.navCtrl.push(RoomDetailPage, {
-      mentoroom_id: mentoroom.mentoroom_id,
+      mentoroom_id: mentoroom.mentoroom_id, room: 0,
     });
     
     //let modal = this.modalCtrl.create(RoomDetailPage);

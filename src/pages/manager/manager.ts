@@ -17,7 +17,7 @@ import { AdminService } from '../../app/admin.service';
     templateUrl: 'manager.html'
 })
 export class ManagerPage implements OnInit{
-    manager: string = "mentorRoom";
+    manager: string = "roomList";
     isAndroid: boolean = false;
     private count:number = 1;
     private mentorooms: Mentoroom[] = [];
@@ -107,7 +107,7 @@ export class ManagerPage implements OnInit{
 
     openRoomDetail(mentoroom) {
         this.navCtrl.push(RoomDetailPage, {
-            mentoroom_id: mentoroom.mentoroom_id,
+            mentoroom_id: mentoroom.mentoroom_id, room: 1,
           });
     }
 
@@ -353,7 +353,6 @@ export class ManagerPage implements OnInit{
                 position: 'bottom',
             });
             toast.present();
-            this.dismiss();
         } else {
             let toast = this.toastCtrl.create({
                 message: '보고서가 존재하지 않습니다.',

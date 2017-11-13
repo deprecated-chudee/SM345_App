@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { App, NavController, ViewController, NavParams, ToastController, } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
+import { ManagerPage } from '.././manager/manager';
 import { ServerService } from '../../app/server.service';
 import { Mentoroom } from '../../models/mentoroom';
 
@@ -14,9 +15,11 @@ export class RoomDetailPage implements OnInit {
   private USERID: number;
   private USERAUTH: number;
   private currentUser;
+  private room: number;
 
   constructor(public app: App, public toastCtrl: ToastController, serverService: ServerService, public navParams: NavParams, public appCtrl: App, public viewCtrl: ViewController) {
     this.mentoroom_id = this.navParams.get("mentoroom_id");
+    this.room = this.navParams.get("room");
     this.serverService = serverService;
     this.mentoroom = new Mentoroom("","","",0,"",0,0,0);
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -42,19 +45,35 @@ export class RoomDetailPage implements OnInit {
   confirm(mentoroom) {
     this.serverService.confirmMentoroom(mentoroom);
     this.Toast('개설이 완료되었습니다');
+    if(this.room == 0){
     setTimeout(() => { 
       this.app.getRootNav().setRoot(RoomPage);
       }, 300);
       this.dismiss();
+    }
+    if(this.room == 1){
+      setTimeout(() => { 
+        this.app.getRootNav().setRoot(ManagerPage);
+        }, 300);
+        this.dismiss();
+    }
   }
 
   reject(){
     this.serverService.rejectMentoroom(this.mentoroom_id);
     this.Toast('개설이 반려되었습니다');
-    setTimeout(() => { 
-      this.app.getRootNav().setRoot(RoomPage);
-      }, 300);
-      this.dismiss();
+    if(this.room == 0){
+      setTimeout(() => { 
+        this.app.getRootNav().setRoot(RoomPage);
+        }, 300);
+        this.dismiss();
+      }
+      if(this.room == 1){
+        setTimeout(() => { 
+          this.app.getRootNav().setRoot(ManagerPage);
+          }, 300);
+          this.dismiss();
+      }
   }
 
   Toast(message) {

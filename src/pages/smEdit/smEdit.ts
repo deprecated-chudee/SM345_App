@@ -21,7 +21,7 @@ export class SmEditPage {
     constructor(public app: App, public toastCtrl: ToastController, public viewCtrl: ViewController, serverService: ServerService, public navParams: NavParams,  public alertCtrl: AlertController) {
         this.board_id = this.navParams.get("board_id");
         this.serverService = serverService;    
-        this.article = new Article(0,0,"","",0,0,0,"");
+        this.article = new Article(0,0,"","",0,0,0,"",0);
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.USERID = this.currentUser.USERID;
     }
