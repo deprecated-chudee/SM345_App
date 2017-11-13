@@ -59,21 +59,17 @@
         </td>
       </tr>
       <tr>
-          <ion-item no-lines class="notice">
-              <span>
+          <ion-item no-lines class="notice" *ngFor="let a of articles">
+              <!--<span>-->
                 <ion-list>
-                  2학기 멘토 신청방법 및 유의사항 안내
+                 {{a.article_title}}
                 </ion-list>
-                <ion-list>
-                  2학기 멘티 신청방법 및 유의사항 안내
-                </ion-list>
-                <ion-list>
-                  2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내 반드시 필독
-                </ion-list>
+              </ion-item>
+              <ion-item>
                 <ion-list (click)="openNoticePage()">
                     <ion-icon name="ios-add-circle-outline"></ion-icon><span class="more">더 보기</span>
                 </ion-list>
-              </span>
+              <!--</span>-->
             </ion-item>
       </tr>
   </table>

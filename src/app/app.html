@@ -21,7 +21,7 @@
          <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERNAME}}</b></td>
     </tr>
     <tr>
-         <td *ngIf="currentUser == undefined" class="account_user"></td>
+         <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERID}}</b></td>
     </tr>
   </table>
 
@@ -59,7 +59,7 @@
           <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>
           <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>
       </tr>
-      <tr>
+      <tr *ngIf="currentUser != undefined && currentUser.USERAUTH == 3">
           <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>
           <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>
       </tr>

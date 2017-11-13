@@ -16,13 +16,15 @@
 
 <ion-content class="page-sm">
     <ion-list>
+        <div  *ngFor="let a of articles">
         <ion-list-header>
-                SM 사업이란?                
+                {{a.article_title}}                
         </ion-list-header>
         <div padding>
-        소프트웨어공학과 멘토링 사업이라는 말로 성공회대 소프트웨어공학과 내에서 선후배간 지식 공유가 이루어지는 것을 의미한다.   
+                {{a.article_content}}
         </div>   
-        
+        </div>
+        <!--
         <ion-list-header>
                 장학금 지급 기준                
         </ion-list-header>
@@ -102,7 +104,7 @@
                 <li>학교 일정상 성적 확인 후 추가 장학금 지급</li>
             </ul>
         </div> 
-
+    -->
 
     </ion-list>
 </ion-content>

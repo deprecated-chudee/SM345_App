@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
 import { MentorAddPage } from '.././mentorAdd/mentorAdd';
@@ -12,9 +12,13 @@ import { Mentoroom } from '../../models/mentoroom';
 export class RoomPage  implements OnInit {
   serverService: ServerService;
   private mentorooms: Mentoroom[] = [];
+  private currentUser;
+  private USERAUTH;
 
   constructor( serverService: ServerService, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.serverService = serverService;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.USERAUTH = this.currentUser.USERAUTH;
   }
 
   ngOnInit() {
@@ -27,9 +31,13 @@ export class RoomPage  implements OnInit {
     this.navCtrl.setRoot(HomePage);
   }
 
-  openRoomDetailPage() {
-    let modal = this.modalCtrl.create(RoomDetailPage);
-    modal.present();
+  openRoomDetailPage(mentoroom) {
+    this.navCtrl.push(RoomDetailPage, {
+      mentoroom_id: mentoroom.mentoroom_id,
+    });
+    
+    //let modal = this.modalCtrl.create(RoomDetailPage);
+   // modal.present();
   }
 
   openMentorAddPage() {
