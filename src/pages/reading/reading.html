@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="page-reading">
+<ion-content *ngIf="toggleEdit === false" style="margin-top: 59px;" class="page-reading">
     <table class="reading-top">
       <tr>
         <td>
@@ -91,8 +91,9 @@
       </table>
 
   </section>
-  <div class="buttonWrapper">
-    <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID">수정</button>
+  <div class="buttonWrapper"> 
+    <button ion-button block class="editButton" (click)="handleToggleEdit()" *ngIf= "article.article_writer == USERID">수정</button>
+    <!-- <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID">수정</button> -->
     <button ion-button block class="deleteButton" (click)="showDeleteAlert(article)" *ngIf= "article.article_writer == USERID || USERAUTH == 3">삭제</button>
     <button ion-button block class="editButton" (click)="WriteDelete()" *ngIf= "USERAUTH == 3">답변완료</button>
     </div>
@@ -100,3 +101,29 @@
     <br/>
     <br/>
 </ion-content>
+
+<ion-content *ngIf="toggleEdit === true" style="margin-top: 59px;" class="page-reading">
+        <table class="reading-top">
+          <tr>
+            <td>
+                {{article.article_title}}
+            </td>
+          </tr>
+          <tr>
+            <td>
+                {{article.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{article.timestamp}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{article.article_hit}}
+            </td>
+          </tr>
+        </table>
+        <hr/>
+        <div id="contentDiv">
+            <ion-input [(ngModel)]="article.article_content"></ion-input>
+        </div>
+    
+      <div class="buttonWrapper"> 
+        <button ion-button block class="editButton" (click)="editArticle()" *ngIf= "article.article_writer == USERID"> 수정 완료 </button>
+        </div>
+    
+        <br/>
+        <br/>
+    </ion-content>

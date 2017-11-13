@@ -101,6 +101,14 @@ export class ServerService {
                 .toPromise()
                 .catch(this.handleError);
    }
+
+    editArticle(article: Article): Promise<string>{
+        let url = this.URL + 'list/' + article.board_id + '/' + article.id + '/edit';
+        return this.http.post(url, article)
+                .toPromise()
+                .then(res => res)
+                .catch(this.handleError);
+ }
 /*
    createComment(comment: Comment){
     let url = this.URL + 'mentoroom/3/' + comment.article_id + '/comment/create';
