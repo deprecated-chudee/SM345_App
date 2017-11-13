@@ -89,7 +89,7 @@ export class ServerService {
     }
 
     creatArticle(article: Article){
-        let url = this.URL + 'list/create/' + article.board_id;
+        let url = this.URL + 'list/' + article.board_id + '/create';
         return this.http.post(url, article)
             .toPromise()
             .catch(this.handleError);

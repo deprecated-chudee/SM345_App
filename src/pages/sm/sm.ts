@@ -30,9 +30,8 @@ export class SmPage implements OnInit  {
     this.navCtrl.setRoot(HomePage);
   }
 
-  OpenSmEditPage() {
-    let modal = this.modalCtrl.create(SmEditPage);
-    modal.present();
+  OpenSmEditPage(board_id) {
+    this.navCtrl.push(SmEditPage, {board_id: board_id});
   }
 
   //삭제하시겠습니까? 알림

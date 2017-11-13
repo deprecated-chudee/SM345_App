@@ -26800,6 +26800,7 @@ ion-icon.icon.icon-md.ion-md-mail {
 
 .page-sm #commentDiv {
   white-space: pre-line;
+  padding-top: 0px;
 }
 
 .header-sm .home_logo_wrapper {
