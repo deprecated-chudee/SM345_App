@@ -7,7 +7,7 @@
     <img src="assets/img/Logo2.png" class="home-logo"/>
   </div>
   <ion-buttons end> <!-- 네비게이션 바에 가장 오른쪽에 만들겠다는 뜻 -->
-    <button ion-button icon-only (click)="OpenSmEditPage()" *ngIf="USERAUTH == 3">
+    <button ion-button icon-only (click)="OpenSmEditPage(1)" *ngIf="USERAUTH == 3">
         <ion-icon name='md-create'></ion-icon>
     </button>
   </ion-buttons>
@@ -18,12 +18,14 @@
     <ion-list>
         <div  *ngFor="let a of articles">
             <ion-list-header>
-                    {{a.article_title}}                
+                    {{a.article_title}}
+                    <ion-icon item-end name="md-trash" (click)="showEditDelete()"></ion-icon>           
             </ion-list-header>
-            <div padding>
+            <div padding id="commentDiv">
                     {{a.article_content}}
             </div>   
         </div>
+
         <!--
         <ion-list-header>
                 장학금 지급 기준                

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, ToastController, ModalController } from 'ionic-angular';
+import { App, NavController, AlertController, ToastController, ModalController, ViewController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { Platform } from 'ionic-angular';
 import { ServerService } from '../../app/server.service';
@@ -23,11 +23,15 @@ export class ManagerPage implements OnInit{
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
     private selectedUser = [];
-    private selectedAll: boolean = false;
+    private selectedRoom = [];
+
+    selectedAllRoom: boolean = false; //멘토방목록 전체선택
+    selectedAllUser: boolean = false; //사용자관리 전체선택
+    selectedAllReport: boolean = false; //보고서목록 전체선택
 
     selectDefualtAuth: number = 1;
     selectDefualtYear: number = 20172;
-    private mentoRoomInfo: MentoRoomInfo; //관리자 페이지 - 멘토방 설정
+    private mentoRoomInfo: MentoRoomInfo; //멘토방 설정
     USERID: number;
     USERNAME: string;
     USERAUTH: number;
@@ -41,7 +45,9 @@ export class ManagerPage implements OnInit{
         public navCtrl: NavController, 
         platform: Platform, 
         public alertCtrl: AlertController, 
-        public toastCtrl: ToastController
+        public toastCtrl: ToastController,
+        public viewCtrl: ViewController,
+        public app: App,
     ) {
         this.isAndroid = platform.is('android');
         this.mentoRoomInfo = new MentoRoomInfo(1, "","","","","","","","","","");
@@ -65,17 +71,6 @@ export class ManagerPage implements OnInit{
             .then(mentoRoomInfo => this.mentoRoomInfo = mentoRoomInfo)
     }
 
-    handleSelectedUser(e: any, user_id: number) {
-        // checked
-        if(e.checked) {
-            this.selectedUser.push(user_id)
-        } else {
-            // not checked
-            let index = this.selectedUser.indexOf(user_id)
-            this.selectedUser.splice(index, 1)
-        }
-    }
-
     //멘토방 설정 저장
     mentoRoomInfoSave() {
         this.serverService.createMentoRoomInfo(this.mentoRoomInfo)
@@ -94,12 +89,6 @@ export class ManagerPage implements OnInit{
         position: 'top',
         });
         toast.present();
-    }
-
-    //멘토방목록 - 전체선택 클릭 시
-    roomList_selectedAll() {
-        this.selectedAll=!this.selectedAll;
-        console.log(this.selectedAll);
     }
 
     userList(e) {
@@ -276,13 +265,108 @@ export class ManagerPage implements OnInit{
         modal.present();
     }
 
-
-
-/*
-    deleteMentoroom(){
-        this.serverService.deleteMentoroom(20172)
-        .then(mentoroom => this.mentorooms = mentoroom);
+    // 멘토방 선택
+    handleSelectedRoom(e, room_id) {
+        if(e.checked) {
+            this.selectedRoom.push(room_id)
+        } else {
+            let index = this.selectedRoom.indexOf(room_id)
+            this.selectedRoom.splice(index, 1)
+        }
     }
-    */
+
+    // 멘토방 선택 전체
+    handleSelectedAllRoom(e) {
+        this.selectedAllRoom = !this.selectedAllRoom;
+        if(e.checked) {
+            this.selectedRoom = [];
+
+            this.mentorooms.forEach(e => {
+                this.selectedRoom.push(e.mentoroom_id)
+            })
+        } else {
+            this.selectedRoom = [];
+        }
+    }
+
+    // 유저 선택
+    handleSelectedUser(e, user_id) {
+        if(e.checked) {
+            this.selectedUser.push(user_id)
+        } else {
+            let index = this.selectedUser.indexOf(user_id)
+            this.selectedUser.splice(index, 1)
+        }
+    }
+
+    // 유저 선택 전체
+    handleSelectedAllUser(e) {
+        this.selectedAllUser = !this.selectedAllUser;
+        if(e.checked) {
+            this.selectedUser = [];
+
+            this.users.forEach(e => {
+                this.selectedUser.push(e.user_id)
+            })
+        } else {
+            this.selectedUser = [];
+        }
+    }
+
+    // 보고서 선택
+    handleSelectedReport(e, user_id) {
+        if(e.checked) {
+            this.selectedUser.push(user_id)
+        } else {
+            let index = this.selectedUser.indexOf(user_id)
+            this.selectedUser.splice(index, 1)
+        }
+    }
+
+    // 보고서 선택 전체
+    handleSelectedAllReport(e) {
+        this.selectedAllUser = !this.selectedAllUser;
+        if(e.checked) {
+            this.selectedUser = [];
+
+            this.users.forEach(e => {
+                this.selectedUser.push(e.user_id)
+            })
+        } else {
+            this.selectedUser = [];
+        }
+    }
+
+    // 멘토방 삭제
+    handleRemoveRoom() {
+        if(this.selectedRoom.length > 0) {
+            this.selectedRoom.forEach(e => {
+                this.adminService.removeRoom(e)
+                    .then(() => console.log('remove id: ' + e))
+            })
+            setTimeout(() => { 
+                this.app.getRootNav().setRoot(ManagerPage);
+            }, 300);
+            let toast = this.toastCtrl.create({
+                message: '선택한 멘토방이 삭제되었습니다.',
+                duration: 3000,
+                position: 'bottom',
+            });
+            toast.present();
+            this.dismiss();
+        } else {
+            let toast = this.toastCtrl.create({
+                message: '보고서가 존재하지 않습니다.',
+                duration: 3000,
+                position: 'bottom',
+            });
+            toast.present();
+            this.app.getRootNav().setRoot(ManagerPage);
+        }
+    }
+
+    dismiss() {
+        this.viewCtrl.dismiss();
+    }
 }
 
