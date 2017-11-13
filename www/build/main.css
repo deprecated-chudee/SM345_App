@@ -25259,6 +25259,10 @@ ion-content.side.content.content-wp {
   font-size: 15px;
 }
 
+.sideAccount td.account_user {
+  width: 70%;
+}
+
 .page-home {
   background: #EDEDED;
 }
@@ -25824,6 +25828,12 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
 
 .page-manager ion-datetime.datetime.datetime-ios.ng-valid.ng-touched.ng-dirty {
   font-size: 13px;
+}
+
+.page-manager ion-item.item.item-block.item-ios.item-select.input-has-value.item-input-has-value,
+.page-manager .page-manager ion-item.item.item-block.item-md.item-select.input-has-value.item-input-has-value {
+  padding-left: 18px;
+  border-bottom: none;
 }
 
 .page-mentorAdd {
@@ -26791,6 +26801,10 @@ ion-icon.icon.icon-md.ion-md-mail {
 .header-sm .home_logo_wrapper {
   text-align: center;
   width: 100%;
+}
+
+ion-list-header.item.item-ios.list-header.list-header-ios {
+  padding-left: 0px;
 }
 
 .header-smEdit .home_logo_wrapper {

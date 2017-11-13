@@ -4,6 +4,7 @@ import { HomePage } from '.././home/home';
 import { Platform } from 'ionic-angular';
 import { ServerService } from '../../app/server.service';
 import { Mentoroom } from '../../models/mentoroom';
+import { MentoRoomInfo } from '../../models/mentoRoomInfo';
 import { User } from '../../models/user';
 
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
@@ -23,16 +24,17 @@ export class ManagerPage implements OnInit{
     private users: User[] = [];
     private selectedUser = [];
 
-    selectDefualtAuth: number = 1;
+    private mentoRoomInfo: MentoRoomInfo; //관리자 페이지 - 멘토방 설정
+    USERID: number;
+    USERNAME: string;
+    USERAUTH: number;
+    private currentUser;
 
-    public event = {
-        month: '2017-01-01',
-        timeEnds: '2017-01-01'
-    }
+    selectDefualtAuth: number = 1;
 
     constructor(
         private serverService: ServerService, 
-        private adminService: AdminService,
+        private adminService: AdminService, 
         public modalCtrl: ModalController, 
         public navCtrl: NavController, 
         platform: Platform, 
@@ -40,6 +42,10 @@ export class ManagerPage implements OnInit{
         public toastCtrl: ToastController
     ) {
         this.isAndroid = platform.is('android');
+        this.mentoRoomInfo = new MentoRoomInfo("","","","","","","","","","");
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.USERID = this.currentUser.USERID;
+        this.USERAUTH = this.currentUser.USERAUTH;
     }
 
     ngOnInit() {
@@ -58,6 +64,24 @@ export class ManagerPage implements OnInit{
             let index = this.selectedUser.indexOf(user_id)
             this.selectedUser.splice(index, 1)
         }
+    }
+
+    //멘토방 설정 저장
+    mentoRoomInfoSave() {
+        this.serverService.createMentoRoomInfo(this.mentoRoomInfo)
+        .then(message =>
+        {
+          this.presentToast();
+        });
+    }
+
+    presentToast() {
+        let toast = this.toastCtrl.create({
+        message: '멘토방 설정이 완료되었습니다.',
+        duration: 3000,
+        position: 'top',
+        });
+        toast.present();
     }
 
     userList(e) {
