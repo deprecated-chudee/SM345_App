@@ -11,20 +11,22 @@ export class RoomDetailPage implements OnInit {
   private mentoroom_id;
   private mentoroom: Mentoroom;
   serverService: ServerService;
-  private USERID;
-  private USERAUTH;
+  private USERID: number;
+  private USERAUTH: number;
+  private currentUser;
 
   constructor(public app: App, public toastCtrl: ToastController, serverService: ServerService, public navParams: NavParams, public appCtrl: App, public viewCtrl: ViewController) {
     this.mentoroom_id = this.navParams.get("mentoroom_id");
     this.serverService = serverService;
     this.mentoroom = new Mentoroom("","","",0,"",0,0,0);
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.USERID = this.currentUser.USERID;
+    this.USERAUTH = this.currentUser.USERAUTH;
   }
 
   ngOnInit() {
     this.serverService.getMentoroom(this.mentoroom_id).then(
       mentoroom => { this.mentoroom = mentoroom;
-                     this.USERID = ServerService.USERID;
-                     this.USERAUTH = ServerService.USERAUTH;
       });
   }
 

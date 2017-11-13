@@ -8,7 +8,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smEdit_smEdit__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smEdit_smEdit__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -66,6 +66,7 @@ SmPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__write_write__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reading_reading__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -80,11 +81,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var NoticePage = (function () {
-    function NoticePage(navCtrl, alertCtrl) {
+    function NoticePage(serverService, navCtrl, alertCtrl) {
         this.navCtrl = navCtrl;
         this.alertCtrl = alertCtrl;
+        this.articles = [];
+        this.serverService = serverService;
     }
+    NoticePage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.serverService.getList(2).then(function (article) {
+            _this.articles = article;
+        });
+    };
     NoticePage.prototype.openHomePage = function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
     };
@@ -95,18 +105,19 @@ var NoticePage = (function () {
         });
         alert.present();
     };
-    NoticePage.prototype.openWritePage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__write_write__["a" /* WritePage */]);
+    NoticePage.prototype.openWritePage = function (board_id) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__write_write__["a" /* WritePage */], { board_id: board_id });
     };
-    NoticePage.prototype.openReadingPage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__reading_reading__["a" /* ReadingPage */]);
+    NoticePage.prototype.openReadingPage = function (article) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__reading_reading__["a" /* ReadingPage */], { id: article.id, board_id: article.board_id,
+        });
     };
     return NoticePage;
 }());
 NoticePage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\notice\notice.html"*/'<ion-header class="header-notice">\n\n<ion-navbar>\n\n  <button ion-button menuToggle>\n\n    <ion-icon name="menu"></ion-icon>\n\n  </button>\n\n  <div class="home_logo_wrapper" (click)="openHomePage()">\n\n    <img src="assets/img/Logo2.png" class="home-logo"/>\n\n  </div>\n\n  <ion-buttons end> <!-- 네비게이션 바에 가장 오른쪽에 만들겠다는 뜻 -->\n\n    <button ion-button icon-only (click)="showReadyAlert()">\n\n        <ion-icon name=\'search\'></ion-icon>\n\n    </button>\n\n  </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-notice">\n\n        <table class="noticeTable">\n\n                <tr>\n\n                  <td>\n\n                      NOTICE\n\n                  </td>\n\n                  <td (click)="openWritePage()">\n\n                      <ion-icon name="md-create"></ion-icon>\n\n                  </td>\n\n                </tr>\n\n        </table>\n\n        <table class="noticeTable-in" (click)="openReadingPage()">\n\n                <tr>\n\n                    <td>\n\n                        2학기 멘토 신청방법 및 유의사항 안내\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n        <table class="noticeTable-in" (click)="openReadingPage()">\n\n                <tr>\n\n                    <td>\n\n                        2학기 멘티 신청방법 및 유의사항 안내\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n        <table class="noticeTable-in" (click)="openReadingPage()">\n\n                <tr>\n\n                    <td>\n\n                        2017년 2학기 멘토 장학금 안내\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n        <table class="noticeTable-in" (click)="openReadingPage()">\n\n                <tr>\n\n                    <td>\n\n                        2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내 멘티 설문조사 방법 안내 반드시 필독\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n        <table class="noticeTable-in" (click)="openReadingPage()">\n\n                <tr>\n\n                    <td>\n\n                        2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n</ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\notice\notice.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\notice\notice.html"*/'<ion-header class="header-notice">\n\n<ion-navbar>\n\n  <button ion-button menuToggle>\n\n    <ion-icon name="menu"></ion-icon>\n\n  </button>\n\n  <div class="home_logo_wrapper" (click)="openHomePage()">\n\n    <img src="assets/img/Logo2.png" class="home-logo"/>\n\n  </div>\n\n  <ion-buttons end> <!-- 네비게이션 바에 가장 오른쪽에 만들겠다는 뜻 -->\n\n    <button ion-button icon-only (click)="showReadyAlert()">\n\n        <ion-icon name=\'search\'></ion-icon>\n\n    </button>\n\n  </ion-buttons>\n\n</ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-notice">\n\n        <table class="noticeTable">\n\n                <tr>\n\n                  <td>\n\n                      NOTICE\n\n                  </td>\n\n                  <td (click)="openWritePage(2)">\n\n                      <ion-icon name="md-create"></ion-icon>\n\n                  </td>\n\n                </tr>\n\n        </table>\n\n        <table class="noticeTable-in" (click)="openReadingPage(a)" *ngFor="let a of articles">\n\n                <tr>\n\n                    <td>\n\n                        {{a.article_title}}\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        {{a.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{a.timestamp}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{a.article_hit}}\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n</ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\notice\notice.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */]])
 ], NoticePage);
 
 //# sourceMappingURL=notice.js.map
@@ -121,6 +132,9 @@ NoticePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notice_notice__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_article__ = __webpack_require__(283);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -133,22 +147,54 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
+
 var WritePage = (function () {
-    function WritePage(navCtrl) {
+    function WritePage(viewCtrl, app, serverService, navCtrl, navParams, toastCtrl) {
+        this.viewCtrl = viewCtrl;
+        this.app = app;
         this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.toastCtrl = toastCtrl;
+        this.board_id = this.navParams.get("board_id");
+        this.serverService = serverService;
+        this.article = new __WEBPACK_IMPORTED_MODULE_5__models_article__["a" /* Article */](0, 0, "", "", 0, 0, 0, "");
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.USERID = this.currentUser.USERID;
     }
     WritePage.prototype.openHomePage = function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
     };
     WritePage.prototype.writeSubmit = function () {
-        this.navCtrl.pop();
+        var _this = this;
+        this.article.board_id = this.board_id;
+        this.article.article_writer = this.USERID;
+        this.serverService.creatArticle(this.article);
+        this.presentToast('게시글이 등록되었습니다');
+        setTimeout(function () {
+            _this.app.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_3__notice_notice__["a" /* NoticePage */]);
+        }, 300);
+        this.dismiss();
+        //this.navCtrl.pop();
+    };
+    WritePage.prototype.presentToast = function (message) {
+        var toast = this.toastCtrl.create({
+            message: message.title,
+            duration: 3000,
+            position: 'bottom',
+        });
+        toast.present();
+    };
+    WritePage.prototype.dismiss = function () {
+        this.viewCtrl.dismiss();
     };
     return WritePage;
 }());
 WritePage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\write\write.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n\n    </div>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-write">\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-input type="text" placeholder="제목을 입력해주세요."></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-textarea placeholder="내용을 입력해주세요." class="write_textarea"></ion-textarea>\n\n        </ion-item>\n\n        <ion-item>\n\n            <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n\n        </ion-item>\n\n        <button ion-button block (click)="writeSubmit()">등록</button>\n\n    </ion-list>\n\n    \n\n</ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\write\write.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\write\write.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n\n    </div>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-write">\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-input type="text" placeholder="제목을 입력해주세요." [(ngModel)]="article.article_title"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-textarea placeholder="내용을 입력해주세요." class="write_textarea" [(ngModel)]="article.article_content"></ion-textarea>\n\n        </ion-item>\n\n        <ion-item>\n\n            <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n\n        </ion-item>\n\n        <button ion-button block (click)="writeSubmit()">등록</button>\n\n    </ion-list>\n\n    \n\n</ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\write\write.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]])
 ], WritePage);
 
 //# sourceMappingURL=write.js.map
@@ -163,7 +209,8 @@ WritePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__write_write__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_server_service__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_article__ = __webpack_require__(283);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -176,12 +223,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+//import { EditPage } from '.././edit/edit';
+
 
 var ReadingPage = (function () {
-    function ReadingPage(navCtrl, actionSheetCtrl) {
+    function ReadingPage(serverService, navParams, navCtrl, actionSheetCtrl) {
+        this.navParams = navParams;
         this.navCtrl = navCtrl;
         this.actionSheetCtrl = actionSheetCtrl;
+        this.id = this.navParams.get("id");
+        this.board_id = this.navParams.get("board_id");
+        this.article = new __WEBPACK_IMPORTED_MODULE_4__models_article__["a" /* Article */](0, 0, "", "", 0, 0, 0, "");
+        this.serverService = serverService;
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.USERID = this.currentUser.USERID;
+        this.USERAUTH = this.currentUser.USERAUTH;
     }
+    ReadingPage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.serverService.getArticle(this.board_id, this.id).then(function (article) {
+            _this.article = article;
+            console.log(article.article_title);
+        });
+    };
     ReadingPage.prototype.openHomePage = function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
     };
@@ -210,17 +274,18 @@ var ReadingPage = (function () {
     ReadingPage.prototype.WriteDelete = function () {
         this.navCtrl.pop();
     };
-    ReadingPage.prototype.openWritePage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__write_write__["a" /* WritePage */]);
+    ReadingPage.prototype.openWritePage = function (id) {
+        //this.navCtrl.push(EditPage, { id: id });
     };
     return ReadingPage;
 }());
 ReadingPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\reading\reading.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n\n    </div>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-reading">\n\n    <table class="reading-top">\n\n      <tr>\n\n        <td>\n\n            2학기 멘토 신청방법 및 유의사항 안내\n\n        </td>\n\n      </tr>\n\n      <tr>\n\n        <td>\n\n          홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35\n\n        </td>\n\n      </tr>\n\n    </table>\n\n    <hr/>\n\n    <div id="contentDiv">파이썬의 왕도를 안내하는 최고의 교과서!따라 하기 쉬운 예제로 이론과 실무를 동시에 익힌다!\n\n\n\n        입문서 잘 만들기로 정평이 난 일본에서 파이썬 입문 분야 베스트셀러!파이썬을 처음 접하는 독자와 다시 배우고자 하는 독자 모두를 위한 책!이 책은 파이썬의 기본을 탄탄한 이론과 상세한 해설, 실용적 예제로 재미있게 구성되어 있다. 또한, 파이썬의 기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.\n\n        따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.\n\n\n\n        그리고 이론 → 코드 → 해설의 구성은 빠른 이해를 도와줄 것이다.\n\n    </div>\n\n\n\n    <!--댓글-->\n\n    <section class="commentTableWrapper">\n\n        <ion-list (press)="presentCommentSheet()"> \n\n            <table class="commentListTable">\n\n                <tr>\n\n                    <td>\n\n                      홍길동\n\n                    </td>\n\n                    <td>\n\n                        <span>2017-08-30 14:30</span>\n\n                    </td>\n\n                </tr>         \n\n                <tr>	\n\n                    <td colspan="2"><div id="commentDiv">기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.</div></td>		\n\n                </tr>\n\n            </table>\n\n        </ion-list>\n\n        <ion-list (press)="presentCommentSheet()"> \n\n            <table class="commentListTable">\n\n                <tr>\n\n                    <td>\n\n                      홍길동\n\n                    </td>\n\n                    <td>\n\n                        <span>2017-08-30 14:30</span>\n\n                    </td>\n\n                </tr>         \n\n                <tr>	\n\n                    <td colspan="2"><div id="commentDiv">따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.</div></td>		\n\n                </tr>\n\n            </table>\n\n        </ion-list>\n\n        <ion-list (press)="presentCommentSheet()"> \n\n            <table class="commentListTable">\n\n                <tr>\n\n                    <td>\n\n                      홍길동\n\n                    </td>\n\n                    <td>\n\n                        <span>2017-08-30 14:30</span>\n\n                    </td>\n\n                </tr>         \n\n                <tr>	\n\n                    <td colspan="2"><div id="commentDiv">안녕하세요. 댓글 예시입니다.</div></td>		\n\n                </tr>\n\n            </table>\n\n        </ion-list>\n\n        \n\n    </section>\n\n\n\n    <section class="commentWriteWrapper commentTableWrapper">\n\n      <table class="comment_textarea_table">\n\n        <tr>\n\n          <td>\n\n              <ion-item no-lines>\n\n                  <ion-textarea class="comment_textarea" placeholder="댓글을 입력하세요."></ion-textarea>\n\n              </ion-item>\n\n          </td>\n\n          <td>\n\n              <button ion-button outline><ion-icon name="ios-send"></ion-icon></button>\n\n          </td>\n\n        </tr>\n\n      </table>\n\n\n\n  </section>\n\n  <div class="buttonWrapper">\n\n    <!--\n\n    <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->\n\n    <button ion-button block class="editButton" (click)="WriteDelete()">답변완료</button>\n\n    <button ion-button block class="deleteButton" (click)="WriteDelete()">삭제</button>\n\n  </div>\n\n\n\n    <br/>\n\n    <br/>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\reading\reading.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\reading\reading.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n\n    </div>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-reading">\n\n    <table class="reading-top">\n\n      <tr>\n\n        <td>\n\n            {{article.article_title}}\n\n        </td>\n\n      </tr>\n\n      <tr>\n\n        <td>\n\n            {{article.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{article.timestamp}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{article.article_hit}}\n\n        </td>\n\n      </tr>\n\n    </table>\n\n    <hr/>\n\n    <div id="contentDiv">{{article.article_content}}\n\n    </div>\n\n\n\n    <!--댓글-->\n\n    <section class="commentTableWrapper">\n\n        <ion-list (press)="presentCommentSheet()"> \n\n            <table class="commentListTable">\n\n                <tr>\n\n                    <td>\n\n                      홍길동\n\n                    </td>\n\n                    <td>\n\n                        <span>2017-08-30 14:30</span>\n\n                    </td>\n\n                </tr>         \n\n                <tr>	\n\n                    <td colspan="2"><div id="commentDiv">기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.</div></td>		\n\n                </tr>\n\n            </table>\n\n        </ion-list>\n\n        <ion-list (press)="presentCommentSheet()"> \n\n            <table class="commentListTable">\n\n                <tr>\n\n                    <td>\n\n                      홍길동\n\n                    </td>\n\n                    <td>\n\n                        <span>2017-08-30 14:30</span>\n\n                    </td>\n\n                </tr>         \n\n                <tr>	\n\n                    <td colspan="2"><div id="commentDiv">따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.</div></td>		\n\n                </tr>\n\n            </table>\n\n        </ion-list>\n\n        <ion-list (press)="presentCommentSheet()"> \n\n            <table class="commentListTable">\n\n                <tr>\n\n                    <td>\n\n                      홍길동\n\n                    </td>\n\n                    <td>\n\n                        <span>2017-08-30 14:30</span>\n\n                    </td>\n\n                </tr>         \n\n                <tr>	\n\n                    <td colspan="2"><div id="commentDiv">안녕하세요. 댓글 예시입니다.</div></td>		\n\n                </tr>\n\n            </table>\n\n        </ion-list>\n\n        \n\n    </section>\n\n\n\n    <section class="commentWriteWrapper commentTableWrapper">\n\n      <table class="comment_textarea_table">\n\n        <tr>\n\n          <td>\n\n              <ion-item no-lines>\n\n                  <ion-textarea class="comment_textarea" placeholder="댓글을 입력하세요."></ion-textarea>\n\n              </ion-item>\n\n          </td>\n\n          <td>\n\n              <button ion-button outline><ion-icon name="ios-send"></ion-icon></button>\n\n          </td>\n\n        </tr>\n\n      </table>\n\n\n\n  </section>\n\n  <div class="buttonWrapper">\n\n    <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID">수정</button>\n\n    <button ion-button block class="deleteButton" (click)="WriteDelete(article.id)" *ngIf= "article.article_writer == USERID || USERAUTH == 3">삭제</button>\n\n    <button ion-button block class="editButton" (click)="WriteDelete()" *ngIf= "USERAUTH == 3">답변완료</button>\n\n    </div>\n\n\n\n    <br/>\n\n    <br/>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\reading\reading.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__app_server_service__["a" /* ServerService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__app_server_service__["a" /* ServerService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]) === "function" && _d || Object])
 ], ReadingPage);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=reading.js.map
 
 /***/ }),
@@ -234,7 +299,7 @@ ReadingPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_server_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_mentoroom__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__models_mentoroom__ = __webpack_require__(205);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -259,13 +324,14 @@ var RoomDetailPage = (function () {
         this.mentoroom_id = this.navParams.get("mentoroom_id");
         this.serverService = serverService;
         this.mentoroom = new __WEBPACK_IMPORTED_MODULE_4__models_mentoroom__["a" /* Mentoroom */]("", "", "", 0, "", 0, 0, 0);
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.USERID = this.currentUser.USERID;
+        this.USERAUTH = this.currentUser.USERAUTH;
     }
     RoomDetailPage.prototype.ngOnInit = function () {
         var _this = this;
         this.serverService.getMentoroom(this.mentoroom_id).then(function (mentoroom) {
             _this.mentoroom = mentoroom;
-            _this.USERID = __WEBPACK_IMPORTED_MODULE_3__app_server_service__["a" /* ServerService */].USERID;
-            _this.USERAUTH = __WEBPACK_IMPORTED_MODULE_3__app_server_service__["a" /* ServerService */].USERAUTH;
         });
     };
     RoomDetailPage.prototype.dismiss = function () {
@@ -356,6 +422,7 @@ webpackEmptyAsyncContext.id = 156;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sm_sm__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notice_notice__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -369,10 +436,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var HomePage = HomePage_1 = (function () {
-    function HomePage(navCtrl) {
+    function HomePage(navCtrl, serverService) {
         this.navCtrl = navCtrl;
+        this.articles = [];
+        this.serverService = serverService;
     }
+    HomePage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.serverService.getList(2).then(function (article) {
+            _this.articles = article;
+        });
+    };
     HomePage.prototype.openHomePage = function () {
         this.navCtrl.setRoot(HomePage_1);
     };
@@ -386,9 +462,9 @@ var HomePage = HomePage_1 = (function () {
 }());
 HomePage = HomePage_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n\n    </div>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-home">\n\n  <!--sm사업 신청기간-->\n\n  <table class="calendarText">\n\n    <tr>\n\n      <td colspan="2">\n\n          SCHEDULE\n\n      </td>\n\n    </tr>\n\n    <tr>\n\n        <td>\n\n          2017.09.01 ~ 09.10\n\n        </td>\n\n        <td>\n\n          2학기 멘토 신청기간\n\n        </td>\n\n      </tr>\n\n    <tr>\n\n      <td>\n\n        2017.09.11 ~ 09.20\n\n      </td>\n\n      <td>\n\n        2학기 멘티 신청기간\n\n      </td>\n\n    </tr>\n\n    <tr>\n\n        <td>\n\n          2017.09.21 ~ 12.10\n\n        </td>\n\n        <td>\n\n          멘토링 활동기간\n\n        </td>\n\n      </tr>\n\n    <tr>\n\n        <td>\n\n          2017.12.11 ~ 12.20\n\n        </td>\n\n        <td>\n\n          2학기 설문조사 기간\n\n        </td>\n\n    </tr>\n\n  </table>\n\n\n\n  <!--공지사항-->\n\n  <table class="noticeTable">\n\n      <tr>\n\n        <td colspan="2">\n\n            NOTICE\n\n        </td>\n\n      </tr>\n\n      <tr>\n\n          <ion-item no-lines class="notice">\n\n              <span>\n\n                <ion-list>\n\n                  2학기 멘토 신청방법 및 유의사항 안내\n\n                </ion-list>\n\n                <ion-list>\n\n                  2학기 멘티 신청방법 및 유의사항 안내\n\n                </ion-list>\n\n                <ion-list>\n\n                  2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내 반드시 필독\n\n                </ion-list>\n\n                <ion-list (click)="openNoticePage()">\n\n                    <ion-icon name="ios-add-circle-outline"></ion-icon><span class="more">더 보기</span>\n\n                </ion-list>\n\n              </span>\n\n            </ion-item>\n\n      </tr>\n\n  </table>\n\n\n\n  <!--멘토방 사진 슬라이드-->\n\n  <table class="mentorTable">\n\n      <tr>\n\n        <td colspan="2">\n\n            MENTOR ROOM\n\n        </td>\n\n      </tr>\n\n  </table>\n\n  <table class="mentor-banner">\n\n      <tr>\n\n          <ion-slides pager loop="true" autoplay="5000" speed="500">\n\n              <ion-slide>\n\n                <table class="mentor-banner-in">\n\n                  <tr>\n\n                    <td>\n\n                      <img src="assets/img/book/algo.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/c.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/java.png" />\n\n                    </td>\n\n                  </tr>\n\n                  <tr>\n\n                    <td>[주제] 알고리즘</td>\n\n                    <td>[주제] C언어</td>\n\n                    <td>[주제] JAVA</td>\n\n                  </tr>\n\n                </table>\n\n              </ion-slide>\n\n              <ion-slide>\n\n                <table class="mentor-banner-in">\n\n                  <tr>\n\n                    <td>\n\n                      <img src="assets/img/book/c.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/algo.png" />\n\n                    </td>    \n\n                    <td>\n\n                      <img src="assets/img/book/java.png" />\n\n                    </td>\n\n                  </tr>\n\n                  <tr>\n\n                    <td>[주제] C언어</td>\n\n                    <td>[주제] 알고리즘</td>\n\n                    <td>[주제] JAVA</td>\n\n                  </tr>\n\n                </table>\n\n              </ion-slide>\n\n              <ion-slide>\n\n                <table class="mentor-banner-in">\n\n                  <tr>\n\n                    <td>\n\n                      <img src="assets/img/book/algo.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/java.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/c.png" />\n\n                    </td>\n\n                  </tr>\n\n                  <tr>\n\n                    <td>[주제] 알고리즘</td>\n\n                    <td>[주제] JAVA</td>\n\n                    <td>[주제] C언어</td>\n\n                  </tr>\n\n                </table>\n\n              </ion-slide>\n\n             \n\n            </ion-slides>\n\n      </tr>\n\n  </table>\n\n\n\n    <!--설명서 바로가기-->\n\n    <table class="noticeTable">\n\n        <tr>\n\n          <td colspan="2">\n\n              DOCUMENT\n\n          </td>\n\n        </tr>\n\n        <tr>\n\n          <img src="assets/img/banner.png" class="document" (click)="openSmPage()"/>\n\n        </tr>\n\n    </table>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n\n    </div>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="page-home">\n\n  <!--sm사업 신청기간 -->\n\n  <table class="calendarText">\n\n    <tr>\n\n      <td colspan="2">\n\n          SCHEDULE\n\n      </td>\n\n    </tr>\n\n    <tr>\n\n        <td>\n\n          2017.09.01 ~ 09.10\n\n        </td>\n\n        <td>\n\n          2학기 멘토 신청기간\n\n        </td>\n\n      </tr>\n\n    <tr>\n\n      <td>\n\n        2017.09.11 ~ 09.20\n\n      </td>\n\n      <td>\n\n        2학기 멘티 신청기간\n\n      </td>\n\n    </tr>\n\n    <tr>\n\n        <td>\n\n          2017.09.21 ~ 12.10\n\n        </td>\n\n        <td>\n\n          멘토링 활동기간\n\n        </td>\n\n      </tr>\n\n    <tr>\n\n        <td>\n\n          2017.12.11 ~ 12.20\n\n        </td>\n\n        <td>\n\n          2학기 설문조사 기간\n\n        </td>\n\n    </tr>\n\n  </table>\n\n\n\n  <!--공지사항-->\n\n  <table class="noticeTable">\n\n      <tr>\n\n        <td colspan="2">\n\n            NOTICE\n\n        </td>\n\n      </tr>\n\n      <tr>\n\n          <ion-item no-lines class="notice" *ngFor="let a of articles">\n\n              <!--<span>-->\n\n                <ion-list>\n\n                 {{a.article_title}}\n\n                </ion-list>\n\n              </ion-item>\n\n              <ion-item>\n\n                <ion-list (click)="openNoticePage()">\n\n                    <ion-icon name="ios-add-circle-outline"></ion-icon><span class="more">더 보기</span>\n\n                </ion-list>\n\n              <!--</span>-->\n\n            </ion-item>\n\n      </tr>\n\n  </table>\n\n\n\n  <!--멘토방 사진 슬라이드-->\n\n  <table class="mentorTable">\n\n      <tr>\n\n        <td colspan="2">\n\n            MENTOR ROOM\n\n        </td>\n\n      </tr>\n\n  </table>\n\n  <table class="mentor-banner">\n\n      <tr>\n\n          <ion-slides pager loop="true" autoplay="5000" speed="500">\n\n              <ion-slide>\n\n                <table class="mentor-banner-in">\n\n                  <tr>\n\n                    <td>\n\n                      <img src="assets/img/book/algo.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/c.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/java.png" />\n\n                    </td>\n\n                  </tr>\n\n                  <tr>\n\n                    <td>[주제] 알고리즘</td>\n\n                    <td>[주제] C언어</td>\n\n                    <td>[주제] JAVA</td>\n\n                  </tr>\n\n                </table>\n\n              </ion-slide>\n\n              <ion-slide>\n\n                <table class="mentor-banner-in">\n\n                  <tr>\n\n                    <td>\n\n                      <img src="assets/img/book/c.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/algo.png" />\n\n                    </td>    \n\n                    <td>\n\n                      <img src="assets/img/book/java.png" />\n\n                    </td>\n\n                  </tr>\n\n                  <tr>\n\n                    <td>[주제] C언어</td>\n\n                    <td>[주제] 알고리즘</td>\n\n                    <td>[주제] JAVA</td>\n\n                  </tr>\n\n                </table>\n\n              </ion-slide>\n\n              <ion-slide>\n\n                <table class="mentor-banner-in">\n\n                  <tr>\n\n                    <td>\n\n                      <img src="assets/img/book/algo.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/java.png" />\n\n                    </td>\n\n                    <td>\n\n                      <img src="assets/img/book/c.png" />\n\n                    </td>\n\n                  </tr>\n\n                  <tr>\n\n                    <td>[주제] 알고리즘</td>\n\n                    <td>[주제] JAVA</td>\n\n                    <td>[주제] C언어</td>\n\n                  </tr>\n\n                </table>\n\n              </ion-slide>\n\n             \n\n            </ion-slides>\n\n      </tr>\n\n  </table>\n\n\n\n    <!--설명서 바로가기-->\n\n    <table class="noticeTable">\n\n        <tr>\n\n          <td colspan="2">\n\n              DOCUMENT\n\n          </td>\n\n        </tr>\n\n        <tr>\n\n          <img src="assets/img/banner.png" class="document" (click)="openSmPage()"/>\n\n        </tr>\n\n    </table>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\home\home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */]])
 ], HomePage);
 
 var HomePage_1;
@@ -396,7 +472,171 @@ var HomePage_1;
 
 /***/ }),
 
-/***/ 200:
+/***/ 196:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(200);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_sm_sm__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_notice_notice__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_question_question__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_room_room__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_message_message__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__app_server_service__ = __webpack_require__(26);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+var MyApp = (function () {
+    function MyApp(toastCtrl, alertCtrl, serverService, modalCtrl, platform, statusBar, splashScreen) {
+        this.toastCtrl = toastCtrl;
+        this.alertCtrl = alertCtrl;
+        this.modalCtrl = modalCtrl;
+        this.platform = platform;
+        this.statusBar = statusBar;
+        this.splashScreen = splashScreen;
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
+        this.initializeApp();
+        this.serverService = serverService;
+        // used for an example of ngFor and navigation
+        this.pages = [
+            { title: 'HOME', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
+            { title: 'SM사업소개', component: __WEBPACK_IMPORTED_MODULE_6__pages_sm_sm__["a" /* SmPage */] },
+            { title: '공지사항', component: __WEBPACK_IMPORTED_MODULE_7__pages_notice_notice__["a" /* NoticePage */] },
+            { title: '멘토방', component: __WEBPACK_IMPORTED_MODULE_9__pages_room_room__["a" /* RoomPage */] },
+            { title: 'Q&A', component: __WEBPACK_IMPORTED_MODULE_8__pages_question_question__["a" /* QuestionPage */] },
+            { title: '관리페이지', component: __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__["a" /* ManagerPage */] },
+        ];
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    }
+    MyApp.prototype.initializeApp = function () {
+        var _this = this;
+        this.platform.ready().then(function () {
+            // Okay, so the platform is ready and our plugins are available.
+            // Here you can do any higher level native things you might need.
+            _this.statusBar.styleDefault();
+            _this.splashScreen.hide();
+        });
+    };
+    MyApp.prototype.openPage = function (page) {
+        // Reset the content nav to have just this page
+        // we wouldn't want the back button to show in this scenario
+        this.nav.setRoot(page.component);
+    };
+    MyApp.prototype.openMessage = function () {
+        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_11__pages_message_message__["a" /* MessagePage */]);
+        modal.present();
+    };
+    MyApp.prototype.openLogout = function () {
+        var _this = this;
+        var prompt = this.alertCtrl.create({
+            title: '로그아웃 하시겠습니까?',
+            buttons: [
+                {
+                    text: '취소',
+                    handler: function (data) { }
+                },
+                {
+                    text: '로그아웃',
+                    handler: function (data) {
+                        _this.presentLogoutToast('bottom');
+                        localStorage.removeItem('currentUser');
+                        window.location.reload();
+                    }
+                }
+            ]
+        });
+        prompt.present();
+    };
+    MyApp.prototype.loginOpen = function () {
+        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */]);
+        modal.present();
+    };
+    MyApp.prototype.presentLogoutToast = function (position) {
+        var toast = this.toastCtrl.create({
+            message: '로그아웃 되었습니다.',
+            duration: 3000,
+            position: position,
+        });
+        toast.present();
+    };
+    MyApp.prototype.showPasswordAlert = function () {
+        var prompt = this.alertCtrl.create({
+            title: '비밀번호 변경',
+            inputs: [
+                {
+                    name: 'password',
+                    type: 'password',
+                    placeholder: '기존 비밀번호',
+                },
+                {
+                    name: 'newPassword',
+                    type: 'password',
+                    placeholder: '새 비밀번호',
+                },
+                {
+                    name: 'newPasswordCheck',
+                    type: 'password',
+                    placeholder: '비밀번호 확인',
+                }
+            ],
+            buttons: [
+                {
+                    text: '취소',
+                    handler: function (data) { }
+                },
+                {
+                    text: '확인',
+                    handler: function (data) { }
+                }
+            ]
+        });
+        prompt.present();
+    };
+    MyApp.prototype.ngOnInit = function () {
+    };
+    return MyApp;
+}());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]),
+    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
+], MyApp.prototype, "nav", void 0);
+MyApp = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\app\app.html"*/'<ion-menu [content]="content">\n\n\n\n  \n\n\n\n<ion-content class="side">\n\n<section class="sideAccount">\n\n    <ion-item no-lines>\n\n      <button menuClose clear ion-button item-right>\n\n        <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n  <table class="sideAccountTable">\n\n    <tr>\n\n      <td rowspan="2">\n\n        <img src="assets/img/user.png" width="50px"/>\n\n      </td>\n\n         <!--로그인 안했을 경우-->\n\n         <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>\n\n         \n\n          <!--로그인 했을 경우-->\n\n         <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERNAME}}</b></td>\n\n    </tr>\n\n    <tr>\n\n         <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERID}}</b></td>\n\n    </tr>\n\n  </table>\n\n\n\n  <ion-item no-lines>\n\n      <button menuClose clear ion-button item-right (click)="openLogout()">\n\n          <ion-icon name="md-log-out" class="account-icon"></ion-icon>\n\n      </button>\n\n      <button menuClose clear ion-button item-right (click)="openMessage()">\n\n        <ion-icon name="md-mail" class="account-icon"></ion-icon>\n\n      </button>\n\n      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">\n\n        <ion-icon name="ios-apps" class="account-icon"></ion-icon>\n\n      </button>\n\n  </ion-item>\n\n</section>\n\n\n\n  <table class="sideTable">\n\n      <tr>\n\n        <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>\n\n        <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>\n\n          <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>\n\n          <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>\n\n          <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>\n\n          <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>\n\n      </tr>\n\n      <tr *ngIf="currentUser != undefined && currentUser.USERAUTH == 3">\n\n          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>\n\n          <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>\n\n      </tr>\n\n    </table>\n\n\n\n\n\n  </ion-content>\n\n</ion-menu>\n\n\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\app\app.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+], MyApp);
+
+//# sourceMappingURL=app.component.js.map
+
+/***/ }),
+
+/***/ 201:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -458,19 +698,20 @@ SmEditPage = __decorate([
 
 /***/ }),
 
-/***/ 201:
+/***/ 202:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__smLogin_smLogin__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_http__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__smLogin_smLogin__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_app_component__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_user__ = __webpack_require__(281);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_message__ = __webpack_require__(282);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_server_service__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -488,17 +729,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { CoolLocalStorage } from 'angular2-cool-storage';
+
 var LoginPage = (function () {
-    function LoginPage(viewCtrl, app, serverService, http, navCtrl, appCtrl, toastCtrl, alertCtrl, modalCtrl) {
-        this.viewCtrl = viewCtrl;
+    function LoginPage(app, serverService, http, navCtrl, appCtrl, toastCtrl, alertCtrl, modalCtrl, viewCtrl) {
         this.app = app;
+        this.serverService = serverService;
+        this.http = http;
         this.navCtrl = navCtrl;
         this.appCtrl = appCtrl;
         this.toastCtrl = toastCtrl;
         this.alertCtrl = alertCtrl;
         this.modalCtrl = modalCtrl;
-        //localStorage: CoolLocalStorage;
+        this.viewCtrl = viewCtrl;
+        this.user = new __WEBPACK_IMPORTED_MODULE_6__models_user__["a" /* User */](0, "", 0, "");
+        this.message = new __WEBPACK_IMPORTED_MODULE_7__models_message__["a" /* Message */];
         this.login_record = 0;
         this.password = "";
         this.http = http;
@@ -506,7 +750,6 @@ var LoginPage = (function () {
         this.user = new __WEBPACK_IMPORTED_MODULE_6__models_user__["a" /* User */](0, "", 0, "");
         this.navCtrl = navCtrl;
         this.message = new __WEBPACK_IMPORTED_MODULE_7__models_message__["a" /* Message */];
-        //this.localStorage = localStorage;   
     }
     //로그인
     LoginPage.prototype.signIn = function () {
@@ -514,7 +757,6 @@ var LoginPage = (function () {
         this.serverService.getLoginrecord(this.user.user_id)
             .then(function (message) {
             _this.login_record = message.login_record;
-            console.log('로그인기록' + _this.login_record);
             if (_this.login_record == 0)
                 _this.showPasswordAlert();
             else {
@@ -525,20 +767,18 @@ var LoginPage = (function () {
                     if (message.key == 2)
                         _this.presentLoginToast(message);
                     if (message.key == 0) {
-                        //this.localStorage.setItem('USERID', message.user_id.toString());
-                        //this.localStorage.setItem('USERAUTH', message.user_auth.toString());
-                        //this.localStorage.setItem('USERNAME', message.user_name);
-                        __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERID = message.user_id;
-                        __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERNAME = message.user_name;
-                        __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERAUTH = message.user_auth;
+                        localStorage.setItem('currentUser', JSON.stringify({
+                            USERID: message.user_id,
+                            USERNAME: message.user_name,
+                            USERAUTH: message.user_auth
+                        }));
                         _this.presentLoginToast(message);
                         //this.navCtrl.push(HomePage);
                         //this.appCtrl.getRootNav().setRoot(HomePage);
                         //window.location.reload();
-                        setTimeout(function () {
-                            _this.app.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
-                        }, 300);
-                        _this.dismiss();
+                        _this.presentLoginToast(message);
+                        _this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_5__app_app_component__["a" /* MyApp */]);
+                        window.location.reload();
                     }
                 });
             }
@@ -556,10 +796,10 @@ var LoginPage = (function () {
         toast.present();
     };
     LoginPage.prototype.openHomePage = function () {
-        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */]);
     };
     LoginPage.prototype.openSmLoginPage = function () {
-        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_3__smLogin_smLogin__["a" /* SmLoginPage */]);
+        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__smLogin_smLogin__["a" /* SmLoginPage */]);
         modal.present();
     };
     LoginPage.prototype.showPasswordAlert = function () {
@@ -597,19 +837,17 @@ var LoginPage = (function () {
                         _this.serverService.updatePassword(_this.user)
                             .then(function (message) {
                             _this.presentLoginToast(message);
-                            //this.localStorage.setItem('USERID', message.user_id.toString());
-                            // this.localStorage.setItem('USERAUTH', message.user_auth.toString());
-                            //this.localStorage.setItem('USERNAME', message.user_name);
-                            __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERID = message.user_id;
-                            __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERNAME = message.user_name;
-                            __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERAUTH = message.user_auth;
+                            localStorage.setItem('currentUser', JSON.stringify({
+                                USERID: message.user_id,
+                                USERNAME: message.user_name,
+                                USERAUTH: message.user_auth
+                            }));
                             // this.navCtrl.push(HomePage);
-                            //this.appCtrl.getRootNav().setRoot(HomePage);
-                            //window.location.reload();
-                            setTimeout(function () {
-                                _this.app.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
-                            }, 300);
-                            _this.dismiss();
+                            // this.appCtrl.getRootNav().setRoot(HomePage);
+                            // window.location.reload();
+                            _this.presentLoginToast(message);
+                            _this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_5__app_app_component__["a" /* MyApp */]);
+                            window.location.reload();
                         });
                     }
                 }
@@ -622,14 +860,22 @@ var LoginPage = (function () {
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\login\login.html"*/'<ion-content class="page-login">\n\n    <section class="loginSection">\n\n        <img src="assets/img/Logo1.jpg" class="sm-logo" />\n\n        <table class="loginTable">\n\n                <tr>\n\n                    <td>\n\n                        <ion-item>\n\n                                <ion-label floating>ID</ion-label>\n\n                                <ion-input type="text" [(ngModel)]="user.user_id"></ion-input>\n\n                        </ion-item>\n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        <ion-item>\n\n                            <ion-label floating>Password</ion-label>\n\n                            <ion-input type="password" [(ngModel)]="user.user_password"></ion-input>\n\n                        </ion-item>\n\n                    </td>\n\n                </tr>\n\n        </table>\n\n        <button ion-button (click)="signIn()" class="login-button">로그인</button>\n\n\n\n        <p class="smLoginP" (click)="openSmLoginPage()"><ion-icon end name=\'help-circle\'></ion-icon>&nbsp;&nbsp;SM사업이란?</p>\n\n    </section>\n\n</ion-content>\n\n  '/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\login\login.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_5__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* App */],
+        __WEBPACK_IMPORTED_MODULE_8__app_server_service__["a" /* ServerService */],
+        __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["i" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* App */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["l" /* ToastController */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* ModalController */],
+        __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["m" /* ViewController */]])
 ], LoginPage);
 
 //# sourceMappingURL=login.js.map
 
 /***/ }),
 
-/***/ 202:
+/***/ 203:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -666,7 +912,7 @@ SmLoginPage = __decorate([
 
 /***/ }),
 
-/***/ 203:
+/***/ 204:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -718,7 +964,7 @@ QuestionPage = __decorate([
 
 /***/ }),
 
-/***/ 204:
+/***/ 205:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -741,7 +987,7 @@ var Mentoroom = (function () {
 
 /***/ }),
 
-/***/ 205:
+/***/ 206:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -749,7 +995,7 @@ var Mentoroom = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_mentoroom__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_mentoroom__ = __webpack_require__(205);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -767,7 +1013,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 //import { CoolLocalStorage } from 'angular2-cool-storage';
 var MentorAddPage = (function () {
-    //localStorage: CoolLocalStorage;
     function MentorAddPage(app, appCtrl, viewCtrl, toastCtrl, navCtrl, serverService) {
         this.app = app;
         this.appCtrl = appCtrl;
@@ -778,20 +1023,12 @@ var MentorAddPage = (function () {
         this.sortArray = [];
         this.mentoroom = new __WEBPACK_IMPORTED_MODULE_3__models_mentoroom__["a" /* Mentoroom */]("", "", "", 0, "", 0, 0, 0);
         this.serverService = serverService;
-        //this.localStorage = localStorage;
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.USERID = this.currentUser.USERID;
+        this.USERAUTH = this.currentUser.USERAUTH;
+        console.log('유저아이디' + this.USERID);
     }
     MentorAddPage.prototype.ngOnInit = function () {
-        /*
-        if(this.localStorage.getItem('USERID') != null){
-          this.USERID = Number(this.localStorage.getItem('USERID'));
-        }
-        
-        if(this.localStorage.getItem('USERID')==null){
-          this.USERID = null;
-        }
-        */
-        this.USERID = __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */].USERID;
-        console.log('유저아이디' + this.USERID);
     };
     MentorAddPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
@@ -799,6 +1036,7 @@ var MentorAddPage = (function () {
     MentorAddPage.prototype.openRoomPage = function () {
         var _this = this;
         this.mentoroom.mento_id = this.USERID;
+        console.log(this.mentoroom.mento_id);
         this.serverService.createMentoroom(this.mentoroom)
             .then(function (message) {
             _this.presentToast(message);
@@ -832,7 +1070,7 @@ MentorAddPage = __decorate([
 
 /***/ }),
 
-/***/ 206:
+/***/ 207:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -842,8 +1080,8 @@ MentorAddPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_server_service__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__roomDetail_roomDetail__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__messageAdd_messageAdd__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__survey_survey__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__messageAdd_messageAdd__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__survey_survey__ = __webpack_require__(209);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1011,7 +1249,7 @@ var ManagerPage = (function () {
     return ManagerPage;
 }());
 ManagerPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\manager\manager.html"*/'<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n\n      </div>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n<ion-content class="page-manager">\n\n    <div>\n\n      <ion-segment [(ngModel)]="manager">\n\n        <ion-segment-button value="mentorRoom">\n\n            멘토방설정\n\n        </ion-segment-button>\n\n        <ion-segment-button value="roomList">\n\n            멘토방목록\n\n          </ion-segment-button>\n\n        <ion-segment-button value="users">\n\n            사용자관리\n\n        </ion-segment-button>\n\n        <ion-segment-button value="report">\n\n            보고서목록\n\n        </ion-segment-button>\n\n        <ion-segment-button value="survey">\n\n            설문조사\n\n        </ion-segment-button>\n\n      </ion-segment>\n\n    </div>\n\n    \n\n    <div [ngSwitch]="manager">\n\n      <ion-list *ngSwitchCase="\'mentorRoom\'">\n\n          <ion-item>\n\n              <ion-label>멘토신청 시작일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>멘토신청 마감일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>멘티신청 시작일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>멘티신청 마감일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label>최대 멘토인원</ion-label>\n\n            <ion-select>\n\n              <ion-option>10명</ion-option>\n\n              <ion-option>15명</ion-option>\n\n              <ion-option>20명</ion-option>\n\n              <ion-option>25명</ion-option>\n\n              <ion-option>30명</ion-option>\n\n              <ion-option>35명</ion-option>\n\n              <ion-option>40명</ion-option>\n\n              <ion-option>45명</ion-option>\n\n              <ion-option>50명</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label>최대 멘티인원</ion-label>\n\n            <ion-select>\n\n              <ion-option>3명</ion-option>\n\n              <ion-option>4명</ion-option>\n\n              <ion-option>5명</ion-option>\n\n              <ion-option>6명</ion-option>\n\n              <ion-option>7명</ion-option>\n\n              <ion-option>8명</ion-option>\n\n              <ion-option>9명</ion-option>\n\n              <ion-option>10명</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label>모임기간</ion-label>\n\n            <ion-select>\n\n              <ion-option>7일</ion-option>\n\n              <ion-option>30일</ion-option>\n\n              <ion-option>1학기</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label>모임횟수</ion-label>\n\n            <ion-select>\n\n              <ion-option>1회</ion-option>\n\n              <ion-option>2회</ion-option>\n\n              <ion-option>3회</ion-option>\n\n              <ion-option>4회</ion-option>\n\n              <ion-option>5회</ion-option>\n\n              <ion-option>6회</ion-option>\n\n              <ion-option>7회</ion-option>\n\n              <ion-option>8회</ion-option>\n\n              <ion-option>9회</ion-option>\n\n              <ion-option>10회</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n\n\n          <ion-item>\n\n              <ion-label>설문조사 시작일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>설문조사 마감일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>\n\n          </ion-item>\n\n\n\n\n\n          <button ion-button block class="mentorRoomButton">저장</button>\n\n\n\n      </ion-list>\n\n    \n\n      <ion-list *ngSwitchCase="\'roomList\'">\n\n          <ion-item>\n\n              <ion-label>\n\n                  검색기간\n\n              </ion-label>\n\n              <ion-select>\n\n                <ion-option [selected]="true">2017-2학기</ion-option>\n\n                <ion-option>2017-1학기</ion-option>\n\n                <ion-option>전체학기</ion-option>\n\n              </ion-select>\n\n          </ion-item>\n\n          <div *ngFor="let m of mentorooms">\n\n            <div *ngIf= "m.team_confirm == 1">\n\n              <ion-item (press)="openRoomDetail()">\n\n              <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>\n\n              </ion-item>\n\n            </div>\n\n            <div *ngIf= "m.team_confirm == 0">\n\n              <ion-item>\n\n              <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n              </ion-item>\n\n            </div>\n\n          </div>\n\n         \n\n          <!--해당학기 끝나면 폐설됨으로 바뀌게해야함\n\n          <ion-item>\n\n              <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;UNIX&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you팀&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n        -->\n\n          <button ion-button block class="mentorRoomButton">목록에서 삭제</button>\n\n      </ion-list> \n\n\n\n      <ion-list *ngSwitchCase="\'users\'">\n\n          <ion-item>\n\n              <ion-label>\n\n                사용자 목록\n\n              </ion-label>\n\n              <ion-select>\n\n                <ion-option [selected]="true">멘토</ion-option>\n\n                <ion-option>멘토-보고서미제출</ion-option>\n\n                <ion-option>멘티</ion-option>\n\n                <ion-option>관리자</ion-option>\n\n              </ion-select>\n\n          </ion-item>\n\n          <!-- 멘토 검색-->\n\n          <!--\n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label>201300000 홍길동</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      보고서 제출 여부 : <span class="yes">Y</span> / 활동비, 장학금 지급 대상자 : <span class="yes">Y</span>\n\n                  </td>\n\n              </tr>\n\n          </table>\n\n          <table class="userTable">\n\n                <tr>\n\n                    <td>\n\n                      <ion-item no-lines>\n\n                          <ion-label>201300000 김길동</ion-label>\n\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                      </ion-item> \n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n\n                    </td>\n\n                </tr>\n\n            </table>\n\n            <table class="userTable">\n\n                <tr>\n\n                    <td>\n\n                      <ion-item no-lines>\n\n                          <ion-label>201300000 이길동</ion-label>\n\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                      </ion-item> \n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n\n                    </td>\n\n                </tr>\n\n            </table>\n\n            <table class="userTable">\n\n                <tr>\n\n                    <td>\n\n                      <ion-item no-lines>\n\n                          <ion-label>201300000 최길동</ion-label>\n\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                      </ion-item> \n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n\n                    </td>\n\n                </tr>\n\n            </table>\n\n        -->\n\n          <!--멘티/관리자 검색-->\n\n          \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 김길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 이길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 정길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 고길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 박길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 최길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n        \n\n\n\n          <div class="buttonWrapper">\n\n              <!--\n\n              <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->\n\n              <button ion-button block class="editButton" (click)="openMessagePage()">쪽지보내기</button>\n\n              \n\n              <button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자지정</button>\n\n              <!--\n\n              <button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자삭제</button>-->\n\n          </div>\n\n          \n\n      </ion-list>\n\n\n\n      <ion-list *ngSwitchCase="\'report\'">\n\n          <ion-item>\n\n              <ion-label>\n\n                  검색기간\n\n              </ion-label>\n\n              <ion-select>\n\n                <ion-option [selected]="true">2017-2학기</ion-option>\n\n                <ion-option>2017-1학기</ion-option>\n\n                <ion-option>전체학기</ion-option>\n\n              </ion-select>\n\n          </ion-item>\n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label><span class="teamName">[자바를 잡아]</span> 1차보고서</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료\n\n                  </td>\n\n              </tr>\n\n          </table>  \n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label><span class="teamName">[자바를 잡아]</span> 2차보고서</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료\n\n                  </td>\n\n              </tr>\n\n          </table> \n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label><span class="teamName">[썬]</span> 1차보고서</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인중\n\n                  </td>\n\n              </tr>\n\n          </table> \n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label><span class="teamName">[ALGO]</span> 1차보고서</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;반려\n\n                  </td>\n\n              </tr>\n\n          </table> \n\n\n\n          <button ion-button block class="editButton" (click)="showReportDeleteAlert()">보고서삭제</button>\n\n          <button ion-button block class="deleteButton" (click)="showReportDownloardAlert()">다운로드</button>\n\n      </ion-list>\n\n\n\n      <ion-list *ngSwitchCase="\'survey\'">\n\n\n\n        <div class="addBox">\n\n            <ion-item>\n\n                <ion-label>Q1.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        <div class="addBox" *ngIf="count>1">\n\n            <ion-item>\n\n                <ion-label>Q2.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        <div class="addBox" *ngIf="count>2">\n\n            <ion-item>\n\n                <ion-label>Q3.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        <div class="addBox" *ngIf="count>3">\n\n            <ion-item>\n\n                <ion-label>Q4.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        <div class="addBox" *ngIf="count>4">\n\n            <ion-item>\n\n                <ion-label>Q5.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        \n\n        <ion-item no-lines class="timeaddbutton">\n\n            <button ion-button outline item-right icon-left (click)="addSurvey()">\n\n                설문 항목추가\n\n            </button>\n\n            <button ion-button outline item-right icon-left class="surveyTrash" (click)="minusSurvey()">\n\n                항목삭제\n\n            </button>\n\n        </ion-item>\n\n\n\n\n\n        <button ion-button block class="mentorRoomButton">저장</button>\n\n        <button ion-button block class="mentorRoomButton2" (click)="openSurveyPage()">설문조사 결과</button>\n\n\n\n      </ion-list>\n\n\n\n    </div>\n\n\n\n  </ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\manager\manager.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\manager\manager.html"*/'<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n\n      </div>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n<ion-content class="page-manager">\n\n    <div>\n\n      <ion-segment [(ngModel)]="manager">\n\n        <ion-segment-button value="mentorRoom">\n\n            멘토방설정\n\n        </ion-segment-button>\n\n        <ion-segment-button value="roomList">\n\n            멘토방목록\n\n          </ion-segment-button>\n\n        <ion-segment-button value="users">\n\n            사용자관리\n\n        </ion-segment-button>\n\n        <ion-segment-button value="report">\n\n            보고서목록\n\n        </ion-segment-button>\n\n        <ion-segment-button value="survey">\n\n            설문조사\n\n        </ion-segment-button>\n\n      </ion-segment>\n\n    </div>\n\n    \n\n    <div [ngSwitch]="manager">\n\n      <ion-list *ngSwitchCase="\'mentorRoom\'">\n\n          <ion-item>\n\n              <ion-label>멘토신청 시작일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>멘토신청 마감일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>멘티신청 시작일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>멘티신청 마감일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label>최대 멘토인원</ion-label>\n\n            <ion-select>\n\n              <ion-option>10명</ion-option>\n\n              <ion-option>15명</ion-option>\n\n              <ion-option>20명</ion-option>\n\n              <ion-option>25명</ion-option>\n\n              <ion-option>30명</ion-option>\n\n              <ion-option>35명</ion-option>\n\n              <ion-option>40명</ion-option>\n\n              <ion-option>45명</ion-option>\n\n              <ion-option>50명</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label>최대 멘티인원</ion-label>\n\n            <ion-select>\n\n              <ion-option>3명</ion-option>\n\n              <ion-option>4명</ion-option>\n\n              <ion-option>5명</ion-option>\n\n              <ion-option>6명</ion-option>\n\n              <ion-option>7명</ion-option>\n\n              <ion-option>8명</ion-option>\n\n              <ion-option>9명</ion-option>\n\n              <ion-option>10명</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label>모임기간</ion-label>\n\n            <ion-select>\n\n              <ion-option>7일</ion-option>\n\n              <ion-option>30일</ion-option>\n\n              <ion-option>1학기</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label>모임횟수</ion-label>\n\n            <ion-select>\n\n              <ion-option>1회</ion-option>\n\n              <ion-option>2회</ion-option>\n\n              <ion-option>3회</ion-option>\n\n              <ion-option>4회</ion-option>\n\n              <ion-option>5회</ion-option>\n\n              <ion-option>6회</ion-option>\n\n              <ion-option>7회</ion-option>\n\n              <ion-option>8회</ion-option>\n\n              <ion-option>9회</ion-option>\n\n              <ion-option>10회</ion-option>\n\n            </ion-select>\n\n          </ion-item>\n\n\n\n          <ion-item>\n\n              <ion-label>설문조사 시작일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.month"></ion-datetime>\n\n          </ion-item>\n\n          <ion-item>\n\n              <ion-label>설문조사 마감일</ion-label>\n\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="event.timeEnds"></ion-datetime>\n\n          </ion-item>\n\n\n\n\n\n          <button ion-button block class="mentorRoomButton">저장</button>\n\n\n\n      </ion-list>\n\n    \n\n      <ion-list *ngSwitchCase="\'roomList\'">\n\n          <ion-item>\n\n              <ion-label>\n\n                  검색기간\n\n              </ion-label>\n\n              <ion-select>\n\n                <ion-option [selected]="true">2017-2학기</ion-option>\n\n                <ion-option>2017-1학기</ion-option>\n\n                <ion-option>전체학기</ion-option>\n\n              </ion-select>\n\n          </ion-item>\n\n\n\n          <div *ngFor="let m of mentorooms">\n\n            <div *ngIf= "m.team_confirm == 1">\n\n              <ion-item (press)="openRoomDetail()">\n\n              <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>\n\n              </ion-item>\n\n            </div>\n\n            <div *ngIf= "m.team_confirm == 0">\n\n              <ion-item>\n\n              <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>\n\n              </ion-item>\n\n            </div>\n\n          </div>\n\n         \n\n          <!--해당학기 끝나면 폐설됨으로 바뀌게해야함\n\n          <ion-item>\n\n              <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;UNIX&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you팀&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n        -->\n\n\n\n          <button ion-button block class="mentorRoomButton">목록에서 삭제</button>\n\n      </ion-list> \n\n\n\n      <ion-list *ngSwitchCase="\'users\'">\n\n          <ion-item>\n\n              <ion-label>\n\n                사용자 목록\n\n              </ion-label>\n\n              <ion-select>\n\n                <ion-option [selected]="true">멘토</ion-option>\n\n                <ion-option>멘토-보고서미제출</ion-option>\n\n                <ion-option>멘티</ion-option>\n\n                <ion-option>관리자</ion-option>\n\n              </ion-select>\n\n          </ion-item>\n\n          <!-- 멘토 검색-->\n\n          <!--\n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label>201300000 홍길동</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      보고서 제출 여부 : <span class="yes">Y</span> / 활동비, 장학금 지급 대상자 : <span class="yes">Y</span>\n\n                  </td>\n\n              </tr>\n\n          </table>\n\n          <table class="userTable">\n\n                <tr>\n\n                    <td>\n\n                      <ion-item no-lines>\n\n                          <ion-label>201300000 김길동</ion-label>\n\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                      </ion-item> \n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n\n                    </td>\n\n                </tr>\n\n            </table>\n\n            <table class="userTable">\n\n                <tr>\n\n                    <td>\n\n                      <ion-item no-lines>\n\n                          <ion-label>201300000 이길동</ion-label>\n\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                      </ion-item> \n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n\n                    </td>\n\n                </tr>\n\n            </table>\n\n            <table class="userTable">\n\n                <tr>\n\n                    <td>\n\n                      <ion-item no-lines>\n\n                          <ion-label>201300000 최길동</ion-label>\n\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                      </ion-item> \n\n                    </td>\n\n                </tr>\n\n                <tr>\n\n                    <td>\n\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n\n                    </td>\n\n                </tr>\n\n            </table>\n\n        -->\n\n          <!--멘티/관리자 검색-->\n\n          \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 김길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 이길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 정길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 고길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 박길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n          <ion-item (press)="showMentorAlert()">\n\n              <ion-label>201300000 최길동</ion-label>\n\n              <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n          </ion-item> \n\n        \n\n\n\n          <div class="buttonWrapper">\n\n              <!--\n\n              <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->\n\n              <button ion-button block class="editButton" (click)="openMessagePage()">쪽지보내기</button>\n\n              \n\n              <button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자지정</button>\n\n              <!--\n\n              <button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자삭제</button>-->\n\n          </div>\n\n          \n\n      </ion-list>\n\n\n\n      <ion-list *ngSwitchCase="\'report\'">\n\n          <ion-item>\n\n              <ion-label>\n\n                  검색기간\n\n              </ion-label>\n\n              <ion-select>\n\n                <ion-option [selected]="true">2017-2학기</ion-option>\n\n                <ion-option>2017-1학기</ion-option>\n\n                <ion-option>전체학기</ion-option>\n\n              </ion-select>\n\n          </ion-item>\n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label><span class="teamName">[자바를 잡아]</span> 1차보고서</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료\n\n                  </td>\n\n              </tr>\n\n          </table>  \n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label><span class="teamName">[자바를 잡아]</span> 2차보고서</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료\n\n                  </td>\n\n              </tr>\n\n          </table> \n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label><span class="teamName">[썬]</span> 1차보고서</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인중\n\n                  </td>\n\n              </tr>\n\n          </table> \n\n          <table class="userTable">\n\n              <tr>\n\n                  <td>\n\n                    <ion-item no-lines>\n\n                        <ion-label><span class="teamName">[ALGO]</span> 1차보고서</ion-label>\n\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n\n                    </ion-item> \n\n                  </td>\n\n              </tr>\n\n              <tr>\n\n                  <td>\n\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;반려\n\n                  </td>\n\n              </tr>\n\n          </table> \n\n\n\n          <button ion-button block class="editButton" (click)="showReportDeleteAlert()">보고서삭제</button>\n\n          <button ion-button block class="deleteButton" (click)="showReportDownloardAlert()">다운로드</button>\n\n      </ion-list>\n\n\n\n      <ion-list *ngSwitchCase="\'survey\'">\n\n\n\n        <div class="addBox">\n\n            <ion-item>\n\n                <ion-label>Q1.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        <div class="addBox" *ngIf="count>1">\n\n            <ion-item>\n\n                <ion-label>Q2.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        <div class="addBox" *ngIf="count>2">\n\n            <ion-item>\n\n                <ion-label>Q3.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        <div class="addBox" *ngIf="count>3">\n\n            <ion-item>\n\n                <ion-label>Q4.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        <div class="addBox" *ngIf="count>4">\n\n            <ion-item>\n\n                <ion-label>Q5.</ion-label>\n\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n\n            </ion-item>\n\n        </div>\n\n        \n\n        <ion-item no-lines class="timeaddbutton">\n\n            <button ion-button outline item-right icon-left (click)="addSurvey()">\n\n                설문 항목추가\n\n            </button>\n\n            <button ion-button outline item-right icon-left class="surveyTrash" (click)="minusSurvey()">\n\n                항목삭제\n\n            </button>\n\n        </ion-item>\n\n\n\n\n\n        <button ion-button block class="mentorRoomButton">저장</button>\n\n        <button ion-button block class="mentorRoomButton2" (click)="openSurveyPage()">설문조사 결과</button>\n\n\n\n      </ion-list>\n\n\n\n    </div>\n\n\n\n  </ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\manager\manager.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */]])
 ], ManagerPage);
@@ -1020,7 +1258,7 @@ ManagerPage = __decorate([
 
 /***/ }),
 
-/***/ 207:
+/***/ 208:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1066,7 +1304,7 @@ MessageAddPage = __decorate([
 
 /***/ }),
 
-/***/ 208:
+/***/ 209:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1103,7 +1341,7 @@ SurveyPage = __decorate([
 
 /***/ }),
 
-/***/ 209:
+/***/ 210:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1140,13 +1378,13 @@ MessagePage = __decorate([
 
 /***/ }),
 
-/***/ 210:
+/***/ 211:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(230);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1154,7 +1392,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 229:
+/***/ 230:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1165,25 +1403,25 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__server_service__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(196);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_login_login__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_login_login__ = __webpack_require__(202);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_sm_sm__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_notice_notice__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_question_question__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_smLogin_smLogin__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_manager_manager__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_question_question__ = __webpack_require__(204);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_smLogin_smLogin__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_manager_manager__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_room_room__ = __webpack_require__(51);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_roomDetail_roomDetail__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_mentorAdd_mentorAdd__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_message_message__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_mentorAdd_mentorAdd__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_message_message__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_reading_reading__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_write_write__ = __webpack_require__(104);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_messageAdd_messageAdd__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_survey_survey__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_smEdit_smEdit__ = __webpack_require__(200);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_status_bar__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_splash_screen__ = __webpack_require__(199);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_messageAdd_messageAdd__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_survey_survey__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_smEdit_smEdit__ = __webpack_require__(201);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__ionic_native_status_bar__ = __webpack_require__(197);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_splash_screen__ = __webpack_require__(200);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1201,6 +1439,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+//import { EditPage } from '../pages/edit/edit';
 
 
 
@@ -1290,7 +1529,7 @@ AppModule = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ServerService; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(100);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(271);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1304,45 +1543,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ServerService = (function () {
+var ServerService = ServerService_1 = (function () {
     function ServerService(http) {
-        this.URL = 'http://localhost:8085/sm345/api/';
         this.http = http;
+        this.URL = 'http://localhost:8085/sm345/api/';
+        console.log(ServerService_1.USERID);
+        console.log(ServerService_1.USERAUTH);
+        console.log(ServerService_1.USERNAME);
     }
     ServerService.prototype.makeLogin = function (user) {
         var url = this.URL + 'login';
         return this.http.post(url, user)
             .toPromise()
-            .then(function (response) {
-            return response.json();
-        })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ServerService.prototype.getLoginrecord = function (user_id) {
         var url = this.URL + 'login_record/' + user_id;
         return this.http.get(url)
             .toPromise()
-            .then(function (response) {
-            return response.json();
-        })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ServerService.prototype.updatePassword = function (user) {
         var url = this.URL + 'updatepassword';
         return this.http.post(url, user)
             .toPromise()
-            .then(function (response) {
-            return response.json();
-        })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ServerService.prototype.createMentoroom = function (mentoroom) {
         var url = this.URL + 'mentoroom/create';
         return this.http.post(url, mentoroom)
             .toPromise()
-            .then(function (response) {
-            return response.json();
-        })
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     ServerService.prototype.getMentoroomList = function () {
@@ -1357,6 +1591,19 @@ var ServerService = (function () {
         return this.http.get(url)
             .toPromise()
             .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ServerService.prototype.getArticle = function (board_id, id) {
+        var url = this.URL + 'list/' + board_id + '/' + id;
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    ServerService.prototype.creatArticle = function (article) {
+        var url = this.URL + 'list/create/' + article.board_id;
+        return this.http.post(url, article)
+            .toPromise()
             .catch(this.handleError);
     };
     ServerService.prototype.getMentoroom = function (mentoroom_id) {
@@ -1384,194 +1631,13 @@ var ServerService = (function () {
     };
     return ServerService;
 }());
-ServerService = __decorate([
+ServerService = ServerService_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
 ], ServerService);
 
+var ServerService_1;
 //# sourceMappingURL=server.service.js.map
-
-/***/ }),
-
-/***/ 272:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(196);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(199);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(201);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_sm_sm__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_notice_notice__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_question_question__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_room_room__ = __webpack_require__(51);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__ = __webpack_require__(206);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_message_message__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__app_server_service__ = __webpack_require__(26);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-//import { CoolLocalStorage } from 'angular2-cool-storage';
-var MyApp = (function () {
-    function MyApp(toastCtrl, alertCtrl, serverService, modalCtrl, platform, statusBar, splashScreen) {
-        this.toastCtrl = toastCtrl;
-        this.alertCtrl = alertCtrl;
-        this.modalCtrl = modalCtrl;
-        this.platform = platform;
-        this.statusBar = statusBar;
-        this.splashScreen = splashScreen;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
-        this.initializeApp();
-        this.serverService = serverService;
-        //this.localStorage = localStorage;
-        // used for an example of ngFor and navigation
-        this.pages = [
-            { title: 'HOME', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
-            { title: 'SM사업소개', component: __WEBPACK_IMPORTED_MODULE_6__pages_sm_sm__["a" /* SmPage */] },
-            { title: '공지사항', component: __WEBPACK_IMPORTED_MODULE_7__pages_notice_notice__["a" /* NoticePage */] },
-            { title: '멘토방', component: __WEBPACK_IMPORTED_MODULE_9__pages_room_room__["a" /* RoomPage */] },
-            { title: 'Q&A', component: __WEBPACK_IMPORTED_MODULE_8__pages_question_question__["a" /* QuestionPage */] },
-            { title: '관리페이지', component: __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__["a" /* ManagerPage */] },
-        ];
-    }
-    MyApp.prototype.initializeApp = function () {
-        var _this = this;
-        this.platform.ready().then(function () {
-            // Okay, so the platform is ready and our plugins are available.
-            // Here you can do any higher level native things you might need.
-            _this.statusBar.styleDefault();
-            _this.splashScreen.hide();
-        });
-    };
-    MyApp.prototype.openPage = function (page) {
-        // Reset the content nav to have just this page
-        // we wouldn't want the back button to show in this scenario
-        this.nav.setRoot(page.component);
-    };
-    MyApp.prototype.openMessage = function () {
-        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_11__pages_message_message__["a" /* MessagePage */]);
-        modal.present();
-    };
-    MyApp.prototype.openLogout = function () {
-        var _this = this;
-        var prompt = this.alertCtrl.create({
-            title: '로그아웃 하시겠습니까?',
-            buttons: [
-                {
-                    text: '취소',
-                    handler: function (data) {
-                    }
-                },
-                {
-                    text: '로그아웃',
-                    handler: function (data) {
-                        _this.presentLogoutToast('bottom');
-                        // this.localStorage.clear();
-                        window.location.reload();
-                    }
-                }
-            ]
-        });
-        prompt.present();
-    };
-    MyApp.prototype.loginOpen = function () {
-        var modal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_5__pages_login_login__["a" /* LoginPage */]);
-        modal.present();
-    };
-    MyApp.prototype.presentLogoutToast = function (position) {
-        var toast = this.toastCtrl.create({
-            message: '로그아웃 되었습니다.',
-            duration: 3000,
-            position: position,
-        });
-        toast.present();
-    };
-    MyApp.prototype.showPasswordAlert = function () {
-        var prompt = this.alertCtrl.create({
-            title: '비밀번호 변경',
-            inputs: [
-                {
-                    name: 'password',
-                    type: 'password',
-                    placeholder: '기존 비밀번호',
-                },
-                {
-                    name: 'newPassword',
-                    type: 'password',
-                    placeholder: '새 비밀번호',
-                },
-                {
-                    name: 'newPasswordCheck',
-                    type: 'password',
-                    placeholder: '비밀번호 확인',
-                }
-            ],
-            buttons: [
-                {
-                    text: '취소',
-                    handler: function (data) {
-                    }
-                },
-                {
-                    text: '확인',
-                    handler: function (data) {
-                    }
-                }
-            ]
-        });
-        prompt.present();
-    };
-    MyApp.prototype.ngOnInit = function () {
-        /*
-       if(this.localStorage.getItem('USERID') != null){
-         this.USERID = Number(this.localStorage.getItem('USERID'));
-         this.USERNAME = this.localStorage.getItem('USERNAME');
-         this.USERAUTH = Number(this.localStorage.getItem('USERAUTH'));
-       }
-       
-       if(this.localStorage.getItem('USERID')==null){
-         this.USERID = null;
-         this.USERNAME = null;
-         this.USERAUTH = null;
-       }
-       */
-        console.log(__WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */].USERID);
-    };
-    return MyApp;
-}());
-__decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
-], MyApp.prototype, "nav", void 0);
-MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\app\app.html"*/'<ion-menu [content]="content">\n\n\n\n  \n\n\n\n<ion-content class="side">\n\n<section class="sideAccount">\n\n    <ion-item no-lines>\n\n      <button menuClose clear ion-button item-right>\n\n        <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>\n\n      </button>\n\n    </ion-item>\n\n  <table class="sideAccountTable">\n\n    <tr>\n\n      <td rowspan="2">\n\n        <img src="assets/img/user.png" width="50px"/>\n\n      </td>\n\n         <!--로그인 안했을 경우-->\n\n         <td *ngIf="USERID == null" class="account_user" (click)="loginOpen()">로그인 해주세요</td>\n\n         \n\n          <!--로그인 했을 경우-->\n\n         <td *ngIf="USERID != null" class="account_user"><b>{{USERNAME}}</b></td>\n\n    </tr>\n\n    <tr>\n\n         <td *ngIf="USERID == null" class="account_user"></td>\n\n    </tr>\n\n  </table>\n\n\n\n  <ion-item no-lines>\n\n      <button menuClose clear ion-button item-right (click)="openLogout()">\n\n          <ion-icon name="md-log-out" class="account-icon"></ion-icon>\n\n      </button>\n\n      <button menuClose clear ion-button item-right (click)="openMessage()">\n\n        <ion-icon name="md-mail" class="account-icon"></ion-icon>\n\n      </button>\n\n      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">\n\n        <ion-icon name="ios-apps" class="account-icon"></ion-icon>\n\n      </button>\n\n  </ion-item>\n\n</section>\n\n\n\n  <table class="sideTable">\n\n      <tr>\n\n        <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>\n\n        <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>\n\n          <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>\n\n          <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>\n\n          <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>\n\n          <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>\n\n      </tr>\n\n      <tr>\n\n          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>\n\n          <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>\n\n      </tr>\n\n    </table>\n\n\n\n\n\n  </ion-content>\n\n</ion-menu>\n\n\n\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\app\app.html"*/
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
-], MyApp);
-
-//# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
@@ -1609,6 +1675,28 @@ var Message = (function () {
 
 /***/ }),
 
+/***/ 283:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Article; });
+var Article = (function () {
+    function Article(id, board_id, article_title, article_content, article_writer, article_hit, timestamp, user_name) {
+        this.id = id;
+        this.article_title = article_title;
+        this.article_content = article_content;
+        this.article_writer = article_writer;
+        this.article_hit = article_hit;
+        this.timestamp = timestamp;
+        this.user_name = user_name;
+    }
+    return Article;
+}());
+
+//# sourceMappingURL=article.js.map
+
+/***/ }),
+
 /***/ 51:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1618,7 +1706,7 @@ var Message = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roomDetail_roomDetail__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mentorAdd_mentorAdd__ = __webpack_require__(205);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mentorAdd_mentorAdd__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(26);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1641,6 +1729,8 @@ var RoomPage = (function () {
         this.modalCtrl = modalCtrl;
         this.mentorooms = [];
         this.serverService = serverService;
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.USERAUTH = this.currentUser.USERAUTH;
     }
     RoomPage.prototype.ngOnInit = function () {
         var _this = this;
@@ -1665,7 +1755,7 @@ var RoomPage = (function () {
     return RoomPage;
 }());
 RoomPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\room\room.html"*/'<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n\n      </div>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding class="page-room">\n\n      \n\n\n\n      <table class="roomTable" *ngFor="let m of mentorooms">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>\n\n          <td>[팀명] {{m.team_name}}&nbsp;&nbsp;\n\n            <div *ngIf= "m.team_confirm == 0">\n\n            <button ion-button class="fileButton4">대기중</button>\n\n            </div>\n\n            <div *ngIf= "m.team_confirm == 1">\n\n            <button ion-button class="fileButton">개설완료</button>\n\n            </div>\n\n          </td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage(m)"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] {{m.team_theme}}</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 1명</td>\n\n        </tr>\n\n      </table>\n\n<!--\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/java.png" /></td>\n\n          <td>[팀명] 자바를 잡아&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] JAVA</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 3명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/algo.png" /></td>\n\n          <td>[팀명] ALGO&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] 알고리즘</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 2명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/python.png" /></td>\n\n          <td>[팀명] 썬&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] Python</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 1명</td>\n\n        </tr>\n\n      </table>\n\n    -->\n\n      <button ion-button block (click)="openMentorAddPage()">멘토신청</button>\n\n\n\n  </ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\room\room.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"C:\Users\효경\sm345_app\src\pages\room\room.html"*/'<ion-header>\n\n    <ion-navbar>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n\n      </div>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding class="page-room">\n\n      \n\n\n\n      <table class="roomTable" *ngFor="let m of mentorooms">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>\n\n          <td>[팀명] {{m.team_name}}&nbsp;&nbsp;\n\n            <div *ngIf= "m.team_confirm == 0">\n\n            <button ion-button class="fileButton4">대기중</button>\n\n            </div>\n\n            <div *ngIf= "m.team_confirm == 1">\n\n            <button ion-button class="fileButton">개설완료</button>\n\n            </div>\n\n          </td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage(m)"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] {{m.team_theme}}</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 1명</td>\n\n        </tr>\n\n      </table>\n\n<!--\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/java.png" /></td>\n\n          <td>[팀명] 자바를 잡아&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] JAVA</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 3명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/algo.png" /></td>\n\n          <td>[팀명] ALGO&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] 알고리즘</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 2명</td>\n\n        </tr>\n\n      </table>\n\n\n\n      <table class="roomTable">\n\n        <tr>\n\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/python.png" /></td>\n\n          <td>[팀명] 썬&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n\n        </tr>\n\n        <tr>\n\n          <td>[주제] Python</td>\n\n        </tr>\n\n        <tr>\n\n          <td>[현재팀원] 1명</td>\n\n        </tr>\n\n      </table>\n\n    -->\n\n    <div *ngIf="currentUser.USERAUTH != 3">\n\n      <button ion-button block (click)="openMentorAddPage()">멘토신청</button>\n\n    </div>\n\n\n\n  </ion-content>'/*ion-inline-end:"C:\Users\효경\sm345_app\src\pages\room\room.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
 ], RoomPage);
@@ -1674,5 +1764,5 @@ RoomPage = __decorate([
 
 /***/ })
 
-},[210]);
+},[211]);
 //# sourceMappingURL=main.js.map

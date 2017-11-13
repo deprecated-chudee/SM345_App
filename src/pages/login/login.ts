@@ -1,35 +1,47 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, AlertController, ToastController, App, ViewController } from 'ionic-angular';
+import { Http } from '@angular/http';
+import { 
+    NavController, 
+    ModalController, 
+    AlertController, 
+    ToastController, 
+    ViewController,
+    App } from 'ionic-angular';
+
 import { HomePage } from '.././home/home';
 import { SmLoginPage } from '../smLogin/smLogin';
-import { ServerService } from '../../app/server.service';
-import { Http } from '@angular/http';
 import { MyApp } from '../../app/app.component';
 import { User } from '../../models/user';
 import { Message } from '../../models/message';
-//import { CoolLocalStorage } from 'angular2-cool-storage';
+import { ServerService } from '../../app/server.service';
 
 @Component({
-  templateUrl: 'login.html'
+    templateUrl: 'login.html'
 })
 export class LoginPage {
+    private user: User = new User(0,"",0,"");
+    private message: Message = new Message;
+    private login_record: number = 0;
+    private password: string = "";
+    ServerService: ServerService;   
 
-  private user: User;
-  private http: Http;
-  serverService: ServerService;
-  private message: Message;
-  //localStorage: CoolLocalStorage;
-  private login_record: number =0;
-  private password: string = "";
-
-  constructor(public viewCtrl: ViewController, public app: App, serverService: ServerService, http: Http, public navCtrl: NavController, public appCtrl: App, public toastCtrl: ToastController, public alertCtrl: AlertController, public modalCtrl: ModalController, /*localStorage: CoolLocalStorage*/) {
-    this.http = http;
-    this.serverService = serverService;          
-    this.user = new User(0,"",0,"");
-    this.navCtrl = navCtrl;
-    this.message = new Message;
-    //this.localStorage = localStorage;   
-  }
+    constructor(
+        public app: App, 
+        private serverService: ServerService, 
+        private http: Http, 
+        public navCtrl: NavController, 
+        public appCtrl: App, 
+        public toastCtrl: ToastController, 
+        public alertCtrl: AlertController, 
+        public modalCtrl: ModalController,
+        public viewCtrl: ViewController
+    ) { 
+      this.http = http;
+      this.serverService = serverService;          
+      this.user = new User(0,"",0,"");
+      this.navCtrl = navCtrl;
+      this.message = new Message;
+    }
 
   //로그인
   signIn(){
@@ -37,7 +49,6 @@ export class LoginPage {
     .then(message =>
     {
       this.login_record = message.login_record;
-      console.log('로그인기록'+this.login_record);
       if(this.login_record == 0)
       this.showPasswordAlert();
       else{
@@ -49,15 +60,11 @@ export class LoginPage {
         if(message.key == 2)
           this.presentLoginToast(message);
         if(message.key == 0){
-        
-         
-          //this.localStorage.setItem('USERID', message.user_id.toString());
-          //this.localStorage.setItem('USERAUTH', message.user_auth.toString());
-          //this.localStorage.setItem('USERNAME', message.user_name);
-         
-          ServerService.USERID = message.user_id;
-          ServerService.USERNAME = message.user_name;
-          ServerService.USERAUTH = message.user_auth;
+      
+          localStorage.setItem('currentUser', JSON.stringify({ 
+            USERID: message.user_id,
+            USERNAME: message.user_name,
+            USERAUTH: message.user_auth}));
 
           this.presentLoginToast(message);
           
@@ -65,17 +72,16 @@ export class LoginPage {
           //this.appCtrl.getRootNav().setRoot(HomePage);
           //window.location.reload();
 
-          setTimeout(() => { 
-            this.app.getRootNav().setRoot(HomePage);
-            }, 300);
-            this.dismiss();
-      
-         
+          this.presentLoginToast(message);
+          this.appCtrl.getRootNav().setRoot(MyApp);
+          window.location.reload();
+          }
+        });
         }
-      });
-    }
-  });
-    }
+      }
+     ) }
+  
+  
 
   dismiss() {
     this.viewCtrl.dismiss();
@@ -136,21 +142,19 @@ export class LoginPage {
               {
                 this.presentLoginToast(message);
 
-                //this.localStorage.setItem('USERID', message.user_id.toString());
-               // this.localStorage.setItem('USERAUTH', message.user_auth.toString());
-                //this.localStorage.setItem('USERNAME', message.user_name);
+                localStorage.setItem('currentUser', JSON.stringify({ 
+                  USERID: message.user_id,
+                  USERNAME: message.user_name,
+                  USERAUTH: message.user_auth
+              }));
 
-                ServerService.USERID = message.user_id;
-                ServerService.USERNAME = message.user_name;
-                ServerService.USERAUTH = message.user_auth;
-              
                // this.navCtrl.push(HomePage);
-                //this.appCtrl.getRootNav().setRoot(HomePage);
-                //window.location.reload();
-                setTimeout(() => { 
-                  this.app.getRootNav().setRoot(HomePage);
-                  }, 300);
-                  this.dismiss();
+               // this.appCtrl.getRootNav().setRoot(HomePage);
+               // window.location.reload();
+                
+                 this.presentLoginToast(message);
+                 this.appCtrl.getRootNav().setRoot(MyApp);
+                 window.location.reload();
                
             });
             }                   
@@ -158,7 +162,5 @@ export class LoginPage {
        ]
     });
     prompt.present();
-    }
-  }
-
-
+}
+}

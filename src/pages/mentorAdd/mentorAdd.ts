@@ -17,26 +17,18 @@ export class MentorAddPage implements OnInit {
   USERID: number;
   USERNAME: string;
   USERAUTH: number;
-  //localStorage: CoolLocalStorage;
+  private currentUser;
 
   constructor(public app: App, public appCtrl: App, public viewCtrl: ViewController, public toastCtrl: ToastController, public navCtrl: NavController, serverService: ServerService, /*localStorage: CoolLocalStorage*/) {
     this.mentoroom = new Mentoroom("","","",0,"",0,0,0);
     this.serverService = serverService;
-    //this.localStorage = localStorage;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.USERID = this.currentUser.USERID;
+    this.USERAUTH = this.currentUser.USERAUTH;
+    console.log('유저아이디'+this.USERID);
   }
 
   ngOnInit() {
-    /*
-    if(this.localStorage.getItem('USERID') != null){
-      this.USERID = Number(this.localStorage.getItem('USERID'));
-    }
-    
-    if(this.localStorage.getItem('USERID')==null){
-      this.USERID = null;
-    }
-    */
-    this.USERID = ServerService.USERID;
-    console.log('유저아이디'+this.USERID);
   }
 
   dismiss() {
@@ -45,6 +37,7 @@ export class MentorAddPage implements OnInit {
 
   openRoomPage() {
     this.mentoroom.mento_id = this.USERID;
+    console.log(this.mentoroom.mento_id);
     this.serverService.createMentoroom(this.mentoroom)
     .then(message =>
     {
@@ -56,7 +49,6 @@ export class MentorAddPage implements OnInit {
       this.app.getRootNav().setRoot(RoomPage);
       }, 300);
       this.dismiss();
-
   }
 
   fileClick(sort) {

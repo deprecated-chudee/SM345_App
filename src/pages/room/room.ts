@@ -12,9 +12,13 @@ import { Mentoroom } from '../../models/mentoroom';
 export class RoomPage  implements OnInit {
   serverService: ServerService;
   private mentorooms: Mentoroom[] = [];
+  private currentUser;
+  private USERAUTH;
 
   constructor( serverService: ServerService, public navCtrl: NavController, public modalCtrl: ModalController) {
     this.serverService = serverService;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.USERAUTH = this.currentUser.USERAUTH;
   }
 
   ngOnInit() {

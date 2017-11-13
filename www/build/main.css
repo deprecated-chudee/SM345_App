@@ -25645,6 +25645,10 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
   color: lightgray;
 }
 
+.page-manager b {
+  font-size: 13px;
+}
+
 .page-manager ion-item.item.item-block.item-ios.item-select.input-has-value.item-input-has-value,
 .page-manager ion-item.item.item-block.item-md.item-select.input-has-value.item-input-has-value {
   padding-left: 18px;

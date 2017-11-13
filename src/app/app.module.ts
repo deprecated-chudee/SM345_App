@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SmPage } from '../pages/sm/sm';
 import { NoticePage } from '../pages/notice/notice';
+//import { EditPage } from '../pages/edit/edit';
 import { QuestionPage } from '../pages/question/question';
 import { SmLoginPage } from '../pages/smLogin/smLogin';
 import { ManagerPage } from '../pages/manager/manager';
@@ -47,6 +48,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MessageAddPage,
     SurveyPage,
     SmEditPage,
+   // EditPage,
   ],
   imports: [
     BrowserModule,
