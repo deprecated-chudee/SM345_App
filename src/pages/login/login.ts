@@ -99,7 +99,6 @@ export class LoginPage {
     this.navCtrl.setRoot(HomePage);
   }
 
-
   showPasswordAlert() {
     let prompt = this.alertCtrl.create({
        title: '비밀번호 변경',

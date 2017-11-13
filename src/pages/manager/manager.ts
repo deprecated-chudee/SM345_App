@@ -23,6 +23,8 @@ export class ManagerPage implements OnInit{
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
     private selectedUser = [];
+    private selectedAll: boolean = false;
+
     selectDefualtAuth: number = 1;
     selectDefualtYear: number = 20172;
     private mentoRoomInfo: MentoRoomInfo; //관리자 페이지 - 멘토방 설정
@@ -62,7 +64,7 @@ export class ManagerPage implements OnInit{
         this.serverService.getMentoRoomInfo()
             .then(mentoRoomInfo => this.mentoRoomInfo = mentoRoomInfo)
     }
-    
+
     handleSelectedUser(e: any, user_id: number) {
         // checked
         if(e.checked) {
@@ -94,8 +96,10 @@ export class ManagerPage implements OnInit{
         toast.present();
     }
 
+    //멘토방목록 - 전체선택 클릭 시
     roomList_selectedAll() {
-        console.log('checkedAll');
+        this.selectedAll=!this.selectedAll;
+        console.log(this.selectedAll);
     }
 
     userList(e) {
