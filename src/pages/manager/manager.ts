@@ -119,6 +119,18 @@ export class ManagerPage implements OnInit{
         this.selectedAll2 = false;
     }
 
+    roomList_selected() {
+        this.selectedAll = false;
+    }
+
+    userList_selected() {
+        this.selectedAll2 = false;
+    }
+
+    reportList_selected() {
+        this.selectedAll3 = false;
+    }
+
     userList(e) {
       this.adminService.userList(e)
         .then(users => this.users = users)

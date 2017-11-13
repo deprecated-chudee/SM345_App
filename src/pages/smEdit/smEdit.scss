@@ -7,12 +7,12 @@
 
 .page-smEdit {
     textarea.text-input.text-input-ios {
-        height: 100px;
+        height: 500px;
         font-size: 13px;
     }
 
     ion-textarea.input.input-ios {
-        height: 100px;
+        height: 500px;
     }
 
     ion-input.input.input-ios {
@@ -38,5 +38,15 @@
 
     ion-label {
         font-size: 14px;
+    }
+
+    .item-ios.item-block .item-inner,
+    .item-md.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: none;
+    }
+
+    .item-ios, .item-md {
+        border-bottom: 0.55px solid #c8c7cc;
     }
 }

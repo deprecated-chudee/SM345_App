@@ -27,7 +27,7 @@
 
     ion-label.label.label-ios,
     ion-label.label.label-md {
-        text-align: center;
+        margin-left: 16px;
         font-weight: bold;
     }
 
@@ -38,6 +38,10 @@
         border-top: 1px solid #dedede;
         font-size: 1.4rem;
         color: #757575;
+    }
+
+    #commentDiv {
+        white-space: pre-line;
     }
 }
 

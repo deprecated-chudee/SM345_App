@@ -26785,7 +26785,7 @@ ion-icon.icon.icon-md.ion-md-mail {
 
 .page-sm ion-label.label.label-ios,
 .page-sm ion-label.label.label-md {
-  text-align: center;
+  margin-left: 16px;
   font-weight: bold;
 }
 
@@ -26796,6 +26796,10 @@ ion-icon.icon.icon-md.ion-md-mail {
   border-top: 1px solid #dedede;
   font-size: 1.4rem;
   color: #757575;
+}
+
+.page-sm #commentDiv {
+  white-space: pre-line;
 }
 
 .header-sm .home_logo_wrapper {
@@ -26813,12 +26817,12 @@ ion-list-header.item.item-ios.list-header.list-header-ios {
 }
 
 .page-smEdit textarea.text-input.text-input-ios {
-  height: 100px;
+  height: 500px;
   font-size: 13px;
 }
 
 .page-smEdit ion-textarea.input.input-ios {
-  height: 100px;
+  height: 500px;
 }
 
 .page-smEdit ion-input.input.input-ios {
@@ -26844,6 +26848,16 @@ ion-list-header.item.item-ios.list-header.list-header-ios {
 
 .page-smEdit ion-label {
   font-size: 14px;
+}
+
+.page-smEdit .item-ios.item-block .item-inner,
+.page-smEdit .item-md.item-block .item-inner {
+  padding-right: 8px;
+  border-bottom: none;
+}
+
+.page-smEdit .item-ios, .page-smEdit .item-md {
+  border-bottom: 0.55px solid #c8c7cc;
 }
 
 .page-survey .list-header-ios,
