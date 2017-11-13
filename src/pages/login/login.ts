@@ -9,7 +9,6 @@ import {
     App } from 'ionic-angular';
 
 import { HomePage } from '.././home/home';
-import { SmLoginPage } from '../smLogin/smLogin';
 import { MyApp } from '../../app/app.component';
 import { User } from '../../models/user';
 import { Message } from '../../models/message';
@@ -98,11 +97,6 @@ export class LoginPage {
 
   openHomePage() {
     this.navCtrl.setRoot(HomePage);
-  }
-
-  openSmLoginPage() {
-    let modal = this.modalCtrl.create(SmLoginPage);
-    modal.present();
   }
 
   showPasswordAlert() {

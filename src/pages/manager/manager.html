@@ -137,7 +137,7 @@
 
           <ion-item>
               <ion-label>전체선택</ion-label>
-              <ion-checkbox [checked]="roomList_selectedAll()"></ion-checkbox>
+              <ion-checkbox color="danger" (click)="roomList_selectedAll()"></ion-checkbox>
           </ion-item>
 
           <!--개설완료된 멘토방-->
@@ -145,7 +145,8 @@
             <div *ngIf= "m.team_confirm == 1">
               <ion-item (press)="openRoomDetail()">
               <ion-label><button ion-button class="fileButton">개설완료</button><b>&nbsp;&nbsp;[{{m.team_name}}]&nbsp;&nbsp;</b>{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
+              <ion-checkbox *ngIf="selectedAll==false" color="dark" checked="false"></ion-checkbox>
+              <ion-checkbox *ngIf="selectedAll==true" color="dark" checked="true"></ion-checkbox>
               <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>
               </ion-item>
             </div>
@@ -154,7 +155,8 @@
             <div *ngIf= "m.team_confirm == 0">
               <ion-item>
               <ion-label><button ion-button class="fileButton4">대기중</button><b>&nbsp;&nbsp;[{{m.team_name}}]&nbsp;&nbsp;</b>{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
+              <ion-checkbox *ngIf="selectedAll==false" color="dark" checked="false"></ion-checkbox>
+              <ion-checkbox *ngIf="selectedAll==true" color="dark" checked="true"></ion-checkbox>
               <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>
               </ion-item>
             </div>
@@ -163,7 +165,8 @@
           <!--기간끝나면 폐설됨-->
           <ion-item>
               <ion-label><button ion-button class="fileButton3">폐설됨</button><b>&nbsp;&nbsp;[팀명]&nbsp;&nbsp;</b>UNIX&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
+              <ion-checkbox *ngIf="selectedAll==false" color="dark" checked="false"></ion-checkbox>
+              <ion-checkbox *ngIf="selectedAll==true" color="dark" checked="true"></ion-checkbox>
           </ion-item> 
 
           <button ion-button block class="mentorRoomButton">목록에서 삭제</button>

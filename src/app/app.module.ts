@@ -14,7 +14,6 @@ import { SmPage } from '../pages/sm/sm';
 import { NoticePage } from '../pages/notice/notice';
 //import { EditPage } from '../pages/edit/edit';
 import { QuestionPage } from '../pages/question/question';
-import { SmLoginPage } from '../pages/smLogin/smLogin';
 import { ManagerPage } from '../pages/manager/manager';
 import { RoomPage } from '../pages/room/room';
 import { RoomDetailPage } from '../pages/roomDetail/roomDetail';
@@ -39,7 +38,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SmPage,
     NoticePage,
     QuestionPage,
-    SmLoginPage,
     RoomPage,
     ManagerPage,
     RoomDetailPage,
@@ -67,7 +65,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SmPage,
     NoticePage,
     QuestionPage,
-    SmLoginPage,
     RoomPage,
     ManagerPage,
     RoomDetailPage,
