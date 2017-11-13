@@ -330,7 +330,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ServerService = ServerService_1 = (function () {
     function ServerService(http) {
         this.http = http;
-        this.URL = 'http://localhost:8086/sm345/api/';
+        //private URL = 'http://localhost:8086/sm345/api/';
+        this.URL = 'http://220.230.112.31:8081/sm345/api/';
         console.log(ServerService_1.USERID);
         console.log(ServerService_1.USERAUTH);
         console.log(ServerService_1.USERNAME);
@@ -472,10 +473,10 @@ var ServerService = ServerService_1 = (function () {
 }());
 ServerService = ServerService_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]) === "function" && _a || Object])
 ], ServerService);
 
-var ServerService_1;
+var ServerService_1, _a;
 //# sourceMappingURL=server.service.js.map
 
 /***/ }),

@@ -44,6 +44,11 @@
         white-space: pre-line;
         padding-top: 0px;
     }
+
+    ion-icon.icon.icon-ios.ion-md-trash.item-icon,
+    ion-icon.icon.icon-md.ion-md-trash.item-icon {
+        color: indianred;
+    }
 }
 
 .header-sm {
