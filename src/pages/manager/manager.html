@@ -172,6 +172,7 @@
 
       </ion-list> 
 
+      <!--사용자 관리-->
       <ion-list *ngSwitchCase="'users'">
           <ion-item>
               <ion-label> 사용자 목록 </ion-label>
@@ -181,9 +182,16 @@
                 <ion-option [value]="3">관리자</ion-option>
               </ion-select>
           </ion-item>
+
+          <ion-item>
+              <ion-label>전체선택</ion-label>
+              <ion-checkbox color="danger" (click)="userList_selectedAll()"></ion-checkbox>
+          </ion-item>
+
           <ion-item *ngFor="let user of users">
             <ion-label>{{user.user_name}} {{user.user_id}}</ion-label>
-            <ion-checkbox color="dark" checked="false" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>
+            <ion-checkbox *ngIf="selectedAll2==false" color="dark" checked="false" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>
+            <ion-checkbox *ngIf="selectedAll2==true" color="dark" checked="true" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>
           </ion-item> 
           <!-- 멘토 검색-->
           <!--
@@ -263,6 +271,7 @@
           
       </ion-list>
 
+      <!--보고서 목록-->
       <ion-list *ngSwitchCase="'report'">
           <ion-item>
               <ion-label>
@@ -274,12 +283,19 @@
                 <ion-option>전체학기</ion-option>
               </ion-select>
           </ion-item>
+
+          <ion-item>
+              <ion-label>전체선택</ion-label>
+              <ion-checkbox color="danger" (click)="reportList_selectedAll()"></ion-checkbox>
+          </ion-item>
+
           <table class="userTable">
               <tr>
                   <td>
                     <ion-item no-lines>
                         <ion-label><span class="teamName">[자바를 잡아]</span> 1차보고서</ion-label>
-                        <ion-checkbox color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>
                     </ion-item> 
                   </td>
               </tr>
@@ -294,7 +310,8 @@
                   <td>
                     <ion-item no-lines>
                         <ion-label><span class="teamName">[자바를 잡아]</span> 2차보고서</ion-label>
-                        <ion-checkbox color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>
                     </ion-item> 
                   </td>
               </tr>
@@ -309,7 +326,8 @@
                   <td>
                     <ion-item no-lines>
                         <ion-label><span class="teamName">[썬]</span> 1차보고서</ion-label>
-                        <ion-checkbox color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>
                     </ion-item> 
                   </td>
               </tr>
@@ -324,7 +342,8 @@
                   <td>
                     <ion-item no-lines>
                         <ion-label><span class="teamName">[ALGO]</span> 1차보고서</ion-label>
-                        <ion-checkbox color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>
                     </ion-item> 
                   </td>
               </tr>

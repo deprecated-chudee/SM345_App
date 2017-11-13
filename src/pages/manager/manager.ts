@@ -23,11 +23,13 @@ export class ManagerPage implements OnInit{
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
     private selectedUser = [];
-    private selectedAll: boolean = false;
+    selectedAll: boolean = false; //멘토방목록 전체선택
+    selectedAll2: boolean = false; //사용자관리 전체선택
+    selectedAll3: boolean = false; //보고서목록 전체선택
 
     selectDefualtAuth: number = 1;
     selectDefualtYear: number = 20172;
-    private mentoRoomInfo: MentoRoomInfo; //관리자 페이지 - 멘토방 설정
+    private mentoRoomInfo: MentoRoomInfo; //멘토방 설정
     USERID: number;
     USERNAME: string;
     USERAUTH: number;
@@ -98,8 +100,23 @@ export class ManagerPage implements OnInit{
 
     //멘토방목록 - 전체선택 클릭 시
     roomList_selectedAll() {
-        this.selectedAll=!this.selectedAll;
-        console.log(this.selectedAll);
+        this.selectedAll = !this.selectedAll;
+        this.selectedAll2 = false;
+        this.selectedAll3 = false;
+    }
+
+    //사용자관리 - 전체선택 클릭 시
+    userList_selectedAll() {
+        this.selectedAll2 = !this.selectedAll2;
+        this.selectedAll = false;
+        this.selectedAll3 = false;
+    }
+
+    //보고서 목록 - 전체선택 클릭 시
+    reportList_selectedAll() {
+        this.selectedAll3 = !this.selectedAll3;
+        this.selectedAll = false;
+        this.selectedAll2 = false;
     }
 
     userList(e) {
