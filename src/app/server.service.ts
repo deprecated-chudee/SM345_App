@@ -122,4 +122,13 @@ export class ServerService {
             .then()
             .catch(this.handleError);
     }
+
+    //멘토방 설정 불러오기
+    getMentoRoomInfo(): Promise<any> {
+        let url = this.URL + 'admin/room_info';
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as MentoRoomInfo)
+            .catch(this.handleError);
+    }
 }

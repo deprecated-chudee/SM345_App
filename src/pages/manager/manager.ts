@@ -27,16 +27,18 @@ export class ManagerPage implements OnInit{
     USERNAME: string;
     USERAUTH: number;
     private currentUser;
+    private roomListChecked: boolean[] = [];
 
     selectDefualtAuth: number = 1;
 
     constructor(private serverService: ServerService, private adminService: AdminService, public modalCtrl: ModalController, public navCtrl: NavController, platform: Platform, public alertCtrl: AlertController, public toastCtrl: ToastController) {
         this.isAndroid = platform.is('android');
-        this.mentoRoomInfo = new MentoRoomInfo("","","","","","","","","","");
+        this.mentoRoomInfo = new MentoRoomInfo(1, "","","","","","","","","","");
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.USERID = this.currentUser.USERID;
         this.USERAUTH = this.currentUser.USERAUTH;
         this.serverService = serverService;
+        this.getMentoRoomInfo()
     }
 
     ngOnInit() {
@@ -46,6 +48,12 @@ export class ManagerPage implements OnInit{
             .then(users => this.users = users);
     }
 
+    //멘토방 설정시킨 것 불러오기
+    getMentoRoomInfo() {
+        this.serverService.getMentoRoomInfo()
+            .then(mentoRoomInfo => this.mentoRoomInfo = mentoRoomInfo)
+    }
+
     //멘토방 설정 저장
     mentoRoomInfoSave() {
         this.serverService.createMentoRoomInfo(this.mentoRoomInfo)
@@ -53,8 +61,10 @@ export class ManagerPage implements OnInit{
         {
           this.presentToast();
         });
+        console.log(typeof(this.mentoRoomInfo.max_mento));
     }
 
+    //멘토방 설정 완료 알림창
     presentToast() {
         let toast = this.toastCtrl.create({
         message: '멘토방 설정이 완료되었습니다.',
@@ -62,6 +72,10 @@ export class ManagerPage implements OnInit{
         position: 'top',
         });
         toast.present();
+    }
+
+    roomList_selectedAll() {
+        console.log('checkedAll');
     }
 
     userList(e) {
