@@ -59,7 +59,7 @@
         </td>
       </tr>
       <tr>
-          <ion-item no-lines class="notice" *ngFor="let a of articles">
+          <ion-item no-lines class="notice" *ngFor="let a of articles" (click)="openReadingPage(a)">
               <!--<span>-->
                 <ion-list>
                  {{a.article_title}}

@@ -6,6 +6,7 @@ import { Message } from '../models/message';
 import { Article } from '../models/article';
 import { User } from '../models/user';
 import { Mentoroom } from '../models/mentoroom';
+//import { Comment } from '../models/comment';
 
 @Injectable()
 export class ServerService {
@@ -85,6 +86,21 @@ export class ServerService {
           .toPromise()
           .catch(this.handleError);
     }
+
+    deleteArticle(id: number, board_id: number){
+      let url = this.URL + 'list/' + board_id + '/' + id + '/delete';
+      return this.http.get(url)
+                .toPromise()
+                .catch(this.handleError);
+   }
+/*
+   createComment(comment: Comment){
+    let url = this.URL + 'mentoroom/3/' + comment.article_id + '/comment/create';
+    return this.http.post(url, comment)
+        .toPromise()
+        .catch(this.handleError);
+  }
+  */
 
     getMentoroom(mentoroom_id: number): Promise<Mentoroom> {
     let url = this.URL + 'mentoroom/' + mentoroom_id;

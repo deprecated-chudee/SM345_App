@@ -93,7 +93,7 @@
   </section>
   <div class="buttonWrapper">
     <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID">수정</button>
-    <button ion-button block class="deleteButton" (click)="WriteDelete(article.id)" *ngIf= "article.article_writer == USERID || USERAUTH == 3">삭제</button>
+    <button ion-button block class="deleteButton" (click)="showDeleteAlert(article)" *ngIf= "article.article_writer == USERID || USERAUTH == 3">삭제</button>
     <button ion-button block class="editButton" (click)="WriteDelete()" *ngIf= "USERAUTH == 3">답변완료</button>
     </div>
 
