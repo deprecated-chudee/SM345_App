@@ -11,9 +11,13 @@ import { Article } from '../../models/article';
 export class SmPage implements OnInit  {
   serverService: ServerService;
   private articles: Article[] =[];
+  private currentUser;
+  private USERAUTH;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, serverService: ServerService) {
     this.serverService = serverService;
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.USERAUTH = this.currentUser.USERAUTH;
   }
 
   ngOnInit() {

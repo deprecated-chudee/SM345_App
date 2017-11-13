@@ -11,7 +11,7 @@ import { MentoRoomInfo } from '../models/mentoRoomInfo';
 @Injectable()
 export class ServerService {
   
-    // private URL = 'http://localhost:8085/sm345/api/';
+    //private URL = 'http://localhost:8086/sm345/api/';
     private URL = 'http://220.230.112.31:8081/sm345/api/';
 
     static USERID: number;
@@ -56,12 +56,20 @@ export class ServerService {
             .catch(this.handleError);
     }
 
-    getMentoroomList(): Promise<Mentoroom[]> {
-        let url = this.URL + 'mentoroom'
+    getMentoroomListByYear(year: number): Promise<Mentoroom[]> {
+        let url = this.URL + 'mentoroom/' + year + '/1';
         return this.http.get(url)
             .toPromise()
             .then(response => response.json() as Mentoroom[])
             .catch(this.handleError);
+    }
+
+    getMentoroomList(): Promise<Mentoroom[]> {
+      let url = this.URL + 'mentoroom'
+      return this.http.get(url)
+          .toPromise()
+          .then(response => response.json() as Mentoroom[])
+          .catch(this.handleError);
     }
 
     getList(board_id: number): Promise<Article[]> {
@@ -87,6 +95,21 @@ export class ServerService {
             .catch(this.handleError);
     }
 
+    deleteArticle(id: number, board_id: number){
+      let url = this.URL + 'list/' + board_id + '/' + id + '/delete';
+      return this.http.get(url)
+                .toPromise()
+                .catch(this.handleError);
+   }
+/*
+   createComment(comment: Comment){
+    let url = this.URL + 'mentoroom/3/' + comment.article_id + '/comment/create';
+    return this.http.post(url, comment)
+        .toPromise()
+        .catch(this.handleError);
+  }
+  */
+
     getMentoroom(mentoroom_id: number): Promise<Mentoroom> {
         let url = this.URL + 'mentoroom/' + mentoroom_id;
         return this.http.get(url)
@@ -107,6 +130,20 @@ export class ServerService {
         return this.http.get(url)
             .toPromise()
             .catch(this.handleError);
+    }
+
+    updateEmpowerUser(user_id: number){
+      let url = this.URL + 'admin/empower/' + user_id;
+      return this.http.get(url)
+          .toPromise()
+          .catch(this.handleError);
+    }
+
+    updateLeaveUser(user_id: number){
+    let url = this.URL + 'admin/leave/' + user_id;
+    return this.http.get(url)
+        .toPromise()
+        .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

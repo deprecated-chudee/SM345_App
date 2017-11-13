@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 import { SmPage } from '../sm/sm';
+import { ReadingPage } from '../reading/reading';
 import { NoticePage } from '../notice/notice';
 import { ServerService } from '../../app/server.service';
 import { Article } from '../../models/article';
@@ -20,6 +21,11 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.serverService.getList(2).then(
       article => { this.articles = article;
+    });
+  }
+
+  openReadingPage(article){
+    this.navCtrl.push(ReadingPage, {id: article.id, board_id: article.board_id,
     });
   }
 
