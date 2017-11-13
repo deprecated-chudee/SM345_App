@@ -9,7 +9,6 @@ import {
     App } from 'ionic-angular';
 
 import { HomePage } from '.././home/home';
-import { SmLoginPage } from '../smLogin/smLogin';
 import { MyApp } from '../../app/app.component';
 import { User } from '../../models/user';
 import { Message } from '../../models/message';

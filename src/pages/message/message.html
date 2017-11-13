@@ -10,76 +10,23 @@
 </ion-header>    
 
 <ion-content class="page-message">
-        <table class="noticeTable-in">
+        <table class="noticeTable-in" *ngFor="let message of messages">
                 <tr>
                     <td>
-                        <ion-icon name="md-mail"></ion-icon>&nbsp;&nbsp;설문조사 기간 안내입니다.
+                        <ion-icon name="md-mail"></ion-icon>&nbsp;&nbsp;
+                        {{ message.message_title }}
                     </td>
+                    <ion-icon name="md-trash" 
+                        style="text-align: right;"
+                        (click)="handleRemove(message.id)"
+                    >
+                    </ion-icon>
                 </tr>
                 <tr>
                     <td>
-                        2017-08-30 14:30
-                    </td>
-                </tr>
-        </table>
-        <table class="noticeTable-in">
-                <tr>
-                    <td>
-                        <ion-icon name="md-mail"></ion-icon>&nbsp;&nbsp;멘토방이 개설되었습니다.
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2017-08-30 14:30
+                        {{ message.timestamp | date:'yyyy-MM-dd HH:mm' }}
                     </td>
                 </tr>
         </table>
-        <table class="noticeTable-in">
-                <tr>
-                    <td>
-                        <ion-icon name="md-mail-open"></ion-icon>&nbsp;&nbsp;보고서 작성기한 엄수바람
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2017-08-30 14:30
-                    </td>
-                </tr>
-        </table>
-        <table class="noticeTable-in">
-                <tr>
-                    <td>
-                        <ion-icon name="md-mail-open"></ion-icon>&nbsp;&nbsp;멘티 전체 필독공지
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2017-08-30 14:30
-                    </td>
-                </tr>
-        </table>
-        <table class="noticeTable-in">
-                <tr>
-                    <td>
-                        <ion-icon name="md-mail-open"></ion-icon>&nbsp;&nbsp;2학기 멘토 신청방법 및 유의사항 안내
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2017-08-30 14:30
-                    </td>
-                </tr>
-        </table>
-        <table class="noticeTable-in">
-                <tr>
-                    <td>
-                        <ion-icon name="md-mail-open"></ion-icon>&nbsp;&nbsp;2학기 멘토 신청방법 및 유의사항 안내
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        2017-08-30 14:30
-                    </td>
-                </tr>
-        </table>
+        
 </ion-content>

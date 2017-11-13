@@ -6,7 +6,7 @@ import { Message } from '../models/message';
 import { Article } from '../models/article';
 import { User } from '../models/user';
 import { Mentoroom } from '../models/mentoroom';
-//import { Comment } from '../models/comment';
+import { MentoRoomInfo } from '../models/mentoRoomInfo';
 
 @Injectable()
 export class ServerService {
@@ -149,5 +149,23 @@ export class ServerService {
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
+    }
+
+    //멘토방설정 저장
+    createMentoRoomInfo(mentoRoomInfo: MentoRoomInfo): Promise<any>{
+        let url = this.URL + 'admin/room_info/edit';
+        return this.http.post(url, mentoRoomInfo)
+            .toPromise()
+            .then()
+            .catch(this.handleError);
+    }
+
+    //멘토방 설정 불러오기
+    getMentoRoomInfo(): Promise<any> {
+        let url = this.URL + 'admin/room_info';
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as MentoRoomInfo)
+            .catch(this.handleError);
     }
 }

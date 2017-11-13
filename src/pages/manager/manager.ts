@@ -4,6 +4,7 @@ import { HomePage } from '.././home/home';
 import { Platform } from 'ionic-angular';
 import { ServerService } from '../../app/server.service';
 import { Mentoroom } from '../../models/mentoroom';
+import { MentoRoomInfo } from '../../models/mentoRoomInfo';
 import { User } from '../../models/user';
 
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
@@ -22,18 +23,18 @@ export class ManagerPage implements OnInit{
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
     private selectedUser = [];
-
     selectDefualtAuth: number = 1;
     selectDefualtYear: number = 20172;
-
-    public event = {
-        month: '2017-01-01',
-        timeEnds: '2017-01-01'
-    }
+    private mentoRoomInfo: MentoRoomInfo; //관리자 페이지 - 멘토방 설정
+    USERID: number;
+    USERNAME: string;
+    USERAUTH: number;
+    private currentUser;
+    private roomListChecked: boolean[] = [];
 
     constructor(
         private serverService: ServerService, 
-        private adminService: AdminService,
+        private adminService: AdminService, 
         public modalCtrl: ModalController, 
         public navCtrl: NavController, 
         platform: Platform, 
@@ -41,6 +42,12 @@ export class ManagerPage implements OnInit{
         public toastCtrl: ToastController
     ) {
         this.isAndroid = platform.is('android');
+        this.mentoRoomInfo = new MentoRoomInfo(1, "","","","","","","","","","");
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.USERID = this.currentUser.USERID;
+        this.USERAUTH = this.currentUser.USERAUTH;
+        this.serverService = serverService;
+        this.getMentoRoomInfo()
     }
 
     ngOnInit() {
@@ -48,6 +55,47 @@ export class ManagerPage implements OnInit{
             .then(mentoroom => this.mentorooms = mentoroom);
         this.adminService.userList(1)
             .then(users => this.users = users);
+    }
+
+    //멘토방 설정시킨 것 불러오기
+    getMentoRoomInfo() {
+        this.serverService.getMentoRoomInfo()
+            .then(mentoRoomInfo => this.mentoRoomInfo = mentoRoomInfo)
+    }
+    
+    handleSelectedUser(e: any, user_id: number) {
+        // checked
+        if(e.checked) {
+            this.selectedUser.push(user_id)
+        } else {
+            // not checked
+            let index = this.selectedUser.indexOf(user_id)
+            this.selectedUser.splice(index, 1)
+        }
+    }
+
+    //멘토방 설정 저장
+    mentoRoomInfoSave() {
+        this.serverService.createMentoRoomInfo(this.mentoRoomInfo)
+        .then(message =>
+        {
+          this.presentToast();
+        });
+        console.log(typeof(this.mentoRoomInfo.max_mento));
+    }
+
+    //멘토방 설정 완료 알림창
+    presentToast() {
+        let toast = this.toastCtrl.create({
+        message: '멘토방 설정이 완료되었습니다.',
+        duration: 3000,
+        position: 'top',
+        });
+        toast.present();
+    }
+
+    roomList_selectedAll() {
+        console.log('checkedAll');
     }
 
     userList(e) {
@@ -104,8 +152,11 @@ export class ManagerPage implements OnInit{
     }
 
     openMessagePage() {
-        let modal = this.modalCtrl.create(MessageAddPage);
-        modal.present();
+        this.navCtrl.push(MessageAddPage, {
+            selectedUser: this.selectedUser
+        })
+        // let modal = this.modalCtrl.create(MessageAddPage);
+        // modal.present(this.selectedUser);
     }
 
     showReportDeleteAlert() {
@@ -197,15 +248,6 @@ export class ManagerPage implements OnInit{
         modal.present();
     }
 
-    handleSelectedUser(e: any, user_id: number){
-        if(e.checked) {
-            this.selectedUser.push(user_id);
-        } else {
-            // not checked
-            let index = this.selectedUser.indexOf(user_id);
-            this.selectedUser.splice(index, 1);
-        }
-    }
 
 
 /*

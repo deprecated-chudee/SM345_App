@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ServerService } from './server.service';
 import { AdminService } from './admin.service';
+import { MessageService } from './message.service';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -13,7 +14,6 @@ import { SmPage } from '../pages/sm/sm';
 import { NoticePage } from '../pages/notice/notice';
 //import { EditPage } from '../pages/edit/edit';
 import { QuestionPage } from '../pages/question/question';
-import { SmLoginPage } from '../pages/smLogin/smLogin';
 import { ManagerPage } from '../pages/manager/manager';
 import { RoomPage } from '../pages/room/room';
 import { RoomDetailPage } from '../pages/roomDetail/roomDetail';
@@ -38,7 +38,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SmPage,
     NoticePage,
     QuestionPage,
-    SmLoginPage,
     RoomPage,
     ManagerPage,
     RoomDetailPage,
@@ -66,7 +65,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SmPage,
     NoticePage,
     QuestionPage,
-    SmLoginPage,
     RoomPage,
     ManagerPage,
     RoomDetailPage,
@@ -83,6 +81,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     SplashScreen,
     ServerService,
     AdminService,
+    MessageService,
     //CoolStorageModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

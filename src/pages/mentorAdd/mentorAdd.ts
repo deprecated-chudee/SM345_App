@@ -35,6 +35,7 @@ export class MentorAddPage implements OnInit {
     this.viewCtrl.dismiss();
   }
 
+  //멘토 신청
   openRoomPage() {
     this.mentoroom.mento_id = this.USERID;
     console.log(this.mentoroom.mento_id);
@@ -62,5 +63,5 @@ export class MentorAddPage implements OnInit {
     position: 'bottom',
     });
     toast.present();
-}
+  }
 }
