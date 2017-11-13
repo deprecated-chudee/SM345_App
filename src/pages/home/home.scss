@@ -199,6 +199,30 @@
         margin-top: 5px;
     }
 
+    ion-list.list.list-md,
+    ion-list.list.list-ios {
+        padding: 5px;
+        font-size: 13px;
+        text-align: center;
+        border-bottom: none;
+        height: 40px;
+        line-height: 30px;
+        margin: 0px;
+        max-width: 95%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .item-ios.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: none;
+    }
+
+    .input-wrapper {
+        border-bottom: 0.55px solid #F0F0F0;
+    }
+
 }
 
 .toolbar-background.toolbar-background-md,

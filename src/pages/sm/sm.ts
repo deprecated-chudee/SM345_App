@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController, AlertController } from 'ionic-angular';
+import { ToastController, ViewController, App, NavController, ModalController, AlertController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { SmEditPage } from '.././smEdit/smEdit';
 import { ServerService } from '../../app/server.service';
@@ -14,7 +14,7 @@ export class SmPage implements OnInit  {
   private currentUser;
   private USERAUTH;
 
-  constructor(public alertCtrl: AlertController, public navCtrl: NavController, public modalCtrl: ModalController, serverService: ServerService) {
+  constructor(public toastCtrl: ToastController, public viewCtrl: ViewController, public app: App, public alertCtrl: AlertController, public navCtrl: NavController, public modalCtrl: ModalController, serverService: ServerService) {
     this.serverService = serverService;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERAUTH = this.currentUser.USERAUTH;
@@ -30,13 +30,12 @@ export class SmPage implements OnInit  {
     this.navCtrl.setRoot(HomePage);
   }
 
-  OpenSmEditPage() {
-    let modal = this.modalCtrl.create(SmEditPage);
-    modal.present();
+  OpenSmEditPage(board_id) {
+    this.navCtrl.push(SmEditPage, {board_id: board_id});
   }
 
   //삭제하시겠습니까? 알림
-  showEditDelete() {
+  showEditDelete(article) {
       let confirm = this.alertCtrl.create({
         title: '삭제하시겠습니까?',
         buttons: [
@@ -49,7 +48,11 @@ export class SmPage implements OnInit  {
           {
             text: '삭제하기',
             handler: () => {
-              console.log('삭제');
+              this.serverService.deleteArticle(article.id, 1);
+              this.presentToast('삭제되었습니다.');
+                setTimeout(() => { 
+                  this.navCtrl.setRoot(SmPage);
+                  }, 300);
             }
           }
         ]
@@ -57,4 +60,19 @@ export class SmPage implements OnInit  {
       confirm.present();
     
   }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
+  }
+
+  presentToast(message) {
+    let toast = this.toastCtrl.create({
+    message: message.title,
+    duration: 3000,
+    position: 'bottom',
+    });
+    toast.present();
+  }
+
+
 }

@@ -168,9 +168,35 @@
         display: inline-block;
         background: #38484f;
     }
+
+    button.editButton1.disable-hover.button.button-md.button-default.button-default-md.button-block.button-block-md,
+    button.editButton1.disable-hover.button.button-ios.button-default.button-default-ios.button-block.button-block-ios {
+        background: #91A0AB;
+        width: 28%;
+        margin: 1%;
+        display: inline-block;
+    }
+
+    button.deleteButton1.disable-hover.button.button-md.button-default.button-default-md.button-block.button-block-md,
+    button.deleteButton1.disable-hover.button.button-ios.button-default.button-default-ios.button-block.button-block-ios {
+        margin: 1%;
+        width: 28%;
+        display: inline-block;
+        background: #38484f;
+    }
+
+    button.editButton2.disable-hover.button.button-md.button-default.button-default-md.button-block.button-block-md,
+    button.editButton2.disable-hover.button.button-ios.button-default.button-default-ios.button-block.button-block-ios {
+        background: lightcoral;
+        width: 28%;
+        margin: 1%;
+        display: inline-block;
+    }
+
     .buttonWrapper {
         width: 100%;
         text-align: center;
+        padding-top: 10px;
     }
 
     textarea.text-input.text-input-ios {

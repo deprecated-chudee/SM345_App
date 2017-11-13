@@ -12,12 +12,12 @@
 <ion-content class="page-manager">
     <div>
       <ion-segment [(ngModel)]="manager">
+        <ion-segment-button value="roomList">
+            멘토방목록
+        </ion-segment-button>
         <ion-segment-button value="mentorRoom">
             멘토방설정
         </ion-segment-button>
-        <ion-segment-button value="roomList">
-            멘토방목록
-          </ion-segment-button>
         <ion-segment-button value="users">
             사용자관리
         </ion-segment-button>
@@ -262,7 +262,7 @@
               
               <button ion-button block class="deleteButton" (click)="showManagerAlert()" *ngIf="selectDefualtAuth != 3">관리자지정</button>
               
-              <button ion-button block class="deleteButton" (click)="showManagerAlert()" *ngIf="selectDefualtAuth == 3">관리자삭제</button>
+              <button ion-button block class="deleteButton" (click)="showManagerAlert2()" *ngIf="selectDefualtAuth == 3">관리자삭제</button>
           </div>
           
       </ion-list>

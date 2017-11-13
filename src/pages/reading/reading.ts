@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NavController, ActionSheetController, NavParams, AlertController, ToastController,App, ViewController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { WritePage } from '.././write/write';
+import { NoticePage } from '.././notice/notice'
+import { QuestionPage } from '.././question/question'
 //import { EditPage } from '.././edit/edit';
 import { ServerService } from '../../app/server.service';
 import { Article } from '../../models/article';
@@ -25,7 +27,7 @@ export class ReadingPage implements OnInit {
   constructor(public viewCtrl: ViewController, public app: App, public toastCtrl: ToastController, public alertCtrl: AlertController, serverService: ServerService, public navParams: NavParams, public navCtrl: NavController, public actionSheetCtrl: ActionSheetController) {
     this.id = this.navParams.get("id");
     this.board_id = this.navParams.get("board_id");
-    this.article = new Article(0,0,"","",0,0,0,"");
+    this.article = new Article(0,0,"","",0,0,0,"",0);
     this.serverService = serverService;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
@@ -81,24 +83,61 @@ export class ReadingPage implements OnInit {
           text: '삭제하기',
           handler: () => {
             this.serverService.deleteArticle(article.id, article.board_id);
+            this.Toast('게시글이 삭제되었습니다');
+            if(article.board_id == 2){
+              setTimeout(() => { 
+                this.app.getRootNav().setRoot(NoticePage);
+                }, 300);
+                this.dismiss();
+            }
+            if(article.board_id == 3){
+              setTimeout(() => { 
+                this.app.getRootNav().setRoot(QuestionPage);
+                  }, 300);
+                this.dismiss();
+            }
+
           }
         }
       ]
     });
     confirm.present();
   }
-/*
-  WriteDelete(id) {
 
-    this.serverService.removeArticle(id);
-    this.Toast('');
-    setTimeout(() => { 
-      this.app.getRootNav().setRoot(RoomPage);
-      }, 300);
-      this.dismiss();
-    this.navCtrl.pop();
+  showAnswerAlert(article){
+    let confirm = this.alertCtrl.create({
+      title: '답변 완료하시겠습니까?',
+      buttons: [
+        {
+          text: '취소',
+          handler: () => {
+            console.log('취소 clicked');
+          }
+        },
+        {
+          text: '완료하기',
+          handler: () => {
+            this.serverService.updateAnswer(article.id, article.board_id);
+            this.Toast('답변이 완료되었습니다');
+            if(article.board_id == 2){
+              setTimeout(() => { 
+                this.app.getRootNav().setRoot(NoticePage);
+                }, 300);
+                this.dismiss();
+            }
+            if(article.board_id == 3){
+              setTimeout(() => { 
+                this.app.getRootNav().setRoot(QuestionPage);
+                  }, 300);
+                this.dismiss();
+            }
+
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
-  */
 
   Toast(message) {
     let toast = this.toastCtrl.create({

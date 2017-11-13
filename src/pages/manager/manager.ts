@@ -17,7 +17,7 @@ import { AdminService } from '../../app/admin.service';
     templateUrl: 'manager.html'
 })
 export class ManagerPage implements OnInit{
-    manager: string = "mentorRoom";
+    manager: string = "roomList";
     isAndroid: boolean = false;
     private count:number = 1;
     private mentorooms: Mentoroom[] = [];
@@ -107,7 +107,7 @@ export class ManagerPage implements OnInit{
 
     openRoomDetail(mentoroom) {
         this.navCtrl.push(RoomDetailPage, {
-            mentoroom_id: mentoroom.mentoroom_id,
+            mentoroom_id: mentoroom.mentoroom_id, room: 1,
           });
     }
 
@@ -127,7 +127,7 @@ export class ManagerPage implements OnInit{
                         for(let uid of this.selectedUser){
                             this.serverService.updateEmpowerUser(uid)
                         }
-                        this.managerToast();
+                        this.Toast('관리자로 지정되었습니다');
                     }
                 }
             ]
@@ -135,9 +135,33 @@ export class ManagerPage implements OnInit{
         alert.present();
     }
 
-    managerToast() {
+    showManagerAlert2() {
+        let alert = this.alertCtrl.create({
+            title: '관리자 권한 해제',
+            subTitle: '관리자 권한을 해제하시겠습니까?',
+            buttons: [
+                {
+                    text: '취소',
+                    handler: data => {
+                    }
+                },
+                {
+                    text: '확인',
+                    handler: data => {
+                        for(let uid of this.selectedUser){
+                            this.serverService.updateLeaveUser(uid)
+                        }
+                        this.Toast('관리자 권한이 해제되었습니다');
+                    }
+                }
+            ]
+        });
+        alert.present();
+    }
+
+    Toast(message) {
         let toast = this.toastCtrl.create({
-            message: '관리자로 지정되었습니다.',
+            message: message,
             duration: 3000,
             position: 'bottom',
         });
@@ -329,7 +353,6 @@ export class ManagerPage implements OnInit{
                 position: 'bottom',
             });
             toast.present();
-            this.dismiss();
         } else {
             let toast = this.toastCtrl.create({
                 message: '보고서가 존재하지 않습니다.',
