@@ -20,68 +20,20 @@
                   <td>
                       NOTICE
                   </td>
-                  <td (click)="openWritePage()">
+                  <td (click)="openWritePage(2)">
                       <ion-icon name="md-create"></ion-icon>
                   </td>
                 </tr>
         </table>
-        <table class="noticeTable-in" (click)="openReadingPage()">
+        <table class="noticeTable-in" (click)="openReadingPage(a)" *ngFor="let a of articles">
                 <tr>
                     <td>
-                        2학기 멘토 신청방법 및 유의사항 안내
+                        {{a.article_title}}
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35
-                    </td>
-                </tr>
-        </table>
-        <table class="noticeTable-in" (click)="openReadingPage()">
-                <tr>
-                    <td>
-                        2학기 멘티 신청방법 및 유의사항 안내
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35
-                    </td>
-                </tr>
-        </table>
-        <table class="noticeTable-in" (click)="openReadingPage()">
-                <tr>
-                    <td>
-                        2017년 2학기 멘토 장학금 안내
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35
-                    </td>
-                </tr>
-        </table>
-        <table class="noticeTable-in" (click)="openReadingPage()">
-                <tr>
-                    <td>
-                        2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내 멘티 설문조사 방법 안내 반드시 필독
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35
-                    </td>
-                </tr>
-        </table>
-        <table class="noticeTable-in" (click)="openReadingPage()">
-                <tr>
-                    <td>
-                        2017년 2학기 멘토 설문조사 / 멘티 설문조사 방법 안내
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-08-30 14:30&nbsp;&nbsp;|&nbsp;&nbsp;조회수 35
+                        {{a.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{a.timestamp}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{a.article_hit}}
                     </td>
                 </tr>
         </table>

@@ -1,16 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { WritePage } from '../write/write';
 import { ReadingPage } from '../reading/reading';
+import { ServerService } from '../../app/server.service';
+import { Article } from '../../models/article';
 
 @Component({
   templateUrl: 'notice.html'
 })
-export class NoticePage {
+export class NoticePage implements OnInit  {
+  serverService: ServerService;
+  private articles: Article[] =[];
 
-  constructor(public navCtrl: NavController, public alertCtrl: AlertController) {
+  constructor(serverService: ServerService, public navCtrl: NavController, public alertCtrl: AlertController) {
+    this.serverService = serverService;
+  }
 
+  ngOnInit() {
+    this.serverService.getList(2).then(
+      article => { this.articles = article;
+    });
   }
 
   openHomePage() {
@@ -25,12 +35,12 @@ export class NoticePage {
     alert.present();
   }
 
-  openWritePage() {
-    this.navCtrl.push(WritePage);
+  openWritePage(board_id) {
+    this.navCtrl.push(WritePage, {board_id: board_id});
   }
 
-  openReadingPage() {
-    this.navCtrl.push(ReadingPage);
+  openReadingPage(article) {
+    this.navCtrl.push(ReadingPage, {id: article.id, board_id: article.board_id,
+    });
   }
-
 }

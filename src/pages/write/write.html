@@ -12,10 +12,10 @@
 <ion-content class="page-write">
     <ion-list>
         <ion-item>
-            <ion-input type="text" placeholder="제목을 입력해주세요."></ion-input>
+            <ion-input type="text" placeholder="제목을 입력해주세요." [(ngModel)]="article.article_title"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-textarea placeholder="내용을 입력해주세요." class="write_textarea"></ion-textarea>
+            <ion-textarea placeholder="내용을 입력해주세요." class="write_textarea" [(ngModel)]="article.article_content"></ion-textarea>
         </ion-item>
         <ion-item>
             <input type="file" id="upload" name="uploadFile" file-upload multiple/>
