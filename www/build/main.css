@@ -25263,6 +25263,12 @@ ion-content.side.content.content-wp {
   width: 70%;
 }
 
+.sideAccount img.account-icon {
+  margin-left: 10px;
+  width: 18px;
+  vertical-align: top;
+}
+
 .page-home {
   background: #EDEDED;
 }
