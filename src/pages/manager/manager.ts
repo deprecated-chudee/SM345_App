@@ -22,6 +22,8 @@ export class ManagerPage implements OnInit{
     private count:number = 1;
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
+    private selectedUser = [];
+
     private mentoRoomInfo: MentoRoomInfo; //관리자 페이지 - 멘토방 설정
     USERID: number;
     USERNAME: string;
@@ -31,7 +33,15 @@ export class ManagerPage implements OnInit{
 
     selectDefualtAuth: number = 1;
 
-    constructor(private serverService: ServerService, private adminService: AdminService, public modalCtrl: ModalController, public navCtrl: NavController, platform: Platform, public alertCtrl: AlertController, public toastCtrl: ToastController) {
+    constructor(
+        private serverService: ServerService, 
+        private adminService: AdminService, 
+        public modalCtrl: ModalController, 
+        public navCtrl: NavController, 
+        platform: Platform, 
+        public alertCtrl: AlertController, 
+        public toastCtrl: ToastController
+    ) {
         this.isAndroid = platform.is('android');
         this.mentoRoomInfo = new MentoRoomInfo(1, "","","","","","","","","","");
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -52,6 +62,17 @@ export class ManagerPage implements OnInit{
     getMentoRoomInfo() {
         this.serverService.getMentoRoomInfo()
             .then(mentoRoomInfo => this.mentoRoomInfo = mentoRoomInfo)
+    }
+    
+    handleSelectedUser(e: any, user_id: number) {
+        // checked
+        if(e.checked) {
+            this.selectedUser.push(user_id)
+        } else {
+            // not checked
+            let index = this.selectedUser.indexOf(user_id)
+            this.selectedUser.splice(index, 1)
+        }
     }
 
     //멘토방 설정 저장
@@ -122,8 +143,11 @@ export class ManagerPage implements OnInit{
     }
 
     openMessagePage() {
-        let modal = this.modalCtrl.create(MessageAddPage);
-        modal.present();
+        this.navCtrl.push(MessageAddPage, {
+            selectedUser: this.selectedUser
+        })
+        // let modal = this.modalCtrl.create(MessageAddPage);
+        // modal.present(this.selectedUser);
     }
 
     showReportDeleteAlert() {

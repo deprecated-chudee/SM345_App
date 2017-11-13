@@ -177,9 +177,13 @@
                 <ion-option [value]="3">관리자</ion-option>
               </ion-select>
           </ion-item>
-          <ion-item *ngFor="let user of users" (press)="showMentorAlert()">
+          <ion-item *ngFor="let user of users">
             <ion-label>{{user.user_name}} {{user.user_id}}</ion-label>
-            <ion-checkbox color="dark" checked="false"></ion-checkbox>
+            <ion-checkbox 
+                color="dark" 
+                checked="false"
+                (ionChange)="handleSelectedUser($event, user.user_id)"
+            ></ion-checkbox>
           </ion-item> 
           <!-- 멘토 검색-->
           <!--
