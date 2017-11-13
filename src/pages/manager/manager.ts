@@ -21,6 +21,7 @@ export class ManagerPage implements OnInit{
     private count:number = 1;
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
+    private selectedUser = [];
 
     selectDefualtAuth: number = 1;
 
@@ -46,6 +47,17 @@ export class ManagerPage implements OnInit{
             .then(mentoroom => this.mentorooms = mentoroom);
         this.adminService.userList(1)
             .then(users => this.users = users);
+    }
+
+    handleSelectedUser(e: any, user_id: number) {
+        // checked
+        if(e.checked) {
+            this.selectedUser.push(user_id)
+        } else {
+            // not checked
+            let index = this.selectedUser.indexOf(user_id)
+            this.selectedUser.splice(index, 1)
+        }
     }
 
     userList(e) {
@@ -92,8 +104,11 @@ export class ManagerPage implements OnInit{
     }
 
     openMessagePage() {
-        let modal = this.modalCtrl.create(MessageAddPage);
-        modal.present();
+        this.navCtrl.push(MessageAddPage, {
+            selectedUser: this.selectedUser
+        })
+        // let modal = this.modalCtrl.create(MessageAddPage);
+        // modal.present(this.selectedUser);
     }
 
     showReportDeleteAlert() {
