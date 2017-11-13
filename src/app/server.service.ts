@@ -11,8 +11,8 @@ import { MentoRoomInfo } from '../models/mentoRoomInfo';
 @Injectable()
 export class ServerService {
   
-    //private URL = 'http://localhost:8086/sm345/api/';
-    private URL = 'http://220.230.112.31:8081/sm345/api/';
+    private URL = 'http://localhost:8086/sm345/api/';
+    //private URL = 'http://220.230.112.31:8081/sm345/api/';
 
     static USERID: number;
     static USERAUTH: number;
@@ -89,7 +89,7 @@ export class ServerService {
     }
 
     creatArticle(article: Article){
-        let url = this.URL + 'list/create/' + article.board_id;
+        let url = this.URL + 'list/' + article.board_id + '/create';
         return this.http.post(url, article)
             .toPromise()
             .catch(this.handleError);
@@ -145,6 +145,13 @@ export class ServerService {
         .toPromise()
         .catch(this.handleError);
     }
+
+    updateAnswer(id: number, board_id: number){
+      let url = this.URL + 'list/' + board_id + '/' + id + '/answer';
+      return this.http.get(url)
+          .toPromise()
+          .catch(this.handleError);
+      }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

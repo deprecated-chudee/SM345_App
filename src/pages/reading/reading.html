@@ -18,7 +18,7 @@
       </tr>
       <tr>
         <td>
-            {{article.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{article.timestamp}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{article.article_hit}}
+            {{article.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{article.timestamp | date:'yyyy-MM-dd HH:mm'}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{article.article_hit}}
         </td>
       </tr>
     </table>
@@ -95,7 +95,7 @@
   <div class="buttonWrapper">
     <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID">수정</button>
     <button ion-button block class="deleteButton" (click)="showDeleteAlert(article)" *ngIf= "article.article_writer == USERID || USERAUTH == 3">삭제</button>
-    <button ion-button block class="editButton" (click)="WriteDelete()" *ngIf= "USERAUTH == 3 && article.board_id == 3">답변완료</button>
+    <button ion-button block class="editButton" (click)="showAnswerAlert(article)" *ngIf= "USERAUTH == 3 && article.board_id == 3">답변완료</button>
     </div>
 
     <br/>

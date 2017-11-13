@@ -7,8 +7,9 @@ export class Article{
     article_hit: number;
     timestamp: number;
     user_name: string;
+    answer_complete: number;
 
-    constructor(id, board_id, article_title, article_content, article_writer, article_hit, timestamp, user_name){
+    constructor(id, board_id, article_title, article_content, article_writer, article_hit, timestamp, user_name, answer_complete){
         this.id=id;
         this.article_title=article_title;
         this.article_content=article_content;
@@ -16,5 +17,6 @@ export class Article{
         this.article_hit=article_hit;
         this.timestamp=timestamp;
         this.user_name=user_name;
+        this.answer_complete;
     }
 }
