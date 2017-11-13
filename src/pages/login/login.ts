@@ -99,10 +99,6 @@ export class LoginPage {
     this.navCtrl.setRoot(HomePage);
   }
 
-  openSmLoginPage() {
-    let modal = this.modalCtrl.create(SmLoginPage);
-    modal.present();
-  }
 
   showPasswordAlert() {
     let prompt = this.alertCtrl.create({

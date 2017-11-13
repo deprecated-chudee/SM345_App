@@ -26,8 +26,9 @@
     <div id="contentDiv">{{article.article_content}}
     </div>
 
+
     <!--댓글-->
-    <section class="commentTableWrapper">
+    <section class="commentTableWrapper" *ngIf="article.board_id == 3">
         <ion-list (press)="presentCommentSheet()"> 
             <table class="commentListTable">
                 <tr>
@@ -76,7 +77,7 @@
         
     </section>
 
-    <section class="commentWriteWrapper commentTableWrapper">
+    <section class="commentWriteWrapper commentTableWrapper" *ngIf="article.board_id == 3">
       <table class="comment_textarea_table">
         <tr>
           <td>
@@ -94,7 +95,7 @@
   <div class="buttonWrapper">
     <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID">수정</button>
     <button ion-button block class="deleteButton" (click)="showDeleteAlert(article)" *ngIf= "article.article_writer == USERID || USERAUTH == 3">삭제</button>
-    <button ion-button block class="editButton" (click)="WriteDelete()" *ngIf= "USERAUTH == 3">답변완료</button>
+    <button ion-button block class="editButton" (click)="WriteDelete()" *ngIf= "USERAUTH == 3 && article.board_id == 3">답변완료</button>
     </div>
 
     <br/>
