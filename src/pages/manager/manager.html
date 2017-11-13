@@ -132,37 +132,38 @@
 
           <ion-item>
               <ion-label>전체선택</ion-label>
-              <ion-checkbox color="danger" (click)="roomList_selectedAll()"></ion-checkbox>
-          </ion-item>
+              <ion-checkbox color="danger" *ngIf="selectedRoom.length !== mentorooms.length" checked="false" (ionChange)="handleSelectedAllRoom($event)"></ion-checkbox>
+              <ion-checkbox color="danger" *ngIf="selectedRoom.length === mentorooms.length" checked="true" (ionChange)="handleSelectedAllRoom($event)"></ion-checkbox>    
+            </ion-item>
 
            <!--멘토방 목록-->
            <div *ngFor="let m of mentorooms">
                 <!--개설완료-->
                 <ion-item (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 1">
                   <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-                  <ion-checkbox *ngIf="selectedAll==false" color="dark" checked="false" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>
-                  <ion-checkbox *ngIf="selectedAll==true" color="dark" checked="true" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>
+                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
                   <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon> 
                 </ion-item>
                 
                 <!-- 대기중 -->
                 <ion-item (press)="openRoomDetail(m)"  *ngIf= "m.team_confirm == 0">
                   <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-                  <ion-checkbox *ngIf="selectedAll==false" color="dark" checked="false" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>
-                  <ion-checkbox *ngIf="selectedAll==true" color="dark" checked="true" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>  
+                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>  
                   <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
                 </ion-item>
                 
                 <!-- 기간 지나서 폐설됨 -->
                 <ion-item  (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 2">
                   <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-                  <ion-checkbox *ngIf="selectedAll==false" color="dark" checked="false" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>
-                  <ion-checkbox *ngIf="selectedAll==true" color="dark" checked="true" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>
+                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
                   <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
                 </ion-item> 
             </div>
            
-            <button ion-button block class="mentorRoomButton" (click)="deleteMentoroom()">목록에서 삭제</button>
+            <button ion-button block class="mentorRoomButton" (click)="handleRemoveRoom()">목록에서 삭제</button>
 
       </ion-list> 
 
@@ -179,13 +180,14 @@
 
           <ion-item>
               <ion-label>전체선택</ion-label>
-              <ion-checkbox color="danger" (click)="userList_selectedAll()"></ion-checkbox>
-          </ion-item>
+              <ion-checkbox color="danger" *ngIf="selectedUser.length !== users.length" checked="false" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>
+              <ion-checkbox color="danger" *ngIf="selectedUser.length === users.length" checked="true" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>
+            </ion-item>
 
           <ion-item *ngFor="let user of users">
             <ion-label>{{user.user_name}} {{user.user_id}}</ion-label>
-            <ion-checkbox *ngIf="selectedAll2==false" color="dark" checked="false" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>
-            <ion-checkbox *ngIf="selectedAll2==true" color="dark" checked="true" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>
+            <ion-checkbox *ngIf="selectedAllUser === false" color="dark" checked="false" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>
+            <ion-checkbox *ngIf="selectedAllUser === true" color="dark" checked="true" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>
           </ion-item> 
           <!-- 멘토 검색-->
           <!--
@@ -288,8 +290,8 @@
                   <td>
                     <ion-item no-lines>
                         <ion-label><span class="teamName">[자바를 잡아]</span> 1차보고서</ion-label>
-                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>
-                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAllReport === false" color="dark" checked="false"></ion-checkbox>
+                        <ion-checkbox *ngIf="selectedAllReport === true" color="dark" checked="true"></ion-checkbox>
                     </ion-item> 
                   </td>
               </tr>
