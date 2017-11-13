@@ -33,8 +33,8 @@ export class ServerService {
     }
 
     getLoginrecord(user_id: number): Promise<Message> {
-    let url = this.URL + 'login_record/' + user_id;
-    return this.http.get(url)
+        let url = this.URL + 'login_record/' + user_id;
+        return this.http.get(url)
               .toPromise()
               .then(response => response.json() as Message)
               .catch(this.handleError);
@@ -65,26 +65,26 @@ export class ServerService {
     }
 
     getList(board_id: number): Promise<Article[]> {
-    let url = this.URL + 'list/' + board_id;
-    return this.http.get(url)
-              .toPromise()
-              .then(response => response.json() as Article[])
-              .catch(this.handleError);
+        let url = this.URL + 'list/' + board_id;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as Article[])
+            .catch(this.handleError);
     }
 
     getArticle(board_id: number, id: number): Promise<Article> {
-      let url = this.URL + 'list/' + board_id + '/' + id;
-      return this.http.get(url)
-                .toPromise()
-                .then(response => response.json() as Article)
-                .catch(this.handleError);
+        let url = this.URL + 'list/' + board_id + '/' + id;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as Article)
+            .catch(this.handleError);
     }
 
     creatArticle(article: Article){
-      let url = this.URL + 'list/create/' + article.board_id;
-      return this.http.post(url, article)
-          .toPromise()
-          .catch(this.handleError);
+        let url = this.URL + 'list/create/' + article.board_id;
+        return this.http.post(url, article)
+            .toPromise()
+            .catch(this.handleError);
     }
 
     deleteArticle(id: number, board_id: number){
@@ -103,25 +103,25 @@ export class ServerService {
   */
 
     getMentoroom(mentoroom_id: number): Promise<Mentoroom> {
-    let url = this.URL + 'mentoroom/' + mentoroom_id;
-    return this.http.get(url)
-              .toPromise()
-              .then(response => response.json() as Mentoroom)
-              .catch(this.handleError);
+        let url = this.URL + 'mentoroom/' + mentoroom_id;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as Mentoroom)
+            .catch(this.handleError);
     }
 
     confirmMentoroom(mentoroom: Mentoroom){
-    let url = this.URL + 'mentoroom/' + mentoroom.mentoroom_id + '/confirm';
-    return this.http.post(url, mentoroom)
-              .toPromise()
-              .catch(this.handleError);
+        let url = this.URL + 'mentoroom/' + mentoroom.mentoroom_id + '/confirm';
+        return this.http.post(url, mentoroom)
+            .toPromise()
+            .catch(this.handleError);
     }
 
     rejectMentoroom(mentoroom_id: number){
-    let url = this.URL + 'mentoroom/' + mentoroom_id + '/reject';
-    return this.http.get(url)
-              .toPromise()
-              .catch(this.handleError);
+        let url = this.URL + 'mentoroom/' + mentoroom_id + '/reject';
+        return this.http.get(url)
+            .toPromise()
+            .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

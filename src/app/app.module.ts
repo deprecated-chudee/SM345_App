@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ServerService } from './server.service';
+import { AdminService } from './admin.service';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -81,6 +82,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     StatusBar,
     SplashScreen,
     ServerService,
+    AdminService,
     //CoolStorageModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

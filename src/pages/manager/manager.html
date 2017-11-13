@@ -154,16 +154,17 @@
 
       <ion-list *ngSwitchCase="'users'">
           <ion-item>
-              <ion-label>
-                사용자 목록
-              </ion-label>
-              <ion-select>
-                <ion-option [selected]="true">멘토</ion-option>
-                <ion-option>멘토-보고서미제출</ion-option>
-                <ion-option>멘티</ion-option>
-                <ion-option>관리자</ion-option>
+              <ion-label> 사용자 목록 </ion-label>
+              <ion-select [(ngModel)]="selectDefualtAuth" (ionChange)="userList($event)">
+                <ion-option [selected]="true" [value]="1">멘토</ion-option>
+                <ion-option [value]="2">멘티</ion-option>
+                <ion-option [value]="3">관리자</ion-option>
               </ion-select>
           </ion-item>
+          <ion-item *ngFor="let user of users" (press)="showMentorAlert()">
+            <ion-label>{{user.user_name}} {{user.user_id}}</ion-label>
+            <ion-checkbox color="dark" checked="false"></ion-checkbox>
+          </ion-item> 
           <!-- 멘토 검색-->
           <!--
           <table class="userTable">
@@ -229,31 +230,6 @@
         -->
           <!--멘티/관리자 검색-->
           
-          <ion-item (press)="showMentorAlert()">
-              <ion-label>201300000 김길동</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-          <ion-item (press)="showMentorAlert()">
-              <ion-label>201300000 이길동</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-          <ion-item (press)="showMentorAlert()">
-              <ion-label>201300000 정길동</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-          <ion-item (press)="showMentorAlert()">
-              <ion-label>201300000 고길동</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-          <ion-item (press)="showMentorAlert()">
-              <ion-label>201300000 박길동</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-          <ion-item (press)="showMentorAlert()">
-              <ion-label>201300000 최길동</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-        
 
           <div class="buttonWrapper">
               <!--
