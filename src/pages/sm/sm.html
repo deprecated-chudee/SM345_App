@@ -19,7 +19,7 @@
         <div  *ngFor="let a of articles">
             <ion-list-header>
                     {{a.article_title}}
-                    <ion-icon item-end name="md-trash" (click)="showEditDelete()"></ion-icon>           
+                    <ion-icon item-end name="md-trash" (click)="showEditDelete(a)" *ngIf= "USERAUTH == 3"></ion-icon>           
             </ion-list-header>
             <div padding id="commentDiv">
                     {{a.article_content}}
