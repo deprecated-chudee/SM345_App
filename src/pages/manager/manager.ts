@@ -32,7 +32,7 @@ export class ManagerPage implements OnInit{
 
     constructor(private serverService: ServerService, private adminService: AdminService, public modalCtrl: ModalController, public navCtrl: NavController, platform: Platform, public alertCtrl: AlertController, public toastCtrl: ToastController) {
         this.isAndroid = platform.is('android');
-        this.mentoRoomInfo = new MentoRoomInfo(0,0,0,0,0,0,0,0,0,0);
+        this.mentoRoomInfo = new MentoRoomInfo("","","","","","","","","","");
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.USERID = this.currentUser.USERID;
         this.USERAUTH = this.currentUser.USERAUTH;
@@ -53,16 +53,6 @@ export class ManagerPage implements OnInit{
         {
           this.presentToast();
         });
-        console.log(typeof(this.mentoRoomInfo.mento_start));
-        console.log(typeof(this.mentoRoomInfo.mento_end));
-        console.log(typeof(this.mentoRoomInfo.menti_start));
-        console.log(typeof(this.mentoRoomInfo.menti_end));
-        console.log(typeof(this.mentoRoomInfo.max_mento));
-        console.log(typeof(this.mentoRoomInfo.max_menti));
-        console.log(typeof(this.mentoRoomInfo.meeting_period));
-        console.log(typeof(this.mentoRoomInfo.meeting_number));
-        console.log(typeof(this.mentoRoomInfo.survey_start));
-        console.log(typeof(this.mentoRoomInfo.survey_end));
     }
 
     presentToast() {

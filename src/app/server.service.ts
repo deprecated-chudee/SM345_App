@@ -116,10 +116,10 @@ export class ServerService {
 
     //멘토방설정 저장
     createMentoRoomInfo(mentoRoomInfo: MentoRoomInfo): Promise<any>{
-        let url = this.URL + 'admin/room_info/create';
+        let url = this.URL + 'admin/room_info/edit';
         return this.http.post(url, mentoRoomInfo)
             .toPromise()
-            .then(response => response.json())
+            .then()
             .catch(this.handleError);
     }
 }
