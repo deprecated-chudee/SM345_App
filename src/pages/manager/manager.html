@@ -118,38 +118,33 @@
               <ion-label>
                   검색기간
               </ion-label>
-              <ion-select>
-                <ion-option [selected]="true">2017-2학기</ion-option>
-                <ion-option>2017-1학기</ion-option>
-                <ion-option>전체학기</ion-option>
+              <ion-select [(ngModel)]="selectDefualtYear" (ionChange)="getMentoroomListByYear($event)">
+                <ion-option [selected]="true" [value]="20172">2017-2학기</ion-option>
+                <ion-option [value]="20171">2017-1학기</ion-option>
+                <ion-option [value]="20162">2016-2학기</ion-option>
+                <ion-option [value]="0">전체학기</ion-option>
               </ion-select>
           </ion-item>
 
           <div *ngFor="let m of mentorooms">
-            <div *ngIf= "m.team_confirm == 1">
-              <ion-item (press)="openRoomDetail()">
-              <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>
+              <ion-item (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 1">
+                <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
+                <ion-checkbox color="dark" checked="false" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>
+                <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon> 
               </ion-item>
-            </div>
-            <div *ngIf= "m.team_confirm == 0">
-              <ion-item>
-              <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-              <ion-icon (click)="openRoomDetail()" item-end name="ios-arrow-forward"></ion-icon>
+                <ion-item (press)="openRoomDetail(m)"  *ngIf= "m.team_confirm == 0">
+                <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
+                <ion-checkbox color="dark" checked="false" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>
+              <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
               </ion-item>
-            </div>
+                <ion-item  (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 2">
+                <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
+                <ion-checkbox color="dark" checked="false" (ionChange)="handleSelectedId($event, m.mentoroom_id)"></ion-checkbox>
+                <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
+              </ion-item> 
           </div>
          
-          <!--해당학기 끝나면 폐설됨으로 바뀌게해야함
-          <ion-item>
-              <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;UNIX&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you팀&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;3명</ion-label>
-              <ion-checkbox color="dark" checked="false"></ion-checkbox>
-          </ion-item> 
-        -->
-
-          <button ion-button block class="mentorRoomButton">목록에서 삭제</button>
+          <button ion-button block class="mentorRoomButton" (click)="deleteMentoroom()">목록에서 삭제</button>
       </ion-list> 
 
       <ion-list *ngSwitchCase="'users'">
@@ -163,7 +158,7 @@
           </ion-item>
           <ion-item *ngFor="let user of users" (press)="showMentorAlert()">
             <ion-label>{{user.user_name}} {{user.user_id}}</ion-label>
-            <ion-checkbox color="dark" checked="false"></ion-checkbox>
+            <ion-checkbox color="dark" checked="false" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>
           </ion-item> 
           <!-- 멘토 검색-->
           <!--
@@ -236,9 +231,9 @@
               <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->
               <button ion-button block class="editButton" (click)="openMessagePage()">쪽지보내기</button>
               
-              <button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자지정</button>
-              <!--
-              <button ion-button block class="deleteButton" (click)="showManagerAlert()">관리자삭제</button>-->
+              <button ion-button block class="deleteButton" (click)="showManagerAlert()" *ngIf="selectDefualtAuth != 3">관리자지정</button>
+              
+              <button ion-button block class="deleteButton" (click)="showManagerAlert()" *ngIf="selectDefualtAuth == 3">관리자삭제</button>
           </div>
           
       </ion-list>

@@ -21,8 +21,10 @@ export class ManagerPage implements OnInit{
     private count:number = 1;
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
+    private selectedUser = [];
 
     selectDefualtAuth: number = 1;
+    selectDefualtYear: number = 20172;
 
     public event = {
         month: '2017-01-01',
@@ -42,7 +44,7 @@ export class ManagerPage implements OnInit{
     }
 
     ngOnInit() {
-        this.serverService.getMentoroomList()
+        this.serverService.getMentoroomListByYear(20172)
             .then(mentoroom => this.mentorooms = mentoroom);
         this.adminService.userList(1)
             .then(users => this.users = users);
@@ -53,18 +55,25 @@ export class ManagerPage implements OnInit{
         .then(users => this.users = users)
     }
 
+    getMentoroomListByYear(e){
+        this.serverService.getMentoroomListByYear(e)
+        .then(mentoroom => this.mentorooms = mentoroom);
+    }
+
     openHomePage() {
         this.navCtrl.setRoot(HomePage);
     }
 
-    openRoomDetail() {
-        this.navCtrl.push(RoomDetailPage);
+    openRoomDetail(mentoroom) {
+        this.navCtrl.push(RoomDetailPage, {
+            mentoroom_id: mentoroom.mentoroom_id,
+          });
     }
 
     showManagerAlert() {
         let alert = this.alertCtrl.create({
             title: '관리자 지정',
-            subTitle: '홍길동님을 관리자로 지정하시겠습니까?',
+            subTitle: '관리자로 지정하시겠습니까?',
             buttons: [
                 {
                     text: '취소',
@@ -74,6 +83,9 @@ export class ManagerPage implements OnInit{
                 {
                     text: '확인',
                     handler: data => {
+                        for(let uid of this.selectedUser){
+                            this.serverService.updateEmpowerUser(uid)
+                        }
                         this.managerToast();
                     }
                 }
@@ -84,7 +96,7 @@ export class ManagerPage implements OnInit{
 
     managerToast() {
         let toast = this.toastCtrl.create({
-            message: '홍길동님이 관리자로 지정되었습니다.',
+            message: '관리자로 지정되었습니다.',
             duration: 3000,
             position: 'bottom',
         });
@@ -184,5 +196,23 @@ export class ManagerPage implements OnInit{
         let modal = this.modalCtrl.create(SurveyPage);
         modal.present();
     }
+
+    handleSelectedUser(e: any, user_id: number){
+        if(e.checked) {
+            this.selectedUser.push(user_id);
+        } else {
+            // not checked
+            let index = this.selectedUser.indexOf(user_id);
+            this.selectedUser.splice(index, 1);
+        }
+    }
+
+
+/*
+    deleteMentoroom(){
+        this.serverService.deleteMentoroom(20172)
+        .then(mentoroom => this.mentorooms = mentoroom);
+    }
+    */
 }
 
