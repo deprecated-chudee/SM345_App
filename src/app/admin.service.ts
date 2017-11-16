@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs/Rx';
-import { Message } from '../models/message';
-import { Article } from '../models/article';
 import { User } from '../models/user';
-import { Mentoroom } from '../models/mentoroom';
 
 @Injectable()
 export class AdminService {

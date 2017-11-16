@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs/Rx';
 import { Message } from '../models/message';
 import { Article } from '../models/article';
 import { User } from '../models/user';
@@ -19,9 +18,6 @@ export class ServerService {
     static USERNAME: string;
 
     constructor(private http: Http) { 
-        console.log(ServerService.USERID)
-        console.log(ServerService.USERAUTH)
-        console.log(ServerService.USERNAME)
     }
 
     makeLogin(user: User): Promise<Message> {
