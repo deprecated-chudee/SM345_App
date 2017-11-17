@@ -60,14 +60,6 @@ export class ServerService {
             .catch(this.handleError);
     }
 
-    getMentoroomList(): Promise<Mentoroom[]> {
-      let url = this.URL + 'mentoroom'
-      return this.http.get(url)
-          .toPromise()
-          .then(response => response.json() as Mentoroom[])
-          .catch(this.handleError);
-    }
-
     getList(board_id: number): Promise<Article[]> {
         let url = this.URL + 'list/' + board_id;
         return this.http.get(url)
@@ -114,13 +106,6 @@ export class ServerService {
   }
   */
 
-    getMentoroom(mentoroom_id: number): Promise<Mentoroom> {
-        let url = this.URL + 'mentoroom/' + mentoroom_id;
-        return this.http.get(url)
-            .toPromise()
-            .then(response => response.json() as Mentoroom)
-            .catch(this.handleError);
-    }
 
     confirmMentoroom(mentoroom: Mentoroom){
         let url = this.URL + 'mentoroom/' + mentoroom.mentoroom_id + '/confirm';

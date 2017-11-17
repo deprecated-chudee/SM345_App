@@ -1,6 +1,8 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>[{{mentoroom.team_name}}] 멘토방</ion-title> 
+        <ion-title>
+            [{{selectedRoom.team_name}}]
+        </ion-title> 
         <ion-buttons end>
             <button ion-button (click)="dismiss()">
                 <span ion-text><ion-icon name="close"></ion-icon></span>
@@ -16,19 +18,34 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td><b>멘토 : </b>{{mentoroom.mento_name}}</td>
+            <td>
+                <b>멘토 : </b>
+                {{selectedRoom.mento_name}}
+            </td>
         </tr>
         <tr>
-            <td><b>팀명 : </b>{{mentoroom.team_name}}</td>
+            <td>
+                <b>팀명 : </b>
+                {{selectedRoom.team_name}}
+            </td>
         </tr>
         <tr>
-            <td><b>주제 : </b>{{mentoroom.team_theme}}</td>
+            <td>
+                <b>주제 : </b>
+                {{selectedRoom.team_theme}}
+            </td>
         </tr>
         <tr>
-            <td><b>현재팀원 : </b>1명</td>
+            <td>
+                <b>현재팀원 : </b>
+                {{selectedRoom.person_count}}
+            </td>
         </tr>
         <tr>
-            <td><b>자격증명 파일 : </b><button ion-button class="fileButton">다운로드</button></td>
+            <td>
+                <b>자격증명 파일 : </b>
+                <button ion-button class="fileButton">다운로드</button>
+            </td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -39,7 +56,8 @@
             팀 소개 및 설명                
     </ion-list-header>
     <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon><span class="youtube-span">팀 소개 영상보기</span>
-    <div padding class="teamInfo">{{mentoroom.team_about}}
+    <div padding class="teamInfo"> 
+        {{selectedRoom.team_about}}
     </div>
 
     <!--멘토/관리자 인터페이스-->
@@ -89,14 +107,24 @@
     </table>
     </div>
 
-    <!--멘토 인터페이스-->
-    <ion-item no-lines  *ngIf= "USERAUTH == 1">
+    <!-- 멘티 신청 인터페이스 -->
+    <ion-item no-lines  *ngIf="USERAUTH === 0">
+        <button ion-button class="teamOk" (click)="joinMentee()">멘티 신청</button>
+    </ion-item>
+
+    <!-- 멘티 신청 취소 인터페이스 -->
+    <ion-item no-lines  *ngIf="USERAUTH === 1">
+        <button ion-button class="teamNo" >멘티 신청</button>
+    </ion-item>
+
+    <!-- 멘토 인터페이스 -->
+    <ion-item no-lines  *ngIf="USERAUTH === 1">
             <button ion-button class="teamOk" (click)="openRoomPage()">보고서 제출</button>
     </ion-item>
 
-    <!--관리자 인터페이스-->
-    <ion-item no-lines  *ngIf= "USERAUTH == 3 && mentoroom.team_confirm == 0" >
-        <button ion-button class="teamOk" (click)="confirm(mentoroom)">개설승낙</button>
+    <!-- 관리자 인터페이스 -->
+    <ion-item no-lines  *ngIf="USERAUTH === 3 && selectedRoom.team_confirm === 0" >
+        <button ion-button class="teamOk" (click)="confirm()">개설승낙</button>
         <button ion-button class="teamNo" (click)="reject()">개설거절</button>
     </ion-item>
 

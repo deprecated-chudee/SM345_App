@@ -3,7 +3,6 @@ import { App, NavController, ViewController, ToastController } from 'ionic-angul
 import { RoomPage } from '.././room/room';
 import { Mentoroom } from '../../models/mentoroom';
 import { ServerService } from '../../app/server.service';
-//import { CoolLocalStorage } from 'angular2-cool-storage';
 
 @Component({
   templateUrl: 'mentorAdd.html'
@@ -13,15 +12,19 @@ export class MentorAddPage implements OnInit {
   sort: number = 0;
   sortArray: boolean[] = [];
   private mentoroom: Mentoroom;
-  serverService: ServerService;
   USERID: number;
   USERNAME: string;
   USERAUTH: number;
   private currentUser;
 
-  constructor(public app: App, public appCtrl: App, public viewCtrl: ViewController, public toastCtrl: ToastController, public navCtrl: NavController, serverService: ServerService, /*localStorage: CoolLocalStorage*/) {
-    this.mentoroom = new Mentoroom("","","",0,"",0,0,0);
-    this.serverService = serverService;
+  constructor(
+    public app: App, 
+    public appCtrl: App, 
+    public viewCtrl: ViewController, 
+    public toastCtrl: ToastController, 
+    public navCtrl: NavController, 
+    private serverService: ServerService
+  ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
     this.USERAUTH = this.currentUser.USERAUTH;
@@ -40,14 +43,13 @@ export class MentorAddPage implements OnInit {
     this.mentoroom.mento_id = this.USERID;
     console.log(this.mentoroom.mento_id);
     this.serverService.createMentoroom(this.mentoroom)
-    .then(message =>
-    {
-      this.presentToast(message);
-    });
+      .then(message => {
+        this.presentToast(message);
+      });
            
     //this.navCtrl.setRoot(RoomPage);
     setTimeout(() => { 
-      this.app.getRootNav().setRoot(RoomPage);
+        this.app.getRootNav().setRoot(RoomPage);
       }, 300);
       this.dismiss();
   }
@@ -58,9 +60,9 @@ export class MentorAddPage implements OnInit {
 
   presentToast(message) {
     let toast = this.toastCtrl.create({
-    message: message.title,
-    duration: 3000,
-    position: 'bottom',
+      message: message.title,
+      duration: 3000,
+      position: 'bottom',
     });
     toast.present();
   }
