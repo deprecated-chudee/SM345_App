@@ -23,13 +23,18 @@ export class MyApp implements OnInit {
 
     private currentUser;
 
-    serverService: ServerService;
-
     pages: Array<{title: string, component: any}>;
 
-    constructor(public toastCtrl: ToastController, public alertCtrl: AlertController, serverService: ServerService, public modalCtrl: ModalController, public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, /*localStorage: CoolLocalStorage*/) {
+    constructor(
+        public toastCtrl: ToastController, 
+        public alertCtrl: AlertController, 
+        public modalCtrl: ModalController, 
+        public platform: Platform, 
+        public statusBar: StatusBar, 
+        public splashScreen: SplashScreen,
+        private serverService: ServerService 
+    ) {
         this.initializeApp();
-        this.serverService = serverService;
       
         // used for an example of ngFor and navigation
         this.pages = [
@@ -40,6 +45,7 @@ export class MyApp implements OnInit {
           { title: 'Q&A', component: QuestionPage }, //4
           { title: '관리페이지', component: ManagerPage }, //5
         ];
+        // 로컬 스토리지 (Auth값 체크 추가예정)
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
