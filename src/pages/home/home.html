@@ -82,70 +82,72 @@
         </td>
       </tr>
   </table>
+<!--
+  <table class="roomTable" *ngFor="let m of mentorooms">
+    <div *ngIf= "m.team_confirm != 2">
+    <tr>
+      <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>
+      <td>[팀명] {{m.team_name}}&nbsp;&nbsp;
+        <div *ngIf= "m.team_confirm == 0">
+        <button ion-button class="fileButton4">대기중</button>
+        </div>
+        <div *ngIf= "m.team_confirm == 1">
+        <button ion-button class="fileButton">개설완료</button>
+        </div>
+      </td>
+      <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage(m)"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>
+    </tr>
+    <tr>
+      <td>[주제] {{m.team_theme}}</td>
+    </tr>
+    <tr>
+      <td>[현재팀원] 1명</td>
+    </tr>
+    </div>
+  </table>-->
+
+
   <table class="mentor-banner">
       <tr>
-          <ion-slides pager loop="true" autoplay="5000" speed="500">
+          <ion-slides pager loop="true" autoplay="5000" speed="500" slidesPerView="3">
+              <ion-slide>
+                <table class="mentor-banner-in">
+                  <tr>
+                    <td>
+                      <img src="assets/img/book/algo.png" /> <!--멘토방1-->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>[주제] JAVA</td><!--멘토방1-->
+                  </tr>
+                </table>
+              </ion-slide>
+
               <ion-slide>
                 <table class="mentor-banner-in">
                   <tr>
                     <td>
                       <img src="assets/img/book/algo.png" />
                     </td>
-                    <td>
-                      <img src="assets/img/book/c.png" />
-                    </td>
-                    <td>
-                      <img src="assets/img/book/java.png" />
-                    </td>
                   </tr>
                   <tr>
                     <td>[주제] 알고리즘</td>
-                    <td>[주제] C언어</td>
-                    <td>[주제] JAVA</td>
                   </tr>
                 </table>
               </ion-slide>
-              <ion-slide>
-                <table class="mentor-banner-in">
-                  <tr>
-                    <td>
-                      <img src="assets/img/book/c.png" />
-                    </td>
-                    <td>
-                      <img src="assets/img/book/algo.png" />
-                    </td>    
-                    <td>
-                      <img src="assets/img/book/java.png" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>[주제] C언어</td>
-                    <td>[주제] 알고리즘</td>
-                    <td>[주제] JAVA</td>
-                  </tr>
-                </table>
-              </ion-slide>
+              
               <ion-slide>
                 <table class="mentor-banner-in">
                   <tr>
                     <td>
                       <img src="assets/img/book/algo.png" />
                     </td>
-                    <td>
-                      <img src="assets/img/book/java.png" />
-                    </td>
-                    <td>
-                      <img src="assets/img/book/c.png" />
-                    </td>
                   </tr>
                   <tr>
                     <td>[주제] 알고리즘</td>
-                    <td>[주제] JAVA</td>
-                    <td>[주제] C언어</td>
                   </tr>
                 </table>
               </ion-slide>
-             
             </ion-slides>
       </tr>
   </table>
