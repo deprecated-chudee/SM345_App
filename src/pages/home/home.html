@@ -82,7 +82,8 @@
         </td>
       </tr>
   </table>
-<!--
+
+<!-- 
   <table class="roomTable" *ngFor="let m of mentorooms">
     <div *ngIf= "m.team_confirm != 2">
     <tr>
@@ -104,51 +105,30 @@
       <td>[현재팀원] 1명</td>
     </tr>
     </div>
-  </table>-->
+  </table> -->
 
 
-  <table class="mentor-banner">
+  <table class="mentor-banner" >
       <tr>
           <ion-slides pager loop="true" autoplay="5000" speed="500" slidesPerView="3">
-              <ion-slide>
+              <ion-slide *ngFor="let m of mentorooms">
+                <div  *ngIf= "m.team_confirm != 2">
                 <table class="mentor-banner-in">
                   <tr>
                     <td>
-                      <img src="assets/img/book/algo.png" /> <!--멘토방1-->
+                      <img src="assets/img/book/algo.png" /> 
                     </td>
                   </tr>
                   <tr>
-                    <td>[주제] JAVA</td><!--멘토방1-->
+                    <td><b>[{{m.team_name}}]</b></td>
+                  </tr>
+                  <tr>
+                    <td>{{m.team_theme}}</td>
                   </tr>
                 </table>
+                </div>
               </ion-slide>
-
-              <ion-slide>
-                <table class="mentor-banner-in">
-                  <tr>
-                    <td>
-                      <img src="assets/img/book/algo.png" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>[주제] 알고리즘</td>
-                  </tr>
-                </table>
-              </ion-slide>
-              
-              <ion-slide>
-                <table class="mentor-banner-in">
-                  <tr>
-                    <td>
-                      <img src="assets/img/book/algo.png" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>[주제] 알고리즘</td>
-                  </tr>
-                </table>
-              </ion-slide>
-            </ion-slides>
+          </ion-slides>
       </tr>
   </table>
 

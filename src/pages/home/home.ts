@@ -5,6 +5,9 @@ import { ReadingPage } from '../reading/reading';
 import { NoticePage } from '../notice/notice';
 import { ServerService } from '../../app/server.service';
 import { Article } from '../../models/article';
+import { MentorAddPage } from '.././mentorAdd/mentorAdd';
+import { MentoroomService } from '../../app/mentoroom.service';
+import { Mentoroom } from '../../models/mentoroom';
 
 @Component({
   selector: 'page-home',
@@ -13,8 +16,13 @@ import { Article } from '../../models/article';
 export class HomePage implements OnInit {
   serverService: ServerService;
   private articles: Article[] =[];
+  private mentorooms: Mentoroom[];
 
-  constructor(public navCtrl: NavController, serverService: ServerService) {
+  constructor(
+    public navCtrl: NavController,
+    serverService: ServerService,
+    private mentoroomService: MentoroomService,
+  ) {
     this.serverService = serverService;
   }
 
@@ -22,6 +30,8 @@ export class HomePage implements OnInit {
     this.serverService.getList(2).then(
       article => { this.articles = article;
     });
+    this.mentoroomService.getMentoroomList()
+    .then(mentorooms => this.mentorooms = mentorooms);
   }
 
   openReadingPage(article){
