@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, URLSearchParams, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs/Rx';
 import { Message } from '../models/message';
 import { Article } from '../models/article';
 import { User } from '../models/user';
@@ -19,9 +18,6 @@ export class ServerService {
     static USERNAME: string;
 
     constructor(private http: Http) { 
-        console.log(ServerService.USERID)
-        console.log(ServerService.USERAUTH)
-        console.log(ServerService.USERNAME)
     }
 
     makeLogin(user: User): Promise<Message> {
@@ -64,14 +60,6 @@ export class ServerService {
             .catch(this.handleError);
     }
 
-    getMentoroomList(): Promise<Mentoroom[]> {
-      let url = this.URL + 'mentoroom'
-      return this.http.get(url)
-          .toPromise()
-          .then(response => response.json() as Mentoroom[])
-          .catch(this.handleError);
-    }
-
     getList(board_id: number): Promise<Article[]> {
         let url = this.URL + 'list/' + board_id;
         return this.http.get(url)
@@ -101,6 +89,14 @@ export class ServerService {
                 .toPromise()
                 .catch(this.handleError);
    }
+
+    editArticle(article: Article): Promise<string>{
+        let url = this.URL + 'list/' + article.board_id + '/' + article.id + '/edit';
+        return this.http.post(url, article)
+                .toPromise()
+                .then(res => res)
+                .catch(this.handleError);
+ }
 /*
    createComment(comment: Comment){
     let url = this.URL + 'mentoroom/3/' + comment.article_id + '/comment/create';
@@ -110,13 +106,6 @@ export class ServerService {
   }
   */
 
-    getMentoroom(mentoroom_id: number): Promise<Mentoroom> {
-        let url = this.URL + 'mentoroom/' + mentoroom_id;
-        return this.http.get(url)
-            .toPromise()
-            .then(response => response.json() as Mentoroom)
-            .catch(this.handleError);
-    }
 
     confirmMentoroom(mentoroom: Mentoroom){
         let url = this.URL + 'mentoroom/' + mentoroom.mentoroom_id + '/confirm';

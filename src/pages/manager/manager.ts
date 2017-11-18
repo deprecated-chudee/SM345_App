@@ -59,10 +59,8 @@ export class ManagerPage implements OnInit{
     }
 
     ngOnInit() {
-        this.serverService.getMentoroomListByYear(20172)
-            .then(mentoroom => this.mentorooms = mentoroom);
-        this.adminService.userList(1)
-            .then(users => this.users = users);
+        this.getMentoroomListByYear(20172);
+        this.userList(0);
     }
 
     //멘토방 설정시킨 것 불러오기
@@ -92,8 +90,10 @@ export class ManagerPage implements OnInit{
     }
 
     userList(e) {
-      this.adminService.userList(e)
-        .then(users => this.users = users)
+        this.selectedUser = [];
+        this.selectedAllUser = false;
+        this.adminService.userList(e)
+            .then(users => this.users = users)
     }
 
     getMentoroomListByYear(e){

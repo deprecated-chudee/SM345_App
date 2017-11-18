@@ -172,14 +172,16 @@
           <ion-item>
               <ion-label> 사용자 목록 </ion-label>
               <ion-select [(ngModel)]="selectDefualtAuth" (ionChange)="userList($event)">
+                <ion-option [value]="0">전체학생</ion-option>  
                 <ion-option [selected]="true" [value]="1">멘토</ion-option>
+                <ion-option [value]="4">멘토(보고서미제출)</ion-option>
                 <ion-option [value]="2">멘티</ion-option>
                 <ion-option [value]="3">관리자</ion-option>
               </ion-select>
           </ion-item>
 
           <ion-item>
-              <ion-label>전체선택</ion-label>
+              <ion-label>All</ion-label>
               <ion-checkbox color="danger" *ngIf="selectedUser.length !== users.length" checked="false" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>
               <ion-checkbox color="danger" *ngIf="selectedUser.length === users.length" checked="true" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>
             </ion-item>

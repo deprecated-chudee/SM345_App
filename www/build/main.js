@@ -190,7 +190,7 @@ WritePage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__manager_manager__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_mentoroom__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_mentoroom_service__ = __webpack_require__(286);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -207,26 +207,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var RoomDetailPage = (function () {
-    function RoomDetailPage(app, toastCtrl, serverService, navParams, appCtrl, viewCtrl) {
+    function RoomDetailPage(app, toastCtrl, serverService, mentoroomService, navParams, appCtrl, viewCtrl) {
         this.app = app;
         this.toastCtrl = toastCtrl;
+        this.serverService = serverService;
+        this.mentoroomService = mentoroomService;
         this.navParams = navParams;
         this.appCtrl = appCtrl;
         this.viewCtrl = viewCtrl;
-        this.mentoroom_id = this.navParams.get("mentoroom_id");
+        this.selectedRoom = this.navParams.get("selectedRoom");
         this.room = this.navParams.get("room");
-        this.serverService = serverService;
-        this.mentoroom = new __WEBPACK_IMPORTED_MODULE_5__models_mentoroom__["a" /* Mentoroom */]("", "", "", 0, "", 0, 0, 0);
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.USERID = this.currentUser.USERID;
         this.USERAUTH = this.currentUser.USERAUTH;
     }
-    RoomDetailPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.serverService.getMentoroom(this.mentoroom_id).then(function (mentoroom) {
-            _this.mentoroom = mentoroom;
-        });
-    };
     RoomDetailPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
     };
@@ -234,9 +228,9 @@ var RoomDetailPage = (function () {
         this.appCtrl.getRootNav().setRoot(__WEBPACK_IMPORTED_MODULE_2__room_room__["a" /* RoomPage */]);
         this.viewCtrl.dismiss();
     };
-    RoomDetailPage.prototype.confirm = function (mentoroom) {
+    RoomDetailPage.prototype.confirm = function () {
         var _this = this;
-        this.serverService.confirmMentoroom(mentoroom);
+        this.serverService.confirmMentoroom(this.selectedRoom);
         this.Toast('개설이 완료되었습니다');
         if (this.room == 0) {
             setTimeout(function () {
@@ -253,7 +247,7 @@ var RoomDetailPage = (function () {
     };
     RoomDetailPage.prototype.reject = function () {
         var _this = this;
-        this.serverService.rejectMentoroom(this.mentoroom_id);
+        this.serverService.rejectMentoroom(this.selectedRoom.mentoroom_id);
         this.Toast('개설이 반려되었습니다');
         if (this.room == 0) {
             setTimeout(function () {
@@ -268,6 +262,12 @@ var RoomDetailPage = (function () {
             this.dismiss();
         }
     };
+    RoomDetailPage.prototype.joinMentee = function () {
+        var _this = this;
+        this.mentoroomService.joinMentee(this.selectedRoom.mentoroom_id, this.USERID)
+            .then(function (response) { return _this.Toast(response); })
+            .catch(function () { return _this.Toast('실패'); });
+    };
     RoomDetailPage.prototype.Toast = function (message) {
         var toast = this.toastCtrl.create({
             message: message,
@@ -279,9 +279,15 @@ var RoomDetailPage = (function () {
     return RoomDetailPage;
 }());
 RoomDetailPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/roomDetail/roomDetail.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>[{{mentoroom.team_name}}] 멘토방</ion-title> \n        <ion-buttons end>\n            <button ion-button (click)="dismiss()">\n                <span ion-text><ion-icon name="close"></ion-icon></span>\n            </button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content padding class="page-roomDetail">\n    <table class="roomDetailTable">\n        <tr>\n            <td rowspan="7"><img src="assets/img/book/python.png" /></td>\n            <td>&nbsp;</td>\n        </tr>\n        <tr>\n            <td><b>멘토 : </b>{{mentoroom.mento_name}}</td>\n        </tr>\n        <tr>\n            <td><b>팀명 : </b>{{mentoroom.team_name}}</td>\n        </tr>\n        <tr>\n            <td><b>주제 : </b>{{mentoroom.team_theme}}</td>\n        </tr>\n        <tr>\n            <td><b>현재팀원 : </b>1명</td>\n        </tr>\n        <tr>\n            <td><b>자격증명 파일 : </b><button ion-button class="fileButton">다운로드</button></td>\n        </tr>\n        <tr>\n            <td>&nbsp;</td>\n        </tr>\n    </table>\n\n    <ion-list-header>\n            팀 소개 및 설명                \n    </ion-list-header>\n    <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon><span class="youtube-span">팀 소개 영상보기</span>\n    <div padding class="teamInfo">{{mentoroom.team_about}}\n    </div>\n\n    <!--멘토/관리자 인터페이스-->\n    <div class="noAlarm" *ngIf= "USERAUTH == 1 || USERAUTH == 3">\n    <ion-list-header>\n            모임 결과보고서            \n    </ion-list-header>\n    <table class="reportTable">\n            <tr>\n                <td>3차 모임 결과보고서</td>\n                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>\n                <td rowspan="2" class="report-ing">확인중</td>\n            </tr>\n            <tr>\n                <td><span class="reportTime">2017-10-04</span></td>\n            </tr>\n    </table>\n    <table class="reportTable">\n            <tr>\n                <td>3차 모임 결과보고서</td>\n                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>\n                <td rowspan="2" class="report-reject">반려</td>\n            </tr>\n            <tr>\n                <td><span class="reportTime">2017-09-20</span></td>\n            </tr>\n    </table>\n    <table class="reportTable">\n            <tr>\n                <td>2차 모임 결과보고서</td>\n                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>\n                <td rowspan="2" class="report-end">확인<br/>완료</td>\n            </tr>\n            <tr>\n                <td><span class="reportTime">2017-09-20</span></td>\n            </tr>\n    </table>\n    <table class="reportTable">\n            <tr>\n                <td>1차 모임 결과보고서</td>\n                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>\n                <td rowspan="2" class="report-end">확인<br/>완료</td>\n            </tr>\n            <tr>\n                <td><span class="reportTime">2017-09-20</span></td>\n            </tr>\n    </table>\n    </div>\n\n    <!--멘토 인터페이스-->\n    <ion-item no-lines  *ngIf= "USERAUTH == 1">\n            <button ion-button class="teamOk" (click)="openRoomPage()">보고서 제출</button>\n    </ion-item>\n\n    <!--관리자 인터페이스-->\n    <ion-item no-lines  *ngIf= "USERAUTH == 3 && mentoroom.team_confirm == 0" >\n        <button ion-button class="teamOk" (click)="confirm(mentoroom)">개설승낙</button>\n        <button ion-button class="teamNo" (click)="reject()">개설거절</button>\n    </ion-item>\n\n\n    <!--멘티 인터페이스-->\n    <!--\n    <button ion-button block class="menteeButton" (click)="showMenteeAlert()">멘티신청</button>\n    -->\n\n    <!--멘티 인터페이스-->\n    <!--\n    <button ion-button block class="menteeButton" (click)="showMenteeAlert()">멘티신청취소</button>\n    -->\n    \n    <!--멘토/멘티 인터페이스-->\n    <!--\n    <ion-list-header>\n            설문조사                \n    </ion-list-header>\n    <div class="poll">\n        <b>Q1.</b> 멘토링 활동에 만족하셨나요?\n    </div>\n    <ion-item>\n      <ion-range min="1" max="5" pin="true" step="1" snaps="true">\n        <ion-icon range-left name="md-sad"></ion-icon>\n        <ion-icon range-right name="md-happy"></ion-icon>\n      </ion-range>\n    </ion-item>\n\n    <div class="poll">\n        <b>Q2.</b> 성실히 참여했나요?\n    </div>\n    <ion-item>\n      <ion-range min="1" max="5" pin="true" step="1" snaps="true">\n        <ion-icon range-left name="md-sad"></ion-icon>\n        <ion-icon range-right name="md-happy"></ion-icon>\n      </ion-range>\n    </ion-item>\n\n    <div class="poll">\n        <b>Q3.</b> 다음에 또 멘토링 활동에 참여하고 싶은가요?\n    </div>\n    <ion-item>\n      <ion-range min="1" max="5" pin="true" step="1" snaps="true">\n        <ion-icon range-left name="md-sad"></ion-icon>\n        <ion-icon range-right name="md-happy"></ion-icon>\n      </ion-range>\n    </ion-item>\n\n    <ion-item no-lines>\n            <button ion-button class="teamOk" (click)="openRoomPage()">설문 완료</button>\n    </ion-item>\n-->\n    \n</ion-content>\n'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/roomDetail/roomDetail.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/roomDetail/roomDetail.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-title>\n            [{{selectedRoom.team_name}}]\n        </ion-title> \n        <ion-buttons end>\n            <button ion-button (click)="dismiss()">\n                <span ion-text><ion-icon name="close"></ion-icon></span>\n            </button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content padding class="page-roomDetail">\n    <table class="roomDetailTable">\n        <tr>\n            <td rowspan="7"><img src="assets/img/book/python.png" /></td>\n            <td>&nbsp;</td>\n        </tr>\n        <tr>\n            <td>\n                <b>멘토 : </b>\n                {{selectedRoom.mento_name}}\n            </td>\n        </tr>\n        <tr>\n            <td>\n                <b>팀명 : </b>\n                {{selectedRoom.team_name}}\n            </td>\n        </tr>\n        <tr>\n            <td>\n                <b>주제 : </b>\n                {{selectedRoom.team_theme}}\n            </td>\n        </tr>\n        <tr>\n            <td>\n                <b>현재팀원 : </b>\n                {{selectedRoom.person_count}}\n            </td>\n        </tr>\n        <tr>\n            <td>\n                <b>자격증명 파일 : </b>\n                <button ion-button class="fileButton">다운로드</button>\n            </td>\n        </tr>\n        <tr>\n            <td>&nbsp;</td>\n        </tr>\n    </table>\n\n    <ion-list-header>\n            팀 소개 및 설명                \n    </ion-list-header>\n    <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon><span class="youtube-span">팀 소개 영상보기</span>\n    <div padding class="teamInfo"> \n        {{selectedRoom.team_about}}\n    </div>\n\n    <!--멘토/관리자 인터페이스-->\n    <div class="noAlarm" *ngIf= "USERAUTH == 1 || USERAUTH == 3">\n    <ion-list-header>\n            모임 결과보고서            \n    </ion-list-header>\n    <table class="reportTable">\n            <tr>\n                <td>3차 모임 결과보고서</td>\n                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>\n                <td rowspan="2" class="report-ing">확인중</td>\n            </tr>\n            <tr>\n                <td><span class="reportTime">2017-10-04</span></td>\n            </tr>\n    </table>\n    <table class="reportTable">\n            <tr>\n                <td>3차 모임 결과보고서</td>\n                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>\n                <td rowspan="2" class="report-reject">반려</td>\n            </tr>\n            <tr>\n                <td><span class="reportTime">2017-09-20</span></td>\n            </tr>\n    </table>\n    <table class="reportTable">\n            <tr>\n                <td>2차 모임 결과보고서</td>\n                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>\n                <td rowspan="2" class="report-end">확인<br/>완료</td>\n            </tr>\n            <tr>\n                <td><span class="reportTime">2017-09-20</span></td>\n            </tr>\n    </table>\n    <table class="reportTable">\n            <tr>\n                <td>1차 모임 결과보고서</td>\n                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>\n                <td rowspan="2" class="report-end">확인<br/>완료</td>\n            </tr>\n            <tr>\n                <td><span class="reportTime">2017-09-20</span></td>\n            </tr>\n    </table>\n    </div>\n\n    <!-- 멘티 신청 인터페이스 -->\n    <ion-item no-lines  *ngIf="USERAUTH === 0">\n        <button ion-button class="teamOk" (click)="joinMentee()">멘티 신청</button>\n    </ion-item>\n\n    <!-- 멘티 신청 취소 인터페이스 -->\n    <ion-item no-lines  *ngIf="USERAUTH === 1">\n        <button ion-button class="teamNo" >멘티 신청</button>\n    </ion-item>\n\n    <!-- 멘토 인터페이스 -->\n    <ion-item no-lines  *ngIf="USERAUTH === 1">\n            <button ion-button class="teamOk" (click)="openRoomPage()">보고서 제출</button>\n    </ion-item>\n\n    <!-- 관리자 인터페이스 -->\n    <ion-item no-lines  *ngIf="USERAUTH === 3 && selectedRoom.team_confirm === 0" >\n        <button ion-button class="teamOk" (click)="confirm()">개설승낙</button>\n        <button ion-button class="teamNo" (click)="reject()">개설거절</button>\n    </ion-item>\n\n\n    <!--멘티 인터페이스-->\n    <!--\n    <button ion-button block class="menteeButton" (click)="showMenteeAlert()">멘티신청</button>\n    -->\n\n    <!--멘티 인터페이스-->\n    <!--\n    <button ion-button block class="menteeButton" (click)="showMenteeAlert()">멘티신청취소</button>\n    -->\n    \n    <!--멘토/멘티 인터페이스-->\n    <!--\n    <ion-list-header>\n            설문조사                \n    </ion-list-header>\n    <div class="poll">\n        <b>Q1.</b> 멘토링 활동에 만족하셨나요?\n    </div>\n    <ion-item>\n      <ion-range min="1" max="5" pin="true" step="1" snaps="true">\n        <ion-icon range-left name="md-sad"></ion-icon>\n        <ion-icon range-right name="md-happy"></ion-icon>\n      </ion-range>\n    </ion-item>\n\n    <div class="poll">\n        <b>Q2.</b> 성실히 참여했나요?\n    </div>\n    <ion-item>\n      <ion-range min="1" max="5" pin="true" step="1" snaps="true">\n        <ion-icon range-left name="md-sad"></ion-icon>\n        <ion-icon range-right name="md-happy"></ion-icon>\n      </ion-range>\n    </ion-item>\n\n    <div class="poll">\n        <b>Q3.</b> 다음에 또 멘토링 활동에 참여하고 싶은가요?\n    </div>\n    <ion-item>\n      <ion-range min="1" max="5" pin="true" step="1" snaps="true">\n        <ion-icon range-left name="md-sad"></ion-icon>\n        <ion-icon range-right name="md-happy"></ion-icon>\n      </ion-range>\n    </ion-item>\n\n    <ion-item no-lines>\n            <button ion-button class="teamOk" (click)="openRoomPage()">설문 완료</button>\n    </ion-item>\n-->\n    \n</ion-content>\n'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/roomDetail/roomDetail.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
+        __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */],
+        __WEBPACK_IMPORTED_MODULE_5__app_mentoroom_service__["a" /* MentoroomService */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */]])
 ], RoomDetailPage);
 
 //# sourceMappingURL=roomDetail.js.map
@@ -353,11 +359,8 @@ var ManagerPage = ManagerPage_1 = (function () {
         this.getMentoRoomInfo();
     }
     ManagerPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.serverService.getMentoroomListByYear(20172)
-            .then(function (mentoroom) { return _this.mentorooms = mentoroom; });
-        this.adminService.userList(1)
-            .then(function (users) { return _this.users = users; });
+        this.getMentoroomListByYear(20172);
+        this.userList(0);
     };
     //멘토방 설정시킨 것 불러오기
     ManagerPage.prototype.getMentoRoomInfo = function () {
@@ -385,6 +388,8 @@ var ManagerPage = ManagerPage_1 = (function () {
     };
     ManagerPage.prototype.userList = function (e) {
         var _this = this;
+        this.selectedUser = [];
+        this.selectedAllUser = false;
         this.adminService.userList(e)
             .then(function (users) { return _this.users = users; });
     };
@@ -657,7 +662,7 @@ var ManagerPage = ManagerPage_1 = (function () {
     return ManagerPage;
 }());
 ManagerPage = ManagerPage_1 = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/manager/manager.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n      </div>\n    </ion-navbar>\n  </ion-header>\n  \n<ion-content class="page-manager">\n    <div>\n      <ion-segment [(ngModel)]="manager">\n        <ion-segment-button value="roomList">\n            멘토방목록\n        </ion-segment-button>\n        <ion-segment-button value="mentorRoom">\n            멘토방설정\n        </ion-segment-button>\n        <ion-segment-button value="users">\n            사용자관리\n        </ion-segment-button>\n        <ion-segment-button value="report">\n            보고서목록\n        </ion-segment-button>\n        <ion-segment-button value="survey">\n            설문조사\n        </ion-segment-button>\n      </ion-segment>\n    </div>\n\n    <!--멘토방 설정-->\n    <div [ngSwitch]="manager">\n      <ion-list *ngSwitchCase="\'mentorRoom\'">\n          <ion-item>\n              <ion-label>멘토신청 시작일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.mento_start"></ion-datetime>\n          </ion-item>\n          <ion-item>\n              <ion-label>멘토신청 마감일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.mento_end"></ion-datetime>\n          </ion-item>\n          <ion-item>\n              <ion-label>멘티신청 시작일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.menti_start"></ion-datetime>\n          </ion-item>\n          <ion-item>\n              <ion-label>멘티신청 마감일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.menti_end"></ion-datetime>\n          </ion-item>\n          <ion-item>\n            <ion-label>최대 멘토인원</ion-label>\n            <ion-select [(ngModel)]="mentoRoomInfo.max_mento">\n              <ion-option value="10">10명</ion-option>\n              <ion-option value="15">15명</ion-option>\n              <ion-option value="20">20명</ion-option>\n              <ion-option value="25">25명</ion-option>\n              <ion-option value="30">30명</ion-option>\n              <ion-option value="35">35명</ion-option>\n              <ion-option value="40">40명</ion-option>\n              <ion-option value="45">45명</ion-option>\n              <ion-option value="50">50명</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label>최대 멘티인원</ion-label>\n            <ion-select [(ngModel)]="mentoRoomInfo.max_menti">\n              <ion-option value="3">3명</ion-option>\n              <ion-option value="4">4명</ion-option>\n              <ion-option value="5">5명</ion-option>\n              <ion-option value="6">6명</ion-option>\n              <ion-option value="7">7명</ion-option>\n              <ion-option value="8">8명</ion-option>\n              <ion-option value="9">9명</ion-option>\n              <ion-option value="10">10명</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label>모임기간</ion-label>\n            <ion-select [(ngModel)]="mentoRoomInfo.meeting_period">\n              <ion-option value="7">7일</ion-option>\n              <ion-option value="30">30일</ion-option>\n              <ion-option value="60">60일</ion-option>\n              <ion-option value="120">1학기</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label>모임횟수</ion-label>\n            <ion-select [(ngModel)]="mentoRoomInfo.meeting_number">\n              <ion-option value="1">1회</ion-option>\n              <ion-option value="2">2회</ion-option>\n              <ion-option value="3">3회</ion-option>\n              <ion-option value="4">4회</ion-option>\n              <ion-option value="5">5회</ion-option>\n              <ion-option value="6">6회</ion-option>\n              <ion-option value="7">7회</ion-option>\n              <ion-option value="8">8회</ion-option>\n              <ion-option value="9">9회</ion-option>\n              <ion-option value="10">10회</ion-option>\n            </ion-select>\n          </ion-item>\n\n          <ion-item>\n              <ion-label>설문조사 시작일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" value="survey_start" [(ngModel)]="mentoRoomInfo.survey_start"></ion-datetime>\n          </ion-item>\n          <ion-item>\n              <ion-label>설문조사 마감일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.survey_end"></ion-datetime>\n          </ion-item>\n\n\n          <button ion-button block class="mentorRoomButton" (click)="mentoRoomInfoSave()">저장</button>\n\n      </ion-list>\n\n\n      <!-- 멘토방 목록 -->\n      <ion-list *ngSwitchCase="\'roomList\'">\n          <ion-item>\n              <ion-label>\n                  검색기간\n              </ion-label>\n              <ion-select [(ngModel)]="selectDefualtYear" (ionChange)="getMentoroomListByYear($event)">\n                <ion-option [selected]="true" [value]="20172">2017-2학기</ion-option>\n                <ion-option [value]="20171">2017-1학기</ion-option>\n                <ion-option [value]="20162">2016-2학기</ion-option>\n                <ion-option [value]="0">전체학기</ion-option>\n              </ion-select>\n          </ion-item>\n\n          <ion-item>\n              <ion-label>전체선택</ion-label>\n              <ion-checkbox color="danger" *ngIf="selectedRoom.length !== mentorooms.length" checked="false" (ionChange)="handleSelectedAllRoom($event)"></ion-checkbox>\n              <ion-checkbox color="danger" *ngIf="selectedRoom.length === mentorooms.length" checked="true" (ionChange)="handleSelectedAllRoom($event)"></ion-checkbox>    \n            </ion-item>\n\n           <!--멘토방 목록-->\n           <div *ngFor="let m of mentorooms">\n                <!--개설완료-->\n                <ion-item (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 1">\n                  <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon> \n                </ion-item>\n                \n                <!-- 대기중 -->\n                <ion-item (press)="openRoomDetail(m)"  *ngIf= "m.team_confirm == 0">\n                  <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>  \n                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>\n                </ion-item>\n                \n                <!-- 기간 지나서 폐설됨 -->\n                <ion-item  (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 2">\n                  <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>\n                </ion-item> \n            </div>\n           \n            <button ion-button block class="mentorRoomButton" (click)="handleRemoveRoom()">목록에서 삭제</button>\n\n      </ion-list> \n\n      <!--사용자 관리-->\n      <ion-list *ngSwitchCase="\'users\'">\n          <ion-item>\n              <ion-label> 사용자 목록 </ion-label>\n              <ion-select [(ngModel)]="selectDefualtAuth" (ionChange)="userList($event)">\n                <ion-option [selected]="true" [value]="1">멘토</ion-option>\n                <ion-option [value]="2">멘티</ion-option>\n                <ion-option [value]="3">관리자</ion-option>\n              </ion-select>\n          </ion-item>\n\n          <ion-item>\n              <ion-label>전체선택</ion-label>\n              <ion-checkbox color="danger" *ngIf="selectedUser.length !== users.length" checked="false" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>\n              <ion-checkbox color="danger" *ngIf="selectedUser.length === users.length" checked="true" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>\n            </ion-item>\n\n          <ion-item *ngFor="let user of users">\n            <ion-label>{{user.user_name}} {{user.user_id}}</ion-label>\n            <ion-checkbox *ngIf="selectedAllUser === false" color="dark" checked="false" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>\n            <ion-checkbox *ngIf="selectedAllUser === true" color="dark" checked="true" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>\n          </ion-item> \n          <!-- 멘토 검색-->\n          <!--\n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label>201300000 홍길동</ion-label>\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      보고서 제출 여부 : <span class="yes">Y</span> / 활동비, 장학금 지급 대상자 : <span class="yes">Y</span>\n                  </td>\n              </tr>\n          </table>\n          <table class="userTable">\n                <tr>\n                    <td>\n                      <ion-item no-lines>\n                          <ion-label>201300000 김길동</ion-label>\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n                      </ion-item> \n                    </td>\n                </tr>\n                <tr>\n                    <td>\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n                    </td>\n                </tr>\n            </table>\n            <table class="userTable">\n                <tr>\n                    <td>\n                      <ion-item no-lines>\n                          <ion-label>201300000 이길동</ion-label>\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n                      </ion-item> \n                    </td>\n                </tr>\n                <tr>\n                    <td>\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n                    </td>\n                </tr>\n            </table>\n            <table class="userTable">\n                <tr>\n                    <td>\n                      <ion-item no-lines>\n                          <ion-label>201300000 최길동</ion-label>\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n                      </ion-item> \n                    </td>\n                </tr>\n                <tr>\n                    <td>\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n                    </td>\n                </tr>\n            </table>\n        -->\n          <!--멘티/관리자 검색-->\n          \n\n          <div class="buttonWrapper">\n              <!--\n              <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->\n              <button ion-button block class="editButton" (click)="openMessagePage()">쪽지보내기</button>\n              \n              <button ion-button block class="deleteButton" (click)="showManagerAlert()" *ngIf="selectDefualtAuth != 3">관리자지정</button>\n              \n              <button ion-button block class="deleteButton" (click)="showManagerAlert2()" *ngIf="selectDefualtAuth == 3">관리자삭제</button>\n          </div>\n          \n      </ion-list>\n\n      <!--보고서 목록-->\n      <ion-list *ngSwitchCase="\'report\'">\n          <ion-item>\n              <ion-label>\n                  검색기간\n              </ion-label>\n              <ion-select>\n                <ion-option [selected]="true">2017-2학기</ion-option>\n                <ion-option>2017-1학기</ion-option>\n                <ion-option>전체학기</ion-option>\n              </ion-select>\n          </ion-item>\n\n          <ion-item>\n              <ion-label>전체선택</ion-label>\n              <ion-checkbox color="danger" (click)="reportList_selectedAll()"></ion-checkbox>\n          </ion-item>\n\n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label><span class="teamName">[자바를 잡아]</span> 1차보고서</ion-label>\n                        <ion-checkbox *ngIf="selectedAllReport === false" color="dark" checked="false"></ion-checkbox>\n                        <ion-checkbox *ngIf="selectedAllReport === true" color="dark" checked="true"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료\n                  </td>\n              </tr>\n          </table>  \n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label><span class="teamName">[자바를 잡아]</span> 2차보고서</ion-label>\n                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>\n                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료\n                  </td>\n              </tr>\n          </table> \n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label><span class="teamName">[썬]</span> 1차보고서</ion-label>\n                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>\n                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인중\n                  </td>\n              </tr>\n          </table> \n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label><span class="teamName">[ALGO]</span> 1차보고서</ion-label>\n                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>\n                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;반려\n                  </td>\n              </tr>\n          </table> \n\n          <button ion-button block class="editButton" (click)="showReportDeleteAlert()">보고서삭제</button>\n          <button ion-button block class="deleteButton" (click)="showReportDownloardAlert()">다운로드</button>\n      </ion-list>\n\n      <ion-list *ngSwitchCase="\'survey\'">\n\n        <div class="addBox">\n            <ion-item>\n                <ion-label>Q1.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        <div class="addBox" *ngIf="count>1">\n            <ion-item>\n                <ion-label>Q2.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        <div class="addBox" *ngIf="count>2">\n            <ion-item>\n                <ion-label>Q3.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        <div class="addBox" *ngIf="count>3">\n            <ion-item>\n                <ion-label>Q4.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        <div class="addBox" *ngIf="count>4">\n            <ion-item>\n                <ion-label>Q5.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        \n        <ion-item no-lines class="timeaddbutton">\n            <button ion-button outline item-right icon-left (click)="addSurvey()">\n                설문 항목추가\n            </button>\n            <button ion-button outline item-right icon-left class="surveyTrash" (click)="minusSurvey()">\n                항목삭제\n            </button>\n        </ion-item>\n\n\n        <button ion-button block class="mentorRoomButton">저장</button>\n        <button ion-button block class="mentorRoomButton2" (click)="openSurveyPage()">설문조사 결과</button>\n\n      </ion-list>\n\n    </div>\n\n  </ion-content>'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/manager/manager.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/manager/manager.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n      </div>\n    </ion-navbar>\n  </ion-header>\n  \n<ion-content class="page-manager">\n    <div>\n      <ion-segment [(ngModel)]="manager">\n        <ion-segment-button value="roomList">\n            멘토방목록\n        </ion-segment-button>\n        <ion-segment-button value="mentorRoom">\n            멘토방설정\n        </ion-segment-button>\n        <ion-segment-button value="users">\n            사용자관리\n        </ion-segment-button>\n        <ion-segment-button value="report">\n            보고서목록\n        </ion-segment-button>\n        <ion-segment-button value="survey">\n            설문조사\n        </ion-segment-button>\n      </ion-segment>\n    </div>\n\n    <!--멘토방 설정-->\n    <div [ngSwitch]="manager">\n      <ion-list *ngSwitchCase="\'mentorRoom\'">\n          <ion-item>\n              <ion-label>멘토신청 시작일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.mento_start"></ion-datetime>\n          </ion-item>\n          <ion-item>\n              <ion-label>멘토신청 마감일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.mento_end"></ion-datetime>\n          </ion-item>\n          <ion-item>\n              <ion-label>멘티신청 시작일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.menti_start"></ion-datetime>\n          </ion-item>\n          <ion-item>\n              <ion-label>멘티신청 마감일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.menti_end"></ion-datetime>\n          </ion-item>\n          <ion-item>\n            <ion-label>최대 멘토인원</ion-label>\n            <ion-select [(ngModel)]="mentoRoomInfo.max_mento">\n              <ion-option value="10">10명</ion-option>\n              <ion-option value="15">15명</ion-option>\n              <ion-option value="20">20명</ion-option>\n              <ion-option value="25">25명</ion-option>\n              <ion-option value="30">30명</ion-option>\n              <ion-option value="35">35명</ion-option>\n              <ion-option value="40">40명</ion-option>\n              <ion-option value="45">45명</ion-option>\n              <ion-option value="50">50명</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label>최대 멘티인원</ion-label>\n            <ion-select [(ngModel)]="mentoRoomInfo.max_menti">\n              <ion-option value="3">3명</ion-option>\n              <ion-option value="4">4명</ion-option>\n              <ion-option value="5">5명</ion-option>\n              <ion-option value="6">6명</ion-option>\n              <ion-option value="7">7명</ion-option>\n              <ion-option value="8">8명</ion-option>\n              <ion-option value="9">9명</ion-option>\n              <ion-option value="10">10명</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label>모임기간</ion-label>\n            <ion-select [(ngModel)]="mentoRoomInfo.meeting_period">\n              <ion-option value="7">7일</ion-option>\n              <ion-option value="30">30일</ion-option>\n              <ion-option value="60">60일</ion-option>\n              <ion-option value="120">1학기</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label>모임횟수</ion-label>\n            <ion-select [(ngModel)]="mentoRoomInfo.meeting_number">\n              <ion-option value="1">1회</ion-option>\n              <ion-option value="2">2회</ion-option>\n              <ion-option value="3">3회</ion-option>\n              <ion-option value="4">4회</ion-option>\n              <ion-option value="5">5회</ion-option>\n              <ion-option value="6">6회</ion-option>\n              <ion-option value="7">7회</ion-option>\n              <ion-option value="8">8회</ion-option>\n              <ion-option value="9">9회</ion-option>\n              <ion-option value="10">10회</ion-option>\n            </ion-select>\n          </ion-item>\n\n          <ion-item>\n              <ion-label>설문조사 시작일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" value="survey_start" [(ngModel)]="mentoRoomInfo.survey_start"></ion-datetime>\n          </ion-item>\n          <ion-item>\n              <ion-label>설문조사 마감일</ion-label>\n              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.survey_end"></ion-datetime>\n          </ion-item>\n\n\n          <button ion-button block class="mentorRoomButton" (click)="mentoRoomInfoSave()">저장</button>\n\n      </ion-list>\n\n\n      <!-- 멘토방 목록 -->\n      <ion-list *ngSwitchCase="\'roomList\'">\n          <ion-item>\n              <ion-label>\n                  검색기간\n              </ion-label>\n              <ion-select [(ngModel)]="selectDefualtYear" (ionChange)="getMentoroomListByYear($event)">\n                <ion-option [selected]="true" [value]="20172">2017-2학기</ion-option>\n                <ion-option [value]="20171">2017-1학기</ion-option>\n                <ion-option [value]="20162">2016-2학기</ion-option>\n                <ion-option [value]="0">전체학기</ion-option>\n              </ion-select>\n          </ion-item>\n\n          <ion-item>\n              <ion-label>전체선택</ion-label>\n              <ion-checkbox color="danger" *ngIf="selectedRoom.length !== mentorooms.length" checked="false" (ionChange)="handleSelectedAllRoom($event)"></ion-checkbox>\n              <ion-checkbox color="danger" *ngIf="selectedRoom.length === mentorooms.length" checked="true" (ionChange)="handleSelectedAllRoom($event)"></ion-checkbox>    \n            </ion-item>\n\n           <!--멘토방 목록-->\n           <div *ngFor="let m of mentorooms">\n                <!--개설완료-->\n                <ion-item (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 1">\n                  <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon> \n                </ion-item>\n                \n                <!-- 대기중 -->\n                <ion-item (press)="openRoomDetail(m)"  *ngIf= "m.team_confirm == 0">\n                  <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>  \n                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>\n                </ion-item>\n                \n                <!-- 기간 지나서 폐설됨 -->\n                <ion-item  (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 2">\n                  <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>\n                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>\n                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>\n                </ion-item> \n            </div>\n           \n            <button ion-button block class="mentorRoomButton" (click)="handleRemoveRoom()">목록에서 삭제</button>\n\n      </ion-list> \n\n      <!--사용자 관리-->\n      <ion-list *ngSwitchCase="\'users\'">\n          <ion-item>\n              <ion-label> 사용자 목록 </ion-label>\n              <ion-select [(ngModel)]="selectDefualtAuth" (ionChange)="userList($event)">\n                <ion-option [value]="0">전체학생</ion-option>  \n                <ion-option [selected]="true" [value]="1">멘토</ion-option>\n                <ion-option [value]="4">멘토(보고서미제출)</ion-option>\n                <ion-option [value]="2">멘티</ion-option>\n                <ion-option [value]="3">관리자</ion-option>\n              </ion-select>\n          </ion-item>\n\n          <ion-item>\n              <ion-label>All</ion-label>\n              <ion-checkbox color="danger" *ngIf="selectedUser.length !== users.length" checked="false" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>\n              <ion-checkbox color="danger" *ngIf="selectedUser.length === users.length" checked="true" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>\n            </ion-item>\n\n          <ion-item *ngFor="let user of users">\n            <ion-label>{{user.user_name}} {{user.user_id}}</ion-label>\n            <ion-checkbox *ngIf="selectedAllUser === false" color="dark" checked="false" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>\n            <ion-checkbox *ngIf="selectedAllUser === true" color="dark" checked="true" (ionChange)="handleSelectedUser($event, user.user_id)"></ion-checkbox>\n          </ion-item> \n          <!-- 멘토 검색-->\n          <!--\n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label>201300000 홍길동</ion-label>\n                        <ion-checkbox color="dark" checked="false"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      보고서 제출 여부 : <span class="yes">Y</span> / 활동비, 장학금 지급 대상자 : <span class="yes">Y</span>\n                  </td>\n              </tr>\n          </table>\n          <table class="userTable">\n                <tr>\n                    <td>\n                      <ion-item no-lines>\n                          <ion-label>201300000 김길동</ion-label>\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n                      </ion-item> \n                    </td>\n                </tr>\n                <tr>\n                    <td>\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n                    </td>\n                </tr>\n            </table>\n            <table class="userTable">\n                <tr>\n                    <td>\n                      <ion-item no-lines>\n                          <ion-label>201300000 이길동</ion-label>\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n                      </ion-item> \n                    </td>\n                </tr>\n                <tr>\n                    <td>\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n                    </td>\n                </tr>\n            </table>\n            <table class="userTable">\n                <tr>\n                    <td>\n                      <ion-item no-lines>\n                          <ion-label>201300000 최길동</ion-label>\n                          <ion-checkbox color="dark" checked="false"></ion-checkbox>\n                      </ion-item> \n                    </td>\n                </tr>\n                <tr>\n                    <td>\n                        보고서 제출 여부 : <span class="no">N</span> / 활동비, 장학금 지급 대상자 : <span class="no">N</span>\n                    </td>\n                </tr>\n            </table>\n        -->\n          <!--멘티/관리자 검색-->\n          \n\n          <div class="buttonWrapper">\n              <!--\n              <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->\n              <button ion-button block class="editButton" (click)="openMessagePage()">쪽지보내기</button>\n              \n              <button ion-button block class="deleteButton" (click)="showManagerAlert()" *ngIf="selectDefualtAuth != 3">관리자지정</button>\n              \n              <button ion-button block class="deleteButton" (click)="showManagerAlert2()" *ngIf="selectDefualtAuth == 3">관리자삭제</button>\n          </div>\n          \n      </ion-list>\n\n      <!--보고서 목록-->\n      <ion-list *ngSwitchCase="\'report\'">\n          <ion-item>\n              <ion-label>\n                  검색기간\n              </ion-label>\n              <ion-select>\n                <ion-option [selected]="true">2017-2학기</ion-option>\n                <ion-option>2017-1학기</ion-option>\n                <ion-option>전체학기</ion-option>\n              </ion-select>\n          </ion-item>\n\n          <ion-item>\n              <ion-label>전체선택</ion-label>\n              <ion-checkbox color="danger" (click)="reportList_selectedAll()"></ion-checkbox>\n          </ion-item>\n\n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label><span class="teamName">[자바를 잡아]</span> 1차보고서</ion-label>\n                        <ion-checkbox *ngIf="selectedAllReport === false" color="dark" checked="false"></ion-checkbox>\n                        <ion-checkbox *ngIf="selectedAllReport === true" color="dark" checked="true"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료\n                  </td>\n              </tr>\n          </table>  \n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label><span class="teamName">[자바를 잡아]</span> 2차보고서</ion-label>\n                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>\n                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료\n                  </td>\n              </tr>\n          </table> \n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label><span class="teamName">[썬]</span> 1차보고서</ion-label>\n                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>\n                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인중\n                  </td>\n              </tr>\n          </table> \n          <table class="userTable">\n              <tr>\n                  <td>\n                    <ion-item no-lines>\n                        <ion-label><span class="teamName">[ALGO]</span> 1차보고서</ion-label>\n                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>\n                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>\n                    </ion-item> \n                  </td>\n              </tr>\n              <tr>\n                  <td>\n                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;반려\n                  </td>\n              </tr>\n          </table> \n\n          <button ion-button block class="editButton" (click)="showReportDeleteAlert()">보고서삭제</button>\n          <button ion-button block class="deleteButton" (click)="showReportDownloardAlert()">다운로드</button>\n      </ion-list>\n\n      <ion-list *ngSwitchCase="\'survey\'">\n\n        <div class="addBox">\n            <ion-item>\n                <ion-label>Q1.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        <div class="addBox" *ngIf="count>1">\n            <ion-item>\n                <ion-label>Q2.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        <div class="addBox" *ngIf="count>2">\n            <ion-item>\n                <ion-label>Q3.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        <div class="addBox" *ngIf="count>3">\n            <ion-item>\n                <ion-label>Q4.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        <div class="addBox" *ngIf="count>4">\n            <ion-item>\n                <ion-label>Q5.</ion-label>\n                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>\n            </ion-item>\n        </div>\n        \n        <ion-item no-lines class="timeaddbutton">\n            <button ion-button outline item-right icon-left (click)="addSurvey()">\n                설문 항목추가\n            </button>\n            <button ion-button outline item-right icon-left class="surveyTrash" (click)="minusSurvey()">\n                항목삭제\n            </button>\n        </ion-item>\n\n\n        <button ion-button block class="mentorRoomButton">저장</button>\n        <button ion-button block class="mentorRoomButton2" (click)="openSurveyPage()">설문조사 결과</button>\n\n      </ion-list>\n\n    </div>\n\n  </ion-content>'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/manager/manager.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__app_server_service__["a" /* ServerService */],
         __WEBPACK_IMPORTED_MODULE_8__app_admin_service__["a" /* AdminService */],
@@ -713,14 +718,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ServerService = ServerService_1 = (function () {
+var ServerService = (function () {
     function ServerService(http) {
         this.http = http;
         //private URL = 'http://localhost:8086/sm345/api/';
         this.URL = 'http://220.230.112.31:8081/sm345/api/';
-        console.log(ServerService_1.USERID);
-        console.log(ServerService_1.USERAUTH);
-        console.log(ServerService_1.USERNAME);
     }
     ServerService.prototype.makeLogin = function (user) {
         var url = this.URL + 'login';
@@ -757,13 +759,6 @@ var ServerService = ServerService_1 = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
-    ServerService.prototype.getMentoroomList = function () {
-        var url = this.URL + 'mentoroom';
-        return this.http.get(url)
-            .toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
     ServerService.prototype.getList = function (board_id) {
         var url = this.URL + 'list/' + board_id;
         return this.http.get(url)
@@ -790,6 +785,13 @@ var ServerService = ServerService_1 = (function () {
             .toPromise()
             .catch(this.handleError);
     };
+    ServerService.prototype.editArticle = function (article) {
+        var url = this.URL + 'list/' + article.board_id + '/' + article.id + '/edit';
+        return this.http.post(url, article)
+            .toPromise()
+            .then(function (res) { return res; })
+            .catch(this.handleError);
+    };
     /*
        createComment(comment: Comment){
         let url = this.URL + 'mentoroom/3/' + comment.article_id + '/comment/create';
@@ -798,13 +800,6 @@ var ServerService = ServerService_1 = (function () {
             .catch(this.handleError);
       }
       */
-    ServerService.prototype.getMentoroom = function (mentoroom_id) {
-        var url = this.URL + 'mentoroom/' + mentoroom_id;
-        return this.http.get(url)
-            .toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
     ServerService.prototype.confirmMentoroom = function (mentoroom) {
         var url = this.URL + 'mentoroom/' + mentoroom.mentoroom_id + '/confirm';
         return this.http.post(url, mentoroom)
@@ -857,12 +852,11 @@ var ServerService = ServerService_1 = (function () {
     };
     return ServerService;
 }());
-ServerService = ServerService_1 = __decorate([
+ServerService = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
 ], ServerService);
 
-var ServerService_1;
 //# sourceMappingURL=server.service.js.map
 
 /***/ }),
@@ -1046,16 +1040,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var MyApp = (function () {
-    function MyApp(toastCtrl, alertCtrl, serverService, modalCtrl, platform, statusBar, splashScreen) {
+    function MyApp(toastCtrl, alertCtrl, modalCtrl, platform, statusBar, splashScreen, serverService) {
         this.toastCtrl = toastCtrl;
         this.alertCtrl = alertCtrl;
         this.modalCtrl = modalCtrl;
         this.platform = platform;
         this.statusBar = statusBar;
         this.splashScreen = splashScreen;
+        this.serverService = serverService;
         this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */];
         this.initializeApp();
-        this.serverService = serverService;
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'HOME', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
@@ -1065,6 +1059,7 @@ var MyApp = (function () {
             { title: 'Q&A', component: __WEBPACK_IMPORTED_MODULE_8__pages_question_question__["a" /* QuestionPage */] },
             { title: '관리페이지', component: __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__["a" /* ManagerPage */] },
         ];
+        // 로컬 스토리지 (Auth값 체크 추가예정)
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
     MyApp.prototype.initializeApp = function () {
@@ -1162,7 +1157,13 @@ __decorate([
 MyApp = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/app/app.html"*/'<ion-menu [content]="content">\n\n  \n\n<ion-content class="side">\n<section class="sideAccount">\n    <ion-item no-lines>\n      <button menuClose clear ion-button item-right>\n        <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>\n      </button>\n    </ion-item>\n  <table class="sideAccountTable">\n    <tr>\n      <td rowspan="2">\n        <img src="assets/img/user.png" width="50px"/>\n      </td>\n         <!--로그인 안했을 경우-->\n         <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>\n         \n          <!--로그인 했을 경우-->\n         <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 1" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘토</td>\n         <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 2" class="account_user"><b>{{currentUser.USERNAME}}</b></td>\n         <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 3" class="account_user"><b>{{currentUser.USERNAME}}</b><img src="assets/img/crown.png" class="account-icon"/></td>\n    </tr>\n    <tr>\n         <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERID}}</b></td>\n    </tr>\n  </table>\n\n  <ion-item no-lines>\n      <button menuClose clear ion-button item-right (click)="openLogout()">\n          <ion-icon name="md-log-out" class="account-icon"></ion-icon>\n      </button>\n      <button menuClose clear ion-button item-right (click)="openMessage()">\n        <ion-icon name="md-mail" class="account-icon"></ion-icon>\n      </button>\n      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">\n        <ion-icon name="ios-apps" class="account-icon"></ion-icon>\n      </button>\n  </ion-item>\n</section>\n\n  <table class="sideTable">\n      <tr>\n        <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>\n        <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>\n          <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>\n          <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>\n          <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>\n      </tr>\n      <tr>\n          <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>\n          <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>\n      </tr>\n      <tr *ngIf="currentUser != undefined && currentUser.USERAUTH == 3">\n          <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>\n          <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>\n      </tr>\n    </table>\n\n\n  </ion-content>\n</ion-menu>\n\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>'/*ion-inline-end:"/Users/jess2/sm345_app/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* Platform */],
+        __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */],
+        __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */],
+        __WEBPACK_IMPORTED_MODULE_12__app_server_service__["a" /* ServerService */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
@@ -1542,29 +1543,6 @@ SurveyPage = __decorate([
 
 /***/ }),
 
-/***/ 211:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Mentoroom; });
-var Mentoroom = (function () {
-    function Mentoroom(team_name, team_about, team_theme, team_filekind, team_link, team_year, team_semester, mento_id) {
-        this.team_name = team_name;
-        this.team_about = team_about;
-        this.team_theme = team_theme;
-        this.team_filekind = team_filekind;
-        this.team_link = team_link;
-        this.team_year = team_year;
-        this.team_semester = team_semester;
-        this.mento_id = mento_id;
-    }
-    return Mentoroom;
-}());
-
-//# sourceMappingURL=mentoroom.js.map
-
-/***/ }),
-
 /***/ 212:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1573,8 +1551,7 @@ var Mentoroom = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_mentoroom__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_server_service__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1588,8 +1565,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
-//import { CoolLocalStorage } from 'angular2-cool-storage';
 var MentorAddPage = (function () {
     function MentorAddPage(app, appCtrl, viewCtrl, toastCtrl, navCtrl, serverService) {
         this.app = app;
@@ -1597,10 +1572,9 @@ var MentorAddPage = (function () {
         this.viewCtrl = viewCtrl;
         this.toastCtrl = toastCtrl;
         this.navCtrl = navCtrl;
+        this.serverService = serverService;
         this.sort = 0;
         this.sortArray = [];
-        this.mentoroom = new __WEBPACK_IMPORTED_MODULE_3__models_mentoroom__["a" /* Mentoroom */]("", "", "", 0, "", 0, 0, 0);
-        this.serverService = serverService;
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.USERID = this.currentUser.USERID;
         this.USERAUTH = this.currentUser.USERAUTH;
@@ -1642,7 +1616,12 @@ var MentorAddPage = (function () {
 MentorAddPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/mentorAdd/mentorAdd.html"*/'<ion-header>\n    <ion-toolbar>\n        <ion-buttons left>\n        <button ion-button (click)="dismiss()">\n                <span ion-text><ion-icon name="ios-close-circle-outline"></ion-icon></span>  \n        </button>\n        </ion-buttons>\n        <ion-title>멘토신청</ion-title> \n        <ion-buttons end>\n            <button ion-button (click)="openRoomPage()">\n                <span ion-text><ion-icon name="ios-checkmark-circle-outline"></ion-icon></span>\n            </button>\n        </ion-buttons>\n    </ion-toolbar>\n</ion-header>\n\n<ion-content class="page-mentorAdd">\n    <ion-list>\n        \n        <!--팀명-->\n        <ion-item>\n                <ion-input type="text" name="팀명" placeholder="팀명" [(ngModel)]="mentoroom.team_name"></ion-input> \n        </ion-item>\n\n        <!--주제-->\n        <ion-item>\n                <ion-input type="text" placeholder="주제" [(ngModel)]="mentoroom.team_theme"></ion-input> \n        </ion-item>\n\n        <!--첨부-->\n        <ion-item class="fileTitle">\n            <ion-icon name="logo-youtube" class="youtube-icon" (click)="fileClick(0)"></ion-icon><p (click)="fileClick(0)">영상링크</p>\n            <ion-icon name="md-photos" class="photos-icon" (click)="fileClick(1)"></ion-icon><p (click)="fileClick(1)">팀광고사진</p>\n            <ion-icon name="ios-link" class="link-icon" (click)="fileClick(2)"></ion-icon><p (click)="fileClick(2)">자격증명파일</p>\n        </ion-item>\n\n        <!--동영상 링크-->\n        <ion-item *ngIf="sortArray[0]==true">\n                <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>\n                <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input" [(ngModel)]="mentoroom.team_link"></ion-input>\n        </ion-item>\n\n        <!--팀 광고사진-->\n        <ion-item *ngIf="sortArray[1]==true">\n                <ion-icon name="md-photos" class="photos-icon"></ion-icon>\n                <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n        </ion-item>\n\n        <!--자격증명파일-->\n        <ion-item *ngIf="sortArray[2]==true">\n                <ion-icon name="ios-link" class="link-icon"></ion-icon>\n                <input type="file" id="upload" name="uploadFile" file-upload multiple/>\n        </ion-item>\n\n        <!--팀 소개 및 설명-->\n        <ion-item>\n                <ion-textarea placeholder="팀 소개 및 설명" [(ngModel)]="mentoroom.team_about"></ion-textarea>\n        </ion-item>\n\n    </ion-list>\n\n\n</ion-content>\n'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/mentorAdd/mentorAdd.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_4__app_server_service__["a" /* ServerService */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_3__app_server_service__["a" /* ServerService */]])
 ], MentorAddPage);
 
 //# sourceMappingURL=mentorAdd.js.map
@@ -1728,30 +1707,32 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__server_service__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__admin_service__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__message_service__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_component__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_home_home__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_login_login__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_sm_sm__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_notice_notice__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_question_question__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_manager_manager__ = __webpack_require__(111);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_room_room__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_roomDetail_roomDetail__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_mentorAdd_mentorAdd__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_message_message__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_reading_reading__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_write_write__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_messageAdd_messageAdd__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_survey_survey__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_smEdit_smEdit__ = __webpack_require__(207);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__ionic_native_status_bar__ = __webpack_require__(203);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_splash_screen__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mentoroom_service__ = __webpack_require__(286);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_component__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_home_home__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_sm_sm__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_notice_notice__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_question_question__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_manager_manager__ = __webpack_require__(111);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_room_room__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_roomDetail_roomDetail__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_mentorAdd_mentorAdd__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_message_message__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_reading_reading__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_write_write__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_messageAdd_messageAdd__ = __webpack_require__(209);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_survey_survey__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_smEdit_smEdit__ = __webpack_require__(207);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__ionic_native_status_bar__ = __webpack_require__(203);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__ionic_native_splash_screen__ = __webpack_require__(206);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1789,54 +1770,55 @@ var AppModule = (function () {
 AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["L" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_login_login__["a" /* LoginPage */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_sm_sm__["a" /* SmPage */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_notice_notice__["a" /* NoticePage */],
-            __WEBPACK_IMPORTED_MODULE_13__pages_question_question__["a" /* QuestionPage */],
-            __WEBPACK_IMPORTED_MODULE_15__pages_room_room__["a" /* RoomPage */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_manager_manager__["a" /* ManagerPage */],
-            __WEBPACK_IMPORTED_MODULE_16__pages_roomDetail_roomDetail__["a" /* RoomDetailPage */],
-            __WEBPACK_IMPORTED_MODULE_17__pages_mentorAdd_mentorAdd__["a" /* MentorAddPage */],
-            __WEBPACK_IMPORTED_MODULE_18__pages_message_message__["a" /* MessagePage */],
-            __WEBPACK_IMPORTED_MODULE_19__pages_reading_reading__["a" /* ReadingPage */],
-            __WEBPACK_IMPORTED_MODULE_20__pages_write_write__["a" /* WritePage */],
-            __WEBPACK_IMPORTED_MODULE_21__pages_messageAdd_messageAdd__["a" /* MessageAddPage */],
-            __WEBPACK_IMPORTED_MODULE_22__pages_survey_survey__["a" /* SurveyPage */],
-            __WEBPACK_IMPORTED_MODULE_23__pages_smEdit_smEdit__["a" /* SmEditPage */],
+            __WEBPACK_IMPORTED_MODULE_9__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_login_login__["a" /* LoginPage */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_sm_sm__["a" /* SmPage */],
+            __WEBPACK_IMPORTED_MODULE_13__pages_notice_notice__["a" /* NoticePage */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_question_question__["a" /* QuestionPage */],
+            __WEBPACK_IMPORTED_MODULE_16__pages_room_room__["a" /* RoomPage */],
+            __WEBPACK_IMPORTED_MODULE_15__pages_manager_manager__["a" /* ManagerPage */],
+            __WEBPACK_IMPORTED_MODULE_17__pages_roomDetail_roomDetail__["a" /* RoomDetailPage */],
+            __WEBPACK_IMPORTED_MODULE_18__pages_mentorAdd_mentorAdd__["a" /* MentorAddPage */],
+            __WEBPACK_IMPORTED_MODULE_19__pages_message_message__["a" /* MessagePage */],
+            __WEBPACK_IMPORTED_MODULE_20__pages_reading_reading__["a" /* ReadingPage */],
+            __WEBPACK_IMPORTED_MODULE_21__pages_write_write__["a" /* WritePage */],
+            __WEBPACK_IMPORTED_MODULE_22__pages_messageAdd_messageAdd__["a" /* MessageAddPage */],
+            __WEBPACK_IMPORTED_MODULE_23__pages_survey_survey__["a" /* SurveyPage */],
+            __WEBPACK_IMPORTED_MODULE_24__pages_smEdit_smEdit__["a" /* SmEditPage */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */]),
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_9__app_component__["a" /* MyApp */]),
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
             __WEBPACK_IMPORTED_MODULE_4__angular_http__["b" /* HttpModule */],
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicApp */]],
         entryComponents: [
-            __WEBPACK_IMPORTED_MODULE_8__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_login_login__["a" /* LoginPage */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_sm_sm__["a" /* SmPage */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_notice_notice__["a" /* NoticePage */],
-            __WEBPACK_IMPORTED_MODULE_13__pages_question_question__["a" /* QuestionPage */],
-            __WEBPACK_IMPORTED_MODULE_15__pages_room_room__["a" /* RoomPage */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_manager_manager__["a" /* ManagerPage */],
-            __WEBPACK_IMPORTED_MODULE_16__pages_roomDetail_roomDetail__["a" /* RoomDetailPage */],
-            __WEBPACK_IMPORTED_MODULE_17__pages_mentorAdd_mentorAdd__["a" /* MentorAddPage */],
-            __WEBPACK_IMPORTED_MODULE_18__pages_message_message__["a" /* MessagePage */],
-            __WEBPACK_IMPORTED_MODULE_19__pages_reading_reading__["a" /* ReadingPage */],
-            __WEBPACK_IMPORTED_MODULE_20__pages_write_write__["a" /* WritePage */],
-            __WEBPACK_IMPORTED_MODULE_21__pages_messageAdd_messageAdd__["a" /* MessageAddPage */],
-            __WEBPACK_IMPORTED_MODULE_22__pages_survey_survey__["a" /* SurveyPage */],
-            __WEBPACK_IMPORTED_MODULE_23__pages_smEdit_smEdit__["a" /* SmEditPage */],
+            __WEBPACK_IMPORTED_MODULE_9__app_component__["a" /* MyApp */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_login_login__["a" /* LoginPage */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_sm_sm__["a" /* SmPage */],
+            __WEBPACK_IMPORTED_MODULE_13__pages_notice_notice__["a" /* NoticePage */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_question_question__["a" /* QuestionPage */],
+            __WEBPACK_IMPORTED_MODULE_16__pages_room_room__["a" /* RoomPage */],
+            __WEBPACK_IMPORTED_MODULE_15__pages_manager_manager__["a" /* ManagerPage */],
+            __WEBPACK_IMPORTED_MODULE_17__pages_roomDetail_roomDetail__["a" /* RoomDetailPage */],
+            __WEBPACK_IMPORTED_MODULE_18__pages_mentorAdd_mentorAdd__["a" /* MentorAddPage */],
+            __WEBPACK_IMPORTED_MODULE_19__pages_message_message__["a" /* MessagePage */],
+            __WEBPACK_IMPORTED_MODULE_20__pages_reading_reading__["a" /* ReadingPage */],
+            __WEBPACK_IMPORTED_MODULE_21__pages_write_write__["a" /* WritePage */],
+            __WEBPACK_IMPORTED_MODULE_22__pages_messageAdd_messageAdd__["a" /* MessageAddPage */],
+            __WEBPACK_IMPORTED_MODULE_23__pages_survey_survey__["a" /* SurveyPage */],
+            __WEBPACK_IMPORTED_MODULE_24__pages_smEdit_smEdit__["a" /* SmEditPage */],
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_24__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_25__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_25__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_26__ionic_native_splash_screen__["a" /* SplashScreen */],
             __WEBPACK_IMPORTED_MODULE_5__server_service__["a" /* ServerService */],
             __WEBPACK_IMPORTED_MODULE_6__admin_service__["a" /* AdminService */],
             __WEBPACK_IMPORTED_MODULE_7__message_service__["a" /* MessageService */],
+            __WEBPACK_IMPORTED_MODULE_8__mentoroom_service__["a" /* MentoroomService */],
             //CoolStorageModule,
             { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["v" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* IonicErrorHandler */] }
         ]
@@ -1904,6 +1886,69 @@ var MentoRoomInfo = (function () {
 }());
 
 //# sourceMappingURL=mentoRoomInfo.js.map
+
+/***/ }),
+
+/***/ 286:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MentoroomService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MentoroomService = (function () {
+    function MentoroomService(http) {
+        this.http = http;
+        //private URL = 'http://localhost:8086/sm345/api/';
+        this.URL = 'http://220.230.112.31:8081/sm345/api/';
+    }
+    MentoroomService.prototype.getMentoroomList = function () {
+        var url = this.URL + 'mentoroom';
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    MentoroomService.prototype.getMentoroom = function (mentoroom_id) {
+        var url = this.URL + 'mentoroom/' + mentoroom_id;
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    MentoroomService.prototype.joinMentee = function (mid, uid) {
+        var url = this.URL + "/mentoroom/" + mid + "/" + uid + "/menti_join";
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response; })
+            .catch(this.handleError);
+    };
+    MentoroomService.prototype.handleError = function (error) {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    };
+    return MentoroomService;
+}());
+MentoroomService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+], MentoroomService);
+
+//# sourceMappingURL=mentoroom.service.js.map
 
 /***/ }),
 
@@ -2111,6 +2156,7 @@ var ReadingPage = (function () {
         this.navParams = navParams;
         this.navCtrl = navCtrl;
         this.actionSheetCtrl = actionSheetCtrl;
+        this.toggleEdit = false;
         this.id = this.navParams.get("id");
         this.board_id = this.navParams.get("board_id");
         this.article = new __WEBPACK_IMPORTED_MODULE_6__models_article__["a" /* Article */](0, 0, "", "", 0, 0, 0, "", 0);
@@ -2256,10 +2302,27 @@ var ReadingPage = (function () {
     ReadingPage.prototype.dismiss = function () {
         this.viewCtrl.dismiss();
     };
+    // 수정 토글
+    ReadingPage.prototype.handleToggleEdit = function () {
+        this.toggleEdit = !this.toggleEdit;
+    };
+    // 수정 완료
+    ReadingPage.prototype.editArticle = function () {
+        var _this = this;
+        this.serverService.editArticle(this.article)
+            .then(function (res) { return _this.presentToast('수정되었습니다.'); });
+        var toast = this.toastCtrl.create({
+            message: '수정 돠었습니다.',
+            duration: 3000,
+            position: 'bottom',
+        });
+        toast.present();
+        this.toggleEdit = !this.toggleEdit;
+    };
     return ReadingPage;
 }());
 ReadingPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/reading/reading.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n    </div>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="page-reading">\n    <table class="reading-top">\n      <tr>\n        <td>\n            {{article.article_title}}\n        </td>\n      </tr>\n      <tr>\n        <td>\n            {{article.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{article.timestamp | date:\'yyyy-MM-dd HH:mm\'}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{article.article_hit}}\n        </td>\n      </tr>\n    </table>\n    <hr/>\n    <div id="contentDiv">{{article.article_content}}\n    </div>\n\n\n    <!--댓글-->\n    <section class="commentTableWrapper" *ngIf="article.board_id == 3">\n        <ion-list (press)="presentCommentSheet()"> \n            <table class="commentListTable">\n                <tr>\n                    <td>\n                      홍길동\n                    </td>\n                    <td>\n                        <span>2017-08-30 14:30</span>\n                    </td>\n                </tr>         \n                <tr>	\n                    <td colspan="2"><div id="commentDiv">기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.</div></td>		\n                </tr>\n            </table>\n        </ion-list>\n        <ion-list (press)="presentCommentSheet()"> \n            <table class="commentListTable">\n                <tr>\n                    <td>\n                      홍길동\n                    </td>\n                    <td>\n                        <span>2017-08-30 14:30</span>\n                    </td>\n                </tr>         \n                <tr>	\n                    <td colspan="2"><div id="commentDiv">따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.</div></td>		\n                </tr>\n            </table>\n        </ion-list>\n        <ion-list (press)="presentCommentSheet()"> \n            <table class="commentListTable">\n                <tr>\n                    <td>\n                      홍길동\n                    </td>\n                    <td>\n                        <span>2017-08-30 14:30</span>\n                    </td>\n                </tr>         \n                <tr>	\n                    <td colspan="2"><div id="commentDiv">안녕하세요. 댓글 예시입니다.</div></td>		\n                </tr>\n            </table>\n        </ion-list>\n        \n    </section>\n\n    <section class="commentWriteWrapper commentTableWrapper" *ngIf="article.board_id == 3">\n      <table class="comment_textarea_table">\n        <tr>\n          <td>\n              <ion-item no-lines>\n                  <ion-textarea class="comment_textarea" placeholder="댓글을 입력하세요."></ion-textarea>\n              </ion-item>\n          </td>\n          <td>\n              <button ion-button outline><ion-icon name="ios-send"></ion-icon></button>\n          </td>\n        </tr>\n      </table>\n\n  </section>\n  <div class="buttonWrapper">\n    <!--공지사항 게시판일때-->\n    <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID && article.board_id != 3">수정</button>\n    <button ion-button block class="deleteButton" (click)="showDeleteAlert(article)" *ngIf= "(article.article_writer == USERID || USERAUTH == 3) && article.board_id != 3">삭제</button>\n\n    <!--Q&A 게시판일때-->\n    <button ion-button block class="editButton1" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID && article.board_id == 3">수정</button>\n    <button ion-button block class="deleteButton1" (click)="showDeleteAlert(article)" *ngIf= "(article.article_writer == USERID || USERAUTH == 3) && article.board_id == 3">삭제</button>\n    <button ion-button block class="editButton2" (click)="showAnswerAlert(article)" *ngIf= "USERAUTH == 3 && article.board_id == 3">답변완료</button>\n    </div>\n\n    <br/>\n    <br/>\n</ion-content>\n'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/reading/reading.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/reading/reading.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n    </div>\n  </ion-navbar>\n</ion-header>\n\n<ion-content *ngIf="toggleEdit === false" style="margin-top: 59px;" class="page-reading">\n    <table class="reading-top">\n      <tr>\n        <td>\n            {{article.article_title}}\n        </td>\n      </tr>\n      <tr>\n        <td>\n            {{article.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{article.timestamp | date:\'yyyy-MM-dd HH:mm\'}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{article.article_hit}}\n        </td>\n      </tr>\n    </table>\n    <hr/>\n    <div id="contentDiv">{{article.article_content}}\n    </div>\n\n\n    <!--댓글-->\n    <section class="commentTableWrapper" *ngIf="article.board_id == 3">\n        <ion-list (press)="presentCommentSheet()"> \n            <table class="commentListTable">\n                <tr>\n                    <td>\n                      홍길동\n                    </td>\n                    <td>\n                        <span>2017-08-30 14:30</span>\n                    </td>\n                </tr>         \n                <tr>	\n                    <td colspan="2"><div id="commentDiv">기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.</div></td>		\n                </tr>\n            </table>\n        </ion-list>\n        <ion-list (press)="presentCommentSheet()"> \n            <table class="commentListTable">\n                <tr>\n                    <td>\n                      홍길동\n                    </td>\n                    <td>\n                        <span>2017-08-30 14:30</span>\n                    </td>\n                </tr>         \n                <tr>	\n                    <td colspan="2"><div id="commentDiv">따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.</div></td>		\n                </tr>\n            </table>\n        </ion-list>\n        <ion-list (press)="presentCommentSheet()"> \n            <table class="commentListTable">\n                <tr>\n                    <td>\n                      홍길동\n                    </td>\n                    <td>\n                        <span>2017-08-30 14:30</span>\n                    </td>\n                </tr>         \n                <tr>	\n                    <td colspan="2"><div id="commentDiv">안녕하세요. 댓글 예시입니다.</div></td>		\n                </tr>\n            </table>\n        </ion-list>\n        \n    </section>\n\n    <section class="commentWriteWrapper commentTableWrapper" *ngIf="article.board_id == 3">\n      <table class="comment_textarea_table">\n        <tr>\n          <td>\n              <ion-item no-lines>\n                  <ion-textarea class="comment_textarea" placeholder="댓글을 입력하세요."></ion-textarea>\n              </ion-item>\n          </td>\n          <td>\n              <button ion-button outline><ion-icon name="ios-send"></ion-icon></button>\n          </td>\n        </tr>\n      </table>\n\n  </section>\n\n  <div class="buttonWrapper">\n    <!--공지사항 게시판일때-->\n    <button ion-button block class="editButton" (click)="handleToggleEdit()" *ngIf= "article.article_writer == USERID">수정</button>\n    <!-- <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID && article.board_id != 3">수정</button> -->\n    <button ion-button block class="deleteButton" (click)="showDeleteAlert(article)" *ngIf= "(article.article_writer == USERID || USERAUTH == 3) && article.board_id != 3">삭제</button>\n\n    <!--Q&A 게시판일때-->\n    <button ion-button block class="editButton1" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID && article.board_id == 3">수정</button>\n    <button ion-button block class="deleteButton1" (click)="showDeleteAlert(article)" *ngIf= "(article.article_writer == USERID || USERAUTH == 3) && article.board_id == 3">삭제</button>\n    <button ion-button block class="editButton2" (click)="showAnswerAlert(article)" *ngIf= "USERAUTH == 3 && article.board_id == 3">답변완료</button>\n    </div>\n\n    <br/>\n    <br/>\n</ion-content>\n\n<ion-content *ngIf="toggleEdit === true" style="margin-top: 59px;" class="page-reading">\n        <table class="reading-top">\n          <tr>\n            <td>\n                {{article.article_title}}\n            </td>\n          </tr>\n          <tr>\n            <td>\n                {{article.user_name}}&nbsp;&nbsp;|&nbsp;&nbsp;{{article.timestamp}}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{article.article_hit}}\n            </td>\n          </tr>\n        </table>\n        <hr/>\n        <div id="contentDiv">\n            <ion-textarea [(ngModel)]="article.article_content"></ion-textarea>\n        </div>\n    \n      <div class="buttonWrapper"> \n        <button ion-button block class="editButton" (click)="editArticle()" *ngIf= "article.article_writer == USERID"> 수정 완료 </button>\n        </div>\n    \n        <br/>\n        <br/>\n    </ion-content>\n'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/reading/reading.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ViewController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* ToastController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* AlertController */], __WEBPACK_IMPORTED_MODULE_5__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* ActionSheetController */]])
 ], ReadingPage);
@@ -2346,7 +2409,7 @@ QuestionPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roomDetail_roomDetail__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mentorAdd_mentorAdd__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_mentoroom_service__ = __webpack_require__(286);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2363,26 +2426,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var RoomPage = (function () {
-    function RoomPage(serverService, navCtrl, modalCtrl) {
+    function RoomPage(mentoroomService, navCtrl, modalCtrl) {
+        this.mentoroomService = mentoroomService;
         this.navCtrl = navCtrl;
         this.modalCtrl = modalCtrl;
-        this.mentorooms = [];
-        this.serverService = serverService;
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.USERAUTH = this.currentUser.USERAUTH;
     }
     RoomPage.prototype.ngOnInit = function () {
         var _this = this;
-        this.serverService.getMentoroomList().then(function (mentoroom) {
-            _this.mentorooms = mentoroom;
-        });
+        this.mentoroomService.getMentoroomList()
+            .then(function (mentorooms) { return _this.mentorooms = mentorooms; });
     };
     RoomPage.prototype.openHomePage = function () {
         this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */]);
     };
-    RoomPage.prototype.openRoomDetailPage = function (mentoroom) {
+    RoomPage.prototype.openRoomDetailPage = function (selectedRoom) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__roomDetail_roomDetail__["a" /* RoomDetailPage */], {
-            mentoroom_id: mentoroom.mentoroom_id, room: 0,
+            selectedRoom: selectedRoom, room: 0
         });
         //let modal = this.modalCtrl.create(RoomDetailPage);
         // modal.present();
@@ -2394,9 +2455,11 @@ var RoomPage = (function () {
     return RoomPage;
 }());
 RoomPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/room/room.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n      </div>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding class="page-room">\n      \n\n      <table class="roomTable" *ngFor="let m of mentorooms">\n        <div *ngIf= "m.team_confirm != 2">\n        <tr>\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>\n          <td>[팀명] {{m.team_name}}&nbsp;&nbsp;\n            <div *ngIf= "m.team_confirm == 0">\n            <button ion-button class="fileButton4">대기중</button>\n            </div>\n            <div *ngIf= "m.team_confirm == 1">\n            <button ion-button class="fileButton">개설완료</button>\n            </div>\n          </td>\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage(m)"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n        </tr>\n        <tr>\n          <td>[주제] {{m.team_theme}}</td>\n        </tr>\n        <tr>\n          <td>[현재팀원] 1명</td>\n        </tr>\n        </div>\n      </table>\n<!--\n      <table class="roomTable">\n        <tr>\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/java.png" /></td>\n          <td>[팀명] 자바를 잡아&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n        </tr>\n        <tr>\n          <td>[주제] JAVA</td>\n        </tr>\n        <tr>\n          <td>[현재팀원] 3명</td>\n        </tr>\n      </table>\n\n      <table class="roomTable">\n        <tr>\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/algo.png" /></td>\n          <td>[팀명] ALGO&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n        </tr>\n        <tr>\n          <td>[주제] 알고리즘</td>\n        </tr>\n        <tr>\n          <td>[현재팀원] 2명</td>\n        </tr>\n      </table>\n\n      <table class="roomTable">\n        <tr>\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/python.png" /></td>\n          <td>[팀명] 썬&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n        </tr>\n        <tr>\n          <td>[주제] Python</td>\n        </tr>\n        <tr>\n          <td>[현재팀원] 1명</td>\n        </tr>\n      </table>\n    -->\n    <div *ngIf="currentUser.USERAUTH != 3">\n      <button ion-button block (click)="openMentorAddPage()">멘토신청</button>\n    </div>\n\n  </ion-content>'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/room/room.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/room/room.html"*/'<ion-header>\n    <ion-navbar>\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n      <div class="home_logo_wrapper" (click)="openHomePage()">\n        <img src="assets/img/Logo2.png" class="home-logo"/>\n      </div>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding class="page-room">\n      \n\n      <table class="roomTable" *ngFor="let m of mentorooms">\n        <div *ngIf= "m.team_confirm != 2">\n        <tr>\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>\n          <td>[팀명] {{m.team_name}}&nbsp;&nbsp;\n            <div *ngIf= "m.team_confirm == 0">\n            <button ion-button class="fileButton4">대기중</button>\n            </div>\n            <div *ngIf= "m.team_confirm == 1">\n            <button ion-button class="fileButton">개설완료</button>\n            </div>\n          </td>\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage(m)"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n        </tr>\n        <tr>\n          <td>[주제] {{m.team_theme}}</td>\n        </tr>\n        <tr>\n          <td>[현재팀원] {{m.person_count}}명</td>\n        </tr>\n        </div>\n      </table>\n<!--\n      <table class="roomTable">\n        <tr>\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/java.png" /></td>\n          <td>[팀명] 자바를 잡아&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n        </tr>\n        <tr>\n          <td>[주제] JAVA</td>\n        </tr>\n        <tr>\n          <td>[현재팀원] 3명</td>\n        </tr>\n      </table>\n\n      <table class="roomTable">\n        <tr>\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/algo.png" /></td>\n          <td>[팀명] ALGO&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n        </tr>\n        <tr>\n          <td>[주제] 알고리즘</td>\n        </tr>\n        <tr>\n          <td>[현재팀원] 2명</td>\n        </tr>\n      </table>\n\n      <table class="roomTable">\n        <tr>\n          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/python.png" /></td>\n          <td>[팀명] 썬&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>\n          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>\n        </tr>\n        <tr>\n          <td>[주제] Python</td>\n        </tr>\n        <tr>\n          <td>[현재팀원] 1명</td>\n        </tr>\n      </table>\n    -->\n    <div *ngIf="currentUser.USERAUTH != 3">\n      <button ion-button block (click)="openMentorAddPage()">멘토신청</button>\n    </div>\n\n  </ion-content>'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/room/room.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__app_server_service__["a" /* ServerService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_5__app_mentoroom_service__["a" /* MentoroomService */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* ModalController */]])
 ], RoomPage);
 
 //# sourceMappingURL=room.js.map

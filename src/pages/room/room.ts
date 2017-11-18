@@ -3,39 +3,39 @@ import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
 import { MentorAddPage } from '.././mentorAdd/mentorAdd';
-import { ServerService } from '../../app/server.service';
+import { MentoroomService } from '../../app/mentoroom.service';
 import { Mentoroom } from '../../models/mentoroom';
 
 @Component({
   templateUrl: 'room.html'
 })
 export class RoomPage  implements OnInit {
-  serverService: ServerService;
-  private mentorooms: Mentoroom[] = [];
+  private mentorooms: Mentoroom[];
   private currentUser;
   private USERAUTH;
 
-  constructor( serverService: ServerService, public navCtrl: NavController, public modalCtrl: ModalController) {
-    this.serverService = serverService;
+  constructor( 
+    private mentoroomService: MentoroomService, 
+    public navCtrl: NavController, 
+    public modalCtrl: ModalController
+  ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERAUTH = this.currentUser.USERAUTH;
   }
 
   ngOnInit() {
-    this.serverService.getMentoroomList().then(
-      mentoroom => { this.mentorooms = mentoroom;
-    });
+    this.mentoroomService.getMentoroomList()
+    .then(mentorooms => this.mentorooms = mentorooms);
   }
 
   openHomePage() {
     this.navCtrl.setRoot(HomePage);
   }
 
-  openRoomDetailPage(mentoroom) {
+  openRoomDetailPage(selectedRoom) {
     this.navCtrl.push(RoomDetailPage, {
-      mentoroom_id: mentoroom.mentoroom_id, room: 0,
+      selectedRoom: selectedRoom, room: 0
     });
-    
     //let modal = this.modalCtrl.create(RoomDetailPage);
    // modal.present();
   }

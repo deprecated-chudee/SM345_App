@@ -22,6 +22,8 @@ export class ReadingPage implements OnInit {
   private USERAUTH;
   private comment: Comment;
 
+  toggleEdit: boolean = false;
+
   constructor(public viewCtrl: ViewController, public app: App, public toastCtrl: ToastController, public alertCtrl: AlertController, serverService: ServerService, public navParams: NavParams, public navCtrl: NavController, public actionSheetCtrl: ActionSheetController) {
     this.id = this.navParams.get("id");
     this.board_id = this.navParams.get("board_id");
@@ -166,15 +168,34 @@ export class ReadingPage implements OnInit {
 
   presentToast(message) {
     let toast = this.toastCtrl.create({
-    message: message.title,
-    duration: 3000,
-    position: 'bottom',
+      message: message.title,
+      duration: 3000,
+      position: 'bottom',
     });
     toast.present();
   }
 
   dismiss() {
-  this.viewCtrl.dismiss();
+    this.viewCtrl.dismiss();
   }
 
+  // 수정 토글
+  handleToggleEdit() {
+    this.toggleEdit = !this.toggleEdit;
+  }
+
+  // 수정 완료
+  editArticle() {
+      this.serverService.editArticle(this.article)
+          .then(res => this.presentToast('수정되었습니다.'))
+      
+      let toast = this.toastCtrl.create({
+          message: '수정 돠었습니다.',
+          duration: 3000,
+          position: 'bottom',
+      });
+      toast.present();
+
+      this.toggleEdit = !this.toggleEdit
+  }
 }
