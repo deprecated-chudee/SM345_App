@@ -83,24 +83,25 @@
       </tr>
   </table>
 
+
   <table class="mentor-banner" >
       <tr>
-          <ion-slides pager loop="true" autoplay="5000" speed="500" slidesPerView="3">
+          <ion-slides  *ngIf="mentorooms && mentorooms.length" pager="true" loop="true" autoplay="5000" speed="500" slidesPerView="3">
               <ion-slide *ngFor="let m of mentorooms">
-                <div  *ngIf= "m.team_confirm != 2">
-                <table class="mentor-banner-in">
-                  <tr>
-                    <td>
-                      <img src="assets/img/book/algo.png" /> 
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><b>[{{m.team_name}}]</b></td>
-                  </tr>
-                  <tr>
-                    <td>{{m.team_theme}}</td>
-                  </tr>
-                </table>
+                <div *ngIf= "m.team_confirm != 2">
+                    <table class="mentor-banner-in">
+                      <tr>
+                        <td>
+                          <img src="assets/img/book/algo.png" /> 
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><b>[{{m.team_name}}]</b></td>
+                      </tr>
+                      <tr>
+                        <td>{{m.team_theme}}</td>
+                      </tr>
+                    </table>
                 </div>
               </ion-slide>
           </ion-slides>

@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 106:
+/***/ 107:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -70,69 +70,6 @@ MessageService = __decorate([
 
 /***/ }),
 
-/***/ 107:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MentoroomService; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(33);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var MentoroomService = (function () {
-    function MentoroomService(http) {
-        this.http = http;
-        //private URL = 'http://localhost:8086/sm345/api/';
-        this.URL = 'http://220.230.112.31:8081/sm345/api/';
-    }
-    MentoroomService.prototype.getMentoroomList = function () {
-        var url = this.URL + 'mentoroom';
-        return this.http.get(url)
-            .toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
-    MentoroomService.prototype.getMentoroom = function (mentoroom_id) {
-        var url = this.URL + 'mentoroom/' + mentoroom_id;
-        return this.http.get(url)
-            .toPromise()
-            .then(function (response) { return response.json(); })
-            .catch(this.handleError);
-    };
-    MentoroomService.prototype.joinMentee = function (mid, uid) {
-        var url = this.URL + "/mentoroom/" + mid + "/" + uid + "/menti_join";
-        return this.http.get(url)
-            .toPromise()
-            .then(function (response) { return response; })
-            .catch(this.handleError);
-    };
-    MentoroomService.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
-        return Promise.reject(error.message || error);
-    };
-    return MentoroomService;
-}());
-MentoroomService = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
-], MentoroomService);
-
-//# sourceMappingURL=mentoroom.service.js.map
-
-/***/ }),
-
 /***/ 109:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -164,7 +101,7 @@ var Article = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__question_question__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__question_question__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__notice_notice__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_article__ = __webpack_require__(109);
@@ -250,10 +187,10 @@ WritePage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RoomDetailPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__manager_manager__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_server_service__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_mentoroom_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_mentoroom_service__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -948,11 +885,11 @@ webpackEmptyAsyncContext.id = 162;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sm_sm__ = __webpack_require__(54);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reading_reading__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sm_sm__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reading_reading__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__notice_notice__ = __webpack_require__(42);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_mentoroom_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_mentoroom_service__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1001,7 +938,7 @@ var HomePage = HomePage_1 = (function () {
 }());
 HomePage = HomePage_1 = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n    </div>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="page-home">\n  <!--sm사업 신청기간 -->\n  <table class="calendarText">\n    <tr>\n      <td colspan="2">\n          SCHEDULE\n      </td>\n    </tr>\n    <tr>\n        <td>\n          2017.09.01 ~ 09.10\n        </td>\n        <td>\n          2학기 멘토 신청기간\n        </td>\n      </tr>\n    <tr>\n      <td>\n        2017.09.11 ~ 09.20\n      </td>\n      <td>\n        2학기 멘티 신청기간\n      </td>\n    </tr>\n    <tr>\n        <td>\n          2017.09.21 ~ 12.10\n        </td>\n        <td>\n          멘토링 활동기간\n        </td>\n      </tr>\n    <tr>\n        <td>\n          2017.12.11 ~ 12.20\n        </td>\n        <td>\n          2학기 설문조사 기간\n        </td>\n    </tr>\n  </table>\n\n  <!--공지사항-->\n  <table class="noticeTable">\n      <tr>\n        <td colspan="2">\n            NOTICE\n        </td>\n      </tr>\n      <tr>\n          <ion-item no-lines class="notice" *ngFor="let a of articles" (click)="openReadingPage(a)">\n              <!--<span>-->\n                <ion-list>\n                 {{a.article_title}}\n                </ion-list>\n              </ion-item>\n              <ion-item>\n                <ion-list no-lines (click)="openNoticePage()">\n                    <ion-icon name="ios-add-circle-outline"></ion-icon><span class="more">더 보기</span>\n                </ion-list>\n              <!--</span>-->\n            </ion-item>\n      </tr>\n  </table>\n\n  <!--멘토방 사진 슬라이드-->\n  <table class="mentorTable">\n      <tr>\n        <td colspan="2">\n            MENTOR ROOM\n        </td>\n      </tr>\n  </table>\n\n  <table class="mentor-banner" >\n      <tr>\n          <ion-slides pager loop="true" autoplay="5000" speed="500" slidesPerView="3">\n              <ion-slide *ngFor="let m of mentorooms">\n                <div  *ngIf= "m.team_confirm != 2">\n                <table class="mentor-banner-in">\n                  <tr>\n                    <td>\n                      <img src="assets/img/book/algo.png" /> \n                    </td>\n                  </tr>\n                  <tr>\n                    <td><b>[{{m.team_name}}]</b></td>\n                  </tr>\n                  <tr>\n                    <td>{{m.team_theme}}</td>\n                  </tr>\n                </table>\n                </div>\n              </ion-slide>\n          </ion-slides>\n      </tr>\n  </table>\n\n    <!--설명서 바로가기-->\n    <table class="noticeTable">\n        <tr>\n          <td colspan="2">\n              DOCUMENT\n          </td>\n        </tr>\n        <tr>\n          <img src="assets/img/banner.png" class="document" (click)="openSmPage()"/>\n        </tr>\n    </table>\n</ion-content>\n'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Users/jess2/sm345_app/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <div class="home_logo_wrapper" (click)="openHomePage()">\n      <img src="assets/img/Logo2.png" class="home-logo"/>\n    </div>\n  </ion-navbar>\n</ion-header>\n\n<ion-content class="page-home">\n  <!--sm사업 신청기간 -->\n  <table class="calendarText">\n    <tr>\n      <td colspan="2">\n          SCHEDULE\n      </td>\n    </tr>\n    <tr>\n        <td>\n          2017.09.01 ~ 09.10\n        </td>\n        <td>\n          2학기 멘토 신청기간\n        </td>\n      </tr>\n    <tr>\n      <td>\n        2017.09.11 ~ 09.20\n      </td>\n      <td>\n        2학기 멘티 신청기간\n      </td>\n    </tr>\n    <tr>\n        <td>\n          2017.09.21 ~ 12.10\n        </td>\n        <td>\n          멘토링 활동기간\n        </td>\n      </tr>\n    <tr>\n        <td>\n          2017.12.11 ~ 12.20\n        </td>\n        <td>\n          2학기 설문조사 기간\n        </td>\n    </tr>\n  </table>\n\n  <!--공지사항-->\n  <table class="noticeTable">\n      <tr>\n        <td colspan="2">\n            NOTICE\n        </td>\n      </tr>\n      <tr>\n          <ion-item no-lines class="notice" *ngFor="let a of articles" (click)="openReadingPage(a)">\n              <!--<span>-->\n                <ion-list>\n                 {{a.article_title}}\n                </ion-list>\n              </ion-item>\n              <ion-item>\n                <ion-list no-lines (click)="openNoticePage()">\n                    <ion-icon name="ios-add-circle-outline"></ion-icon><span class="more">더 보기</span>\n                </ion-list>\n              <!--</span>-->\n            </ion-item>\n      </tr>\n  </table>\n\n  <!--멘토방 사진 슬라이드-->\n  <table class="mentorTable">\n      <tr>\n        <td colspan="2">\n            MENTOR ROOM\n        </td>\n      </tr>\n  </table>\n\n\n  <table class="mentor-banner" >\n      <tr>\n          <ion-slides  *ngIf="mentorooms && mentorooms.length" pager="true" loop="true" autoplay="5000" speed="500" slidesPerView="3">\n              <ion-slide *ngFor="let m of mentorooms">\n                <div *ngIf= "m.team_confirm != 2">\n                    <table class="mentor-banner-in">\n                      <tr>\n                        <td>\n                          <img src="assets/img/book/algo.png" /> \n                        </td>\n                      </tr>\n                      <tr>\n                        <td><b>[{{m.team_name}}]</b></td>\n                      </tr>\n                      <tr>\n                        <td>{{m.team_theme}}</td>\n                      </tr>\n                    </table>\n                </div>\n              </ion-slide>\n          </ion-slides>\n      </tr>\n  </table>\n\n    <!--설명서 바로가기-->\n    <table class="noticeTable">\n        <tr>\n          <td colspan="2">\n              DOCUMENT\n          </td>\n        </tr>\n        <tr>\n          <img src="assets/img/banner.png" class="document" (click)="openSmPage()"/>\n        </tr>\n    </table>\n</ion-content>\n'/*ion-inline-end:"/Users/jess2/sm345_app/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavController */],
         __WEBPACK_IMPORTED_MODULE_5__app_server_service__["a" /* ServerService */],
@@ -1080,10 +1017,10 @@ AdminService = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(207);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_sm_sm__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_sm_sm__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_notice_notice__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_question_question__ = __webpack_require__(56);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_room_room__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_question_question__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_room_room__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_manager_manager__ = __webpack_require__(112);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_message_message__ = __webpack_require__(213);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__app_server_service__ = __webpack_require__(13);
@@ -1249,7 +1186,7 @@ MyApp = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_server_service__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_article__ = __webpack_require__(109);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sm_sm__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sm_sm__ = __webpack_require__(55);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1499,7 +1436,7 @@ LoginPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessageAddPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_message_service__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_message_service__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1620,7 +1557,7 @@ SurveyPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MentorAddPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__room_room__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_server_service__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1705,7 +1642,7 @@ MentorAddPage = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MessagePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_message_service__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_message_service__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1776,20 +1713,20 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__server_service__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__admin_service__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__message_service__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mentoroom_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__message_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__mentoroom_service__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_component__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_home_home__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_login_login__ = __webpack_require__(209);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_sm_sm__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_sm_sm__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_notice_notice__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_question_question__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_question_question__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_manager_manager__ = __webpack_require__(112);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_room_room__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_room_room__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_roomDetail_roomDetail__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_mentorAdd_mentorAdd__ = __webpack_require__(212);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_message_message__ = __webpack_require__(213);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_reading_reading__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_reading_reading__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_write_write__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_messageAdd_messageAdd__ = __webpack_require__(210);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_survey_survey__ = __webpack_require__(211);
@@ -1968,7 +1905,7 @@ var MentoRoomInfo = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__write_write__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reading_reading__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__reading_reading__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2028,6 +1965,69 @@ NoticePage = __decorate([
 /***/ }),
 
 /***/ 54:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MentoroomService; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_toPromise__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MentoroomService = (function () {
+    function MentoroomService(http) {
+        this.http = http;
+        //private URL = 'http://localhost:8086/sm345/api/';
+        this.URL = 'http://220.230.112.31:8081/sm345/api/';
+    }
+    MentoroomService.prototype.getMentoroomList = function () {
+        var url = this.URL + 'mentoroom';
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    MentoroomService.prototype.getMentoroom = function (mentoroom_id) {
+        var url = this.URL + 'mentoroom/' + mentoroom_id;
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    MentoroomService.prototype.joinMentee = function (mid, uid) {
+        var url = this.URL + "/mentoroom/" + mid + "/" + uid + "/menti_join";
+        return this.http.get(url)
+            .toPromise()
+            .then(function (response) { return response; })
+            .catch(this.handleError);
+    };
+    MentoroomService.prototype.handleError = function (error) {
+        console.error('An error occurred', error); // for demo purposes only
+        return Promise.reject(error.message || error);
+    };
+    return MentoroomService;
+}());
+MentoroomService = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+], MentoroomService);
+
+//# sourceMappingURL=mentoroom.service.js.map
+
+/***/ }),
+
+/***/ 55:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2125,7 +2125,7 @@ var SmPage_1;
 
 /***/ }),
 
-/***/ 55:
+/***/ 56:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2134,7 +2134,7 @@ var SmPage_1;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notice_notice__ = __webpack_require__(42);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__question_question__ = __webpack_require__(56);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__question_question__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_article__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2338,7 +2338,7 @@ ReadingPage = __decorate([
 
 /***/ }),
 
-/***/ 56:
+/***/ 57:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2346,7 +2346,7 @@ ReadingPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reading_reading__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__reading_reading__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__write_write__ = __webpack_require__(110);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_server_service__ = __webpack_require__(13);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2406,7 +2406,7 @@ QuestionPage = __decorate([
 
 /***/ }),
 
-/***/ 57:
+/***/ 58:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2416,7 +2416,7 @@ QuestionPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(20);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__roomDetail_roomDetail__ = __webpack_require__(111);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mentorAdd_mentorAdd__ = __webpack_require__(212);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_mentoroom_service__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_mentoroom_service__ = __webpack_require__(54);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
