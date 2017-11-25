@@ -11,22 +11,34 @@
 
 <ion-content class="page-message">
         <table class="noticeTable-in" *ngFor="let message of messages">
-                <tr>
-                    <td>
-                        <ion-icon name="md-mail"></ion-icon>&nbsp;&nbsp;
-                        {{ message.message_title }}
-                    </td>
-                    <ion-icon name="md-trash" 
-                        style="text-align: right;"
-                        (click)="handleRemove(message.id)"
+            <tr>
+                <td>
+                    <ion-icon 
+                        *ngIf="message.read_check === 0"
+                        name="md-mail"
+                        (click)="handleRead(message.id)"
                     >
                     </ion-icon>
-                </tr>
-                <tr>
-                    <td>
-                        {{ message.timestamp | date:'yyyy-MM-dd HH:mm' }}
-                    </td>
-                </tr>
+                    <ion-icon
+                        *ngIf="message.read_check === 1"
+                        name="md-mail-open"
+                    ></ion-icon>
+                    &nbsp;&nbsp;
+
+                    {{ message.message_title }}
+
+                    <ion-icon
+                        name="md-trash" 
+                        class="remove"
+                        (click)="handleRemove(message.id)"
+                    ></ion-icon>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ message.timestamp | date:'yyyy-MM-dd HH:mm' }}
+                </td>
+            </tr>
         </table>
         
 </ion-content>

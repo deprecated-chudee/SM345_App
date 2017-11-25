@@ -9,7 +9,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content *ngIf="toggleEdit === false" style="margin-top: 59px;" class="page-reading">
+<ion-content *ngIf="toggleEdit === false" class="page-reading">
     <table class="reading-top">
       <tr>
         <td>
@@ -93,18 +93,34 @@
 
   </section>
 
-  <div class="buttonWrapper">
     <!--공지사항 게시판일때-->
-    <button ion-button block class="editButton" (click)="handleToggleEdit()" *ngIf= "article.article_writer == USERID">수정</button>
-    <!-- <button ion-button block class="editButton" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID && article.board_id != 3">수정</button> -->
-    <button ion-button block class="deleteButton" (click)="showDeleteAlert(article)" *ngIf= "(article.article_writer == USERID || USERAUTH == 3) && article.board_id != 3">삭제</button>
-
-    <!--Q&A 게시판일때-->
-    <button ion-button block class="editButton1" (click)="openWritePage(article.id)" *ngIf= "article.article_writer == USERID && article.board_id == 3">수정</button>
-    <button ion-button block class="deleteButton1" (click)="showDeleteAlert(article)" *ngIf= "(article.article_writer == USERID || USERAUTH == 3) && article.board_id == 3">삭제</button>
-    <button ion-button block class="editButton2" (click)="showAnswerAlert(article)" *ngIf= "USERAUTH == 3 && article.board_id == 3">답변완료</button>
+    <div class="buttonWrapper" *ngIf="article.board_id == 2">
+        <button ion-button block 
+            class="editButton" 
+            (click)="handleToggleEdit()" 
+            *ngIf= "USERAUTH == 3">수정</button>
+        <button ion-button block 
+            class="deleteButton" 
+            (click)="showDeleteAlert(article)" 
+            *ngIf= "USERAUTH == 3">삭제</button>
     </div>
-
+        
+    <!--Q&A 게시판일때-->
+    <div class="buttonWrapper" *ngIf="article.board_id == 3">
+        <button ion-button block 
+            class="editButton" 
+            (click)="handleToggleEdit()" 
+            *ngIf= "article.article_writer == USERID">수정</button>
+        <button ion-button block 
+            class="deleteButton" 
+            (click)="showDeleteAlert(article)" 
+            *ngIf= "article.article_writer == USERID || USERAUTH == 3">삭제</button>
+        <button ion-button block 
+            class="editButton" 
+            (click)="showAnswerAlert(article)" 
+            *ngIf= "USERAUTH == 3 && article.answer_complete == 0">답변완료</button>
+    </div>
+        
     <br/>
     <br/>
 </ion-content>
@@ -128,7 +144,7 @@
         </div>
     
       <div class="buttonWrapper"> 
-        <button ion-button block class="editButton" (click)="editArticle()" *ngIf= "article.article_writer == USERID"> 수정 완료 </button>
+        <button ion-button block class="editButton" (click)="editArticle()" *ngIf= "article.article_writer == USERID || USERAUTH == 3"> 수정 완료 </button>
         </div>
     
         <br/>

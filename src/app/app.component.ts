@@ -1,5 +1,11 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { Nav, Platform, ModalController, AlertController, ToastController } from 'ionic-angular';
+import { 
+    Nav, 
+    Platform, 
+    ModalController, 
+    AlertController, 
+    ToastController,
+    LoadingController} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,12 +23,10 @@ import { ServerService } from '../app/server.service';
     templateUrl: 'app.html'
 })
 export class MyApp implements OnInit {
+    // @ViewChild(Nav) nav: Nav;
     @ViewChild(Nav) nav: Nav;
-
     rootPage: any = HomePage;
-
-    private currentUser;
-
+    public currentUser;
     pages: Array<{title: string, component: any}>;
 
     constructor(
@@ -32,7 +36,8 @@ export class MyApp implements OnInit {
         public platform: Platform, 
         public statusBar: StatusBar, 
         public splashScreen: SplashScreen,
-        private serverService: ServerService 
+        private serverService: ServerService,
+        public loadingCtrl: LoadingController
     ) {
         this.initializeApp();
       
@@ -45,8 +50,6 @@ export class MyApp implements OnInit {
           { title: 'Q&A', component: QuestionPage }, //4
           { title: '관리페이지', component: ManagerPage }, //5
         ];
-        // 로컬 스토리지 (Auth값 체크 추가예정)
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 
     initializeApp() {
@@ -84,6 +87,7 @@ export class MyApp implements OnInit {
                         this.presentLogoutToast('bottom');
                         localStorage.removeItem('currentUser');
                         window.location.reload();
+                        this.loading();
                     }
                 }
             ]
@@ -140,7 +144,19 @@ export class MyApp implements OnInit {
     }
 
     ngOnInit() {
-
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
+
+    loading() {
+        let loading = this.loadingCtrl.create({
+            content: 'Loading...'
+          });
+        
+          loading.present();
+        
+          setTimeout(() => {
+            loading.dismiss();
+          }, 3000);
+      }
 }
 

@@ -12,11 +12,19 @@ export class MessageService {
     }
 
     messageList(user_id: number): Promise<any> {
-        let url = this.URL + 'message/' + user_id;
-        return this.http.post(url, null)
+        let url = this.URL + 'message/list/' + user_id;
+        return this.http.get(url)
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError);
+    }
+
+    messageRead(message_id: number): Promise<any> {
+        let url = this.URL + 'message/' + message_id;
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError)
     }
 
     getUsername(u_id: number): Promise<any> {

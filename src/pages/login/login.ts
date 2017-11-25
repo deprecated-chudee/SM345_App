@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { 
-    NavController, 
-    ModalController, 
-    AlertController, 
-    ToastController, 
-    ViewController,
-    App } from 'ionic-angular';
+  NavController, 
+  ModalController, 
+  AlertController, 
+  ToastController, 
+  ViewController,
+  LoadingController,
+  App 
+} from 'ionic-angular';
 
 import { HomePage } from '.././home/home';
 import { MyApp } from '../../app/app.component';
@@ -15,80 +17,74 @@ import { Message } from '../../models/message';
 import { ServerService } from '../../app/server.service';
 
 @Component({
-    templateUrl: 'login.html'
+  templateUrl: 'login.html'
 })
-export class LoginPage {
-    private user: User = new User(0,"",0,"");
-    private message: Message = new Message;
-    private login_record: number = 0;
-    private password: string = "";
-    ServerService: ServerService;   
+export class LoginPage implements OnInit {
+  public user: User;
+  private message: Message;
+  private login_record: number = 0;
 
-    constructor(
-        public app: App, 
-        private serverService: ServerService, 
-        private http: Http, 
-        public navCtrl: NavController, 
-        public appCtrl: App, 
-        public toastCtrl: ToastController, 
-        public alertCtrl: AlertController, 
-        public modalCtrl: ModalController,
-        public viewCtrl: ViewController
-    ) { 
-      this.http = http;
-      this.serverService = serverService;          
-      this.user = new User(0,"",0,"");
-      this.navCtrl = navCtrl;
-      this.message = new Message;
-    }
+  constructor(
+    public app: App, 
+    private serverService: ServerService, 
+    private http: Http, 
+    public navCtrl: NavController, 
+    public appCtrl: App, 
+    public toastCtrl: ToastController, 
+    public alertCtrl: AlertController, 
+    public modalCtrl: ModalController,
+    public viewCtrl: ViewController,
+    public loadingCtrl: LoadingController,
+  ) { }
 
-    //로그인
+  ngOnInit() {
+    this.user = new User();
+    this.message = new Message();
+  }
+
+  //로그인
   signIn(){
-    this.serverService.getLoginrecord(this.user)
-    .then(message =>
-    {
-      if(message.key == -1)
-        this.presentLoginToast(message);
-      else if(message.key == -2)
-        this.presentLoginToast(message);
-      else if(message.key == -3)
-        this.presentLoginToast(message);
-      else if(message.key == -4)
-        this.presentLoginToast(message);
-      else{
-        this.login_record = message.login_record;
-        if(this.login_record == 0)
-          this.showPasswordAlert();
-        else{
-          this.serverService.makeLogin(this.user)
-          .then(message =>
-          {  
-          if(message.key == -1)
+    if (typeof this.user.user_id !== 'number' && isNaN(Number(this.user.user_id)) !== false) {
+      this.UserIdToast('유저아이디를 숫자로 입력해 주세요.')
+    } else {
+      this.loading()
+      this.serverService.getLoginrecord(this.user)
+      .then(message =>
+      {
+        if(message.key == -1)
           this.presentLoginToast(message);
-          if(message.key == 2)
+        else if(message.key == -2)
           this.presentLoginToast(message);
-          if(message.key == 0){
-      
-          localStorage.setItem('currentUser', JSON.stringify({ 
-            USERID: message.user_id,
-            USERNAME: message.user_name,
-            USERAUTH: message.user_auth}));
-
+        else if(message.key == -3)
           this.presentLoginToast(message);
+        else if(message.key == -4)
+          this.presentLoginToast(message);
+        else {
+          this.login_record = message.login_record;
           
-          //this.navCtrl.push(HomePage);
-          //this.appCtrl.getRootNav().setRoot(HomePage);
-          //window.location.reload();
-
-          this.presentLoginToast(message);
-          this.appCtrl.getRootNav().setRoot(MyApp);
-          window.location.reload();
+          if(this.login_record == 0) this.showPasswordAlert();
+          else {
+            this.serverService.makeLogin(this.user)
+            .then(message =>
+            {  
+              if(message.key == -1) this.presentLoginToast(message);
+              if(message.key == 2) this.presentLoginToast(message);
+              if(message.key == 0) {
+        
+                localStorage.setItem('currentUser', JSON.stringify({ 
+                  USERID: message.user_id,
+                  USERNAME: message.user_name,
+                  USERAUTH: message.user_auth}));
+  
+                  this.presentLoginToast(message);
+                  this.appCtrl.getRootNav().setRoot(MyApp);
+                  window.location.reload();
+                }
+            });
           }
-        });
         }
-      }
+      }) 
     }
-     ) 
   }  
 
   dismiss() {
@@ -96,12 +92,21 @@ export class LoginPage {
   }
 
   presentLoginToast(message) {
-      let toast = this.toastCtrl.create({
+    let toast = this.toastCtrl.create({
       message: message.title,
       duration: 3000,
       position: 'bottom',
-      });
-      toast.present();
+    });
+    toast.present();
+  }
+
+  UserIdToast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+    });
+    toast.present();
   }
 
   openHomePage() {
@@ -135,34 +140,40 @@ export class LoginPage {
              }
           },
           {
-             text: '확인',
-             handler: data => {
-              
-                    this.user.user_password = data['newPassword'];
-                    this.serverService.updatePassword(this.user)
-                    .then(message =>
-                    {
-                      this.presentLoginToast(message);
+            text: '확인',
+            handler: data => {
+              this.user.user_password = data['newPassword'];
+              this.serverService.updatePassword(this.user)
+                .then(message =>
+                {
+                  this.presentLoginToast(message);
 
-                      localStorage.setItem('currentUser', JSON.stringify({ 
-                        USERID: message.user_id,
-                        USERNAME: message.user_name,
-                        USERAUTH: message.user_auth
-                     }));
-                     this.presentLoginToast(message);
-                     this.appCtrl.getRootNav().setRoot(MyApp);
-                     window.location.reload();
+                  localStorage.setItem('currentUser', JSON.stringify({ 
+                    USERID: message.user_id,
+                    USERNAME: message.user_name,
+                    USERAUTH: message.user_auth
+                  }));
+                  this.presentLoginToast(message);
+                  this.appCtrl.getRootNav().setRoot(MyApp);
+                  window.location.reload();
 
-                    });
-                  }
-               // this.navCtrl.push(HomePage);
-               // this.appCtrl.getRootNav().setRoot(HomePage);
-               // window.location.reload();
-              
-                }  
-       ]
-      
+                });
+            }
+          }
+       ]  
     });
     prompt.present();
+  }
+
+  loading() {
+    let loading = this.loadingCtrl.create({
+        content: 'Loading...'
+      });
+    
+      loading.present();
+    
+      setTimeout(() => {
+        loading.dismiss();
+      }, 3000);
   }
 }

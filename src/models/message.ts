@@ -1,4 +1,4 @@
-export class Message{
+export class Message {
     title: string;
     key: number;
     user_id: number;
