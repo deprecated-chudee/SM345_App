@@ -227,5 +227,22 @@
         vertical-align: middle;
         margin-right: 16px;
     }
+
+    button.submitButton.disable-hover.button.button-md.button-default.button-default-md,
+    button.submitButton.disable-hover.button.button-ios.button-default.button-default-ios {
+        background: #38484f;
+        height: 20px;
+        vertical-align: middle;
+        font-size: 10px;
+        margin: 0px;
+    }
+
+    button.submitButton span.button-inner{
+        font-size: 10px;
+    }
+
+    ion-icon.link-icon.icon.icon-md.ion-md-add-circle.item-icon {
+        color: #38484f;
+    }
     
 }

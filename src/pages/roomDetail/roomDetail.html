@@ -68,10 +68,14 @@
             <ion-icon item-end *ngIf="USERAUTH === 1" name="md-add-circle" class="link-icon" (click)="openReport()"></ion-icon>            
     </ion-list-header>
 
+    <!-- 결과보고서 파일업로드 -->
     <ion-item *ngIf="sort==true">
-            <ion-icon name="ios-link" class="link-icon"></ion-icon>
             <input type="file" id="upload" name="uploadFile" file-upload multiple/>
+            <button ion-button class="submitButton" (click)="reportSave()">제출하기</button>
     </ion-item>
+
+    <!-- 파일업로드 저장버튼 -->
+
 
     <table class="reportTable">
             <tr>

@@ -25,7 +25,8 @@ export class RoomDetailPage {
     public navParams: NavParams, 
     public appCtrl: App, 
     public viewCtrl: ViewController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public navCtrl: NavController
   ) {
     this.selectedRoom = this.navParams.get("selectedRoom");
     this.room = this.navParams.get("room");
@@ -77,6 +78,7 @@ export class RoomDetailPage {
       }
   }
 
+  //멘티 신청
   joinMentee() {
     this.mentoroomService.joinMentee(this.selectedRoom.mentoroom_id, this.USERID)
       .then(response => this.Toast(response))
@@ -105,6 +107,14 @@ export class RoomDetailPage {
   //보고서 제출 파일첨부 창 띄우기
   openReport() {
     this.sort = true;
+  }
+
+  //보고서 파일 제출하기
+  reportSave() {
+    this.Toast('보고서 제출이 완료되었습니다.');
+    setTimeout(() => { 
+      this.dismiss();
+    }, 500);
   }
 
 }
