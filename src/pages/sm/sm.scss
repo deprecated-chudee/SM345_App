@@ -58,6 +58,13 @@
     }
 }
 
-ion-list-header.item.item-ios.list-header.list-header-ios {
+ion-list-header.item.item-ios.list-header.list-header-ios,
+ion-list-header.item.item-md.list-header.list-header-md {
     padding-left: 0px;
+}
+
+
+.header-sm .home_logo_wrapper {
+    text-align: center;
+    width: 88%;
 }
