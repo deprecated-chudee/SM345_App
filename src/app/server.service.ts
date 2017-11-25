@@ -19,7 +19,6 @@ export class ServerService {
 
     constructor(private http: Http) { 
     }
-
     makeLogin(user: User): Promise<Message> {
         let url = this.URL + 'login';
         return this.http.post(url, user)
@@ -28,9 +27,9 @@ export class ServerService {
             .catch(this.handleError);
     }
 
-    getLoginrecord(user_id: number): Promise<Message> {
-        let url = this.URL + 'login_record/' + user_id;
-        return this.http.get(url)
+    getLoginrecord(user: User): Promise<Message> {
+        let url = this.URL + 'login_record/';
+        return this.http.post(url, user)
               .toPromise()
               .then(response => response.json() as Message)
               .catch(this.handleError);
