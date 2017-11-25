@@ -11,7 +11,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="page-roomDetail">
+<ion-content class="page-roomDetail">
     <table class="roomDetailTable">
         <tr>
             <td rowspan="7"><img src="assets/img/book/python.png" /></td>
@@ -38,7 +38,8 @@
         <tr>
             <td>
                 <b>현재팀원 : </b>
-                {{selectedRoom.person_count}}
+                {{selectedRoom.person_count}}명
+                <button ion-button class="fileButton2" (click)="mentiListCheck()">팀원보기</button>
             </td>
         </tr>
         <tr>
@@ -61,13 +62,24 @@
     </div>
 
     <!--멘토/관리자 인터페이스-->
-    <div class="noAlarm" *ngIf= "USERAUTH == 1 || USERAUTH == 3">
+    <div class="noAlarm" *ngIf= "USERAUTH == 1 || USERAUTH == 3"> <!--멘토 및 관리자만 볼 수 있음-->
     <ion-list-header>
-            모임 결과보고서            
+            모임 결과보고서
+            <ion-icon item-end *ngIf="USERAUTH === 1" name="md-add-circle" class="link-icon" (click)="openReport()"></ion-icon>            
     </ion-list-header>
+
+    <!-- 결과보고서 파일업로드 -->
+    <ion-item *ngIf="sort==true">
+            <input type="file" id="upload" name="uploadFile" file-upload multiple/>
+            <button ion-button class="submitButton" (click)="reportSave()">제출하기</button>
+    </ion-item>
+
+    <!-- 파일업로드 저장버튼 -->
+
+
     <table class="reportTable">
             <tr>
-                <td>3차 모임 결과보고서</td>
+                <td>{{selectedRoom.team_name}} 결과보고서</td>
                 <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
                 <td rowspan="2" class="report-ing">확인중</td>
             </tr>
@@ -77,7 +89,7 @@
     </table>
     <table class="reportTable">
             <tr>
-                <td>3차 모임 결과보고서</td>
+                <td>{{selectedRoom.team_name}} 결과보고서</td>
                 <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
                 <td rowspan="2" class="report-reject">반려</td>
             </tr>
@@ -87,7 +99,7 @@
     </table>
     <table class="reportTable">
             <tr>
-                <td>2차 모임 결과보고서</td>
+                <td>{{selectedRoom.team_name}} 결과보고서</td>
                 <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
                 <td rowspan="2" class="report-end">확인<br/>완료</td>
             </tr>
@@ -97,7 +109,7 @@
     </table>
     <table class="reportTable">
             <tr>
-                <td>1차 모임 결과보고서</td>
+                <td>{{selectedRoom.team_name}} 결과보고서</td>
                 <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
                 <td rowspan="2" class="report-end">확인<br/>완료</td>
             </tr>
@@ -108,18 +120,13 @@
     </div>
 
     <!-- 멘티 신청 인터페이스 -->
-    <ion-item no-lines  *ngIf="USERAUTH === 0">
-        <button ion-button class="teamOk" (click)="joinMentee()">멘티 신청</button>
+    <ion-item no-lines *ngIf="USERAUTH === 0"> <!--*ngIf="USERAUTH === 0"-->
+        <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
     </ion-item>
 
     <!-- 멘티 신청 취소 인터페이스 -->
-    <ion-item no-lines  *ngIf="USERAUTH === 1">
-        <button ion-button class="teamNo" >멘티 신청</button>
-    </ion-item>
-
-    <!-- 멘토 인터페이스 -->
-    <ion-item no-lines  *ngIf="USERAUTH === 1">
-            <button ion-button class="teamOk" (click)="openRoomPage()">보고서 제출</button>
+    <ion-item no-lines *ngIf="USERAUTH === 2"> <!--*ngIf="USERAUTH === 2"-->
+        <button ion-button class="teamNo" >멘티 신청취소</button>
     </ion-item>
 
     <!-- 관리자 인터페이스 -->
@@ -178,5 +185,7 @@
             <button ion-button class="teamOk" (click)="openRoomPage()">설문 완료</button>
     </ion-item>
 -->
-    
+    <br/>
+    <br/>
+    <br/>
 </ion-content>

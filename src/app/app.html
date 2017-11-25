@@ -18,9 +18,10 @@
          <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>
          
           <!--로그인 했을 경우-->
-         <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 1" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘토</td>
-         <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 2" class="account_user"><b>{{currentUser.USERNAME}}</b></td>
-         <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 3" class="account_user"><b>{{currentUser.USERNAME}}</b><img src="assets/img/crown.png" class="account-icon"/></td>
+          <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 0" class="account_user"><b>{{currentUser.USERNAME}}</b></td>
+          <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 1" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘토</td>
+          <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 2" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘티</td>
+          <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 3" class="account_user"><b>{{currentUser.USERNAME}}</b><img src="assets/img/crown.png" class="account-icon"/></td>
     </tr>
     <tr>
          <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERID}}</b></td>

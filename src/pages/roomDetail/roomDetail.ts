@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, NavController, ViewController, NavParams, ToastController } from 'ionic-angular';
+import { App, NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';
 import { ServerService } from '../../app/server.service';
@@ -15,6 +15,7 @@ export class RoomDetailPage {
   private USERAUTH: number;
   private currentUser;
   private room: number;
+  sort: boolean = false;
 
   constructor(
     public app: App, 
@@ -23,7 +24,9 @@ export class RoomDetailPage {
     private mentoroomService: MentoroomService,
     public navParams: NavParams, 
     public appCtrl: App, 
-    public viewCtrl: ViewController
+    public viewCtrl: ViewController,
+    public alertCtrl: AlertController,
+    public navCtrl: NavController
   ) {
     this.selectedRoom = this.navParams.get("selectedRoom");
     this.room = this.navParams.get("room");
@@ -75,6 +78,7 @@ export class RoomDetailPage {
       }
   }
 
+  //멘티 신청
   joinMentee() {
     this.mentoroomService.joinMentee(this.selectedRoom.mentoroom_id, this.USERID)
       .then(response => this.Toast(response))
@@ -88,6 +92,29 @@ export class RoomDetailPage {
       position: 'bottom',
     });
     toast.present();
+  }
+
+  //팀원확인
+  mentiListCheck() {
+    let alert = this.alertCtrl.create({
+      title: 'Basic Alert',
+      subTitle: '기본 알림창입니다.',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
+
+  //보고서 제출 파일첨부 창 띄우기
+  openReport() {
+    this.sort = true;
+  }
+
+  //보고서 파일 제출하기
+  reportSave() {
+    this.Toast('보고서 제출이 완료되었습니다.');
+    setTimeout(() => { 
+      this.dismiss();
+    }, 500);
   }
 
 }
