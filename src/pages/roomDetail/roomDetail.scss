@@ -210,11 +210,6 @@
         text-decoration: underline;
     }
 
-    .label-ios {
-        margin: 11px 8px 11px 16px;
-        font-weight: bold;
-    }
-
     .item-md.item-block .item-inner,
     .item-ios.item-block .item-inner {
         margin-left: 16px;
@@ -243,6 +238,20 @@
 
     ion-icon.link-icon.icon.icon-md.ion-md-add-circle.item-icon {
         color: #38484f;
+    }
+
+    .label-ios,
+    .lebel-md {
+        margin: 11px 8px 11px 16px;
+        font-weight: bold;
+    }
+    
+    .label-md {
+        margin: 13px 8px 13px 16px;
+    }
+
+    .file-item .label-md {
+        margin: 13px 8px 13px 0px;
     }
     
 }

@@ -29,13 +29,13 @@
   </table>
 
   <ion-item no-lines>
-      <button menuClose clear ion-button item-right (click)="openLogout()">
+      <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openLogout()">
           <ion-icon name="md-log-out" class="account-icon"></ion-icon>
       </button>
-      <button menuClose clear ion-button item-right (click)="openMessage()">
+      <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openMessage()">
         <ion-icon name="md-mail" class="account-icon"></ion-icon>
       </button>
-      <button menuClose clear ion-button item-right (click)="showPasswordAlert()">
+      <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="showPasswordAlert()">
         <ion-icon name="ios-apps" class="account-icon"></ion-icon>
       </button>
   </ion-item>
