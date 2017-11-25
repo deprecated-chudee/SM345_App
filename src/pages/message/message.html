@@ -10,6 +10,11 @@
 </ion-header>    
 
 <ion-content class="page-message">
+    <div class="empty" *ngIf="messages.length == 0">
+        <h2>
+            쪽지가 없습니다 :)
+        </h2>
+    </div>
         <table class="noticeTable-in" *ngFor="let message of messages">
             <tr>
                 <td>

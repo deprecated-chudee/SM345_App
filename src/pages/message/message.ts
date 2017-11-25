@@ -12,7 +12,7 @@ import { MessageService } from '../../app/message.service';
 })
 export class MessagePage implements OnInit {
 
-    private messages;
+    private messages = [];
     private currentUser;
 
     constructor(
