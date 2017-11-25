@@ -42,23 +42,32 @@ export class LoginPage {
       this.message = new Message;
     }
 
-  //로그인
+    //로그인
   signIn(){
-    this.serverService.getLoginrecord(this.user.user_id)
+    this.serverService.getLoginrecord(this.user)
     .then(message =>
     {
-      this.login_record = message.login_record;
-      if(this.login_record == 0)
-      this.showPasswordAlert();
+      if(message.key == -1)
+        this.presentLoginToast(message);
+      else if(message.key == -2)
+        this.presentLoginToast(message);
+      else if(message.key == -3)
+        this.presentLoginToast(message);
+      else if(message.key == -4)
+        this.presentLoginToast(message);
       else{
-      this.serverService.makeLogin(this.user)
-      .then(message =>
-      { 
-        if(message.key == -1)
+        this.login_record = message.login_record;
+        if(this.login_record == 0)
+          this.showPasswordAlert();
+        else{
+          this.serverService.makeLogin(this.user)
+          .then(message =>
+          {  
+          if(message.key == -1)
           this.presentLoginToast(message);
-        if(message.key == 2)
+          if(message.key == 2)
           this.presentLoginToast(message);
-        if(message.key == 0){
+          if(message.key == 0){
       
           localStorage.setItem('currentUser', JSON.stringify({ 
             USERID: message.user_id,
@@ -78,9 +87,9 @@ export class LoginPage {
         });
         }
       }
-     ) }
-  
-  
+    }
+     ) 
+  }  
 
   dismiss() {
     this.viewCtrl.dismiss();
@@ -128,33 +137,32 @@ export class LoginPage {
           {
              text: '확인',
              handler: data => {
-              //비번이 기존꺼랑 일치하는지 여부 틀리면 틀리다.
               
-              this.user.user_password = data['newPassword'];
-              this.serverService.updatePassword(this.user)
-              .then(message =>
-              {
-                this.presentLoginToast(message);
+                    this.user.user_password = data['newPassword'];
+                    this.serverService.updatePassword(this.user)
+                    .then(message =>
+                    {
+                      this.presentLoginToast(message);
 
-                localStorage.setItem('currentUser', JSON.stringify({ 
-                  USERID: message.user_id,
-                  USERNAME: message.user_name,
-                  USERAUTH: message.user_auth
-              }));
+                      localStorage.setItem('currentUser', JSON.stringify({ 
+                        USERID: message.user_id,
+                        USERNAME: message.user_name,
+                        USERAUTH: message.user_auth
+                     }));
+                     this.presentLoginToast(message);
+                     this.appCtrl.getRootNav().setRoot(MyApp);
+                     window.location.reload();
 
+                    });
+                  }
                // this.navCtrl.push(HomePage);
                // this.appCtrl.getRootNav().setRoot(HomePage);
                // window.location.reload();
-                
-                 this.presentLoginToast(message);
-                 this.appCtrl.getRootNav().setRoot(MyApp);
-                 window.location.reload();
-               
-            });
-            }                   
-          }
+              
+                }  
        ]
+      
     });
     prompt.present();
-}
+  }
 }
