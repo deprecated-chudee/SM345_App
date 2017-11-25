@@ -14,16 +14,14 @@ import { Mentoroom } from '../../models/mentoroom';
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
-  serverService: ServerService;
   private articles: Article[] =[];
   private mentorooms: Mentoroom[];
 
   constructor(
     public navCtrl: NavController,
-    serverService: ServerService,
+    private serverService: ServerService,
     private mentoroomService: MentoroomService,
   ) {
-    this.serverService = serverService;
   }
 
   ngOnInit() {

@@ -15,7 +15,6 @@ import { Article } from '../../models/article';
 export class ReadingPage implements OnInit {
   private id;
   private board_id;
-  serverService: ServerService;
   private article: Article;
   private currentUser;
   private USERID;
@@ -24,15 +23,22 @@ export class ReadingPage implements OnInit {
 
   toggleEdit: boolean = false;
 
-  constructor(public viewCtrl: ViewController, public app: App, public toastCtrl: ToastController, public alertCtrl: AlertController, serverService: ServerService, public navParams: NavParams, public navCtrl: NavController, public actionSheetCtrl: ActionSheetController) {
+  constructor(
+    public viewCtrl: ViewController, 
+    public app: App, 
+    public toastCtrl: ToastController, 
+    public alertCtrl: AlertController, 
+    private serverService: ServerService, 
+    public navParams: NavParams, 
+    public navCtrl: NavController, 
+    public actionSheetCtrl: ActionSheetController
+  ) {
     this.id = this.navParams.get("id");
     this.board_id = this.navParams.get("board_id");
     this.article = new Article(0,0,"","",0,0,0,"",0);
-    this.serverService = serverService;
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
     this.USERAUTH = this.currentUser.USERAUTH;
-    //this.comment = new Comment(0,0,"",0);
   }
 
   ngOnInit() {
@@ -195,7 +201,6 @@ export class ReadingPage implements OnInit {
           position: 'bottom',
       });
       toast.present();
-
-      this.toggleEdit = !this.toggleEdit
+      this.dismiss();
   }
 }
