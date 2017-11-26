@@ -7,6 +7,7 @@ import { ServerService } from './server.service';
 import { AdminService } from './admin.service';
 import { MessageService } from './message.service';
 import { MentoroomService } from './mentoroom.service';
+import { CommentService } from './comment.service';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -84,6 +85,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AdminService,
     MessageService,
     MentoroomService,
+    CommentService,
     //CoolStorageModule,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

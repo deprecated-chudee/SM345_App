@@ -27,71 +27,47 @@
     </div>
 
 
-    <!--댓글-->
+    <!-- Q&A게시판 덧글 -->
     <section class="commentTableWrapper" *ngIf="article.board_id == 3">
-        <ion-list (press)="presentCommentSheet()"> 
+        <ion-list *ngFor="let comment of comments" (press)="presentCommentSheet()">
             <table class="commentListTable">
                 <tr>
                     <td>
-                      홍길동
+                        {{ comment.comment_writer }}
                     </td>
                     <td>
-                        <span>2017-08-30 14:30</span>
+                        <span>{{ comment.timestamp | date:'yyyy-MM-dd HH:mm' }}</span>
                     </td>
                 </tr>         
                 <tr>	
-                    <td colspan="2"><div id="commentDiv">기본 기능 소개는 물론 프로그래밍할 때 필요한 사고방식에도 중점을 두고 설명하고 있으며, 설명하는 기능들이 어디서 어떻게 사용되는지도 쉽게 알 수 있도록 실제 사용 환경과 유사한 예제를 다루고 있다.</div></td>		
+                    <td colspan="2">
+                        <div id="commentDiv">
+                            {{ comment.comment_content }}
+                        </div>
+                    </td>		
                 </tr>
             </table>
         </ion-list>
-        <ion-list (press)="presentCommentSheet()"> 
-            <table class="commentListTable">
-                <tr>
-                    <td>
-                      홍길동
-                    </td>
-                    <td>
-                        <span>2017-08-30 14:30</span>
-                    </td>
-                </tr>         
-                <tr>	
-                    <td colspan="2"><div id="commentDiv">따라서 책을 처음 만났을 때 품었던 학습 의지를 끝까지 유지할 수 있을 것이다.</div></td>		
-                </tr>
-            </table>
-        </ion-list>
-        <ion-list (press)="presentCommentSheet()"> 
-            <table class="commentListTable">
-                <tr>
-                    <td>
-                      홍길동
-                    </td>
-                    <td>
-                        <span>2017-08-30 14:30</span>
-                    </td>
-                </tr>         
-                <tr>	
-                    <td colspan="2"><div id="commentDiv">안녕하세요. 댓글 예시입니다.</div></td>		
-                </tr>
-            </table>
-        </ion-list>
-        
     </section>
 
+    <!-- 덧글 -->
     <section class="commentWriteWrapper commentTableWrapper" *ngIf="article.board_id == 3">
-      <table class="comment_textarea_table">
-        <tr>
-          <td>
-              <ion-item no-lines>
-                  <ion-textarea class="comment_textarea" placeholder="댓글을 입력하세요."></ion-textarea>
-              </ion-item>
-          </td>
-          <td>
-              <button ion-button outline><ion-icon name="ios-send"></ion-icon></button>
-          </td>
-        </tr>
-      </table>
+        <table class="comment_textarea_table">
+            <tr>
+                <td>
+                    <ion-item no-lines>
+                        <ion-textarea class="comment_textarea" [(ngModel)]="createContent" placeholder="댓글을 입력하세요."></ion-textarea>
+                    </ion-item>
+                </td>
+                <td>
+                    <button ion-button outline (click)="commentCreate()">
+                        <ion-icon name="ios-send"></ion-icon>
+                    </button>
+                </td>
+            </tr>
+        </table>
 
-  </section>
+    </section>
 
     <!--공지사항 게시판일때-->
     <div class="buttonWrapper" *ngIf="article.board_id == 2">
