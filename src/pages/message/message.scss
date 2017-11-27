@@ -64,4 +64,11 @@ ion-icon.icon.icon-md.ion-md-mail {
         font-size: 1.5em;
         margin-right: 10px;
     }
+
+    .empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
 }

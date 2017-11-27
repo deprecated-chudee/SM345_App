@@ -27,7 +27,7 @@ export class WritePage {
     public toastCtrl: ToastController
   ) {
     this.board_id = this.navParams.get("board_id");
-    this.article = new Article(0,0,"","",0,0,0,"",0);
+    this.article = new Article(0, '', '', '');
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
   }
@@ -37,29 +37,34 @@ export class WritePage {
   }
 
   writeSubmit() {
-      this.article.board_id = this.board_id;
-      this.article.article_writer = this.USERID;
-      this.articleService.creatArticle(this.article);
-      this.presentToast('게시글이 등록되었습니다');
+    this.article.board_id = this.board_id;
+    this.article.article_writer = this.USERID;
+    this.articleService.creatArticle(this.article)
+      .then(() => {
+        this.Toast('게시글이 등록되었습니다');
+      })
+      .catch(e => {
+        console.error(e)
+      });
+    
 
-      if(this.board_id == 2){
-        setTimeout(() => { 
-          this.app.getRootNav().setRoot(NoticePage);
-          }, 300);
-          this.dismiss();
-          //this.navCtrl.pop();
-      }
-      if(this.board_id == 3){
-        setTimeout(() => { 
-          this.app.getRootNav().setRoot(QuestionPage);
-          }, 300);
-          this.dismiss();
-      }
+    if(this.board_id == 2){
+      setTimeout(() => { 
+        this.app.getRootNav().setRoot(NoticePage);
+        }, 300);
+        this.dismiss();
+    }
+    if(this.board_id == 3){
+      setTimeout(() => { 
+        this.app.getRootNav().setRoot(QuestionPage);
+        }, 300);
+        this.dismiss();
+    }
   }
 
-  presentToast(message) {
+  Toast(message) {
     let toast = this.toastCtrl.create({
-      message: message.title,
+      message: message,
       duration: 3000,
       position: 'bottom',
     });

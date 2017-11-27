@@ -25,7 +25,7 @@ export class SmEditPage {
         public alertCtrl: AlertController
     ) {
         this.board_id = this.navParams.get("board_id");
-        this.article = new Article(0,0,"","",0,0,0,"",0);
+        this.article = new Article(0, '', '', '');
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.USERID = this.currentUser.USERID;
     }
