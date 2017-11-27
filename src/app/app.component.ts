@@ -5,7 +5,8 @@ import {
     ModalController, 
     AlertController, 
     ToastController,
-    LoadingController} from 'ionic-angular';
+    LoadingController
+} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -17,7 +18,6 @@ import { QuestionPage } from '../pages/question/question';
 import { RoomPage } from '../pages/room/room';
 import { ManagerPage } from '../pages/manager/manager';
 import { MessagePage } from '../pages/message/message';
-import { ServerService } from '../app/server.service';
 
 @Component({
     templateUrl: 'app.html'
@@ -36,7 +36,6 @@ export class MyApp implements OnInit {
         public platform: Platform, 
         public statusBar: StatusBar, 
         public splashScreen: SplashScreen,
-        private serverService: ServerService,
         public loadingCtrl: LoadingController
     ) {
         this.initializeApp();

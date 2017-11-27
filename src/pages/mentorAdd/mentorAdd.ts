@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { App, NavController, ViewController, ToastController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { Mentoroom } from '../../models/mentoroom';
-import { ServerService } from '../../app/server.service';
+
+import { MentoroomService } from '../../services/mentoroom.service';
 
 @Component({
   templateUrl: 'mentorAdd.html'
@@ -23,7 +24,7 @@ export class MentorAddPage implements OnInit {
     public viewCtrl: ViewController, 
     public toastCtrl: ToastController, 
     public navCtrl: NavController, 
-    private serverService: ServerService
+    private mentoroomService: MentoroomService
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
@@ -42,7 +43,7 @@ export class MentorAddPage implements OnInit {
   openRoomPage() {
     this.mentoroom.mento_id = this.USERID;
     console.log(this.mentoroom.mento_id);
-    this.serverService.createMentoroom(this.mentoroom)
+    this.mentoroomService.createMentoroom(this.mentoroom)
       .then(message => {
         this.presentToast(message);
       });

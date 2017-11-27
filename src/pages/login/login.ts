@@ -13,20 +13,18 @@ import {
 import { HomePage } from '.././home/home';
 import { MyApp } from '../../app/app.component';
 import { User } from '../../models/user';
-import { Message } from '../../models/message';
-import { ServerService } from '../../app/server.service';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   templateUrl: 'login.html'
 })
 export class LoginPage implements OnInit {
   public user: User;
-  private message: Message;
   private login_record: number = 0;
 
   constructor(
     public app: App, 
-    private serverService: ServerService, 
+    private loginService: LoginService, 
     private http: Http, 
     public navCtrl: NavController, 
     public appCtrl: App, 
@@ -39,7 +37,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.user = new User();
-    this.message = new Message();
   }
 
   //로그인
@@ -48,7 +45,7 @@ export class LoginPage implements OnInit {
       this.UserIdToast('유저아이디를 숫자로 입력해 주세요.')
     } else {
       this.loading()
-      this.serverService.getLoginrecord(this.user)
+      this.loginService.getLoginrecord(this.user)
       .then(message =>
       {
         if(message.key == -1)
@@ -64,7 +61,7 @@ export class LoginPage implements OnInit {
           
           if(this.login_record == 0) this.showPasswordAlert();
           else {
-            this.serverService.makeLogin(this.user)
+            this.loginService.makeLogin(this.user)
             .then(message =>
             {  
               if(message.key == -1) this.presentLoginToast(message);
@@ -143,7 +140,7 @@ export class LoginPage implements OnInit {
             text: '확인',
             handler: data => {
               this.user.user_password = data['newPassword'];
-              this.serverService.updatePassword(this.user)
+              this.loginService.updatePassword(this.user)
                 .then(message =>
                 {
                   this.presentLoginToast(message);
