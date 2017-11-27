@@ -13,7 +13,7 @@ export class CommentService {
     constructor(private http: Http) {
     }
 
-    // 덧글 목록 가져오기
+    // 댓글 목록 가져오기
     commentList(article_id: number): Promise<Comment[]> {
         let url = this.URL + 'comment/list/' + article_id;
         return this.http.get(url)
@@ -22,7 +22,7 @@ export class CommentService {
             .catch(this.handleError)
     }
 
-    // 덧글 생성
+    // 댓글 생성
     commentCreate(comment: Comment) {
         let url = this.URL + 'comment/create';
         return this.http.post(url, comment)
@@ -30,15 +30,15 @@ export class CommentService {
             .catch(this.handleError)
     }
 
-    // 덧글 삭제
+    // 댓글 삭제
     commentDelete(comment_id: number) {
-        let url = this.URL + 'delete/' + comment_id;
+        let url = this.URL + 'comment/delete/' + comment_id;
         return this.http.get(url)
             .toPromise()
             .catch(this.handleError)
     }
 
-    // 덧글 수 조회
+    // 댓글 수 조회
     commentCount(comment_id: number): Promise<number> {
         let url = this.URL + 'CntComment/' + comment_id;
         return this.http.get(url)
@@ -47,9 +47,13 @@ export class CommentService {
             .catch(this.handleError)
     }
 
-    // 구현해야함
-    // commentRemove(): Promise<any> {
-    // }
+    // 댓글 수정
+    commentEdit(comment: Comment) {
+        let url = this.URL + 'comment/edit';
+        return this.http.post(url, comment)
+            .toPromise()
+            .catch(this.handleError)
+    }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

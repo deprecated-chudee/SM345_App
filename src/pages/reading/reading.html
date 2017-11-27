@@ -29,7 +29,7 @@
 
     <!-- Q&A게시판 덧글 -->
     <section class="commentTableWrapper" *ngIf="article.board_id == 3">
-        <ion-list *ngFor="let comment of comments" (press)="presentCommentSheet()">
+        <ion-list *ngFor="let comment of comments" (press)="presentCommentSheet(comment.id)">
             <table class="commentListTable">
                 <tr>
                     <td>
@@ -41,8 +41,14 @@
                 </tr>         
                 <tr>	
                     <td colspan="2">
-                        <div id="commentDiv">
+                        <div id="commentDiv" *ngIf="toggleCommentEdit === false">
                             {{ comment.comment_content }}
+                        </div>
+                        <div id="commentDiv" *ngIf="toggleCommentEdit === true">
+                            <ion-textarea [(ngModel)]="comment.comment_content"></ion-textarea>
+                            <button ion-button (click)="handleCommentEdit(comment.comment_content)">
+                                수정
+                            </button>
                         </div>
                     </td>		
                 </tr>
