@@ -69,9 +69,15 @@
             팀원 목록              
     </ion-list-header>
 
+    <ion-item class="menti_list">
+        <li>
+            {{mento_id}} {{mento_name}} <b>(멘토)</b>
+        </li>
+    </ion-item>
+
     <ion-item *ngFor="let m of mentis" class="menti_list">
         <li>
-        {{m.menti_id}} {{m.user_name}}
+            {{m.menti_id}} {{m.user_name}}
         </li>
     </ion-item>
 

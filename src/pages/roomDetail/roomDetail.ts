@@ -21,6 +21,7 @@ export class RoomDetailPage implements OnInit {
   private currentUser;
   private room: number;
   private mento_id;
+  private mento_name;
   sort: boolean = false;
 
   constructor(
@@ -41,6 +42,7 @@ export class RoomDetailPage implements OnInit {
     this.USERNAME = this.currentUser.USERNAME;
     this.USERAUTH = this.currentUser.USERAUTH;
     this.mento_id = this.selectedRoom.mento_id;
+    this.mento_name = this.selectedRoom.mento_name;
   }
 
   ngOnInit() {
