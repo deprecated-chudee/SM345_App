@@ -4,8 +4,10 @@ import { HomePage } from '.././home/home';
 import { WritePage } from '.././write/write';
 import { NoticePage } from '.././notice/notice'
 import { QuestionPage } from '.././question/question'
-import { ServerService } from '../../app/server.service';
-import { CommentService } from '../../app/comment.service';
+
+import { ArticleService } from '../../services/article.service';
+import { CommentService } from '../../services/comment.service';
+import { AdminService } from '../../services/admin.service';
 
 import { Article } from '../../models/article';
 import { Comment } from '../../models/comment';
@@ -25,8 +27,9 @@ export class ReadingPage implements OnInit {
   toggleEdit: boolean = false;
 
   constructor(
-    private serverService: ServerService, 
+    private articleService: ArticleService, 
     private commentService: CommentService,
+    private adminService: AdminService,
     public viewCtrl: ViewController, 
     public app: App, 
     public toastCtrl: ToastController, 
@@ -50,7 +53,7 @@ export class ReadingPage implements OnInit {
 
   // 게시글 정보 가져오기
   getArticle() {
-    this.serverService.getArticle(this.board_id, this.article_id)
+    this.articleService.getArticle(this.board_id, this.article_id)
       .then(article => this.article = article)
   }
 
@@ -61,7 +64,7 @@ export class ReadingPage implements OnInit {
 
   // 수정 완료
   editArticle() {
-      this.serverService.editArticle(this.article)
+      this.articleService.editArticle(this.article)
         .then(() => console.log('edit ok'))
       this.Toast('수정되었습니다.')
       this.dismiss();
@@ -126,7 +129,7 @@ export class ReadingPage implements OnInit {
         {
           text: '삭제하기',
           handler: () => {
-            this.serverService.deleteArticle(article.id, article.board_id);
+            this.articleService.deleteArticle(article.id);
             this.Toast('게시글이 삭제되었습니다');
             if(article.board_id == 2){
               setTimeout(() => { 
@@ -161,7 +164,7 @@ export class ReadingPage implements OnInit {
         {
           text: '완료하기',
           handler: () => {
-            this.serverService.updateAnswer(article.id, article.board_id);
+            this.adminService.updateAnswer(article.id);
             this.Toast('답변이 완료되었습니다');
             if(article.board_id == 2){
               setTimeout(() => { 

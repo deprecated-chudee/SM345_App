@@ -1,4 +1,4 @@
-export class MentoRoomInfo{
+export class MentoroomInfo{
     id: number;
     mento_start: string;
     mento_end: string;

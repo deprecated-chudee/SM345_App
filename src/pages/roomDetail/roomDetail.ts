@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { App, NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';
-import { ServerService } from '../../app/server.service';
-import { MentoroomService } from '../../app/mentoroom.service';
+
+import { AdminService } from '../../services/admin.service';
+import { MentoroomService } from '../../services/mentoroom.service';
+
 import { Mentoroom } from '../../models/mentoroom';
 
 @Component({
@@ -20,7 +22,7 @@ export class RoomDetailPage {
   constructor(
     public app: App, 
     public toastCtrl: ToastController, 
-    private serverService: ServerService, 
+    private adminService: AdminService, 
     private mentoroomService: MentoroomService,
     public navParams: NavParams, 
     public appCtrl: App, 
@@ -45,7 +47,7 @@ export class RoomDetailPage {
   }
 
   confirm() {
-    this.serverService.confirmMentoroom(this.selectedRoom);
+    this.adminService.confirmMentoroom(this.selectedRoom);
     this.Toast('개설이 완료되었습니다');
     if(this.room == 0){
     setTimeout(() => { 
@@ -62,7 +64,7 @@ export class RoomDetailPage {
   }
 
   reject(){
-    this.serverService.rejectMentoroom(this.selectedRoom.mentoroom_id);
+    this.adminService.rejectMentoroom(this.selectedRoom.mentoroom_id);
     this.Toast('개설이 반려되었습니다');
     if(this.room == 0){
       setTimeout(() => { 

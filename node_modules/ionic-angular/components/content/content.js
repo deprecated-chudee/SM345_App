@@ -48,7 +48,7 @@ function EventEmitterProxy_tsickle_Closure_declarations() {
  * The Content component provides an easy to use content area with
  * some useful methods to control the scrollable area. There should
  * only be one content in a single view component. If additional scrollable
- * elements are needed, use [ionScroll](../../scroll/Scroll).
+ * elements are need, use [ionScroll](../../scroll/Scroll).
  *
  *
  * The content area can also implement pull-to-refresh with the

@@ -2,28 +2,35 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController, ViewController, App, NavController, ModalController, AlertController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { SmEditPage } from '.././smEdit/smEdit';
-import { ServerService } from '../../app/server.service';
+
+import { ArticleService } from '../../services/article.service';
+
 import { Article } from '../../models/article';
 
 @Component({
   templateUrl: 'sm.html'
 })
 export class SmPage implements OnInit  {
-  serverService: ServerService;
   private articles: Article[] =[];
   private currentUser;
   private USERAUTH;
 
-  constructor(public toastCtrl: ToastController, public viewCtrl: ViewController, public app: App, public alertCtrl: AlertController, public navCtrl: NavController, public modalCtrl: ModalController, serverService: ServerService) {
-    this.serverService = serverService;
+  constructor(
+    private articleService: ArticleService,
+    public toastCtrl: ToastController, 
+    public viewCtrl: ViewController, 
+    public app: App, 
+    public alertCtrl: AlertController, 
+    public navCtrl: NavController, 
+    public modalCtrl: ModalController, 
+  ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERAUTH = this.currentUser.USERAUTH;
   }
 
   ngOnInit() {
-    this.serverService.getList(1).then(
-      article => { this.articles = article;
-    });
+    this.articleService.getArticleList(1)
+      .then(article => this.articles = article);
   }
 
   openHomePage() {
@@ -48,7 +55,7 @@ export class SmPage implements OnInit  {
           {
             text: '삭제하기',
             handler: () => {
-              this.serverService.deleteArticle(article.id, 1);
+              this.articleService.deleteArticle(article.id);
               this.presentToast('삭제되었습니다.');
                 setTimeout(() => { 
                   this.navCtrl.setRoot(SmPage);
