@@ -56,14 +56,13 @@
         margin-bottom: 10px;
         padding-right: 10px;
     }
-}
 
-.header-sm {
-    .home_logo_wrapper {
-        text-align: center;
-        width: 100%;
+    .container {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
+
 
 ion-list-header.item.item-ios.list-header.list-header-ios,
 ion-list-header.item.item-md.list-header.list-header-md {

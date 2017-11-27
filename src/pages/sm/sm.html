@@ -24,8 +24,8 @@
 </ion-header>
 
 <ion-content *ngIf="toggleSmEdit === false" class="page-sm">
-    <ion-list>
-        <div *ngFor="let a of articles">
+    <ion-list class="container">
+        <div *ngFor="let a of articles" class="item">
             <ion-list-header>
                     {{a.article_title}}
                     <ion-icon item-end name="ios-more-outline" (click)="presentSmSheet(a)" *ngIf= "USERAUTH == 3"></ion-icon>  
