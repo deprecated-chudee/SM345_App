@@ -89,9 +89,7 @@
         font-size: 1.6rem;
         color: #fff;
         background: #91A0AB;
-        margin-left: 16px;
-        margin-right: 16px;
-        width: calc(100% - 16px);
+        width: 100%;
     }
 
     .teamNo {
@@ -100,9 +98,7 @@
         font-size: 1.6rem;
         color: #fff;
         background: indianred;
-        margin-left: 16px;
-        margin-right: 16px;
-        width: calc(100% - 16px);
+        width: 100%;
     }
 
     .menteeButton.button-ios, 
@@ -208,12 +204,6 @@
         text-decoration: underline;
     }
 
-    .item-md.item-block .item-inner,
-    .item-ios.item-block .item-inner {
-        margin-left: 16px;
-        text-align: left;
-        border-bottom: none;
-    }
 
     ion-icon.link-icon.icon.icon-md.ion-md-add-circle.item-icon {
         vertical-align: middle;
@@ -258,6 +248,10 @@
     div.teamLink {
         margin-top: 20px;
         margin-bottom: -15px;
+    }
+    
+    .menteeButton .item-inner {
+        margin-left: 0px;
     }
     
 }

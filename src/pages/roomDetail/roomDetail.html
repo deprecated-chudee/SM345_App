@@ -125,12 +125,12 @@
     </div>
 
     <!-- 멘티 신청 인터페이스 -->
-    <ion-item no-lines *ngIf="USERAUTH === 0"> <!--*ngIf="USERAUTH === 0"-->
+    <ion-item no-lines *ngIf="USERAUTH === 0" class="menteeButton"> <!--*ngIf="USERAUTH === 0"-->
         <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
     </ion-item>
 
     <!-- 멘티 신청 취소 인터페이스 -->
-    <ion-item no-lines *ngIf="USERAUTH === 2"> <!--*ngIf="USERAUTH === 2"-->
+    <ion-item no-lines *ngIf="USERAUTH === 2" class="menteeButton"> <!--*ngIf="USERAUTH === 2"-->
         <button ion-button class="teamNo" >멘티 신청취소</button>
     </ion-item>
 
