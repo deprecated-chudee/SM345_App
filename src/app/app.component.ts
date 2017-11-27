@@ -5,7 +5,8 @@ import {
     ModalController, 
     AlertController, 
     ToastController,
-    LoadingController
+    LoadingController,
+    App
 } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -18,6 +19,8 @@ import { QuestionPage } from '../pages/question/question';
 import { RoomPage } from '../pages/room/room';
 import { ManagerPage } from '../pages/manager/manager';
 import { MessagePage } from '../pages/message/message';
+import { User } from '../models/user';
+import { LoginService } from '../services/login.service';
 
 @Component({
     templateUrl: 'app.html'
@@ -27,16 +30,20 @@ export class MyApp implements OnInit {
     @ViewChild(Nav) nav: Nav;
     rootPage: any = HomePage;
     public currentUser;
+    public user: User;
     pages: Array<{title: string, component: any}>;
 
     constructor(
+        public app: App, 
         public toastCtrl: ToastController, 
         public alertCtrl: AlertController, 
         public modalCtrl: ModalController, 
         public platform: Platform, 
         public statusBar: StatusBar, 
         public splashScreen: SplashScreen,
-        public loadingCtrl: LoadingController
+        public loadingCtrl: LoadingController,
+        private loginService: LoginService,
+        public appCtrl: App
     ) {
         this.initializeApp();
       
@@ -110,39 +117,53 @@ export class MyApp implements OnInit {
 
     showPasswordAlert() {
         let prompt = this.alertCtrl.create({
-            title: '비밀번호 변경',
-            inputs: [
+           title: '비밀번호 변경',
+           inputs: [
                 {
-                    name: 'password',
-                    type: 'password', 
-                    placeholder: '기존 비밀번호',
-                },
-                {
-                    name: 'newPassword',
-                    type: 'password', 
-                    placeholder: '새 비밀번호',
-                },
-                {
-                    name: 'newPasswordCheck',
-                    type: 'password', 
-                    placeholder: '비밀번호 확인',
+                  name: 'password',
+                  type: 'password',
+                  placeholder: '기존 비밀번호',
+               },
+               {
+                  name: 'newPassword',
+                  type: 'password', 
+                  placeholder: '새 비밀번호',
+               },
+               {
+                  name: 'newPasswordCheck',
+                  type: 'password', 
+                  placeholder: '비밀번호 확인',
+              }
+           ],
+           buttons: [
+              {
+                 text: '취소',
+                 handler: data => {
+                 }
+              },
+              {
+                text: '확인',
+                handler: data => {
+                  this.user.user_password = data['newPassword'];
+                  this.loginService.updatePassword(this.user)
                 }
-            ],
-            buttons: [
-                {
-                    text: '취소',
-                    handler: data => { }
-                },
-                {
-                    text: '확인',
-                    handler: data => { }
-                }
-            ]
+              }
+           ]  
         });
         prompt.present();
-    }
+      }
+
+      presentLoginToast(message) {
+        let toast = this.toastCtrl.create({
+          message: message.title,
+          duration: 3000,
+          position: 'bottom',
+        });
+        toast.present();
+      }
 
     ngOnInit() {
+        this.user = new User();
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     }
 

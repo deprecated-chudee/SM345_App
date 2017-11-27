@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>
-            [{{selectedRoom.team_name}}]
+            {{selectedRoom.team_name}}
         </ion-title> 
         <ion-buttons end>
             <button ion-button (click)="dismiss()">
@@ -39,7 +39,6 @@
             <td>
                 <b>현재팀원 : </b>
                 {{selectedRoom.person_count}}명
-                <button ion-button class="fileButton2" (click)="mentiListCheck()">팀원보기</button>
             </td>
         </tr>
         <tr>
@@ -56,10 +55,31 @@
     <ion-list-header>
             팀 소개 및 설명                
     </ion-list-header>
-    <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon><span class="youtube-span">팀 소개 영상보기</span>
+    
+    <div *ngIf="selectedRoom.team_link != null" class="teamLink">
+        <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon>
+        <span class="youtube-span">팀 소개 영상보기</span>
+    </div>
+
     <div padding class="teamInfo"> 
         {{selectedRoom.team_about}}
     </div>
+
+    <ion-list-header>
+            팀원 목록              
+    </ion-list-header>
+
+    <ion-item class="menti_list">
+        <li>
+            {{mento_id}} {{mento_name}} <b>(멘토)</b>
+        </li>
+    </ion-item>
+
+    <ion-item *ngFor="let m of mentis" class="menti_list">
+        <li>
+            {{m.menti_id}} {{m.user_name}}
+        </li>
+    </ion-item>
 
     <!--멘토/관리자 인터페이스-->
     <div class="noAlarm" *ngIf= "USERAUTH == 1 || USERAUTH == 3"> <!--멘토 및 관리자만 볼 수 있음-->
@@ -124,20 +144,33 @@
     </div>
    
     <!-- 멘티 신청 인터페이스 -->
+<<<<<<< HEAD
     <ion-item no-lines *ngIf="USERAUTH === 0">
+=======
+    <ion-item no-lines *ngIf="USERAUTH === 0" class="menteeButton"> 
+>>>>>>> 8794afb371f90e3869c3391957693f594c661208
         <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
     </ion-item>
 
     <!-- 멘티 신청 취소 인터페이스 -->
+<<<<<<< HEAD
     <ion-item no-lines *ngIf="USERAUTH === 2"> 
         <button ion-button class="teamNo" >멘티 신청취소</button>
     </ion-item>
+=======
+    <div *ngFor="let m of mentis">
+        <ion-item no-lines *ngIf="USERAUTH === 2 && m.menti_id==USERID" class="menteeButton"> 
+            <button ion-button class="teamNo" (click)="cancelMentee()">멘티 신청취소</button>
+        </ion-item>
+    </div>
+>>>>>>> 8794afb371f90e3869c3391957693f594c661208
 
     <!-- 관리자 인터페이스 -->
     <ion-item no-lines  *ngIf="USERAUTH === 3 && selectedRoom.team_confirm === 0" >
         <button ion-button class="teamOk" (click)="confirm()">개설승낙</button>
         <button ion-button class="teamNo" (click)="reject()">개설거절</button>
     </ion-item>
+
 
 
     <!--멘티 인터페이스-->
