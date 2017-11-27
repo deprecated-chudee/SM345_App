@@ -96,62 +96,76 @@
             <button ion-button class="submitButton" (click)="reportSave()">제출하기</button>
     </ion-item>
 
-    <!-- 파일업로드 저장버튼 -->
-
-
-    <table class="reportTable">
-            <tr>
-                <td>{{selectedRoom.team_name}} 결과보고서</td>
-                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-                <td rowspan="2" class="report-ing">확인중</td>
-            </tr>
-            <tr>
-                <td><span class="reportTime">2017-10-04</span></td>
-            </tr>
-    </table>
-    <table class="reportTable">
-            <tr>
-                <td>{{selectedRoom.team_name}} 결과보고서</td>
-                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-                <td rowspan="2" class="report-reject">반려</td>
-            </tr>
-            <tr>
-                <td><span class="reportTime">2017-09-20</span></td>
-            </tr>
-    </table>
-    <table class="reportTable">
-            <tr>
-                <td>{{selectedRoom.team_name}} 결과보고서</td>
-                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-                <td rowspan="2" class="report-end">확인<br/>완료</td>
-            </tr>
-            <tr>
-                <td><span class="reportTime">2017-09-20</span></td>
-            </tr>
-    </table>
-    <table class="reportTable">
-            <tr>
-                <td>{{selectedRoom.team_name}} 결과보고서</td>
-                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-                <td rowspan="2" class="report-end">확인<br/>완료</td>
-            </tr>
-            <tr>
-                <td><span class="reportTime">2017-09-20</span></td>
-            </tr>
-    </table>
+    <!-- 파일 업로드 -->
+    <div class="uploadWrapper">
+        <input type="file" class="inputfile" id="upload" name="uploadFile" (change)="onChange($event)" file-upload multiple />
+        <label for="upload" class="inputLabel"><strong>{{ fileLabel ? fileLabel : 'Choose a file' }}</strong></label>
+        <button ion-button class="button" (click)="save()"> 업로드 </button>
     </div>
 
+    <table class="reportTable">
+        <tr>
+            <td>{{selectedRoom.team_name}} 결과보고서</td>
+            <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
+            <td rowspan="2" class="report-ing">확인중</td>
+        </tr>
+        <tr>
+            <td><span class="reportTime">2017-10-04</span></td>
+        </tr>
+    </table>
+    <table class="reportTable">
+        <tr>
+            <td>{{selectedRoom.team_name}} 결과보고서</td>
+            <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
+            <td rowspan="2" class="report-reject">반려</td>
+        </tr>
+        <tr>
+            <td><span class="reportTime">2017-09-20</span></td>
+        </tr>
+    </table>
+    <table class="reportTable">
+        <tr>
+            <td>{{selectedRoom.team_name}} 결과보고서</td>
+            <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
+            <td rowspan="2" class="report-end">확인<br/>완료</td>
+        </tr>
+        <tr>
+            <td><span class="reportTime">2017-09-20</span></td>
+        </tr>
+    </table>
+    <table class="reportTable">
+        <tr>
+            <td>{{selectedRoom.team_name}} 결과보고서</td>
+            <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
+            <td rowspan="2" class="report-end">확인<br/>완료</td>
+        </tr>
+        <tr>
+            <td><span class="reportTime">2017-09-20</span></td>
+        </tr>
+    </table>
+    </div>
+   
     <!-- 멘티 신청 인터페이스 -->
+<<<<<<< HEAD
+    <ion-item no-lines *ngIf="USERAUTH === 0">
+=======
     <ion-item no-lines *ngIf="USERAUTH === 0" class="menteeButton"> 
+>>>>>>> 8794afb371f90e3869c3391957693f594c661208
         <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
     </ion-item>
 
     <!-- 멘티 신청 취소 인터페이스 -->
+<<<<<<< HEAD
+    <ion-item no-lines *ngIf="USERAUTH === 2"> 
+        <button ion-button class="teamNo" >멘티 신청취소</button>
+    </ion-item>
+=======
     <div *ngFor="let m of mentis">
         <ion-item no-lines *ngIf="USERAUTH === 2 && m.menti_id==USERID" class="menteeButton"> 
             <button ion-button class="teamNo" (click)="cancelMentee()">멘티 신청취소</button>
         </ion-item>
     </div>
+>>>>>>> 8794afb371f90e3869c3391957693f594c661208
 
     <!-- 관리자 인터페이스 -->
     <ion-item no-lines  *ngIf="USERAUTH === 3 && selectedRoom.team_confirm === 0" >

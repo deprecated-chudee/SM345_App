@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ActionSheetController, NavParams, AlertController, ToastController,App, ViewController } from 'ionic-angular';
+import { 
+  NavController, 
+  ActionSheetController, 
+  NavParams, 
+  AlertController, 
+  ToastController,
+  App, 
+  ViewController 
+} from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { WritePage } from '.././write/write';
 import { NoticePage } from '.././notice/notice'
@@ -23,8 +31,10 @@ export class ReadingPage implements OnInit {
   private USERAUTH;
   private comments: Comment[] = [];
   private createContent: string = '';
-
+  private editComment: string = '';
+  
   toggleEdit: boolean = false;
+  toggleCommentEdit: boolean = false;
 
   constructor(
     private articleService: ArticleService, 
@@ -35,7 +45,7 @@ export class ReadingPage implements OnInit {
     public toastCtrl: ToastController, 
     public alertCtrl: AlertController, 
     public navParams: NavParams, 
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public actionSheetCtrl: ActionSheetController
   ) {
     this.article_id = this.navParams.get("id");
@@ -62,6 +72,11 @@ export class ReadingPage implements OnInit {
     this.toggleEdit = !this.toggleEdit;
   }
 
+  // 댓글 수정 토글
+  handleToggleCommentEdit() {
+    this.toggleCommentEdit = !this.toggleCommentEdit;
+  }
+
   // 수정 완료
   editArticle() {
       this.articleService.editArticle(this.article)
@@ -70,41 +85,65 @@ export class ReadingPage implements OnInit {
       this.dismiss();
   }
 
-  // 덧글 목록
+  // 댓글 목록
   commentList() {
     this.commentService.commentList(this.article_id)
-      .then(comments => {
-        this.comments = comments
-        console.log(this.comments)
-      })
+      .then(comments => this.comments = comments)
   }
 
-  // 덧글 생성
+  // 댓글 생성
   commentCreate() {
     let comment: Comment = new Comment(this.article_id, this.USERID, this.createContent);
     this.commentService.commentCreate(comment)
       .then( () => {
-        this.Toast('덧글이 생성 되었습니다.');
+        this.Toast('댓글이 생성 되었습니다.');
         this.dismiss();
       })
+  }
+
+  // 댓글 수정
+  commentEdit(c) {
+    let comment: Comment = new Comment(c.content_id, 0, c.comment_content);
+    this.commentService.commentEdit(comment)
+      .then( () => {
+        this.Toast('댓글이 수정 되었습니다.');
+        this.dismiss();
+      })
+  }
+
+  // 댓글 삭제
+  commentDelete(comment_id: number) {
+    this.commentService.commentDelete(comment_id)
+      .then( () => {
+        this.Toast('댓글이 삭제 되었습니다.');
+        this.dismiss();
+      })
+  }
+
+  handleCommentEdit(content) {
+    this.commentEdit(content)
   }
 
   openHomePage() {
     this.navCtrl.setRoot(HomePage);
   }
 
-  presentCommentSheet() {
+  presentCommentSheet(comment_id) {
     let actionSheet = this.actionSheetCtrl.create({
       title: '작업 선택',
       buttons: [
         {
           text: '수정',
-          handler: () => { }
+          handler: () => { 
+            this.handleToggleCommentEdit()
+          }
         },
         {
           text: '삭제',
           role: 'destructive',
-          handler: () => { }
+          handler: () => { 
+            this.commentDelete(comment_id)
+          }
         },
         {
           text: '취소',

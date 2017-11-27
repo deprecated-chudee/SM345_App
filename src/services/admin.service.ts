@@ -65,8 +65,8 @@ export class AdminService {
     }
 
     // Q&A 답변완료
-    updateAnswer(id: number) {
-        let url = this.URL + 'list/' + id + '/answer';
+    updateAnswer(user_id: number) {
+        let url = this.URL + 'admin/' + user_id + '/answer';
         return this.http.get(url)
             .toPromise()
             .catch(this.handleError);

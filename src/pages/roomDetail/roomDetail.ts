@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+import { Component, ViewChild, ElementRef } from '@angular/core';
+=======
 import { OnInit, Component } from '@angular/core';
+>>>>>>> 8794afb371f90e3869c3391957693f594c661208
 import { App, NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';
@@ -23,6 +27,11 @@ export class RoomDetailPage implements OnInit {
   private mento_id;
   private mento_name;
   sort: boolean = false;
+
+  private formData;
+  fileLabel: string = '';
+
+  loading: boolean = false;
 
   constructor(
     public app: App, 
@@ -49,6 +58,35 @@ export class RoomDetailPage implements OnInit {
     console.log(this.mento_id);
     this.mentoroomService.menti_list(this.mento_id)
       .then(menti => this.mentis = menti);
+  }
+
+  onChange(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+      let file: File = fileList[0];
+      this.formData = new FormData();
+      this.formData.append('uploadFile', file, file.name);
+      this.fileLabel = file.name;
+    } else {
+      this.formData = undefined;
+      this.fileLabel = '';
+    }
+  } 
+
+  save() {
+    if(this.formData) {
+      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id, 1)
+        .then(() => {
+          this.Toast('업로드 성공');
+          this.dismiss();
+        })
+        .catch(err => {
+          this.Toast('업로드 실패');
+          this.dismiss();
+        }) 
+    } else {
+      this.Toast('파일이 없습니다.');
+    }
   }
 
   dismiss() {
