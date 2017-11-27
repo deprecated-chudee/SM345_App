@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ActionSheetController, NavParams, AlertController, ToastController,App, ViewController } from 'ionic-angular';
+import { 
+  NavController, 
+  ActionSheetController, 
+  NavParams, 
+  AlertController, 
+  ToastController,
+  App, 
+  ViewController 
+} from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { WritePage } from '.././write/write';
 import { NoticePage } from '.././notice/notice'
@@ -24,7 +32,7 @@ export class ReadingPage implements OnInit {
   private comments: Comment[] = [];
   private createContent: string = '';
   private editComment: string = '';
-
+  
   toggleEdit: boolean = false;
   toggleCommentEdit: boolean = false;
 
@@ -37,7 +45,7 @@ export class ReadingPage implements OnInit {
     public toastCtrl: ToastController, 
     public alertCtrl: AlertController, 
     public navParams: NavParams, 
-    public navCtrl: NavController, 
+    public navCtrl: NavController,
     public actionSheetCtrl: ActionSheetController
   ) {
     this.article_id = this.navParams.get("id");
@@ -94,8 +102,8 @@ export class ReadingPage implements OnInit {
   }
 
   // 댓글 수정
-  commentEdit(content) {
-    let comment: Comment = new Comment(this.article_id, this.USERID, content);
+  commentEdit(c) {
+    let comment: Comment = new Comment(c.content_id, 0, c.comment_content);
     this.commentService.commentEdit(comment)
       .then( () => {
         this.Toast('댓글이 수정 되었습니다.');
