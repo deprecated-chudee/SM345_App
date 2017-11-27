@@ -80,7 +80,7 @@
     ion-item.item.item-block.item-ios {
         padding-left: 0px;
         text-align: right;
-        margin-bottom: 5px;
+        border-bottom: 1px solid lightgray;
     }
 
     .teamOk {
@@ -116,11 +116,9 @@
     }
 
     table.reportTable {
-        width: calc(100% - 16px - 16px);
-        margin-left: 16px;
-        margin-right: 16px;
-        border: 0.55px solid black;
+        width: 100%;
         margin-top: -1px;
+        border-bottom: 1px solid lightgray;
     }
 
     .reportTable td {
@@ -130,13 +128,13 @@
     .reportTable tr:first-child td:first-child {
         padding-top: 10px;
         padding-bottom: 2px;
-        padding-left: 10px;
+        padding-left: 16px;
     }
 
     .reportTable tr:last-child td {
         padding-top: 2px;
         padding-bottom: 10px;
-        padding-left: 10px;
+        padding-left: 16px;
     }
 
     .reportTable td span.reportTime {
@@ -214,7 +212,6 @@
     .item-ios.item-block .item-inner {
         margin-left: 16px;
         text-align: left;
-        margin-bottom: 10px;
         border-bottom: none;
     }
 
@@ -252,6 +249,15 @@
 
     .file-item .label-md {
         margin: 13px 8px 13px 0px;
+    }
+
+    ion-list-header.item.item-md.list-header.list-header-md {
+        background: #EBEBEB;
+    }
+
+    div.teamLink {
+        margin-top: 20px;
+        margin-bottom: -15px;
     }
     
 }

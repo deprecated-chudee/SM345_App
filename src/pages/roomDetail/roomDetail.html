@@ -56,7 +56,12 @@
     <ion-list-header>
             팀 소개 및 설명                
     </ion-list-header>
-    <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon><span class="youtube-span">팀 소개 영상보기</span>
+    
+    <div *ngIf="selectedRoom.team_link != null" class="teamLink">
+        <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon>
+        <span class="youtube-span">팀 소개 영상보기</span>
+    </div>
+
     <div padding class="teamInfo"> 
         {{selectedRoom.team_about}}
     </div>
