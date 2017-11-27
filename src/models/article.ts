@@ -9,14 +9,10 @@ export class Article {
     user_name: string;
     answer_complete: number;
 
-    constructor(id, board_id, article_title, article_content, article_writer, article_hit, timestamp, user_name, answer_complete){
-        this.id=id;
-        this.article_title=article_title;
-        this.article_content=article_content;
-        this.article_writer=article_writer;
-        this.article_hit=article_hit;
-        this.timestamp=timestamp;
-        this.user_name=user_name;
-        this.answer_complete;
+    constructor(board_id, article_title, article_content, article_writer){
+        this.board_id = board_id
+        this.article_title = article_title;
+        this.article_content = article_content;
+        this.article_writer = article_writer;
     }
 }

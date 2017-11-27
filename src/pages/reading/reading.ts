@@ -46,14 +46,14 @@ export class ReadingPage implements OnInit {
   }
 
   ngOnInit() {
-    this.article = new Article(0,0,"","",0,0,0,"",0);
+    this.article = new Article(0, '', '', '');
     this.getArticle()
     this.commentList()
   }
 
   // 게시글 정보 가져오기
   getArticle() {
-    this.articleService.getArticle(this.board_id, this.article_id)
+    this.articleService.getArticle(this.article_id, this.USERID)
       .then(article => this.article = article)
   }
 
