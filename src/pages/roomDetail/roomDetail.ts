@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import { Component, ViewChild, ElementRef } from '@angular/core';
-=======
-import { OnInit, Component } from '@angular/core';
->>>>>>> 8794afb371f90e3869c3391957693f594c661208
+import { OnInit } from '@angular/core';
 import { App, NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';
