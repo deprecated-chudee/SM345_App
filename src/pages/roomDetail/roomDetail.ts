@@ -46,6 +46,7 @@ export class RoomDetailPage {
     this.viewCtrl.dismiss();
   }
 
+  //관리자 - 멘토방 개설 승낙
   confirm() {
     this.adminService.confirmMentoroom(this.selectedRoom);
     this.Toast('개설이 완료되었습니다');
@@ -63,6 +64,7 @@ export class RoomDetailPage {
     }
   }
 
+  //관리자 - 멘토방 개설 반려
   reject(){
     this.adminService.rejectMentoroom(this.selectedRoom.mentoroom_id);
     this.Toast('개설이 반려되었습니다');
@@ -82,9 +84,29 @@ export class RoomDetailPage {
 
   //멘티 신청
   joinMentee() {
-    this.mentoroomService.joinMentee(this.selectedRoom.mentoroom_id, this.USERID)
-      .then(response => this.Toast(response))
-      .catch(() => this.Toast('실패'))
+    this.mentoroomService.joinMentee(this.selectedRoom.mentoroom_id, this.USERID);
+    this.Toast('멘티신청이 완료되었습니다.');
+
+      // .then(response => this.Toast(response))
+      // .catch(() => this.Toast('실패'))
+  }
+
+  //관리자 - 멘토방 개설 승낙
+  confirm1() {
+    this.adminService.confirmMentoroom(this.selectedRoom);
+    this.Toast('개설이 완료되었습니다');
+    if(this.room == 0){
+    setTimeout(() => { 
+      this.app.getRootNav().setRoot(RoomPage);
+      }, 300);
+      this.dismiss();
+    }
+    if(this.room == 1){
+      setTimeout(() => { 
+        this.app.getRootNav().setRoot(ManagerPage);
+        }, 300);
+        this.dismiss();
+    }
   }
 
   Toast(message) {
