@@ -1,4 +1,5 @@
 .page-myPage {
+    background: #E9E9E9;
     .item-ios,
     .item-md,
     .item-wp {
@@ -52,7 +53,36 @@
     ion-list.login_list.list.list-ios,
     ion-list.login_list.list.list-md {
         text-align: center;
+        background: white;
     }
 
+    img.userImg {
+        margin-top: 50px;
+        margin-bottom: 10px;
+    }
 
+    ion-item.item.item-block.item-md,
+    ion-item.item.item-block.item-ios {
+        text-align: center;
+        line-height: 25px;
+    }
+
+    .item-md.item-block .item-inner {
+        padding-right: none;
+        border-bottom: 1px solid #dedede;
+    }
+
+    .label-md, .label-ios {
+        margin: 10px 8px 10px 8px;
+    }
+    
+    .userInfo .item-inner {
+        padding-bottom: 20px;
+    }
+
+    img.account-icon {
+        margin-left: 10px;
+        width: 18px;
+        vertical-align: text-top;
+    }
 }

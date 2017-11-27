@@ -11,27 +11,17 @@
 
 <ion-content class="page-myPage">
     <ion-list class="login_list">
-      <img src = "assets/img/user_blue.png" width="30%"/>
-      <ion-item>
-        <table class="sideAccountTable">
-            <tr>
-                <!--로그인 안했을 경우-->
-                <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>
-                
-                <!--로그인 했을 경우-->
-                <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 0" class="account_user"><b>{{currentUser.USERNAME}}</b></td>
-                <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 1" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘토</td>
-                <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 2" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘티</td>
-                <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 3" class="account_user"><b>{{currentUser.USERNAME}}</b><img src="assets/img/crown.png" class="account-icon"/></td>
-            </tr>
-            <tr>
-                <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERID}}</b></td>
-            </tr>
-        </table>
+      <img src = "assets/img/user_blue.png" width="30%" class="userImg"/>
+      <ion-item class="userInfo">
+        <span class="account_user"><b>{{currentUser.USERID}}</b></span>
+        <span *ngIf="currentUser.USERAUTH == 0" class="account_user"><b>{{currentUser.USERNAME}}</b></span>
+        <span *ngIf="currentUser.USERAUTH == 1" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘토</span>
+        <span *ngIf="currentUser.USERAUTH == 2" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘티</span>
+        <span *ngIf="currentUser.USERAUTH == 3" class="account_user"><b>{{currentUser.USERNAME}}</b><img src="assets/img/crown.png" class="account-icon"/></span>
       </ion-item>
-      <ion-item class="account_list" (click)="openMessage()"><ion-icon name="md-mail"></ion-icon>&nbsp;&nbsp;쪽지함</ion-item>      
-      <ion-item class="account_list" (click)="showPasswordAlert()"><ion-icon name="ios-key"></ion-icon>&nbsp;&nbsp;비밀번호 변경</ion-item>
-      <ion-item class="account_list" (click)="openLogout()"><ion-icon name="md-log-out"></ion-icon>&nbsp;&nbsp;로그아웃</ion-item>
+      <ion-item class="account_list" (click)="openMessage()"><ion-icon name="md-mail"></ion-icon><br/>쪽지함</ion-item>      
+      <ion-item class="account_list" (click)="showPasswordAlert()"><ion-icon name="ios-key"></ion-icon><br/>비밀번호 변경</ion-item>
+      <ion-item class="account_list" (click)="openLogout()"><ion-icon name="md-log-out"></ion-icon><br/>로그아웃</ion-item>
       
     </ion-list>
 
