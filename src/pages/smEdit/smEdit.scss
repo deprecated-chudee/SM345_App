@@ -36,10 +36,6 @@
         margin: 5px;
     }
 
-    ion-label {
-        font-size: 14px;
-    }
-
     .item-ios.item-block .item-inner,
     .item-md.item-block .item-inner {
         padding-right: 8px;
@@ -48,5 +44,19 @@
 
     .item-ios, .item-md {
         border-bottom: 0.55px solid #c8c7cc;
+    }
+
+    .item-input .label-md, .item-select .label-md, .item-datetime .label-md {
+        color: #999;
+        margin-left: 16px;
+    }
+
+    ion-label {
+        font-size: 15px;
+        color: black;
+    }
+
+    .item-md {
+        padding-left: 0px;
     }
 }

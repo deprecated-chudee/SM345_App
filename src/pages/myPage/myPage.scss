@@ -1,0 +1,58 @@
+.page-myPage {
+    .item-ios,
+    .item-md,
+    .item-wp {
+        padding-left:0;
+    }
+
+    p {
+        font-size:10px;
+    }
+
+    .ion-icon {
+        margin-left:30px;
+    }
+
+    .label-md, .label-wp, .label-ios {
+        margin: 10px 8px 10px 0;
+    }
+
+    ion-list.login_list.list.list-ios,
+    ion-list.login_list.list.list-md,
+    ion-list.login_list.list.list-wp {
+        margin-top: 0px;
+    }
+
+    .account_list ion-label.label.label-ios,
+    .account_list ion-label.label.label-md{
+        padding-left:20px;
+    }
+
+    .account_list ion-label.label.label-ios {
+        padding-bottom: 2px;
+    }
+
+    ion-list-header.item.item-md.list-header.list-header-md,
+    ion-list-header.item.item-wp.list-header.list-header-wp {
+        background: #f3f4f3;
+    }
+
+    .account_mylist {
+        background: #f3f4f3;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .boardTable {
+        width: 100%;
+        margin-top: 0px;
+        border-collapse: collapse;
+    }
+
+    ion-list.login_list.list.list-ios,
+    ion-list.login_list.list.list-md {
+        text-align: center;
+    }
+
+
+}

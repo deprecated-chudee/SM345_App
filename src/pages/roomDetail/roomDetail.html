@@ -58,7 +58,9 @@
     
     <div *ngIf="selectedRoom.team_link != null" class="teamLink">
         <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon>
-        <span class="youtube-span">팀 소개 영상보기</span>
+        <a href="{{selectedRoom.team_link}}">
+            <span class="youtube-span">팀 소개 영상보기</span>
+        </a>
     </div>
 
     <div padding class="teamInfo"> 

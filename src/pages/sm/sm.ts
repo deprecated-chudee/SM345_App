@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController, ViewController, App, NavController, ModalController, AlertController } from 'ionic-angular';
+import { ActionSheetController, NavParams, ToastController, ViewController, App, NavController, ModalController, AlertController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { SmEditPage } from '.././smEdit/smEdit';
 
@@ -11,9 +11,16 @@ import { Article } from '../../models/article';
   templateUrl: 'sm.html'
 })
 export class SmPage implements OnInit  {
+  private article: Article;
+  private board_id;
+  private USERID;
   private articles: Article[] =[];
   private currentUser;
   private USERAUTH;
+  private article_title: string;
+  private article_content: string;
+
+  toggleSmEdit: boolean = false;
 
   constructor(
     private articleService: ArticleService,
@@ -23,9 +30,17 @@ export class SmPage implements OnInit  {
     public alertCtrl: AlertController, 
     public navCtrl: NavController, 
     public modalCtrl: ModalController, 
+    public navParams: NavParams,
+    public actionSheetCtrl: ActionSheetController,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERAUTH = this.currentUser.USERAUTH;
+    this.board_id = this.navParams.get("board_id");
+    this.article = new Article(0, '', '', '');
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.USERID = this.currentUser.USERID;
+    this.article_title = this.article.article_title;
+    this.article_content = this.article.article_content;
   }
 
   ngOnInit() {
@@ -59,7 +74,7 @@ export class SmPage implements OnInit  {
               this.presentToast('삭제되었습니다.');
                 setTimeout(() => { 
                   this.navCtrl.setRoot(SmPage);
-                  }, 300);
+                }, 300);
             }
           }
         ]
@@ -68,8 +83,59 @@ export class SmPage implements OnInit  {
     
   }
 
+  // 수정 토글
+  handleToggleSmEdit(article) {
+    this.toggleSmEdit = !this.toggleSmEdit;
+  }
+
+  // 수정 완료
+  editArticle() {
+    this.articleService.editArticle(this.article)
+      .then(() => console.log('edit ok'))
+    this.Toast('수정되었습니다.');
+    setTimeout(() => { 
+      this.app.getRootNav().setRoot(SmPage);
+      }, 300);
+  }
+
+  // more 버튼 - 수정 및 삭제
+  presentSmSheet(article) {
+        let actionSheet = this.actionSheetCtrl.create({
+          title: '작업 선택',
+          buttons: [
+            {
+                text: '수정',
+                handler: () => {
+                  this.handleToggleSmEdit(article);
+                }
+            },{
+              text: '삭제',
+              role: 'destructive',
+              handler: () => {
+                this.showEditDelete(article);
+              }
+            }
+          ]
+        });
+        actionSheet.present();
+  }
+
+  openSmPage() {
+    this.app.getRootNav().setRoot(SmPage);
+  }
+
+
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  Toast(message) {
+    let toast = this.toastCtrl.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+    });
+    toast.present();
   }
 
   presentToast(message) {
@@ -80,6 +146,4 @@ export class SmPage implements OnInit  {
     });
     toast.present();
   }
-
-
 }

@@ -50,6 +50,7 @@
         padding-top: 0px;
         white-space: pre-line;
         line-height: 20px;
+        margin-bottom: 7px;
     }
 
     button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
@@ -79,7 +80,7 @@
     ion-item.item.item-block.item-ios {
         padding-left: 0px;
         text-align: right;
-        border-bottom: 1px solid lightgray;
+        border-bottom: 0.55px;
     }
 
     .menteeButton.button-ios, 
@@ -224,6 +225,7 @@
 
     ion-list-header.item.item-md.list-header.list-header-md {
         background: #EBEBEB;
+        margin-top: 0px;
     }
 
     div.teamLink {
