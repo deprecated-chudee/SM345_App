@@ -146,26 +146,16 @@
     </div>
    
     <!-- 멘티 신청 인터페이스 -->
-<<<<<<< HEAD
-    <ion-item no-lines *ngIf="USERAUTH === 0">
-=======
     <ion-item no-lines *ngIf="USERAUTH === 0" class="menteeButton"> 
->>>>>>> 8794afb371f90e3869c3391957693f594c661208
         <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
     </ion-item>
 
     <!-- 멘티 신청 취소 인터페이스 -->
-<<<<<<< HEAD
-    <ion-item no-lines *ngIf="USERAUTH === 2"> 
-        <button ion-button class="teamNo" >멘티 신청취소</button>
-    </ion-item>
-=======
     <div *ngFor="let m of mentis">
         <ion-item no-lines *ngIf="USERAUTH === 2 && m.menti_id==USERID" class="menteeButton"> 
             <button ion-button class="teamNo" (click)="cancelMentee()">멘티 신청취소</button>
         </ion-item>
     </div>
->>>>>>> 8794afb371f90e3869c3391957693f594c661208
 
     <!-- 관리자 인터페이스 -->
     <ion-item no-lines  *ngIf="USERAUTH === 3 && selectedRoom.team_confirm === 0" >
