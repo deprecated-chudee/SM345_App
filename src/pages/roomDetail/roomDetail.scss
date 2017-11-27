@@ -49,7 +49,6 @@
     div.teamInfo {
         padding-top: 0px;
         white-space: pre-line;
-        font-size: 14px;
         line-height: 20px;
     }
 
@@ -81,24 +80,6 @@
         padding-left: 0px;
         text-align: right;
         border-bottom: 1px solid lightgray;
-    }
-
-    .teamOk {
-        border-radius: 4px;
-        height: 2.8em;
-        font-size: 1.6rem;
-        color: #fff;
-        background: #91A0AB;
-        width: 100%;
-    }
-
-    .teamNo {
-        border-radius: 4px;
-        height: 2.8em;
-        font-size: 1.6rem;
-        color: #fff;
-        background: indianred;
-        width: 100%;
     }
 
     .menteeButton.button-ios, 
@@ -253,5 +234,47 @@
     .menteeButton .item-inner {
         margin-left: 0px;
     }
+
+    .menteeButton ion-label.label.label-md {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .teamOk {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: #91A0AB;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 10px;
+    }
+
+    .teamNo {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: indianred;
+        width: calc(100% - 13px);
+        text-align: center;
+    }
+
+    ion-item.menteeButton.item.item-block.item-md,
+    ion-item.menteeButton.item.item-block.item-ios {
+        border-bottom: none;
+    }
+
+    .menti_list {
+        text-align: left;
+    }
+
+    ion-item.menti_list.item.item-block.item-md,
+    ion-item.menti_list.item.item-block.item-ios {
+        text-align: left;
+        border-bottom: 0.55px;
+    }
     
 }
+

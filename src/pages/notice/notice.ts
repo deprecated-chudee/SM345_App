@@ -11,7 +11,7 @@ import { Article } from '../../models/article';
 @Component({
   templateUrl: 'notice.html'
 })
-export class NoticePage implements OnInit  {
+export class NoticePage implements OnInit {
   private articles: Article[] =[];
 
   constructor(

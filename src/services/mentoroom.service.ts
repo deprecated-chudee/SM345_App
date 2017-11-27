@@ -4,6 +4,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoRoomInfo';
+import { Menti } from '../models/menti';
 
 @Injectable()
 export class MentoroomService {
@@ -52,7 +53,7 @@ export class MentoroomService {
 
     // 멘티 신청
     joinMentee(mid: number, uid: number): Promise<string> {
-        let url = `${this.URL}/mentoroom/${mid}/${uid}/menti_join`;
+        let url = `${this.URL}mentoroom/${mid}/${uid}/menti_join`;
         return this.http.get(url)
             .toPromise()
             .then(response => response)
@@ -61,7 +62,7 @@ export class MentoroomService {
 
     // 멘티 신청 취소
     cancelMentee(mid: number, uid: number): Promise<string> {
-        let url = `${this.URL}/mentoroom/${mid}/${uid}/menti_cancel`;
+        let url = `${this.URL}mentoroom/${mid}/${uid}/menti_cancel`;
         return this.http.get(url)
             .toPromise()
             .then(response => response)
@@ -69,9 +70,20 @@ export class MentoroomService {
     }
 
     // 멘티 목록
-    // menteeList(): Promise<Mantee[]> {
+    menti_list(m_id: number): Promise<Menti[]> {
+        let url = `${this.URL}mentoroom/${m_id}/menti_list`;
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as Menti[])
+            .catch(this.handleError)
+    }
 
-    // }
+    // <멘티신청>
+    // api/mentoroom/:mid/:uid/menti_join - 멘티신청 [get] :mid- mento_id / :uid - menti_id , return: 멘티신청이 완료되었습니다
+    
+    // api/mentoroom/:mid/:uid/menti_canceal - 멘티신청취소 [get] :mid- mento_id / :uid - menti_id, return - 멘티신청이 취소되었습니다
+    
+    // api/mentoroom/:m_id/menti_list - 멘티목록 [get] mento_id를 받아서 멘티목록을 조회
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
