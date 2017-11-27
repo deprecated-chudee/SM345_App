@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { App, NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';
@@ -19,6 +19,11 @@ export class RoomDetailPage {
   private room: number;
   sort: boolean = false;
 
+  private formData;
+  fileLabel: string = '';
+
+  loading: boolean = false;
+
   constructor(
     public app: App, 
     public toastCtrl: ToastController, 
@@ -35,6 +40,35 @@ export class RoomDetailPage {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
     this.USERAUTH = this.currentUser.USERAUTH;
+  }
+
+  onChange(event) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+      let file: File = fileList[0];
+      this.formData = new FormData();
+      this.formData.append('uploadFile', file, file.name);
+      this.fileLabel = file.name;
+    } else {
+      this.formData = undefined;
+      this.fileLabel = '';
+    }
+  } 
+
+  save() {
+    if(this.formData) {
+      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id, 1)
+        .then(() => {
+          this.Toast('업로드 성공');
+          this.dismiss();
+        })
+        .catch(err => {
+          this.Toast('업로드 실패');
+          this.dismiss();
+        }) 
+    } else {
+      this.Toast('파일이 없습니다.');
+    }
   }
 
   dismiss() {

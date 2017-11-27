@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
 
 import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoRoomInfo';
@@ -72,6 +73,20 @@ export class MentoroomService {
     // menteeList(): Promise<Mantee[]> {
 
     // }
+
+    // 파일 업로드
+    fileUpload(formData, room_id, type) {
+        let headers = new Headers();
+        headers.append('enctype', 'multipart/form-data');
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({headers: headers});
+
+        let url = this.URL + 'fileupload/' + room_id + '/' + type;
+        return this.http.post(url, formData, options)
+            .toPromise()
+            .then(res => res)
+            .catch(this.handleError)
+    }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
