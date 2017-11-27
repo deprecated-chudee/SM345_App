@@ -1,4 +1,4 @@
-export class Article{
+export class Article {
     id: number;
     board_id: number;
     article_title: string;

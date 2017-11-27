@@ -4,48 +4,86 @@ import { HomePage } from '.././home/home';
 import { WritePage } from '.././write/write';
 import { NoticePage } from '.././notice/notice'
 import { QuestionPage } from '.././question/question'
-//import { EditPage } from '.././edit/edit';
 import { ServerService } from '../../app/server.service';
+import { CommentService } from '../../app/comment.service';
+
 import { Article } from '../../models/article';
-
-
+import { Comment } from '../../models/comment';
 @Component({
   templateUrl: 'reading.html'
 })
 export class ReadingPage implements OnInit {
-  private id;
+  private article_id: number;
   private board_id;
   private article: Article;
   private currentUser;
   private USERID;
   private USERAUTH;
-  private comment: Comment;
+  private comments: Comment[] = [];
+  private createContent: string = '';
 
   toggleEdit: boolean = false;
 
   constructor(
+    private serverService: ServerService, 
+    private commentService: CommentService,
     public viewCtrl: ViewController, 
     public app: App, 
     public toastCtrl: ToastController, 
     public alertCtrl: AlertController, 
-    private serverService: ServerService, 
     public navParams: NavParams, 
     public navCtrl: NavController, 
     public actionSheetCtrl: ActionSheetController
   ) {
-    this.id = this.navParams.get("id");
+    this.article_id = this.navParams.get("id");
     this.board_id = this.navParams.get("board_id");
-    this.article = new Article(0,0,"","",0,0,0,"",0);
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
     this.USERAUTH = this.currentUser.USERAUTH;
   }
 
   ngOnInit() {
-    this.serverService.getArticle(this.board_id, this.id).then(
-      article => { this.article = article;
-                  console.log(article.article_title);
-      });
+    this.article = new Article(0,0,"","",0,0,0,"",0);
+    this.getArticle()
+    this.commentList()
+  }
+
+  // 게시글 정보 가져오기
+  getArticle() {
+    this.serverService.getArticle(this.board_id, this.article_id)
+      .then(article => this.article = article)
+  }
+
+  // 수정 토글
+  handleToggleEdit() {
+    this.toggleEdit = !this.toggleEdit;
+  }
+
+  // 수정 완료
+  editArticle() {
+      this.serverService.editArticle(this.article)
+        .then(() => console.log('edit ok'))
+      this.Toast('수정되었습니다.')
+      this.dismiss();
+  }
+
+  // 덧글 목록
+  commentList() {
+    this.commentService.commentList(this.article_id)
+      .then(comments => {
+        this.comments = comments
+        console.log(this.comments)
+      })
+  }
+
+  // 덧글 생성
+  commentCreate() {
+    let comment: Comment = new Comment(this.article_id, this.USERID, this.createContent);
+    this.commentService.commentCreate(comment)
+      .then( () => {
+        this.Toast('덧글이 생성 되었습니다.');
+        this.dismiss();
+      })
   }
 
   openHomePage() {
@@ -55,20 +93,20 @@ export class ReadingPage implements OnInit {
   presentCommentSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       title: '작업 선택',
-      buttons: [{
-            text: '수정',
-            handler: () => {
-            }
-        },{
+      buttons: [
+        {
+          text: '수정',
+          handler: () => { }
+        },
+        {
           text: '삭제',
           role: 'destructive',
-          handler: () => {
-          }
-        },{
+          handler: () => { }
+        },
+        {
           text: '취소',
           role: 'cancel',
-          handler: () => {
-          }
+          handler: () => { }
         }
       ]
     });
@@ -147,34 +185,7 @@ export class ReadingPage implements OnInit {
 
   Toast(message) {
     let toast = this.toastCtrl.create({
-    message: message,
-    duration: 3000,
-    position: 'bottom',
-    });
-    toast.present();
-  }
-
-  openWritePage(id) {
-    //this.navCtrl.push(EditPage, { id: id });
-  }
-/*
-  commentSubmit(id) {
-    this.comment.article_id = id;
-    this.comment.comment_writer = this.USERID;
-    this.serverService.createComment(this.comment)
-    this.presentToast('댓글이 등록되었습니다');
-
-    setTimeout(() => { 
-      this.app.getRootNav().setRoot(ReadingPage);
-      }, 300);
-      this.dismiss();
-    //this.navCtrl.pop();
-  }
-  */
-
-  presentToast(message) {
-    let toast = this.toastCtrl.create({
-      message: message.title,
+      message: message,
       duration: 3000,
       position: 'bottom',
     });
@@ -183,24 +194,5 @@ export class ReadingPage implements OnInit {
 
   dismiss() {
     this.viewCtrl.dismiss();
-  }
-
-  // 수정 토글
-  handleToggleEdit() {
-    this.toggleEdit = !this.toggleEdit;
-  }
-
-  // 수정 완료
-  editArticle() {
-      this.serverService.editArticle(this.article)
-          .then(res => this.presentToast('수정되었습니다.'))
-      
-      let toast = this.toastCtrl.create({
-          message: '수정 돠었습니다.',
-          duration: 3000,
-          position: 'bottom',
-      });
-      toast.present();
-      this.dismiss();
   }
 }
