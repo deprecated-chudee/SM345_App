@@ -90,7 +90,7 @@
     </ion-list-header>
 
     <!-- 결과보고서 파일 업로드 -->
-    <div class="uploadWrapper" *ngIf= "USERAUTH == 1">
+    <div class="uploadWrapper" *ngIf= "USERAUTH == 1 && mento_id==USERID">
         <input type="file" class="inputfile" id="upload" name="uploadFile" (change)="onChange($event)" file-upload multiple />
         <label for="upload" class="inputLabel"><strong>{{ fileLabel ? fileLabel : 'Choose a file' }}</strong></label>
         <button ion-button class="button" (click)="save()"> 업로드 </button>
