@@ -9,7 +9,10 @@
       </button>
   </ion-buttons>
   <ion-title *ngIf="toggleSmEdit === true">SM사업소개 추가</ion-title>
-  <div *ngIf="toggleSmEdit === false" class="home_logo_wrapper" (click)="openHomePage()">
+  <div *ngIf="toggleSmEdit === false && USERAUTH == 3" class="home_logo_wrapper" (click)="openHomePage()">
+    <img src="assets/img/Logo2.png" class="home-logo"/>
+  </div>
+  <div *ngIf="toggleSmEdit === false && USERAUTH != 3" class="home_logo_wrapper2" (click)="openHomePage()">
     <img src="assets/img/Logo2.png" class="home-logo"/>
   </div>
   <ion-buttons end> <!-- 네비게이션 바에 가장 오른쪽에 만들겠다는 뜻 -->

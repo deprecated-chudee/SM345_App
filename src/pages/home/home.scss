@@ -226,6 +226,11 @@
         font-size: 13px;
     }
 
+    .home_logo_wrapper {
+        text-align: center;
+        width: 88%;
+    }
+
 }
 
 .toolbar-background.toolbar-background-md,
@@ -244,10 +249,7 @@ img.home-logo {
     width: 50%;
 }
 
-.home_logo_wrapper {
-    text-align: center;
-    width: 88%;
-}
+
 
 .toolbar-title.toolbar-title-ios,
 .toolbar-title.toolbar-title-md {
@@ -267,4 +269,13 @@ img.home-logo {
     width: 30%;
   }
 
-  
+.home_logo_wrapper {
+    text-align: center;
+}
+
+.home-header {
+    .home_logo_wrapper {
+        text-align: center;
+        width: 88%;
+    }
+}
