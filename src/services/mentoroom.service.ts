@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoRoomInfo';
 import { Menti } from '../models/menti';
-
+import { Upload } from '../models/upload';
 @Injectable()
 export class MentoroomService {
   
@@ -87,16 +87,24 @@ export class MentoroomService {
     // api/mentoroom/:m_id/menti_list - 멘티목록 [get] mento_id를 받아서 멘티목록을 조회
 
     // 파일 업로드
-    fileUpload(formData, room_id, type) {
-        let headers = new Headers();
-        headers.append('enctype', 'multipart/form-data');
-        headers.append('Accept', 'application/json');
-        let options = new RequestOptions({headers: headers});
+    fileUpload(upload: Upload) {
+        // let headers = new Headers();
+        // headers.append('enctype', 'multipart/form-data');
+        // headers.append('content-type', 'application/json');
+        // let options = new RequestOptions({headers: headers});
 
-        let url = this.URL + 'fileupload/' + room_id + '/' + type;
-        return this.http.post(url, formData, options)
+        let url = this.URL + 'mentoroom/fileupload/';
+        return this.http.post(url, upload)
             .toPromise()
-            .then(res => res)
+            .catch(this.handleError)
+    }
+
+    // 파일 리스트
+    fileList(room_id): Promise<Upload[]> {
+        let url = this.URL + 'mentoroom/filelist/' + room_id;
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json() as Upload[])
             .catch(this.handleError)
     }
 

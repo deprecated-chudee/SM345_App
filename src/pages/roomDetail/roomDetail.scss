@@ -208,73 +208,6 @@
         color: #38484f;
     }
 
-    .label-ios,
-    .lebel-md {
-        margin: 11px 8px 11px 16px;
-        font-weight: bold;
-    }
-    
-    .label-md {
-        margin: 13px 8px 13px 16px;
-    }
-
-    .file-item .label-md {
-        margin: 13px 8px 13px 0px;
-    }
-<<<<<<< HEAD
-}
-
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
-
-.inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
-}
-
-.inputfile:focus + label,
-.inputfile + label:hover {
-    background-color: red;
-}
-
-.inputfile + label {
-	cursor: pointer; /* "hand" cursor */
-}
-
-.inputfile + label * {
-	pointer-events: none;
-}
-
-.uploadWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px;
-}
-
-.inputLabel {
-    flex: 5;
-    line-height: 40px;
-    text-align: center;
-    height: 45px;
-    border-radius: 4px;
-}
-
-.button {
-    margin-left: 10px;
-    flex: 1;
-}
-=======
-
     ion-list-header.item.item-md.list-header.list-header-md {
         background: #EBEBEB;
     }
@@ -329,6 +262,68 @@
         border-bottom: 0.55px;
     }
     
+    .label-ios,
+    .lebel-md {
+        margin: 11px 8px 11px 16px;
+        font-weight: bold;
+    }
+    
+    .label-md {
+        margin: 13px 8px 13px 16px;
+    }
+
+    .file-item .label-md {
+        margin: 13px 8px 13px 0px;
+    }
 }
 
->>>>>>> 8794afb371f90e3869c3391957693f594c661208
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.inputfile + label * {
+	pointer-events: none;
+}
+
+.uploadWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+
+.inputLabel {
+    flex: 5;
+    line-height: 40px;
+    text-align: center;
+    height: 45px;
+    border-radius: 4px;
+}
+
+.button {
+    margin-left: 10px;
+    flex: 1;
+}
+    
