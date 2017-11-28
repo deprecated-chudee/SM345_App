@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Observable } from 'rxjs/Rx';
 
 import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoRoomInfo';
@@ -79,32 +78,33 @@ export class MentoroomService {
             .catch(this.handleError)
     }
 
-    // <멘티신청>
-    // api/mentoroom/:mid/:uid/menti_join - 멘티신청 [get] :mid- mento_id / :uid - menti_id , return: 멘티신청이 완료되었습니다
-    
-    // api/mentoroom/:mid/:uid/menti_canceal - 멘티신청취소 [get] :mid- mento_id / :uid - menti_id, return - 멘티신청이 취소되었습니다
-    
-    // api/mentoroom/:m_id/menti_list - 멘티목록 [get] mento_id를 받아서 멘티목록을 조회
-
     // 파일 업로드
-    fileUpload(upload: Upload) {
-        // let headers = new Headers();
-        // headers.append('enctype', 'multipart/form-data');
-        // headers.append('content-type', 'application/json');
-        // let options = new RequestOptions({headers: headers});
+    fileUpload(upload: FormData, room_id: number, file_kind: number) {
+        let headers = new Headers();
+        headers.append('enctype', 'multipart/form-data');
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({headers: headers});
 
-        let url = this.URL + 'mentoroom/fileupload/';
-        return this.http.post(url, upload)
+        let url = `${this.URL}/mentoroom/fileupload/${room_id}/${file_kind}`; 
+        return this.http.post(url, upload, options)
             .toPromise()
             .catch(this.handleError)
     }
 
     // 파일 리스트
-    fileList(room_id): Promise<Upload[]> {
+    fileList(room_id: number): Promise<Upload[]> {
         let url = this.URL + 'mentoroom/filelist/' + room_id;
         return this.http.get(url)
             .toPromise()
             .then(res => res.json() as Upload[])
+            .catch(this.handleError)
+    }
+
+    // 파일 삭제
+    fileDelete(room_id: number, file_id: number) {
+        let url = `${this.URL}/mentoroom/filedelete/${room_id}/${file_id}`;
+        return this.http.get(url)
+            .toPromise()
             .catch(this.handleError)
     }
 
