@@ -209,6 +209,60 @@
         color: #38484f;
     }
 
+    ion-list-header.item.item-md.list-header.list-header-md {
+        background: #EBEBEB;
+    }
+
+    div.teamLink {
+        margin-top: 20px;
+        margin-bottom: -15px;
+    }
+    
+    .menteeButton .item-inner {
+        margin-left: 0px;
+    }
+
+    .menteeButton ion-label.label.label-md {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .teamOk {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: #91A0AB;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 10px;
+    }
+
+    .teamNo {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: indianred;
+        width: calc(100% - 13px);
+        text-align: center;
+    }
+
+    ion-item.menteeButton.item.item-block.item-md,
+    ion-item.menteeButton.item.item-block.item-ios {
+        border-bottom: none;
+    }
+
+    .menti_list {
+        text-align: left;
+    }
+
+    ion-item.menti_list.item.item-block.item-md,
+    ion-item.menti_list.item.item-block.item-ios {
+        text-align: left;
+        border-bottom: 0.55px;
+    }
+    
     .label-ios,
     .lebel-md {
         margin: 11px 8px 11px 16px;
@@ -222,6 +276,9 @@
     .file-item .label-md {
         margin: 13px 8px 13px 0px;
     }
+<<<<<<< HEAD
+}
+=======
 
 
     ion-list-header.item.item-md.list-header.list-header-md {
@@ -279,6 +336,7 @@
         border-bottom: 0.55px;
     }
 
+>>>>>>> 81ee4a89769203273113ae5571c56dff3e3ac9af
 
 .inputfile {
 	width: 0.1px;
@@ -329,6 +387,9 @@
     margin-left: 10px;
     flex: 1;
 }
+<<<<<<< HEAD
+    
+=======
 
 ion-list-header.item.item-ios.list-header.list-header-ios, ion-list-header.item.item-md.list-header.list-header-md {
     padding-left: 0px;
@@ -389,3 +450,4 @@ ion-list-header.item.item-ios.list-header.list-header-ios, ion-list-header.item.
 
    
 }
+>>>>>>> 81ee4a89769203273113ae5571c56dff3e3ac9af
