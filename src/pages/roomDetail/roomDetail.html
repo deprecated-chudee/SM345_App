@@ -94,7 +94,7 @@
         <input type="file" class="inputfile" id="upload" name="uploadFile" (change)="onChange($event)" file-upload multiple />
         <label for="upload" class="inputLabel"><strong>{{ fileLabel ? fileLabel : 'Choose a file' }}</strong></label>
         <button ion-button class="button" (click)="save()"> 업로드 </button>
-    </div> -->
+    </div>
 
     <table class="reportTable" *ngFor="let file of files">
         <tr>
