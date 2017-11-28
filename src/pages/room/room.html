@@ -71,7 +71,7 @@
         </tr>
       </table>
     -->
-    <div *ngIf="currentUser.USERAUTH != 3">
+    <div *ngIf="currentUser.USERAUTH == 0">
       <button ion-button block (click)="openMentorAddPage()">멘토신청</button>
     </div>
 

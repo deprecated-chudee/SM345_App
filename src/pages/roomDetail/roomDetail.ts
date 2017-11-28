@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 
 import { OnInit, Component, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+=======
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { OnInit } from '@angular/core';
+>>>>>>> 81ee4a89769203273113ae5571c56dff3e3ac9af
 import { App, NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';

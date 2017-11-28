@@ -27,6 +27,7 @@ import { WritePage } from '../pages/write/write';
 import { MessageAddPage } from '../pages/messageAdd/messageAdd';
 import { SurveyPage } from '../pages/survey/survey';
 import { SmEditPage } from '../pages/smEdit/smEdit';
+import { MyPage } from '../pages/myPage/myPage';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -49,6 +50,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MessageAddPage,
     SurveyPage,
     SmEditPage,
+    MyPage,
    // EditPage,
   ],
   imports: [
@@ -76,6 +78,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MessageAddPage,
     SurveyPage,
     SmEditPage,
+    MyPage,
   ],
   providers: [
     StatusBar,

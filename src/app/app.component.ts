@@ -21,6 +21,7 @@ import { ManagerPage } from '../pages/manager/manager';
 import { MessagePage } from '../pages/message/message';
 import { User } from '../models/user';
 import { LoginService } from '../services/login.service';
+import { MyPage } from '../pages/myPage/myPage';
 
 @Component({
     templateUrl: 'app.html'
@@ -32,6 +33,7 @@ export class MyApp implements OnInit {
     public currentUser;
     public user: User;
     pages: Array<{title: string, component: any}>;
+    USERID: number;
 
     constructor(
         public app: App, 
@@ -56,6 +58,7 @@ export class MyApp implements OnInit {
           { title: 'Q&A', component: QuestionPage }, //4
           { title: '관리페이지', component: ManagerPage }, //5
         ];
+
     }
 
     initializeApp() {
@@ -146,6 +149,10 @@ export class MyApp implements OnInit {
                 handler: data => {
                   this.user.user_password = data['newPassword'];
                   this.loginService.updatePassword(this.user)
+                    .then(user =>
+                    {
+                      this.presentLoginToast(user.title);
+                    });
                 }
               }
            ]  
@@ -153,9 +160,9 @@ export class MyApp implements OnInit {
         prompt.present();
       }
 
-      presentLoginToast(message) {
+      presentLoginToast(user) {
         let toast = this.toastCtrl.create({
-          message: message.title,
+          message: user.title,
           duration: 3000,
           position: 'bottom',
         });
@@ -177,6 +184,10 @@ export class MyApp implements OnInit {
           setTimeout(() => {
             loading.dismiss();
           }, 3000);
-      }
+    }
+
+    openMyPage() {
+        this.nav.setRoot(MyPage);
+    }
 }
 
