@@ -22,6 +22,8 @@ import { User } from '../../models/user';
 import { Mentoroom } from '../../models/mentoroom';
 import { MentoroomInfo } from '../../models/mentoroomInfo';
 
+import * as _ from 'lodash';
+
 @Component({
     templateUrl: 'manager.html'
 })
@@ -32,10 +34,12 @@ export class ManagerPage implements OnInit{
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
     private selectedUser = [];
+    private selectedSearchedUser = [];
     private selectedRoom = [];
 
     selectedAllRoom: boolean = false; //멘토방목록 전체선택
     selectedAllUser: boolean = false; //사용자관리 전체선택
+    selectedAllSearchedUser: boolean = false; // 검색된 사용자관리 전체선택
     selectedAllReport: boolean = false; //보고서목록 전체선택
 
     selectDefualtAuth: number = 1;
@@ -49,6 +53,10 @@ export class ManagerPage implements OnInit{
 
     // 엑셀 데이터
     public result: any;
+
+    // 검색
+    public searchUsername: string = '';
+    private searchedUsers: User[] = [];
   
     constructor(
         private mentoroomService: MentoroomService, 
@@ -98,11 +106,78 @@ export class ManagerPage implements OnInit{
         toast.present();
     }
 
+    /**
+     *  사용자 함수
+     */
+    // 사용자 리스트 불러오기
     userList(e) {
         this.selectedUser = [];
         this.selectedAllUser = false;
+        this.selectedSearchedUser = [];
+        this.selectedAllSearchedUser = false;
         this.adminService.userList(e)
             .then(users => this.users = users)
+    }
+
+    // 사용자 선택
+    handleSelectedUser(e, user_id) {
+        if(e.checked) {
+            this.selectedUser.push(user_id)
+        } else {
+            let index = this.selectedUser.indexOf(user_id)
+            this.selectedUser.splice(index, 1)
+        }
+        console.log(this.selectedUser)
+    }
+
+    // 사용자 선택 전체
+    handleSelectedAllUser(e) {
+        this.selectedAllUser = !this.selectedAllUser; 
+
+        if(e.checked) {
+            this.selectedUser = [];
+            this.selectedUser = _.map(this.users, (e) => e.user_id)
+        } else {
+            this.selectedUser = [];
+        }
+        console.log(this.selectedUser)
+    }
+
+    // 사용자 검색
+    userSearch(event) {
+        this.selectedUser = [];
+        this.selectedAllUser = false;
+        this.selectedSearchedUser = [];
+        this.selectedAllSearchedUser = false;
+        this.searchedUsers = _.filter(this.users, (user) => {
+            if( user.user_name.indexOf(this.searchUsername) > -1) {
+                return user;
+            }
+        });
+    }
+
+    // 검색된 사용자 선택
+    handleSelectedSearchedUser(e, user_id) {
+        if(e.checked) {
+            this.selectedSearchedUser.push(user_id)
+        } else {
+            let index = this.selectedSearchedUser.indexOf(user_id)
+            this.selectedSearchedUser.splice(index, 1)
+        }
+        console.log(this.selectedSearchedUser)
+    }
+
+    // 검색된 사용자 선택 전체
+    handleSelectedAllSearchedUser(e) {
+        this.selectedAllSearchedUser = !this.selectedAllSearchedUser;
+
+        if(e.checked) {
+            this.selectedSearchedUser = [];
+            this.selectedSearchedUser = _.map(this.searchedUsers, (e) => e.user_id)
+        } else {
+            this.selectedSearchedUser = [];
+        }
+        console.log(this.selectedSearchedUser)
     }
 
     getMentoroomListByYear(e){
@@ -296,30 +371,6 @@ export class ManagerPage implements OnInit{
         }
     }
 
-    // 유저 선택
-    handleSelectedUser(e, user_id) {
-        if(e.checked) {
-            this.selectedUser.push(user_id)
-        } else {
-            let index = this.selectedUser.indexOf(user_id)
-            this.selectedUser.splice(index, 1)
-        }
-    }
-
-    // 유저 선택 전체
-    handleSelectedAllUser(e) {
-        this.selectedAllUser = !this.selectedAllUser;
-        if(e.checked) {
-            this.selectedUser = [];
-
-            this.users.forEach(e => {
-                this.selectedUser.push(e.user_id)
-            })
-        } else {
-            this.selectedUser = [];
-        }
-    }
-
     // 보고서 선택
     handleSelectedReport(e, user_id) {
         if(e.checked) {
@@ -380,8 +431,6 @@ export class ManagerPage implements OnInit{
         let file = event.target.files[0];
             this.xlsxToJsonService.processFileToJson({}, file)
             .subscribe(data => {
-                // console.log(data['sheets'])
-                // this.result = JSON.stringify(data['sheets'].Sheet1);
                 this.result = JSON.stringify(data['sheets']);
                 console.log(data['sheets'])
             })
