@@ -16,6 +16,7 @@ import { SurveyPage } from '.././survey/survey';
 
 import { MentoroomService } from '../../services/mentoroom.service';
 import { AdminService } from '../../services/admin.service';
+import { XlsxToJsonService } from '../../services/xlsx-to-json.service';
 
 import { User } from '../../models/user';
 import { Mentoroom } from '../../models/mentoroom';
@@ -46,9 +47,13 @@ export class ManagerPage implements OnInit{
     private currentUser;
     private roomListChecked: boolean[] = [];
 
+    // 엑셀 데이터
+    public result: any;
+  
     constructor(
         private mentoroomService: MentoroomService, 
         private adminService: AdminService, 
+        private xlsxToJsonService: XlsxToJsonService,
         public modalCtrl: ModalController, 
         public navCtrl: NavController, 
         platform: Platform, 
@@ -368,6 +373,18 @@ export class ManagerPage implements OnInit{
 
     dismiss() {
         this.viewCtrl.dismiss();
+    }
+
+    // 엑셀 업로드 아직 대충 구현함
+    handleFile(event) {
+        let file = event.target.files[0];
+            this.xlsxToJsonService.processFileToJson({}, file)
+            .subscribe(data => {
+                // console.log(data['sheets'])
+                // this.result = JSON.stringify(data['sheets'].Sheet1);
+                this.result = JSON.stringify(data['sheets']);
+                console.log(data['sheets'])
+            })
     }
 }
 

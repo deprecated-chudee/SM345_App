@@ -89,12 +89,6 @@
             모임 결과보고서           
         </ion-list-header>
 
-        <!-- 결과보고서 파일업로드 -->
-        <!-- <ion-item *ngIf="sort==true" class="file-item">
-                <input type="file" id="upload" name="uploadFile" file-upload multiple/>
-                <button ion-button class="submitButton" (click)="reportSave()">제출하기</button>
-        </ion-item> -->
-
         <!-- 결과보고서 파일 업로드 -->
         <div class="uploadWrapper" *ngIf="selectedRoom.mento_id == USERID"> <!-- 해당 방 멘토만 업로드 -->
             <input type="file" class="inputfile" id="upload" (change)="onChange($event)" file-upload multiple />

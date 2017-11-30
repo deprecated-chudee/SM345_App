@@ -27,6 +27,9 @@
         <ion-segment-button value="survey">
             설문조사
         </ion-segment-button>
+        <ion-segment-button value="excel">
+            신입생 엑셀 등록
+        </ion-segment-button>
       </ion-segment>
     </div>
 
@@ -404,6 +407,21 @@
 
       </ion-list>
 
+      <!-- 신입생 엑셀 등록 아직 대충 구현함 -->
+      <ion-list *ngSwitchCase="'excel'">
+        <div>
+            <label for="">Select an .xlsx file to get json</label>
+            <br>
+            <input type="file" (change)="handleFile($event)" />
+        </div>
+        <div class="result-container" *ngIf="result && result.length>0">
+            <h2>
+                Result : 
+                <br>
+            </h2>
+            {{result}}
+        </div>
+      </ion-list>
     </div>
 
   </ion-content>
