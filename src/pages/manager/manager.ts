@@ -21,6 +21,7 @@ import { XlsxToJsonService } from '../../services/xlsx-to-json.service';
 import { User } from '../../models/user';
 import { Mentoroom } from '../../models/mentoroom';
 import { MentoroomInfo } from '../../models/mentoroomInfo';
+import { ReportDate } from '../../models/reportDate';
 
 import * as _ from 'lodash';
 
@@ -45,6 +46,7 @@ export class ManagerPage implements OnInit{
     selectDefualtAuth: number = 1;
     selectDefualtYear: number = 20172;
     private mentoroomInfo: MentoroomInfo; //멘토방 설정
+    // private reportDates: ReportDate[] = []; // 보고서 설정
     USERID: number;
     USERNAME: string;
     USERAUTH: number;
@@ -57,7 +59,10 @@ export class ManagerPage implements OnInit{
     // 검색
     public searchUsername: string = '';
     private searchedUsers: User[] = [];
-  
+
+    // reportData init
+    range: number
+    
     constructor(
         private mentoroomService: MentoroomService, 
         private adminService: AdminService, 
@@ -71,35 +76,49 @@ export class ManagerPage implements OnInit{
         public app: App,
     ) {
         this.isAndroid = platform.is('android');
-        this.mentoroomInfo = new MentoroomInfo(1, "","","","","","","","","","");
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.USERID = this.currentUser.USERID;
         this.USERAUTH = this.currentUser.USERAUTH;
-        this.getMentoRoomInfo()
     }
 
     ngOnInit() {
+        this.getMentoRoomInfo()
         this.getMentoroomListByYear(20172);
         this.userList(0);
     }
 
-    //멘토방 설정시킨 것 불러오기
+    changeRange(index) {
+        this.range = _.range(index)
+    }
+    /**
+     *  멘토방 설정
+     */
+
+    // 멘토방 설정시킨 것 불러오기
     getMentoRoomInfo() {
         this.adminService.getMentoRoomInfo()
-            .then(mentoroomInfo => this.mentoroomInfo = mentoroomInfo)
+            .then(mentoroomInfo => {
+                this.mentoroomInfo = mentoroomInfo
+                this.mentoroomInfo.meeting_number = Number(this.mentoroomInfo.meeting_number)
+                this.range = _.range(this.mentoroomInfo.meeting_number)
+            })
     }
 
-    //멘토방 설정 저장
+    // 멘토방 설정 저장
     mentoRoomInfoSave() {
-        this.adminService.createMentoRoomInfo(this.mentoroomInfo)
-            .then(message => this.presentToast());
-        console.log(typeof(this.mentoroomInfo.max_mento));
+        try {
+            this.adminService.createMentoRoomInfo(this.mentoroomInfo)
+                .then(() => this.Toast('멘토방 설정이 저장 되었습니다.'));
+            // this.adminService.
+        }
+        catch(e) {
+            this.Toast('에러 발생')
+        }
     }
 
-    //멘토방 설정 완료 알림창
-    presentToast() {
+    Toast(message) {
         let toast = this.toastCtrl.create({
-            message: '멘토방 설정이 완료되었습니다.',
+            message: message,
             duration: 3000,
             position: 'top',
         });
@@ -135,7 +154,6 @@ export class ManagerPage implements OnInit{
         this.selectedAllUser = !this.selectedAllUser; 
 
         if(e.checked) {
-            this.selectedUser = [];
             this.selectedUser = _.map(this.users, (e) => e.user_id)
         } else {
             this.selectedUser = [];
@@ -185,6 +203,9 @@ export class ManagerPage implements OnInit{
             .then(mentoroom => this.mentorooms = mentoroom);
     }
 
+    /**
+     *  아이오닉
+     */
     openHomePage() {
         this.navCtrl.setRoot(HomePage);
     }
@@ -243,15 +264,6 @@ export class ManagerPage implements OnInit{
         alert.present();
     }
 
-    Toast(message) {
-        let toast = this.toastCtrl.create({
-            message: message,
-            duration: 3000,
-            position: 'bottom',
-        });
-        toast.present();
-    }
-
     openMessagePage() {
         this.navCtrl.push(MessageAddPage, {
             selectedUser: this.selectedUser
@@ -271,21 +283,12 @@ export class ManagerPage implements OnInit{
                 {
                     text: '확인',
                     handler: data => {
-                        this.deleteToast();
+                        this.Toast('보고서가 삭제되었습니다.');
                     }
                 }
             ]
         });
         alert.present();
-    }
-
-    deleteToast() {
-        let toast = this.toastCtrl.create({
-            message: '보고서가 삭제되었습니다.',
-            duration: 3000,
-            position: 'bottom',
-        });
-        toast.present();
     }
 
     showReportDownloardAlert() {
@@ -301,21 +304,12 @@ export class ManagerPage implements OnInit{
                 {
                   text: '확인',
                   handler: data => {
-                      this.downloadToast();
+                      this.Toast('보고서가 다운로드 되었습니다.');
                   }
                 }
             ]
         });
         alert.present();
-    }
-
-    downloadToast() {
-        let toast = this.toastCtrl.create({
-            message: '보고서가 다운로드 되었습니다.',
-            duration: 3000,
-            position: 'bottom',
-        });
-        toast.present();
     }
 
     addSurvey(){
@@ -395,6 +389,8 @@ export class ManagerPage implements OnInit{
         }
     }
 
+    
+
     // 멘토방 삭제
     handleRemoveRoom() {
         if(this.selectedRoom.length > 0) {
@@ -405,19 +401,9 @@ export class ManagerPage implements OnInit{
             setTimeout(() => { 
                 this.app.getRootNav().setRoot(ManagerPage);
             }, 300);
-            let toast = this.toastCtrl.create({
-                message: '선택한 멘토방이 삭제되었습니다.',
-                duration: 3000,
-                position: 'bottom',
-            });
-            toast.present();
+            this.Toast('선택한 멘토방이 삭제되었습니다.')
         } else {
-            let toast = this.toastCtrl.create({
-                message: '보고서가 존재하지 않습니다.',
-                duration: 3000,
-                position: 'bottom',
-            });
-            toast.present();
+            this.Toast('보고서가 존재하지 않습니다.')
             this.app.getRootNav().setRoot(ManagerPage);
         }
     }

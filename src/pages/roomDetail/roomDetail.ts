@@ -81,7 +81,7 @@ export class RoomDetailPage implements OnInit {
   // 파일 서버에 저장
   save() {
     if(this.formData) {
-      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id, 1)
+      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id)
       .then(() => {
         this.Toast('업로드 성공');
         this.dismiss();

@@ -78,14 +78,14 @@ export class MentoroomService {
             .catch(this.handleError)
     }
 
-    // 파일 업로드
-    fileUpload(upload: FormData, room_id: number, file_kind: number) {
+    // 보고서 업로드
+    fileUpload(upload: FormData, room_id: number) {
         let headers = new Headers();
         headers.append('enctype', 'multipart/form-data');
         headers.append('Accept', 'application/json');
         let options = new RequestOptions({headers: headers});
 
-        let url = `${this.URL}/mentoroom/fileupload/${room_id}/${file_kind}`; 
+        let url = `${this.URL}/mentoroom/fileupload/${room_id}`; 
         return this.http.post(url, upload, options)
             .toPromise()
             .catch(this.handleError)

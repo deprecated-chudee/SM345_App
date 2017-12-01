@@ -38,23 +38,23 @@
       <ion-list *ngSwitchCase="'mentorRoom'">
           <ion-item>
               <ion-label>멘토신청 시작일</ion-label>
-              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.mento_start"></ion-datetime>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoroomInfo.mento_start"></ion-datetime>
           </ion-item>
           <ion-item>
               <ion-label>멘토신청 마감일</ion-label>
-              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.mento_end"></ion-datetime>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoroomInfo.mento_end"></ion-datetime>
           </ion-item>
           <ion-item>
               <ion-label>멘티신청 시작일</ion-label>
-              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.menti_start"></ion-datetime>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoroomInfo.menti_start"></ion-datetime>
           </ion-item>
           <ion-item>
               <ion-label>멘티신청 마감일</ion-label>
-              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.menti_end"></ion-datetime>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoroomInfo.menti_end"></ion-datetime>
           </ion-item>
           <ion-item>
             <ion-label>최대 멘토인원</ion-label>
-            <ion-select [(ngModel)]="mentoRoomInfo.max_mento">
+            <ion-select [(ngModel)]="mentoroomInfo.max_mento">
               <ion-option value="10">10명</ion-option>
               <ion-option value="15">15명</ion-option>
               <ion-option value="20">20명</ion-option>
@@ -68,7 +68,7 @@
           </ion-item>
           <ion-item>
             <ion-label>최대 멘티인원</ion-label>
-            <ion-select [(ngModel)]="mentoRoomInfo.max_menti">
+            <ion-select [(ngModel)]="mentoroomInfo.max_menti">
               <ion-option value="3">3명</ion-option>
               <ion-option value="4">4명</ion-option>
               <ion-option value="5">5명</ion-option>
@@ -79,42 +79,40 @@
               <ion-option value="10">10명</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item>
-            <ion-label>모임기간</ion-label>
-            <ion-select [(ngModel)]="mentoRoomInfo.meeting_period">
-              <ion-option value="7">7일</ion-option>
-              <ion-option value="30">30일</ion-option>
-              <ion-option value="60">60일</ion-option>
-              <ion-option value="120">1학기</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>모임횟수</ion-label>
-            <ion-select [(ngModel)]="mentoRoomInfo.meeting_number">
-              <ion-option value="1">1회</ion-option>
-              <ion-option value="2">2회</ion-option>
-              <ion-option value="3">3회</ion-option>
-              <ion-option value="4">4회</ion-option>
-              <ion-option value="5">5회</ion-option>
-              <ion-option value="6">6회</ion-option>
-              <ion-option value="7">7회</ion-option>
-              <ion-option value="8">8회</ion-option>
-              <ion-option value="9">9회</ion-option>
-              <ion-option value="10">10회</ion-option>
-            </ion-select>
-          </ion-item>
+          <hr />
 
+            <ion-item>
+                <ion-label>모임기간</ion-label>
+                <ion-range min="1" max="15" step="1" (ionChange)="changeRange(mentoroomInfo.meeting_number)" pin="true" [(ngModel)]="mentoroomInfo.meeting_number" snaps="true" color="secondary">
+                    <ion-icon small range-left> 1명 </ion-icon>
+                    <ion-icon range-right> 15명 </ion-icon>
+                </ion-range>
+            </ion-item>
+            <div style="display: flex;" *ngFor="let i of range">
+                <ion-item style="flex: 1;">
+                    <ion-datetime style="flex: 1;" placeholder="{{ i+1 }} 주차 시작일" 
+                        displayFormat="YYYY/MM/DD">
+                    </ion-datetime>
+                </ion-item>
+                <ion-item style="flex: 1;">
+                    <ion-datetime style="flex: 1;" placeholder="{{ i+1 }} 주차 종료일" 
+                        displayFormat="YYYY/MM/DD" >
+                    </ion-datetime>
+                </ion-item>
+            </div>
+
+          <hr />
           <ion-item>
               <ion-label>설문조사 시작일</ion-label>
-              <ion-datetime displayFormat="YYYY/MM/DD" value="survey_start" [(ngModel)]="mentoRoomInfo.survey_start"></ion-datetime>
+              <ion-datetime displayFormat="YYYY/MM/DD" value="survey_start" [(ngModel)]="mentoroomInfo.survey_start"></ion-datetime>
           </ion-item>
           <ion-item>
               <ion-label>설문조사 마감일</ion-label>
-              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoRoomInfo.survey_end"></ion-datetime>
+              <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoroomInfo.survey_end"></ion-datetime>
           </ion-item>
 
 
-          <button ion-button block class="mentorRoomButton" (click)="mentoRoomInfoSave()">저장</button>
+          <button ion-button block class="mentorRoomButton" (click)="mentoroomInfoSave()">저장</button>
 
       </ion-list>
 
