@@ -5,6 +5,6 @@ export class Upload {
     file_data: Blob;
     file_kind: number;
     room_id: number;
-    state: number;
+    file_state: number;
     timestamp: Date;
 }

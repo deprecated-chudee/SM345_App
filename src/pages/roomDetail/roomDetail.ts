@@ -1,6 +1,14 @@
 
 import { OnInit, Component } from '@angular/core';
-import { App, NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
+import { 
+  App, 
+  NavController,
+  ViewController, 
+  NavParams, 
+  ToastController, 
+  AlertController,
+  ActionSheetController
+} from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';
 
@@ -41,6 +49,7 @@ export class RoomDetailPage implements OnInit {
     public viewCtrl: ViewController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
+    public actionSheetCtrl: ActionSheetController
   ) {
     this.selectedRoom = this.navParams.get("selectedRoom");
     this.room = this.navParams.get("room");
@@ -62,7 +71,10 @@ export class RoomDetailPage implements OnInit {
   // 파일 리스트 가져오기
   fileList() {
     this.mentoroomService.fileList(this.selectedRoom.mentoroom_id)
-      .then(files => this.files = files)
+      .then(files => {
+        this.files = files
+        console.log(files)
+      })
   }
 
   // 파일 업로드 버튼 클릭 핸들러
@@ -206,4 +218,48 @@ export class RoomDetailPage implements OnInit {
     }, 500);
   }
 
+  // 보고서 승인 & 반려 함수
+  actionSheet(file_id, file_state) {
+    console.log(file_id, file_state)
+    if(this.USERAUTH === 3 && file_state === 0) {
+      let actionSheet = this.actionSheetCtrl.create({
+        title: '작업 선택',
+        buttons: [
+          {
+              text: '승인',
+              handler: () => {
+                this.reportConfirm(file_id)
+              }
+          },{
+            text: '반려',
+            role: 'destructive',
+            handler: () => {
+              this.reportReject(file_id)
+            }
+          }
+        ]
+      });
+      actionSheet.present();
+    }
+  }
+
+  // 보고서 승인
+  reportConfirm(file_id) {
+    this.adminService.reportConfirm(file_id)
+      .then(() => {
+        this.Toast('보고서가 승인 되었습니다.')
+        this.appCtrl.getRootNav().setRoot(RoomPage)
+      })
+      .catch(() => this.Toast('서버와의 통신 에러입니다. 잠시 후 다시 시도해 주세요.'))
+  }
+
+  // 보고서 반려
+  reportReject(file_id) {
+    this.adminService.reportReject(file_id)
+    .then(() => {
+      this.Toast('보고서가 반려 되었습니다.')
+      this.appCtrl.getRootNav().setRoot(RoomPage)
+    })
+    .catch(() => this.Toast('서버와의 통신 에러입니다. 잠시 후 다시 시도해 주세요.'))
+  }
 }

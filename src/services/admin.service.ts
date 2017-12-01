@@ -90,6 +90,22 @@ export class AdminService {
             .catch(this.handleError);
     }
 
+    // 보고서 승인
+    reportConfirm(f_id: number) {
+        let url = this.URL + 'admin/report_confirm/' + f_id;
+        return this.http.get(url)
+            .toPromise()
+            .catch(this.handleError)
+    }
+
+    // 보고서 거절
+    reportReject(f_id: number) {
+        let url = this.URL + 'admin/report_reject/' + f_id;
+        return this.http.get(url)
+            .toPromise()
+            .catch(this.handleError)
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
