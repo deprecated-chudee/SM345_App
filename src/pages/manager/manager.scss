@@ -16,7 +16,7 @@
     border-width: 1px;
     border-style: solid;
     border-color: #91A0AB;
-    font-size: 1.3rem;
+    font-size: 10px;
     line-height: 3rem;
     color: #91A0AB;
     background-color: transparent;
@@ -38,7 +38,7 @@
     border-bottom-width: 2px;
     border-bottom-style: solid;
     border-bottom-color: rgba(0, 0, 0, 0.1);
-    font-size: 1.2rem;
+    font-size: 10px;
     font-weight: 500;
     line-height: 4rem;
     text-transform: uppercase;
@@ -145,6 +145,8 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
         margin: 0px;
     }
 
+    button.surveyTrash.disable-hover.item-button.button.button-md.button-outline.button-outline-md 
+
     button.fileButton0 span.button-inner {
         font-size: 10px;
     }
@@ -233,7 +235,8 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
         margin: 5px;
     }
 
-    button.surveyTrash.disable-hover.item-button.button.button-ios.button-outline.button-outline-ios {
+    button.surveyTrash.disable-hover.item-button.button.button-ios.button-outline.button-outline-ios,
+    button.surveyTrash.disable-hover.item-button.button.button-md.button-outline.button-outline-md {
         border-color: orangered;
         color: orangered;
     }
@@ -259,6 +262,27 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
         padding-left: 18px;
         border-bottom: none;
     }
+
+    .list-md .item-input:last-child {
+        border-bottom: none;
+    }
+
+    ion-list-header.survey-header.item.item-md.list-header.list-header-md,
+    ion-list-header.survey-header.item.item-ios.list-header.list-header-ios {
+        padding-left: 16px;
+        min-height: 4.5rem;
+        background: #EBEBEB;
+        font-size: 1.4rem;
+        color: #757575;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+
+    ion-icon.icon.icon-md.ion-md-remove-circle.item-icon,
+    ion-icon.icon.icon-ios.ion-md-remove-circle.item-icon {
+        color: indianred;
+    }
+    
 }
 
 .manager-header {
@@ -267,3 +291,4 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
         width: 88%;
     }
 }
+

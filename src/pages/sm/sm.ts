@@ -12,6 +12,7 @@ import { Article } from '../../models/article';
 })
 export class SmPage implements OnInit  {
   private article: Article;
+  private article_id: number;
   private board_id;
   private USERID;
   private articles: Article[] =[];
@@ -36,6 +37,8 @@ export class SmPage implements OnInit  {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERAUTH = this.currentUser.USERAUTH;
     this.board_id = this.navParams.get("board_id");
+    this.article_id = this.navParams.get("id");
+    this.article = this.navParams.get("article");
     this.article = new Article(0, '', '', '');
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
@@ -86,12 +89,24 @@ export class SmPage implements OnInit  {
   // 수정 토글
   handleToggleSmEdit(article) {
     this.toggleSmEdit = !this.toggleSmEdit;
+    console.log(article.id +'수정토글1')
+    this.articleService.getArticle(article.id, this.USERID)
+    .then(article => {
+      this.article = article
+      console.log(article)
+    })
+  }
+
+  // 게시글 정보 가져오기
+  getArticle() {
+    this.articleService.getArticle(this.article_id, this.USERID)
+      .then(article => this.article = article)
   }
 
   // 수정 완료
-  editArticle() {
+  editArticle(article) {
     this.articleService.editArticle(this.article)
-      .then(() => console.log('edit ok'))
+      .then(() => console.log(this.article_id))
     this.Toast('수정되었습니다.');
     setTimeout(() => { 
       this.app.getRootNav().setRoot(SmPage);
@@ -106,6 +121,8 @@ export class SmPage implements OnInit  {
             {
                 text: '수정',
                 handler: () => {
+
+                  console.log(article.id +'more버튼')
                   this.handleToggleSmEdit(article);
                 }
             },{

@@ -28,7 +28,7 @@
             설문조사
         </ion-segment-button>
         <ion-segment-button value="excel">
-            신입생 엑셀 등록
+            신입생등록
         </ion-segment-button>
       </ion-segment>
     </div>
@@ -380,48 +380,61 @@
           <button ion-button block class="deleteButton" (click)="showReportDownloardAlert()">다운로드</button>
       </ion-list>
 
+      <!--설문조사-->
       <ion-list *ngSwitchCase="'survey'">
-
+        <ion-list-header class="survey-header">
+            객관식 설문
+            <ion-icon item-end name="md-add-circle" (click)="addSurvey()"></ion-icon> <!--객관식 설문 추가버튼-->
+            <ion-icon item-end name="md-remove-circle" (click)="minusSurvey()"></ion-icon> <!--객관식 설문 삭제버튼-->
+        </ion-list-header>
         <div class="addBox">
             <ion-item>
-                <ion-label>Q1.</ion-label>
-                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>
+                <ion-label>객관식 Q1.</ion-label>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count>1">
             <ion-item>
-                <ion-label>Q2.</ion-label>
-                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>
+                <ion-label>객관식 Q2.</ion-label>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count>2">
             <ion-item>
-                <ion-label>Q3.</ion-label>
-                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>
+                <ion-label>객관식 Q3.</ion-label>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count>3">
             <ion-item>
-                <ion-label>Q4.</ion-label>
-                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>
+                <ion-label>객관식 Q4.</ion-label>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count>4">
             <ion-item>
-                <ion-label>Q5.</ion-label>
-                <ion-input type="text" placeholder="설문 내용을 입력해주세요."></ion-input>
+                <ion-label>객관식 Q5.</ion-label>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
             </ion-item>
         </div>
-        
-        <ion-item no-lines class="timeaddbutton">
-            <button ion-button outline item-right icon-left (click)="addSurvey()">
-                설문 항목추가
-            </button>
-            <button ion-button outline item-right icon-left class="surveyTrash" (click)="minusSurvey()">
-                항목삭제
-            </button>
-        </ion-item>
 
+        <ion-list-header class="survey-header">
+            주관식 설문
+            <ion-icon item-end name="md-add-circle" (click)="addSurvey1()"></ion-icon> <!--주관식 설문 추가버튼-->
+            <ion-icon item-end name="md-remove-circle" (click)="minusSurvey1()"></ion-icon> <!--주관식 설문 삭제버튼-->
+        </ion-list-header>
+        <div class="addBox" *ngIf="count1>1">
+            <ion-item>
+                <ion-label>주관식 Q1.</ion-label>
+                <ion-input type="text" placeholder="주관식 설문 내용을 입력해주세요."></ion-input>
+            </ion-item>
+        </div>
+        <div class="addBox" *ngIf="count1>2">
+            <ion-item>
+                <ion-label>주관식 Q2.</ion-label>
+                <ion-input type="text" placeholder="주관식 설문 내용을 입력해주세요."></ion-input>
+            </ion-item>
+        </div>
 
         <button ion-button block class="mentorRoomButton">저장</button>
         <button ion-button block class="mentorRoomButton2" (click)="openSurveyPage()">설문조사 결과</button>
