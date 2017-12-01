@@ -15,6 +15,7 @@
             쪽지가 없습니다 :)
         </h2>
     </div>
+    <div class="container">
         <table class="noticeTable-in" *ngFor="let message of messages">
             <tr>
                 <td>
@@ -41,9 +42,15 @@
             </tr>
             <tr>
                 <td>
-                    {{ message.timestamp | date:'yyyy-MM-dd HH:mm' }}
+                    {{ message.timestamp | date:'yyyy-MM-dd HH:mm' }} | {{message.user_name}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ message.message_content}}
                 </td>
             </tr>
         </table>
+    </div>
         
 </ion-content>

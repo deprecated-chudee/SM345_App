@@ -26,12 +26,13 @@
 </ion-navbar>
 </ion-header>
 
+<!--sm사업소개서 페이지-->
 <ion-content *ngIf="toggleSmEdit === false" class="page-sm">
     <ion-list class="container">
         <div *ngFor="let a of articles" class="item">
             <ion-list-header>
                     {{a.article_title}}
-                    <ion-icon item-end name="ios-more-outline" (click)="presentSmSheet(a)" *ngIf= "USERAUTH == 3"></ion-icon>  
+                    <ion-icon item-end name="ios-more-outline" (click)="presentSmSheet(a)" *ngIf= "USERAUTH == 3"></ion-icon><!--more버튼 - 수정,삭제-->
             </ion-list-header>
             <div padding id="commentDiv">
                     {{a.article_content}}
@@ -40,15 +41,16 @@
     </ion-list>
 </ion-content>
 
+<!--수정페이지-->
 <ion-content *ngIf="toggleSmEdit === true" style="margin-top: 59px;" class="page-smEdit">   
     <div class="addBox">
         <ion-item>
             <ion-label>제목</ion-label>
-            <ion-input type="text" [(ngModel)]="article.article_title"></ion-input>
+            <ion-input type="text" [(ngModel)]="article_title"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>내용</ion-label>
-            <ion-textarea [(ngModel)]="article.article_content"></ion-textarea>
+            <ion-textarea [(ngModel)]="article_content"></ion-textarea>
         </ion-item>
     </div>
 </ion-content>

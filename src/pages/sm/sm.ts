@@ -36,6 +36,7 @@ export class SmPage implements OnInit  {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERAUTH = this.currentUser.USERAUTH;
     this.board_id = this.navParams.get("board_id");
+    this.article = this.navParams.get("article");
     this.article = new Article(0, '', '', '');
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
