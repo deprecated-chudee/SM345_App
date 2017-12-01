@@ -201,7 +201,7 @@ presentLogoutToast(position: string) {
     
       setTimeout(() => {
         loading.dismiss();
-      }, 3000);
+      }, 1000);
   }
 
   openMessage() {

@@ -74,8 +74,7 @@ export class LoginPage implements OnInit {
                   USERAUTH: message.user_auth}));
   
                   this.presentLoginToast(message);
-                  this.appCtrl.getRootNav().setRoot(MyApp);
-                  window.location.reload();
+                  this.appCtrl.getRootNav().setRoot(HomePage);
                 }
             });
           }
@@ -151,8 +150,7 @@ export class LoginPage implements OnInit {
                     USERAUTH: message.user_auth
                   }));
                   this.presentLoginToast(message);
-                  this.appCtrl.getRootNav().setRoot(MyApp);
-                  window.location.reload();
+                  this.appCtrl.getRootNav().setRoot(HomePage);
 
                 });
             }
@@ -171,6 +169,6 @@ export class LoginPage implements OnInit {
     
       setTimeout(() => {
         loading.dismiss();
-      }, 3000);
+      }, 1000);
   }
 }
