@@ -19,7 +19,7 @@
     <button ion-button icon-only (click)="OpenSmEditPage(1)" *ngIf="USERAUTH == 3 && toggleSmEdit === false">
         <ion-icon name='md-create'></ion-icon>
     </button>
-    <button ion-button (click)="editArticle()" *ngIf= "toggleSmEdit === true && USERAUTH == 3">
+    <button ion-button (click)="editArticle(article)" *ngIf= "toggleSmEdit === true && USERAUTH == 3">
         <ion-icon name="md-checkmark-circle-outline"></ion-icon>
     </button>
   </ion-buttons>
@@ -46,11 +46,11 @@
     <div class="addBox">
         <ion-item>
             <ion-label>제목</ion-label>
-            <ion-input type="text" [(ngModel)]="article_title"></ion-input>
+            <ion-input type="text" [(ngModel)]="article.article_title"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label>내용</ion-label>
-            <ion-textarea [(ngModel)]="article_content"></ion-textarea>
+            <ion-textarea [(ngModel)]="article.article_content"></ion-textarea>
         </ion-item>
     </div>
 </ion-content>

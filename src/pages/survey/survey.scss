@@ -17,7 +17,8 @@
         padding: 0px;
     }
 
-    .item-ios.item-block .item-inner {
+    .item-ios.item-block .item-inner,
+    .item-md.item-block .item-inner {
         padding-right: 8px;
         border-bottom: none;
     }
@@ -27,4 +28,12 @@
         padding-left: 50px;
         border-bottom: none;
     }
+
+    ion-list-header.survey-result-header.item.item-md.list-header.list-header-md,
+    ion-list-header.survey-result-header.item.item-ios.list-header.list-header-ios {
+        padding-left: 16px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+    }
+
 }
