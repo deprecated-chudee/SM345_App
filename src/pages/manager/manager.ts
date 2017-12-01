@@ -37,9 +37,8 @@ export class ManagerPage implements OnInit{
     private users: User[] = [];
     private selectedUser = [];
     private selectedSearchedUser = [];
-    private selectedRoom = [];
+    private selectedRoom = '';
 
-    selectedAllRoom: boolean = false; //멘토방목록 전체선택
     selectedAllUser: boolean = false; //사용자관리 전체선택
     selectedAllSearchedUser: boolean = false; // 검색된 사용자관리 전체선택
     selectedAllReport: boolean = false; //보고서목록 전체선택
@@ -58,8 +57,10 @@ export class ManagerPage implements OnInit{
     public result: any;
 
     // 검색
-    public searchUsername: string = '';
+    private searchUsername: string = '';
     private searchedUsers: User[] = [];
+    private searchRoomname: string = '';
+    private searchedRooms: Mentoroom[] = [];
 
     // reportData init
     range: number
@@ -114,6 +115,26 @@ export class ManagerPage implements OnInit{
         }
         catch(e) {
             this.Toast('에러 발생')
+        }
+    }
+
+    // 멘토방 검색
+    roomSearch(event) {
+        this.selectedRoom = '';
+        this.searchedRooms = _.filter(this.mentorooms, (room) => {
+            if( room.mento_name.indexOf(this.searchRoomname) > -1) {
+                return room;
+            }
+        });
+        console.log(this.searchedRooms)
+    }
+
+    // 멘토방 선택
+    handleSelectedRoom(e, room_id) {
+        if(e.checked) {
+            this.selectedRoom = room_id
+        } else {
+            this.selectedRoom = ''
         }
     }
 
@@ -200,6 +221,9 @@ export class ManagerPage implements OnInit{
     }
 
     getMentoroomListByYear(e){
+        this.searchedRooms = [];
+        this.searchRoomname = '';
+        this.selectedRoom = '';
         this.mentoroomService.getMentoroomListByYear(e)
             .then(mentoroom => this.mentorooms = mentoroom);
     }
@@ -211,9 +235,9 @@ export class ManagerPage implements OnInit{
         this.navCtrl.setRoot(HomePage);
     }
 
-    openRoomDetail(mentoroom) {
+    openRoomDetail(selectedRoom) {
         this.navCtrl.push(RoomDetailPage, {
-            mentoroom_id: mentoroom.mentoroom_id, room: 1,
+            selectedRoom: selectedRoom
         });
     }
 
@@ -358,30 +382,6 @@ export class ManagerPage implements OnInit{
         modal.present();
     }
 
-    // 멘토방 선택
-    handleSelectedRoom(e, room_id) {
-        if(e.checked) {
-            this.selectedRoom.push(room_id)
-        } else {
-            let index = this.selectedRoom.indexOf(room_id)
-            this.selectedRoom.splice(index, 1)
-        }
-    }
-
-    // 멘토방 선택 전체
-    handleSelectedAllRoom(e) {
-        this.selectedAllRoom = !this.selectedAllRoom;
-        if(e.checked) {
-            this.selectedRoom = [];
-
-            this.mentorooms.forEach(e => {
-                this.selectedRoom.push(e.mentoroom_id)
-            })
-        } else {
-            this.selectedRoom = [];
-        }
-    }
-
     // 보고서 선택
     handleSelectedReport(e, user_id) {
         if(e.checked) {
@@ -410,11 +410,10 @@ export class ManagerPage implements OnInit{
 
     // 멘토방 삭제
     handleRemoveRoom() {
-        if(this.selectedRoom.length > 0) {
-            this.selectedRoom.forEach(e => {
-                this.adminService.removeRoom(e)
-                    .then(() => console.log('remove id: ' + e))
-            })
+        if(this.selectedRoom) {
+            this.adminService.removeRoom(this.selectedRoom)
+                .then(() => console.log('remove id: ' + this.selectedRoom))
+            this.selectedRoom = ''
             setTimeout(() => { 
                 this.app.getRootNav().setRoot(ManagerPage);
             }, 300);

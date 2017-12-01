@@ -119,52 +119,81 @@
 
       <!-- 멘토방 목록 -->
       <ion-list *ngSwitchCase="'roomList'">
-          <ion-item>
-              <ion-label>
-                  검색기간
-              </ion-label>
-              <ion-select [(ngModel)]="selectDefualtYear" (ionChange)="getMentoroomListByYear($event)">
-                <ion-option [selected]="true" [value]="20172">2017-2학기</ion-option>
-                <ion-option [value]="20171">2017-1학기</ion-option>
-                <ion-option [value]="20162">2016-2학기</ion-option>
-                <ion-option [value]="0">전체학기</ion-option>
-              </ion-select>
-          </ion-item>
+        <ion-item>
+            <ion-label> 검색 </ion-label>
+            <ion-input type="text" [(ngModel)]="searchRoomname" (ionChange)="roomSearch($event)" ></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>  검색기간 </ion-label>
+            <ion-select [(ngModel)]="selectDefualtYear" (ionChange)="getMentoroomListByYear($event)">
+            <ion-option [selected]="true" [value]="20172">2017-2학기</ion-option>
+            <ion-option [value]="20171">2017-1학기</ion-option>
+            <ion-option [value]="20162">2016-2학기</ion-option>
+            <ion-option [value]="0">전체학기</ion-option>
+            </ion-select>
+        </ion-item>
 
-          <ion-item>
-              <ion-label>전체선택</ion-label>
-              <ion-checkbox color="danger" *ngIf="selectedRoom.length !== mentorooms.length" checked="false" (ionChange)="handleSelectedAllRoom($event)"></ion-checkbox>
-              <ion-checkbox color="danger" *ngIf="selectedRoom.length === mentorooms.length" checked="true" (ionChange)="handleSelectedAllRoom($event)"></ion-checkbox>    
-            </ion-item>
-
-           <!--멘토방 목록-->
-           <div *ngFor="let m of mentorooms">
+        <!-- 검색 결과 없을 때 -->
+        <div *ngIf="searchedRooms.length === 0" >
+            <!--멘토방 목록-->
+            <div *ngFor="let m of mentorooms">
                 <!--개설완료-->
                 <ion-item (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 1">
-                  <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
-                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
-                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon> 
+                    <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.mento_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.person_count}}명</ion-label>
+                    <ion-checkbox *ngIf="selectedRoom !== m.mentoroom_id" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-checkbox *ngIf="selectedRoom === m.mentoroom_id" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon> 
                 </ion-item>
                 
                 <!-- 대기중 -->
                 <ion-item (press)="openRoomDetail(m)"  *ngIf= "m.team_confirm == 0">
-                  <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
-                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>  
-                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
+                    <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.mento_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.person_count}}명</ion-label>
+                    <ion-checkbox *ngIf="selectedRoom !== m.mentoroom_id" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-checkbox *ngIf="selectedRoom === m.mentoroom_id" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>  
+                    <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
                 </ion-item>
                 
                 <!-- 기간 지나서 폐설됨 -->
                 <ion-item  (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 2">
-                  <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you{{m.team_theme}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;1명</ion-label>
-                  <ion-checkbox *ngIf="selectedAllRoom === false" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
-                  <ion-checkbox *ngIf="selectedAllRoom === true" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
-                  <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
+                    <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you{{m.mento_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.person_count}}명</ion-label>
+                    <ion-checkbox *ngIf="selectedRoom !== m.mentoroom_id" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-checkbox *ngIf="selectedRoom === m.mentoroom_id" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
                 </ion-item> 
             </div>
+        </div>
+
+        <!-- 검색 결과 있을 때 -->
+        <div *ngIf="searchedRooms.length > 0" >
+            <!--멘토방 목록-->
+            <div *ngFor="let m of searchedRooms">
+                <!--개설완료-->
+                <ion-item (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 1">
+                    <ion-label><button ion-button class="fileButton">개설완료</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.mento_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.person_count}}명</ion-label>
+                    <ion-checkbox *ngIf="selectedRoom !== m.mentoroom_id" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-checkbox *ngIf="selectedRoom === m.mentoroom_id" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon> 
+                </ion-item>
+                
+                <!-- 대기중 -->
+                <ion-item (press)="openRoomDetail(m)"  *ngIf= "m.team_confirm == 0">
+                    <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.mento_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.person_count}}명</ion-label>
+                    <ion-checkbox *ngIf="selectedRoom !== m.mentoroom_id" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-checkbox *ngIf="selectedRoom === m.mentoroom_id" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>  
+                    <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
+                </ion-item>
+                
+                <!-- 기간 지나서 폐설됨 -->
+                <ion-item  (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 2">
+                    <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you{{m.mento_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.person_count}}명</ion-label>
+                    <ion-checkbox *ngIf="selectedRoom !== m.mentoroom_id" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-checkbox *ngIf="selectedRoom === m.mentoroom_id" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
+                    <ion-icon (click)="openRoomDetail(m)" item-end name="ios-arrow-forward"></ion-icon>
+                </ion-item> 
+            </div>
+        </div>
            
-            <button ion-button block class="mentorRoomButton" (click)="handleRemoveRoom()">목록에서 삭제</button>
+        <button ion-button block class="mentorRoomButton" (click)="handleRemoveRoom()">목록에서 삭제</button>
 
       </ion-list> 
 

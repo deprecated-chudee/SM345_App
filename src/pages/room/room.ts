@@ -36,10 +36,8 @@ export class RoomPage  implements OnInit {
 
   openRoomDetailPage(selectedRoom) {
     this.navCtrl.push(RoomDetailPage, {
-      selectedRoom: selectedRoom, room: 0
+      selectedRoom: selectedRoom
     });
-    //let modal = this.modalCtrl.create(RoomDetailPage);
-   // modal.present();
   }
 
   openMentorAddPage() {
