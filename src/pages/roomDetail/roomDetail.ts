@@ -1,5 +1,5 @@
-import { OnInit, Component, ViewChild, ElementRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+import { OnInit, Component } from '@angular/core';
 import { App, NavController, ViewController, NavParams, ToastController, AlertController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';
@@ -29,11 +29,8 @@ export class RoomDetailPage implements OnInit {
   
   private formData;
   fileLabel: string = '';
-  
-  form: FormGroup;
   private files: Upload[] = [];
-  private file: Upload;
-
+  
   constructor(
     public app: App, 
     public toastCtrl: ToastController, 
@@ -44,7 +41,6 @@ export class RoomDetailPage implements OnInit {
     public viewCtrl: ViewController,
     public alertCtrl: AlertController,
     public navCtrl: NavController,
-    private fb: FormBuilder
   ) {
     this.selectedRoom = this.navParams.get("selectedRoom");
     this.room = this.navParams.get("room");
@@ -54,68 +50,38 @@ export class RoomDetailPage implements OnInit {
     this.USERAUTH = this.currentUser.USERAUTH;
     this.mento_id = this.selectedRoom.mento_id;
     this.mento_name = this.selectedRoom.mento_name;
-    this.createForm();
   }
-
+  
   ngOnInit() {
-    console.log(this.mento_id);
     this.mentoroomService.menti_list(this.mento_id)
-      .then(menti => this.mentis = menti);
-
+    .then(menti => this.mentis = menti);
+  
     this.fileList()
   }
 
-  // 파일 리스트
+  // 파일 리스트 가져오기
   fileList() {
     this.mentoroomService.fileList(this.selectedRoom.mentoroom_id)
       .then(files => this.files = files)
   }
-  
-  createForm() {
-    this.form = this.fb.group({
-      upload: null
-    });
-  }
 
+  // 파일 업로드 버튼 클릭 핸들러
   onChange(event) {
-    let reader = new FileReader;
     if(event.target.files && event.target.files.length > 0) {
-      let file = event.target.files[0];
-
-      // 라벨에 이름 보이기
+      let file: File = event.target.files[0];
+      this.formData = new FormData();
+      this.formData.append('uploadFile', file, file.name);
       this.fileLabel = file.name;
-
-      reader.readAsArrayBuffer(file);
-      reader.onload = () => {
-        this.form.get('upload').setValue({
-          filename: file.name,
-          filetype: file.type,
-          contents: reader.result
-        })
-      };
+    } else {
+      this.formData = undefined;
+      this.fileLabel = '';
     }
   }
 
+  // 파일 서버에 저장
   save() {
-    const formModel = this.form.value.upload;
-    console.log(formModel.contents)
-    // ArrayBuffer convert to Blob
-    let blob = new Blob([new Int8Array(formModel.contents)], {type: formModel.filetype})
-    console.log(blob)
-    let content = new Int8Array(formModel.contents)
-    let content2 = new Int8Array([1,2,3,4,5])
-    // console.log(typeof content)
-    console.log(content)
-    console.log(content2)
-    const upload: Upload = new Upload(
-      formModel.filename, 
-      formModel.filetype, 
-      content, 
-      1, 
-      this.selectedRoom.mentoroom_id
-    )
-    
-    this.mentoroomService.fileUpload(upload)
+    if(this.formData) {
+      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id, 1)
       .then(() => {
         this.Toast('업로드 성공');
         this.dismiss();
@@ -124,42 +90,30 @@ export class RoomDetailPage implements OnInit {
         this.Toast('업로드 실패');
         this.dismiss();
       }) 
-  }
-
-  download(blob: Blob) {
-    console.log('click')
-    // let 
-    // FileSaver.saveAs(blob, formModel.filename);
-  }
-
-  onChange3(event) {
-    let fileList: FileList = event.target.files;
-    if(fileList.length > 0) {
-      let file: File = fileList[0];
-      this.formData = new FormData();
-      this.formData.append('uploadFile', file, file.name);
-      this.fileLabel = file.name;
-    } else {
-      this.formData = undefined;
-      this.fileLabel = '';
     }
-  } 
+  }
 
-  // save3() {
-  //   if(this.formData) {
-  //     this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id, 1)
-  //       .then(() => {
-  //         this.Toast('업로드 성공');
-  //         this.dismiss();
-  //       })
-  //       .catch(err => {
-  //         this.Toast('업로드 실패');
-  //         this.dismiss();
-  //       }) 
-  //   } else {
-  //     this.Toast('파일이 없습니다.');
-  //   }
-  // }
+  // 파일 사용자 다운로드
+  download(name, data, type) {
+    let binary = atob(data);
+    var byteArray = new Uint8Array(new ArrayBuffer(binary.length));
+    for (var i = 0; i < binary.length; i++) byteArray[i] = binary.charCodeAt(i);
+    let blob = new Blob([byteArray], {type: type})
+    FileSaver.saveAs(blob, name)
+  }
+
+  // 파일 삭제
+  fileDelete(file_id) {
+    this.mentoroomService.fileDelete(this.selectedRoom.mentoroom_id, file_id)
+      .then(() => {
+        this.Toast('파일 삭제 성공');
+        this.dismiss();
+      })
+      .catch(err => {
+        this.Toast('파일 삭제 실패');
+        this.dismiss();
+      }) 
+  }
 
   dismiss() {
     this.viewCtrl.dismiss();

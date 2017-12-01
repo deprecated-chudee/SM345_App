@@ -10,6 +10,7 @@ import { MentoroomService } from '../services/mentoroom.service';
 import { CommentService } from '../services/comment.service';
 import { LoginService } from '../services/login.service';
 import { ArticleService } from '../services/article.service';
+import { XlsxToJsonService } from '../services/xlsx-to-json.service';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -89,6 +90,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     CommentService,
     LoginService,
     ArticleService,
+    XlsxToJsonService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

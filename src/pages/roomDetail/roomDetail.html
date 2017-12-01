@@ -85,59 +85,36 @@
 
     <!--멘토/관리자 인터페이스-->
     <div class="noAlarm" *ngIf= "USERAUTH == 1 || USERAUTH == 3"> <!--멘토 및 관리자만 볼 수 있음-->
-    <ion-list-header>
+        <ion-list-header>
             모임 결과보고서           
-    </ion-list-header>
+        </ion-list-header>
 
-    <!-- 결과보고서 파일 업로드 -->
-    <div class="uploadWrapper" *ngIf= "USERAUTH == 1 && mento_id==USERID">
-        <input type="file" class="inputfile" id="upload" name="uploadFile" (change)="onChange($event)" file-upload multiple />
-        <label for="upload" class="inputLabel"><strong>{{ fileLabel ? fileLabel : 'Choose a file' }}</strong></label>
-        <button ion-button class="button" (click)="save()"> 업로드 </button>
-    </div>
+        <!-- 결과보고서 파일 업로드 -->
+        <div class="uploadWrapper" *ngIf="selectedRoom.mento_id == USERID"> <!-- 해당 방 멘토만 업로드 -->
+            <input type="file" class="inputfile" id="upload" (change)="onChange($event)" file-upload multiple />
+            <label for="upload" class="inputLabel"><strong>{{ fileLabel ? fileLabel : 'Choose a file' }}</strong></label>
+            <button ion-button class="button" (click)="save()"> 제출하기 </button>
+        </div>
 
-    <table class="reportTable" *ngFor="let file of files">
-        <tr>
-            <td>{{ file.filename }}</td>
-            <td rowspan="2">
-                <ion-icon name="md-download"></ion-icon>
-            </td>
-            <td rowspan="2" class="report-ing">확인중</td>
-        </tr>
-        <tr>
-            <td><span class="reportTime">{{ file.timestamp | date:'yyyy-MM-dd HH:mm' }}</span></td>
-        </tr>
-    </table>
-    <!-- <table class="reportTable">
-        <tr>
-            <td>{{selectedRoom.team_name}} 결과보고서</td>
-            <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-            <td rowspan="2" class="report-reject">반려</td>
-        </tr>
-        <tr>
-            <td><span class="reportTime">2017-09-20</span></td>
-        </tr>
-    </table>
-    <table class="reportTable">
-        <tr>
-            <td>{{selectedRoom.team_name}} 결과보고서</td>
-            <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-            <td rowspan="2" class="report-end">확인<br/>완료</td>
-        </tr>
-        <tr>
-            <td><span class="reportTime">2017-09-20</span></td>
-        </tr>
-    </table>
-    <table class="reportTable">
-        <tr>
-            <td>{{selectedRoom.team_name}} 결과보고서</td>
-            <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-            <td rowspan="2" class="report-end">확인<br/>완료</td>
-        </tr>
-        <tr>
-            <td><span class="reportTime">2017-09-20</span></td>
-        </tr>
-    </table> -->
+        <table class="reportTable" *ngFor="let file of files">
+            <tr>
+                <td>{{ file.file_name }}</td>
+                <td rowspan="2" *ngIf="selectedRoom.mento_id == USERID">  <!-- 해당 방 멘토만 삭제 -->
+                    <a (click)="fileDelete(file.id)" >
+                        <ion-icon name="md-trash"></ion-icon>
+                    </a>
+                </td>
+                <td rowspan="2">
+                    <a (click)="download(file.file_name, file.file_data, file.file_type)" >
+                        <ion-icon name="md-download"></ion-icon>
+                    </a>
+                </td>
+                <td rowspan="2" class="report-ing">확인중</td>
+            </tr>
+            <tr>
+                <td><span class="reportTime">{{ file.timestamp | date:'yyyy-MM-dd HH:mm' }}</span></td>
+            </tr>
+        </table>
     </div>
    
     <!-- 멘티 신청 인터페이스 -->
