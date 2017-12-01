@@ -31,6 +31,7 @@ export class ManagerPage implements OnInit{
     manager: string = "roomList";
     isAndroid: boolean = false;
     private count:number = 1;
+    private count1:number = 1;
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
     private selectedUser = [];
@@ -326,9 +327,25 @@ export class ManagerPage implements OnInit{
         }
     }
 
+    addSurvey1(){
+        if(this.count1 <= 2) {
+            this.count1 += 1;
+        } else {
+            this.showAlert('더이상 추가할 수 없습니다.');
+        }
+    }
+
     minusSurvey(){
         if(this.count > 1) {
             this.count -= 1;
+        } else {
+            this.showAlert('더이상 제거할 수 없습니다');
+        }
+    }
+
+    minusSurvey1(){
+        if(this.count1 > 0) {
+            this.count1 -= 1;
         } else {
             this.showAlert('더이상 제거할 수 없습니다');
         }
