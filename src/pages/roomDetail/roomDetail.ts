@@ -169,8 +169,7 @@ export class RoomDetailPage implements OnInit {
           USERNAME: this.USERNAME,
           USERAUTH: 2
         }));
-          this.appCtrl.getRootNav().setRoot(MyApp);
-          window.location.reload();
+          this.appCtrl.getRootNav().setRoot(RoomPage);
   }
 
   //멘티신청 취소
@@ -182,8 +181,7 @@ export class RoomDetailPage implements OnInit {
         USERNAME: this.USERNAME,
         USERAUTH: 0
       }));
-        this.appCtrl.getRootNav().setRoot(MyApp);
-        window.location.reload();
+        this.appCtrl.getRootNav().setRoot(RoomPage);
   }
 
   Toast(message) {

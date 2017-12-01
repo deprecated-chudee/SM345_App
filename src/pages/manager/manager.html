@@ -82,10 +82,10 @@
           <hr />
 
             <ion-item>
-                <ion-label>모임기간</ion-label>
+                <ion-label>총 모임횟수 설정</ion-label>
                 <ion-range min="1" max="15" step="1" (ionChange)="changeRange(mentoroomInfo.meeting_number)" pin="true" [(ngModel)]="mentoroomInfo.meeting_number" snaps="true" color="secondary">
-                    <ion-icon small range-left> 1명 </ion-icon>
-                    <ion-icon range-right> 15명 </ion-icon>
+                    <ion-icon small range-left> 1회 </ion-icon>
+                    <ion-icon range-right> 15회 </ion-icon>
                 </ion-range>
             </ion-item>
             <div style="display: flex;" *ngFor="let i of range">

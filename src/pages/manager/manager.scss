@@ -282,6 +282,12 @@ ion-segment.segment.segment-ios.ng-untouched.ng-pristine.ng-valid {
     ion-icon.icon.icon-ios.ion-md-remove-circle.item-icon {
         color: indianred;
     }
+
+    ion-item.item.item-block.item-ios.item-select.input-has-value.item-input-has-value,
+    ion-item.item.item-block.item-md.item-select.input-has-value.item-input-has-value {
+        padding-left: 18px;
+        border-bottom: none;
+    }
     
 }
 

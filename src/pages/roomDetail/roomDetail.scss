@@ -55,7 +55,7 @@
 
     button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
     button.fileButton.disable-hover.button.button-ios.button-default.button-default-ios {
-        background: lightcoral;
+        background: #488aff;
         height: 20px;
         vertical-align: middle;
         font-size: 10px;
@@ -69,7 +69,7 @@
 
     button.fileButton2.disable-hover.button.button-md.button-default.button-default-md,
     button.fileButton2.disable-hover.button.button-ios.button-default.button-default-ios {
-        background: #61A5FF;
+        background: #488aff;
         height: 20px;
         vertical-align: middle;
         font-size: 10px;
@@ -162,7 +162,7 @@
     
     .range-md [range-right] {
         margin: 5px 0 0 12px;
-        color: #0883F7;
+        color: #488aff;
     }
 
     .poll {
@@ -182,7 +182,7 @@
     span.youtube-span {
         vertical-align: middle;
         font-size: 14px;
-        color: cornflowerblue;
+        color: #488aff;
         text-decoration: underline;
     }
 
@@ -388,5 +388,19 @@
     .button {
         margin-left: 10px;
         flex: 1;
+    }
+
+    table.reportTable td:first-child {
+        width: 58%;
+    }
+
+    ion-icon.icon.icon-md.ion-md-trash,
+    ion-icon.icon.icon-ios.ion-md-trash {
+        color: indianred;
+    }
+
+    ion-icon.icon.icon-md.ion-md-download,
+    ion-icon.icon.icon-ios.ion-md-download {
+        color: #488aff;
     }
 }

@@ -14,10 +14,10 @@
       <td rowspan="2">
         <img src="assets/img/user.png" width="50px"/>
       </td>
-         <!--로그인 안했을 경우-->
-         <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>
+      <td menuClose (click)="openMyPage()" class="account_user">마이페이지</td>
+    </tr>
+         <!-- <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>
          
-          <!--로그인 했을 경우-->
           <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 0" class="account_user"><b>{{currentUser.USERNAME}}</b></td>
           <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 1" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘토</td>
           <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 2" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘티</td>
@@ -25,11 +25,11 @@
     </tr>
     <tr>
          <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERID}}</b></td>
-    </tr>
+    </tr> -->
   </table>
 
   <ion-item no-lines>
-      <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openLogout()">
+      <!-- <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openLogout()">
           <ion-icon name="md-log-out" class="account-icon"></ion-icon>
       </button>
       <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openMessage()">
@@ -37,7 +37,7 @@
       </button>
       <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openMyPage()">
         <ion-icon name="ios-apps" class="account-icon"></ion-icon>
-      </button>
+      </button> -->
   </ion-item>
 </section>
 
