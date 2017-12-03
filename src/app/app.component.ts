@@ -69,10 +69,15 @@ export class MyApp implements OnInit {
             // Here you can do any higher level native things you might need.
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            if(this.currentUser != null) {
+            if(this.currentUser !== null) {
                 this.rootPage = HomePage;
+<<<<<<< HEAD
             }
             if(this.currentUser === null || this.currentUser === undefined) {
+=======
+            } 
+            if(this.currentUser === undefined || this.currentUser === null) {
+>>>>>>> c484d244e9ce5de3eb36dcf9a2d44fe346955f07
                 this.rootPage = LoginPage;
             }
         });

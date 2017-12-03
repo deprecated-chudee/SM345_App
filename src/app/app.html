@@ -1,4 +1,5 @@
 <ion-menu [content]="content">
+<<<<<<< HEAD
 
   
 
@@ -75,6 +76,50 @@
 
 
   </ion-content>
+=======
+    <ion-content class="side">
+        <section class="sideAccount">
+            <ion-item no-lines style="height: 62px;">
+                <button menuClose clear ion-button item-right>
+                <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>
+                </button>
+            </ion-item>
+        </section>
+
+        <table class="sideTable">
+            <tr>
+                <td menuClose (click)="openMyPage()"><img src="assets/img/user.png"/></td>
+                <td menuClose (click)="openMyPage()" class="account_user">마이페이지</td>
+            </tr>
+            <tr>
+                <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>
+                <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>
+            </tr>
+            <tr>
+                <td menuClose (click)="openPage(pages[1])"><img src="assets/img/document.png"/></td>
+                <td menuClose (click)="openPage(pages[1])">{{pages[1].title}}</td>
+            </tr>
+            <tr>
+                <td menuClose (click)="openPage(pages[2])"><img src="assets/img/info.png"/></td>
+                <td menuClose (click)="openPage(pages[2])">{{pages[2].title}}</td>
+            </tr>
+            <tr>
+                <td menuClose (click)="openPage(pages[3])"><img src="assets/img/group.png"/></td>
+                <td menuClose (click)="openPage(pages[3])">{{pages[3].title}}</td>
+            </tr>
+            <tr>
+                <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>
+                <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>
+            </tr>
+            <tr *ngIf="currentUser !== undefined && currentUser.USERAUTH === 3">
+                <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>
+                <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>
+            </tr>
+        </table>
+
+
+    </ion-content>
+>>>>>>> c484d244e9ce5de3eb36dcf9a2d44fe346955f07
 </ion-menu>
 
 
