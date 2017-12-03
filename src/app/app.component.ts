@@ -72,7 +72,7 @@ export class MyApp implements OnInit {
             if(this.currentUser != null) {
                 this.rootPage = HomePage;
             }
-            if(this.currentUser == null || this.currentUser == undefined) {
+            if(this.currentUser === null || this.currentUser === undefined) {
                 this.rootPage = LoginPage;
             }
         });
