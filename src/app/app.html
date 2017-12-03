@@ -1,47 +1,19 @@
 <ion-menu [content]="content">
 
-  
-
 <ion-content class="side">
 <section class="sideAccount">
-    <ion-item no-lines>
+    <ion-item no-lines class="sideHeader" style="height: 61px;">
       <button menuClose clear ion-button item-right>
         <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>
       </button>
     </ion-item>
-  <table class="sideAccountTable">
-    <tr>
-      <td rowspan="2">
-        <img src="assets/img/user.png" width="50px"/>
-      </td>
-      <td menuClose (click)="openMyPage()" class="account_user">마이페이지</td>
-    </tr>
-         <!-- <td *ngIf="currentUser == undefined" class="account_user" (click)="loginOpen()">로그인 해주세요</td>
-         
-          <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 0" class="account_user"><b>{{currentUser.USERNAME}}</b></td>
-          <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 1" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘토</td>
-          <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 2" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘티</td>
-          <td *ngIf="currentUser != undefined && currentUser.USERAUTH == 3" class="account_user"><b>{{currentUser.USERNAME}}</b><img src="assets/img/crown.png" class="account-icon"/></td>
-    </tr>
-    <tr>
-         <td *ngIf="currentUser != undefined" class="account_user"><b>{{currentUser.USERID}}</b></td>
-    </tr> -->
-  </table>
-
-  <ion-item no-lines>
-      <!-- <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openLogout()">
-          <ion-icon name="md-log-out" class="account-icon"></ion-icon>
-      </button>
-      <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openMessage()">
-        <ion-icon name="md-mail" class="account-icon"></ion-icon>
-      </button>
-      <button *ngIf="currentUser != undefined" menuClose clear ion-button item-right (click)="openMyPage()">
-        <ion-icon name="ios-apps" class="account-icon"></ion-icon>
-      </button> -->
-  </ion-item>
 </section>
 
   <table class="sideTable">
+      <tr>
+        <td menuClose (click)="openMyPage()"><img src="assets/img/user.png"/></td>
+        <td menuClose (click)="openMyPage()" class="account_user">마이페이지</td>
+      </tr>
       <tr>
         <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>
         <td menuClose (click)="openPage(pages[0])">{{pages[0].title}}</td>

@@ -432,10 +432,34 @@ export class ManagerPage implements OnInit{
     handleFile(event) {
         let file = event.target.files[0];
             this.xlsxToJsonService.processFileToJson({}, file)
-            .subscribe(data => {
-                this.result = JSON.stringify(data['sheets']);
-                console.log(data['sheets'])
-            })
+                .subscribe(data => {
+                    data = _.map(data['sheets']['신입생등록'], (student) => {
+                        student['주전공'] = this.changeMajor(student['주전공'])
+                        student['부전공/복수전공'] = this.changeMinor(student['부전공/복수전공'])
+                        console.log(student)
+                        return student;
+                    })
+                    this.result = JSON.stringify(data)
+                })
+    }
+
+    // 주 전공 변환
+    changeMajor(major) {
+        switch(major) {
+            case '소프트웨어공학과':
+                return 1;
+        }
+    }
+    // 부 전공 / 복수 전공 변환
+    changeMinor(minor) {
+        switch(minor) {
+            case '소프트웨어공학과':
+                return 1;
+            case '경영학과':
+                return 2;
+            case '없음':
+                return 0;
+        }
     }
 }
 
