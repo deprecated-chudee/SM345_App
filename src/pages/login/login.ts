@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
 import { 
   NavController, 
@@ -7,7 +7,8 @@ import {
   ToastController, 
   ViewController,
   LoadingController,
-  App 
+  App,
+  Nav 
 } from 'ionic-angular';
 
 import { HomePage } from '.././home/home';
@@ -21,6 +22,10 @@ import { LoginService } from '../../services/login.service';
 export class LoginPage implements OnInit {
   public user: User;
   private login_record: number = 0;
+  @ViewChild(Nav) nav: Nav;
+  rootPage: any = LoginPage;
+  public currentUser;
+  USERID: number;
 
   constructor(
     public app: App, 
@@ -37,6 +42,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.user = new User();
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   //로그인
