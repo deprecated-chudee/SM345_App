@@ -29,9 +29,7 @@ import { MyPage } from '../pages/myPage/myPage';
 export class MyApp implements OnInit {
     // @ViewChild(Nav) nav: Nav;
     @ViewChild(Nav) nav: Nav;
-
-    rootPage: any;
-
+    rootPage: any = LoginPage;
     public currentUser;
     public user: User;
     pages: Array<{title: string, component: any}>;
@@ -69,11 +67,6 @@ export class MyApp implements OnInit {
             // Here you can do any higher level native things you might need.
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            if(this.currentUser != null) {
-                this.rootPage = HomePage;
-            } else {
-                this.rootPage = LoginPage;
-            }
         });
     }
 
