@@ -62,7 +62,7 @@
           <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>
           <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>
       </tr>
-      <tr *ngIf="currentUser != undefined && currentUser.USERAUTH == 3">
+      <tr *ngIf="currentUser.USERAUTH == 3">
           <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>
           <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>
       </tr>
