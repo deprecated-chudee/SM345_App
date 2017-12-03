@@ -71,13 +71,8 @@ export class MyApp implements OnInit {
             this.splashScreen.hide();
             if(this.currentUser !== null) {
                 this.rootPage = HomePage;
-<<<<<<< HEAD
-            }
-            if(this.currentUser === null || this.currentUser === undefined) {
-=======
             } 
-            if(this.currentUser === undefined || this.currentUser === null) {
->>>>>>> c484d244e9ce5de3eb36dcf9a2d44fe346955f07
+            if(this.currentUser == undefined || this.currentUser == null) {
                 this.rootPage = LoginPage;
             }
         });
