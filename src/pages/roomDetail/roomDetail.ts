@@ -34,9 +34,9 @@ export class RoomDetailPage implements OnInit {
   private mento_id;
   private mento_name;
   sort: boolean = false;
-  
+
   private formData;
-  fileLabel: string = '';
+  private fileLabel: string = '';
   private files: Upload[] = [];
   
   constructor(
@@ -82,7 +82,7 @@ export class RoomDetailPage implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       let file: File = event.target.files[0];
       this.formData = new FormData();
-      this.formData.append('uploadFile', file, file.name);
+      this.formData.append(event.target.name, file, file.name);
       this.fileLabel = file.name;
     } else {
       this.formData = undefined;

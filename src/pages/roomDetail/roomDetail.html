@@ -91,7 +91,7 @@
 
         <!-- 결과보고서 파일 업로드 -->
         <div class="uploadWrapper" *ngIf="selectedRoom.mento_id == USERID"> <!-- 해당 방 멘토만 업로드 -->
-            <input type="file" class="inputfile" id="upload" (change)="onChange($event)" file-upload multiple />
+            <input type="file" class="inputfile" id="upload" name="uploadFile" (change)="onChange($event)"  accept="application/*" file-upload multiple />
             <label for="upload" class="inputLabel"><strong>{{ fileLabel ? fileLabel : 'Choose a file' }}</strong></label>
             <button ion-button class="button" (click)="save()"> 제출하기 </button>
         </div>

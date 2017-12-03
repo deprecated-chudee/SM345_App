@@ -340,11 +340,11 @@
               <ion-checkbox color="danger" (click)="reportList_selectedAll()"></ion-checkbox>
           </ion-item>
 
-          <table class="userTable">
+          <table class="userTable" *ngFor="let report of reports">
               <tr>
                   <td>
                     <ion-item no-lines>
-                        <ion-label><span class="teamName">[자바를 잡아]</span> 1차보고서</ion-label>
+                        <ion-label><span class="teamName">[{{report.team_name}}]</span> 1차보고서</ion-label>
                         <ion-checkbox *ngIf="selectedAllReport === false" color="dark" checked="false"></ion-checkbox>
                         <ion-checkbox *ngIf="selectedAllReport === true" color="dark" checked="true"></ion-checkbox>
                     </ion-item> 
@@ -356,55 +356,7 @@
                   </td>
               </tr>
           </table>  
-          <table class="userTable">
-              <tr>
-                  <td>
-                    <ion-item no-lines>
-                        <ion-label><span class="teamName">[자바를 잡아]</span> 2차보고서</ion-label>
-                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>
-                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>
-                    </ion-item> 
-                  </td>
-              </tr>
-              <tr>
-                  <td>
-                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료
-                  </td>
-              </tr>
-          </table> 
-          <table class="userTable">
-              <tr>
-                  <td>
-                    <ion-item no-lines>
-                        <ion-label><span class="teamName">[썬]</span> 1차보고서</ion-label>
-                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>
-                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>
-                    </ion-item> 
-                  </td>
-              </tr>
-              <tr>
-                  <td>
-                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인중
-                  </td>
-              </tr>
-          </table> 
-          <table class="userTable">
-              <tr>
-                  <td>
-                    <ion-item no-lines>
-                        <ion-label><span class="teamName">[ALGO]</span> 1차보고서</ion-label>
-                        <ion-checkbox *ngIf="selectedAll3==false" color="dark" checked="false"></ion-checkbox>
-                        <ion-checkbox *ngIf="selectedAll3==true" color="dark" checked="true"></ion-checkbox>
-                    </ion-item> 
-                  </td>
-              </tr>
-              <tr>
-                  <td>
-                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;반려
-                  </td>
-              </tr>
-          </table> 
-
+          
           <button ion-button block class="editButton" (click)="showReportDeleteAlert()">보고서삭제</button>
           <button ion-button block class="deleteButton" (click)="showReportDownloardAlert()">다운로드</button>
       </ion-list>

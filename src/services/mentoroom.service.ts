@@ -16,9 +16,14 @@ export class MentoroomService {
     }
 
     // 멘토방 생성
-    createMentoroom(mentoroom: Mentoroom): Promise<Mentoroom>{
+    createMentoroom(picture: FormData, file: FormData, mentoroom: Mentoroom): Promise<Mentoroom>{
         let url = this.URL + 'mentoroom/create';
-        return this.http.post(url, mentoroom)
+        let headers = new Headers();
+        headers.append('enctype', 'multipart/form-data');
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.post(url, { picture, file, mentoroom }, options)
             .toPromise()
             .then(response => response.json() as Mentoroom)
             .catch(this.handleError);
@@ -85,7 +90,7 @@ export class MentoroomService {
         headers.append('Accept', 'application/json');
         let options = new RequestOptions({headers: headers});
 
-        let url = `${this.URL}/mentoroom/fileupload/${room_id}`; 
+        let url = `${this.URL}mentoroom/fileupload/${room_id}`; 
         return this.http.post(url, upload, options)
             .toPromise()
             .catch(this.handleError)
@@ -102,7 +107,7 @@ export class MentoroomService {
 
     // 파일 삭제
     fileDelete(room_id: number, file_id: number) {
-        let url = `${this.URL}/mentoroom/filedelete/${room_id}/${file_id}`;
+        let url = `${this.URL}mentoroom/filedelete/${room_id}/${file_id}`;
         return this.http.get(url)
             .toPromise()
             .catch(this.handleError)

@@ -35,6 +35,7 @@ export class ManagerPage implements OnInit{
     private count1:number = 1;
     private mentorooms: Mentoroom[] = [];
     private users: User[] = [];
+    private reports = [];
     private selectedUser = [];
     private selectedSearchedUser = [];
     private selectedRoom = '';
@@ -84,9 +85,10 @@ export class ManagerPage implements OnInit{
     }
 
     ngOnInit() {
-        this.getMentoRoomInfo()
+        this.getMentoRoomInfo();
         this.getMentoroomListByYear(20172);
         this.userList(0);
+        this.reportList(20172);
     }
 
     changeRange(index) {
@@ -226,6 +228,22 @@ export class ManagerPage implements OnInit{
         this.selectedRoom = '';
         this.mentoroomService.getMentoroomListByYear(e)
             .then(mentoroom => this.mentorooms = mentoroom);
+    }
+
+
+    /**
+     *  보고서
+     */
+
+    reportList(year: number) {
+        this.adminService.reportList(year)
+            .then(reports => {
+                console.log(reports)
+                this.reports = reports
+            })
+            .catch(() => {
+                this.Toast('error')
+            })
     }
 
     /**

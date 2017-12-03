@@ -6,6 +6,7 @@ import { User } from '../models/user';
 import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoroomInfo';
 import { Observable } from 'rxjs/Observable';
+import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 @Injectable()
 export class AdminService {
@@ -103,6 +104,15 @@ export class AdminService {
         let url = this.URL + 'admin/report_reject/' + f_id;
         return this.http.get(url)
             .toPromise()
+            .catch(this.handleError)
+    }
+
+    // 보고서 목록 불러오기
+    reportList(year: number): Promise<any> {
+        let url = this.URL + 'admin/report/' + year;
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
             .catch(this.handleError)
     }
 
