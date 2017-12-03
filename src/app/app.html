@@ -1,17 +1,16 @@
 <ion-menu [content]="content">
     <ion-content class="side">
         <section class="sideAccount">
-            <ion-item no-lines style="height: 62px;">
+            <ion-item no-lines style="height: 56px;">
                 <button menuClose clear ion-button item-right>
                 <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>
                 </button>
             </ion-item>
         </section>
-
         <table class="sideTable">
             <tr>
-                <td menuClose (click)="openMyPage()"><img src="assets/img/user.png"/></td>
-                <td menuClose (click)="openMyPage()" class="account_user">마이페이지</td>
+                <td menuClose (click)="openPage(pages[5])"><img src="assets/img/user.png"/></td>
+                <td menuClose (click)="openPage(pages[5])" class="account_user">{{pages[5].title}}</td>
             </tr>
             <tr>
                 <td menuClose (click)="openPage(pages[0])"><img src="assets/img/home.png"/></td>
@@ -33,13 +32,14 @@
                 <td menuClose (click)="openPage(pages[4])"><img src="assets/img/question.png"/></td>
                 <td menuClose (click)="openPage(pages[4])">{{pages[4].title}}</td>
             </tr>
+<<<<<<< HEAD
             <tr *ngIf="this.currentUser != undefined && this.currentUser.USERAUTH == 3">
                 <td menuClose (click)="openPage(pages[5])"><img src="assets/img/setting.png"/></td>
                 <td menuClose (click)="openPage(pages[5])">{{pages[5].title}}</td>
             </tr>
+=======
+>>>>>>> 9addeaf432101d4362959a11933aa270c232e914
         </table>
-
-
     </ion-content>
 </ion-menu>
 

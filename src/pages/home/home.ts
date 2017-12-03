@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
+import { LoginPage } from '../login/login';
 import { SmPage } from '../sm/sm';
 import { ReadingPage } from '../reading/reading';
 import { NoticePage } from '../notice/notice';
-import { MentorAddPage } from '.././mentorAdd/mentorAdd';
 
 import { ArticleService } from '../../services/article.service';
 import { MentoroomService } from '../../services/mentoroom.service';
@@ -20,19 +20,24 @@ import { Mentoroom } from '../../models/mentoroom';
 export class HomePage implements OnInit {
   private articles: Article[] =[];
   private mentorooms: Mentoroom[];
+  private currentUser;
 
   constructor(
     public navCtrl: NavController,
     private articleService: ArticleService,
     private mentoroomService: MentoroomService,
   ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if(!this.currentUser) this.navCtrl.setRoot(LoginPage)
   }
 
   ngOnInit() {
-    this.articleService.getArticleList(2)
-      .then(article => this.articles = article);
-    this.mentoroomService.getMentoroomList()
-      .then(mentorooms => this.mentorooms = mentorooms);
+    if(this.currentUser){
+      this.articleService.getArticleList(2)
+        .then(article => this.articles = article);
+      this.mentoroomService.getMentoroomList()
+        .then(mentorooms => this.mentorooms = mentorooms);
+    }
   }
 
   openReadingPage(article){
@@ -51,6 +56,5 @@ export class HomePage implements OnInit {
   openNoticePage() {
     this.navCtrl.setRoot(NoticePage);
   }
-
 
 }

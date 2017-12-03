@@ -6,7 +6,6 @@ import { User } from '../models/user';
 
 @Injectable()
 export class LoginService {
-
     //private URL = 'http://localhost:8086/sm345/api/';
     private URL = 'http://220.230.112.31:8081/sm345/api/';
 
