@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { App, NavController, ViewController, ToastController } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { Mentoroom } from '../../models/mentoroom';
+import { MentoCreate } from '../../models/mentoCreate';
 
 import { MentoroomService } from '../../services/mentoroom.service';
 
@@ -53,13 +54,17 @@ export class MentorAddPage implements OnInit {
     if(!this.image) { this.Toast('팀 사진을 업로드 해주세요.'); return false; }
     if(!this.credentialsFile) { this.Toast('자격증명 파일을 업로드 해주세요.'); return false; }
     this.mentoroom.mento_id = this.USERID;
-    this.mentoroom.picture = this.image;
-    this.mentoroom.file = this.credentialsFile;
-    console.log(this.mentoroom);
-    // this.mentoroomService.createMentoroom(this.mentoroom)
-    //   .then(() => {
-    //     this.Toast('멘토 신청이 완료되었습니다.');
-    //   });
+    let mentoCreate: MentoCreate = new MentoCreate(this.image, this.credentialsFile, this.mentoroom);
+    
+    this.mentoroomService.createMentoroom(mentoCreate)
+      .then(res => {
+        console.log(res)
+        this.Toast('멘토 신청이 완료되었습니다.');
+      }) 
+      .catch(() => {
+        this.Toast('Error');
+      })
+
            
     //this.navCtrl.setRoot(RoomPage);
     setTimeout(() => { 

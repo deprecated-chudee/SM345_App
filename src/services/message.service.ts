@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MessageService {
@@ -34,7 +35,7 @@ export class MessageService {
         let url = this.URL + 'message/username/' + u_id;
         return this.http.get(url)
             .toPromise()
-            .then(res => res.json())
+            .then(res => res.text())
             .catch(this.handleError)
     }
 

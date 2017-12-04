@@ -3,9 +3,9 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Mentoroom } from '../models/mentoroom';
-import { MentoroomInfo } from '../models/mentoRoomInfo';
 import { Menti } from '../models/menti';
 import { Upload } from '../models/upload';
+import { MentoCreate } from '../models/mentoCreate';
 @Injectable()
 export class MentoroomService {
   
@@ -16,16 +16,17 @@ export class MentoroomService {
     }
 
     // 멘토방 생성
-    createMentoroom(picture: FormData, file: FormData, mentoroom: Mentoroom): Promise<Mentoroom>{
+    createMentoroom(mentoCreate: MentoCreate): Promise<Mentoroom>{
         let url = this.URL + 'mentoroom/create';
         let headers = new Headers();
         headers.append('enctype', 'multipart/form-data');
         headers.append('Accept', 'application/json');
         let options = new RequestOptions({headers: headers});
+        console.log(mentoCreate)
 
-        return this.http.post(url, { picture, file, mentoroom }, options)
+        return this.http.post(url, mentoCreate, options)
             .toPromise()
-            .then(response => response.json() as Mentoroom)
+            .then(res => res.text())
             .catch(this.handleError);
     }
 

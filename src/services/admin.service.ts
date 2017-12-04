@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { User } from '../models/user';
@@ -113,6 +113,18 @@ export class AdminService {
         return this.http.get(url)
             .toPromise()
             .then(res => res.json())
+            .catch(this.handleError)
+    }
+
+    // 신입생 엑셀 등록
+    excelEnter(excel: Array<Object>) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({headers: headers});
+
+        let url = this.URL + 'admin/excel';
+        return this.http.post(url, excel, options)
+            .toPromise()
             .catch(this.handleError)
     }
 

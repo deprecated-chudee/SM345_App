@@ -143,7 +143,7 @@ export class ManagerPage implements OnInit{
         let toast = this.toastCtrl.create({
             message: message,
             duration: 3000,
-            position: 'top',
+            position: 'bottom',
         });
         toast.present();
     }
@@ -447,8 +447,8 @@ export class ManagerPage implements OnInit{
             this.xlsxToJsonService.processFileToJson({}, file)
                 .subscribe(data => {
                     data = _.map(data['sheets']['신입생등록'], (student) => {
-                        student['주전공'] = this.changeMajor(student['주전공'])
-                        student['부전공/복수전공'] = this.changeMinor(student['부전공/복수전공'])
+                        student.student_major = this.changeMajor(student.student_major)
+                        student.student_minor = this.changeMinor(student.student_minor)
                         console.log(student)
                         return student;
                     })
@@ -472,6 +472,21 @@ export class ManagerPage implements OnInit{
                 return 2;
             case '없음':
                 return 0;
+        }
+    }
+
+    // 신입생 엑셀 등록
+    excelEnter() {
+        if(this.result) {
+            this.adminService.excelEnter(this.result)
+                .then(() => {
+                    this.Toast('신입생 등록이 완료 되었습니다.')
+                })
+                .catch(() => {
+                    this.Toast('Error')
+                })
+        } else {
+            this.Toast('파일이 없습니다.')
         }
     }
 }
