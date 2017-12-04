@@ -11,6 +11,7 @@ import {
 } from 'ionic-angular';
 import { RoomPage } from '.././room/room';
 import { ManagerPage } from '.././manager/manager';
+import { SurveyWritePage } from '.././surveyWrite/surveyWrite';
 
 import { AdminService } from '../../services/admin.service';
 import { MentoroomService } from '../../services/mentoroom.service';
@@ -261,5 +262,9 @@ export class RoomDetailPage implements OnInit {
       this.appCtrl.getRootNav().setRoot(RoomPage)
     })
     .catch(() => this.Toast('서버와의 통신 에러입니다. 잠시 후 다시 시도해 주세요.'))
+  }
+
+  OpenSurveyWrite() {
+    this.appCtrl.getRootNav().setRoot(SurveyWritePage);
   }
 }
