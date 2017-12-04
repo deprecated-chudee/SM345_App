@@ -207,8 +207,8 @@
           <ion-item>
               <ion-label> 사용자 목록 </ion-label>
               <ion-select [(ngModel)]="selectDefualtAuth" (ionChange)="userList($event)">
-                <ion-option [value]="0">전체학생</ion-option>  
-                <ion-option [selected]="true" [value]="1">멘토</ion-option>
+                <ion-option [selected]="true" [value]="0">전체학생</ion-option>  
+                <ion-option [value]="1">멘토</ion-option>
                 <ion-option [value]="4">멘토(보고서미제출)</ion-option>
                 <ion-option [value]="2">멘티</ion-option>
                 <ion-option [value]="3">관리자</ion-option>
@@ -218,7 +218,7 @@
         <!-- 검색 결과 없을때 -->
         <div *ngIf="searchedUsers.length === 0" >
             <ion-item>
-                <ion-label>All</ion-label>
+                <ion-label>전체선택</ion-label>
                 <ion-checkbox color="danger" *ngIf="selectedUser.length !== users.length" checked="false" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>
                 <ion-checkbox color="danger" *ngIf="selectedUser.length === users.length" checked="true" (ionChange)="handleSelectedAllUser($event)"></ion-checkbox>
             </ion-item>
@@ -233,7 +233,7 @@
         <!-- 검색 결과 있을때 -->
         <div *ngIf="searchedUsers.length > 0">
             <ion-item>
-                <ion-label>All</ion-label>
+                <ion-label>전체선택</ion-label>
                 <ion-checkbox color="danger" *ngIf="selectedSearchedUser.length !== searchedUsers.length" checked="false" (ionChange)="handleSelectedAllSearchedUser($event)"></ion-checkbox>
                 <ion-checkbox color="danger" *ngIf="selectedSearchedUser.length === searchedUsers.length" checked="true" (ionChange)="handleSelectedAllSearchedUser($event)"></ion-checkbox>
             </ion-item>
@@ -246,53 +246,98 @@
         </div>
 
         <div class="buttonWrapper">
-            <!--
-            <button ion-button block class="editButton" (click)="openWritePage()">수정</button>-->
             <button ion-button block class="editButton" (click)="openMessagePage()">쪽지보내기</button>
-            
             <button ion-button block class="deleteButton" (click)="showManagerAlert()" *ngIf="selectDefualtAuth != 3">관리자지정</button>
-            
             <button ion-button block class="deleteButton" (click)="showManagerAlert2()" *ngIf="selectDefualtAuth == 3">관리자삭제</button>
         </div>
           
       </ion-list>
 
-      <!--보고서 목록-->
-      <ion-list *ngSwitchCase="'report'">
-          <ion-item>
-              <ion-label>검색기간</ion-label>
-              <ion-select>
-                <ion-option [selected]="true">2017-2학기</ion-option>
-                <ion-option>2017-1학기</ion-option>
-                <ion-option>전체학기</ion-option>
-              </ion-select>
-          </ion-item>
+        <!--보고서 목록-->
+        <ion-list *ngSwitchCase="'report'">
+            <ion-searchbar [(ngModel)]="searchReportname" (ionChange)="reportSearch($event)"></ion-searchbar>
+            <ion-item>
+                <ion-label>검색기간</ion-label>
+                <ion-select [(ngModel)]="selectDefualtYear" (ionChange)="reportList($event)">
+                    <ion-option [selected]="true" [value]="20172">2017-2학기</ion-option>
+                    <ion-option [value]="20171">2017-1학기</ion-option>
+                    <ion-option [value]="0">전체학기</ion-option>
+                </ion-select>
+            </ion-item>
 
-          <ion-item>
-              <ion-label>전체선택</ion-label>
-              <ion-checkbox color="danger" (click)="reportList_selectedAll()"></ion-checkbox>
-          </ion-item>
+            <!-- 검색 결과 없을때 -->
+            <div *ngIf="searchedReports.length === 0" >
+                <ion-item>
+                    <ion-label>전체선택</ion-label>
+                    <ion-checkbox color="danger" *ngIf="selectedReport.length !== reports.length" checked="false" (ionChange)="handleSelectedAllReport($event)"></ion-checkbox>
+                    <ion-checkbox color="danger" *ngIf="selectedReport.length === reports.length" checked="true" (ionChange)="handleSelectedAllReport($event)"></ion-checkbox>
+                </ion-item>
 
-          <table class="userTable" *ngFor="let report of reports">
-              <tr>
-                  <td>
-                    <ion-item no-lines>
-                        <ion-label><span class="teamName">[{{report.team_name}}]</span> 1차보고서</ion-label>
-                        <ion-checkbox *ngIf="selectedAllReport === false" color="dark" checked="false"></ion-checkbox>
-                        <ion-checkbox *ngIf="selectedAllReport === true" color="dark" checked="true"></ion-checkbox>
-                    </ion-item> 
-                  </td>
-              </tr>
-              <tr>
-                  <td>
-                      홍길동&nbsp;&nbsp;|&nbsp;&nbsp;2017-09-30&nbsp;&nbsp;|&nbsp;&nbsp;확인완료
-                  </td>
-              </tr>
-          </table>  
+                <table class="userTable" *ngFor="let report of reports">
+                    <tr>
+                        <td>
+                            <ion-item no-lines>
+                                <ion-label>
+                                    <span class="teamName">[{{report.team_name}}]</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <span>{{report.file_name}}</span>
+                                </ion-label>
+                                <ion-checkbox *ngIf="selectedReport.indexOf(report.id) === -1" color="dark" checked="false" (ionChange)="handleSelectedReport($event, report)"></ion-checkbox>
+                                <ion-checkbox *ngIf="selectedReport.indexOf(report.id) !== -1" color="dark" checked="true" (ionChange)="handleSelectedReport($event, report)"></ion-checkbox>
+                            </ion-item> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{report.mento_name + '\t'}} &nbsp;&nbsp;|&nbsp;&nbsp;
+                            {{report.timestamp | date: 'yyyy-MM-dd' }} &nbsp;&nbsp;|&nbsp;&nbsp;
+                            {{report.file_state == 0 ? '확인중' : report.file_state == 1 ? '승인완료' : '반려' }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- 검색 결과 있을때 -->
+            <div *ngIf="searchedReports.length > 0">
+                <ion-item>
+                    <ion-label>전체선택</ion-label>
+                    <ion-checkbox color="danger" *ngIf="selectedSearchedReport.length !== searchedReports.length" checked="false" (ionChange)="handleSelectedAllSearchedReport($event)"></ion-checkbox>
+                    <ion-checkbox color="danger" *ngIf="selectedSearchedReport.length === searchedReports.length" checked="true" (ionChange)="handleSelectedAllSearchedReport($event)"></ion-checkbox>
+                </ion-item>
+
+                <table class="userTable" *ngFor="let report of searchedReports">
+                    <tr>
+                        <td>
+                            <ion-item no-lines>
+                                <ion-label>
+                                    <span class="teamName">[{{report.team_name}}]</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                                    <span>{{report.file_name}}</span>
+                                </ion-label>
+                                <ion-checkbox *ngIf="selectedSearchedReport.indexOf(report.id) === -1" color="dark" checked="false" (ionChange)="handleSelectedSearchedReport($event, report)"></ion-checkbox>
+                                <ion-checkbox *ngIf="selectedSearchedReport.indexOf(report.id) !== -1" color="dark" checked="true" (ionChange)="handleSelectedSearchedReport($event, report)"></ion-checkbox>
+                            </ion-item> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{report.mento_name + '\t'}} &nbsp;&nbsp;|&nbsp;&nbsp;
+                            {{report.timestamp | date: 'yyyy-MM-dd' }} &nbsp;&nbsp;|&nbsp;&nbsp;
+                            {{report.file_state == 0 ? '확인중' : report.file_state == 1 ? '승인완료' : '반려' }}
+                        </td>
+                    </tr>
+                </table>
+            </div>
           
-          <button ion-button block class="editButton" (click)="showReportDeleteAlert()">보고서삭제</button>
-          <button ion-button block class="deleteButton" (click)="showReportDownloardAlert()">다운로드</button>
-      </ion-list>
+            <!-- 검색 결과 없을때 -->
+            <div *ngIf="searchedReports.length === 0" >
+                <button ion-button block class="editButton" (click)="showReportDeleteAlert(selectedReport)">보고서삭제</button>
+                <button ion-button block class="deleteButton" (click)="showReportDownloardAlert(selectedReportData)">다운로드</button>
+            </div>        
+            <!-- 검색 결과 있을때 -->
+            <div *ngIf="searchedReports.length > 0">
+                <button ion-button block class="editButton" (click)="showReportDeleteAlert(selectedSearchedReport)">보고서삭제</button>
+                <button ion-button block class="deleteButton" (click)="showReportDownloardAlert(selectedSearchedReportData)">다운로드</button>
+            </div>
+        </ion-list>
 
       <!--설문조사-->
       <ion-list *ngSwitchCase="'survey'">

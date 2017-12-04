@@ -116,6 +116,14 @@ export class AdminService {
             .catch(this.handleError)
     }
 
+    // 보고서 삭제
+    reportRemove(f_id) {
+        let url = this.URL + 'admin/filedelete/' + f_id;
+        return this.http.get(url)
+            .toPromise()
+            .catch(this.handleError)
+    }
+
     // 신입생 엑셀 등록
     excelEnter(excel: Array<Object>) {
         let headers = new Headers();
