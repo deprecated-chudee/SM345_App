@@ -37,15 +37,6 @@ export class MyApp {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-<<<<<<< HEAD
-            if(this.currentUser !== null) {
-                this.rootPage = HomePage;
-            } 
-            if(this.currentUser == undefined || this.currentUser == null) {
-                this.rootPage = LoginPage;
-            }
-=======
->>>>>>> 9addeaf432101d4362959a11933aa270c232e914
         });
     }
 

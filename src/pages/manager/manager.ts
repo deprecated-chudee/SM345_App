@@ -72,7 +72,7 @@ export class ManagerPage implements OnInit{
         private xlsxToJsonService: XlsxToJsonService,
         public modalCtrl: ModalController, 
         public navCtrl: NavController, 
-        platform: Platform, 
+        public platform: Platform, 
         public alertCtrl: AlertController, 
         public toastCtrl: ToastController,
         public viewCtrl: ViewController,
@@ -128,7 +128,6 @@ export class ManagerPage implements OnInit{
                 return room;
             }
         });
-        console.log(this.searchedRooms)
     }
 
     // 멘토방 선택
@@ -170,7 +169,6 @@ export class ManagerPage implements OnInit{
             let index = this.selectedUser.indexOf(user_id)
             this.selectedUser.splice(index, 1)
         }
-        console.log(this.selectedUser)
     }
 
     // 사용자 선택 전체
@@ -182,7 +180,6 @@ export class ManagerPage implements OnInit{
         } else {
             this.selectedUser = [];
         }
-        console.log(this.selectedUser)
     }
 
     // 사용자 검색
@@ -206,7 +203,6 @@ export class ManagerPage implements OnInit{
             let index = this.selectedSearchedUser.indexOf(user_id)
             this.selectedSearchedUser.splice(index, 1)
         }
-        console.log(this.selectedSearchedUser)
     }
 
     // 검색된 사용자 선택 전체
@@ -219,7 +215,6 @@ export class ManagerPage implements OnInit{
         } else {
             this.selectedSearchedUser = [];
         }
-        console.log(this.selectedSearchedUser)
     }
 
     getMentoroomListByYear(e){
@@ -437,7 +432,7 @@ export class ManagerPage implements OnInit{
             }, 300);
             this.Toast('선택한 멘토방이 삭제되었습니다.')
         } else {
-            this.Toast('보고서가 존재하지 않습니다.')
+            this.Toast('삭제할 방을 선택해주세요.')
             this.app.getRootNav().setRoot(ManagerPage);
         }
     }
