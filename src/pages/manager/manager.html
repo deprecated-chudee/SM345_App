@@ -35,7 +35,10 @@
 
     <!--멘토방 설정-->
     <div [ngSwitch]="manager">
-      <ion-list *ngSwitchCase="'mentorRoom'">
+      <ion-list *ngSwitchCase="'mentorRoom'"> 
+         <ion-list-header class="survey-header">
+              멘토/멘티 설정
+         </ion-list-header>
           <ion-item>
               <ion-label>멘토신청 시작일</ion-label>
               <ion-datetime displayFormat="YYYY/MM/DD" [(ngModel)]="mentoroomInfo.mento_start"></ion-datetime>
@@ -79,10 +82,12 @@
               <ion-option value="10">10명</ion-option>
             </ion-select>
           </ion-item>
-          <hr />
+          
+            <ion-list-header class="survey-header">
+                총 모임횟수 설정
+            </ion-list-header>
 
             <ion-item>
-                <ion-label>총 모임횟수 설정</ion-label>
                 <ion-range min="1" max="15" step="1" (ionChange)="changeRange(mentoroomInfo.meeting_number)" pin="true" [(ngModel)]="mentoroomInfo.meeting_number" snaps="true" color="secondary">
                     <ion-icon small range-left> 1회 </ion-icon>
                     <ion-icon range-right> 15회 </ion-icon>
@@ -101,7 +106,9 @@
                 </ion-item>
             </div>
 
-          <hr />
+          <ion-list-header class="survey-header">
+                설문조사 설정
+          </ion-list-header>
           <ion-item>
               <ion-label>설문조사 시작일</ion-label>
               <ion-datetime displayFormat="YYYY/MM/DD" value="survey_start" [(ngModel)]="mentoroomInfo.survey_start"></ion-datetime>
@@ -154,7 +161,7 @@
                 </ion-item>
                 
                 <!-- 기간 지나서 폐설됨 -->
-                <ion-item  (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 2">
+                <ion-item (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 2">
                     <ion-label><button ion-button class="fileButton3">폐설됨</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;you{{m.mento_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.person_count}}명</ion-label>
                     <ion-checkbox *ngIf="selectedRoom !== m.mentoroom_id" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
                     <ion-checkbox *ngIf="selectedRoom === m.mentoroom_id" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
@@ -164,7 +171,7 @@
         </div>
 
         <!-- 검색 결과 있을 때 -->
-        <div *ngIf="searchedRooms.length > 0" >
+        <div *ngIf="searchedRooms.length > 0">
             <!--멘토방 목록-->
             <div *ngFor="let m of searchedRooms">
                 <!--개설완료-->
@@ -176,7 +183,7 @@
                 </ion-item>
                 
                 <!-- 대기중 -->
-                <ion-item (press)="openRoomDetail(m)"  *ngIf= "m.team_confirm == 0">
+                <ion-item (press)="openRoomDetail(m)" *ngIf= "m.team_confirm == 0">
                     <ion-label><button ion-button class="fileButton4">대기중</button>&nbsp;&nbsp;{{m.team_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.mento_name}}&nbsp;&nbsp;<span class="sort">|</span>&nbsp;&nbsp;{{m.person_count}}명</ion-label>
                     <ion-checkbox *ngIf="selectedRoom !== m.mentoroom_id" color="dark" checked="false" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>
                     <ion-checkbox *ngIf="selectedRoom === m.mentoroom_id" color="dark" checked="true" (ionChange)="handleSelectedRoom($event, m.mentoroom_id)"></ion-checkbox>  
