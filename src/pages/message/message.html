@@ -19,22 +19,13 @@
         <table class="noticeTable-in" *ngFor="let message of messages">
             <tr>
                 <td>
-                    <ion-icon 
-                        *ngIf="message.read_check === 0"
-                        name="md-mail"
-                        (click)="handleRead(message.id)"
-                    >
-                    </ion-icon>
-                    <ion-icon
-                        *ngIf="message.read_check === 1"
-                        name="md-mail-open"
-                    ></ion-icon>
+                    <ion-icon name="md-mail"></ion-icon>
                     &nbsp;&nbsp;
 
                     {{ message.message_title }}
 
                     <ion-icon
-                        name="md-trash" 
+                        name="md-trash"
                         class="remove"
                         (click)="handleRemove(message.id)"
                     ></ion-icon>

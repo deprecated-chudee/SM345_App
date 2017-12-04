@@ -97,6 +97,7 @@ export class RoomDetailPage implements OnInit {
       this.formData = new FormData();
       this.formData.append(event.target.name, file, file.name);
       this.fileLabel = file.name;
+      console.log(this.formData.entries())
     } else {
       this.formData = undefined;
       this.fileLabel = '';

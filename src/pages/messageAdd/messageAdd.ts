@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { ViewController, ToastController, NavParams } from 'ionic-angular';
+import { ViewController, ToastController, NavParams, LoadingController } from 'ionic-angular';
 
 import { MessageService } from '../../services/message.service';
+
+import * as _ from 'lodash';
 
 @Component({
   templateUrl: 'messageAdd.html'
@@ -21,10 +23,11 @@ export class MessageAddPage {
         public viewCtrl: ViewController, 
         public toastCtrl: ToastController,
         public navParams: NavParams,
+        public loadingCtrl: LoadingController,
         private messageService: MessageService
     ) {
         this.selectedUser = this.navParams.get('selectedUser')
-        this.selectedUser.forEach( e => this.getUsername(e) )
+        this.getUsername()
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
     }
 
@@ -32,18 +35,31 @@ export class MessageAddPage {
         this.viewCtrl.dismiss();
     }
 
-    messageAdd() {
+    Toast(message) {
         let toast = this.toastCtrl.create({
-            message: '쪽지가 전송되었습니다.',
+            message: message,
             duration: 3000,
             position: 'bottom',
         });
         toast.present();
     }
 
-    getUsername(u_id: any) {
-        this.messageService.getUsername(u_id)
-            .then(username => this.selectedUsername.push(username))
+    async getUsername() {
+        let loading = await this.loadingCtrl.create({
+            content: 'Loading...'
+        });
+
+        await loading.present();
+        
+        this.selectedUsername = await _.map(this.selectedUser, u_id => {
+            return this.messageService.getUsername(u_id)
+                .then(username => username)
+                .catch(e => {
+                    loading.dismiss()
+                    this.Toast('Error')
+                })
+        })
+        await loading.dismiss()
     }
 
     createMessage() {
@@ -55,8 +71,8 @@ export class MessageAddPage {
                 message_content: this.message.content
             }
             this.messageService.createMessage(message)
-                .then(res => console.log(res))
-            this.messageAdd()
+                .then(() => this.Toast('쪽지가 전송되었습니다.'))
+                .catch(() => this.Toast('Error'))  
         })
     }
 }

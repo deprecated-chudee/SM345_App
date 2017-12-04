@@ -26,7 +26,7 @@
 
     .account_list ion-label.label.label-ios,
     .account_list ion-label.label.label-md{
-        padding-left:20px;
+        padding-left: 0;
     }
 
     .account_list ion-label.label.label-ios {
@@ -85,6 +85,7 @@
         width: 18px;
         vertical-align: text-top;
     }
+
 }
 
 .myPage-header {
@@ -93,6 +94,6 @@
     }
     .navbar-btn {
         position: absolute;
-        //top: 12px;
+        top: 12px;
     }
 }
