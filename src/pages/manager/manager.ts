@@ -23,6 +23,11 @@ import { Mentoroom } from '../../models/mentoroom';
 import { MentoroomInfo } from '../../models/mentoroomInfo';
 import { ReportDate } from '../../models/reportDate';
 
+//설문조사
+import { SurveyService } from '../../services/survey.service';
+import { SurveySubject } from '../../models/surveySubject';
+import { SurveyObject } from '../../models/surveyObject';
+
 import * as _ from 'lodash';
 import * as FileSaver from 'file-saver';
 
@@ -34,6 +39,12 @@ export class ManagerPage implements OnInit{
     isAndroid: boolean = false;
     private count:number = 1;
     private count1:number = 1;
+
+    //설문조사
+    private surveyObjs: SurveyObject[] = [];
+    private surveySubjs: SurveySubject[] = [];
+    private object_question: string[] = []; //객관식 설문조사 질문 내용들 배열
+    private subject_question: string[] = []; //주관식 설문조사 질문 내용들 배열
 
     // 로컬 스토리지
     USERID: number;
@@ -91,6 +102,7 @@ export class ManagerPage implements OnInit{
         public toastCtrl: ToastController,
         public viewCtrl: ViewController,
         public app: App,
+        private surveyService: SurveyService,
     ) {
         this.isAndroid = platform.is('android');
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -105,6 +117,19 @@ export class ManagerPage implements OnInit{
         this.reportList(this.selectDefualtYear);
     }
 
+    //관리자 - 객관식 설문조사 저장
+    createSurveyObj() {
+        console.log('object: ' + this.object_question);
+        this.surveyService.createSurveyObj(this.object_question);
+        this.Toast('설문 등록이 완료되었습니다.');
+    }
+
+    //관리자 - 주관식 설문조사 저장
+    createSurveySubj() {
+        console.log('subject: ' + this.subject_question);
+        this.surveyService.createSurveySubj(this.subject_question);
+    }
+    
     /**
      *  멘토방 설정
      */

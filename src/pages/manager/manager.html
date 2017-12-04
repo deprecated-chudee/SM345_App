@@ -69,7 +69,7 @@
               <ion-option value="50">50명</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item no-lines>
+          <ion-item>
             <ion-label>최대 멘티인원</ion-label>
             <ion-select [(ngModel)]="mentoroomInfo.max_menti">
               <ion-option value="3">3명</ion-option>
@@ -339,7 +339,7 @@
             </div>
         </ion-list>
 
-      <!--설문조사-->
+      <!--설문조사 등록-->
       <ion-list *ngSwitchCase="'survey'">
         <ion-list-header class="survey-header">
             객관식 설문
@@ -349,31 +349,31 @@
         <div class="addBox">
             <ion-item>
                 <ion-label>객관식 Q1.</ion-label>
-                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요." [(ngModel)]="object_question[0]"></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count>1">
             <ion-item>
                 <ion-label>객관식 Q2.</ion-label>
-                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요." [(ngModel)]="object_question[1]"></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count>2">
             <ion-item>
                 <ion-label>객관식 Q3.</ion-label>
-                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요." [(ngModel)]="object_question[2]"></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count>3">
             <ion-item>
                 <ion-label>객관식 Q4.</ion-label>
-                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요." [(ngModel)]="object_question[3]"></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count>4">
             <ion-item>
                 <ion-label>객관식 Q5.</ion-label>
-                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요."></ion-input>
+                <ion-input type="text" placeholder="객관식 설문 내용을 입력해주세요." [(ngModel)]="object_question[4]"></ion-input>
             </ion-item>
         </div>
 
@@ -385,17 +385,17 @@
         <div class="addBox" *ngIf="count1>1">
             <ion-item>
                 <ion-label>주관식 Q1.</ion-label>
-                <ion-input type="text" placeholder="주관식 설문 내용을 입력해주세요."></ion-input>
+                <ion-input type="text" placeholder="주관식 설문 내용을 입력해주세요." [(ngModel)]="subject_question[0]"></ion-input>
             </ion-item>
         </div>
         <div class="addBox" *ngIf="count1>2">
             <ion-item>
                 <ion-label>주관식 Q2.</ion-label>
-                <ion-input type="text" placeholder="주관식 설문 내용을 입력해주세요."></ion-input>
+                <ion-input type="text" placeholder="주관식 설문 내용을 입력해주세요." [(ngModel)]="subject_question[1]"></ion-input>
             </ion-item>
         </div>
 
-        <button ion-button block class="mentorRoomButton">저장</button>
+        <button ion-button block class="mentorRoomButton" (click)="createSurveyObj()" (click)="createSurveySubj()">저장</button>
         <button ion-button block class="mentorRoomButton2" (click)="openSurveyPage()">설문조사 결과</button>
 
       </ion-list>

@@ -12,6 +12,10 @@
 </ion-header>
 
 <ion-content class="page-roomDetail">
+
+    <!--설문조사 버튼-->
+    <button ion-button class="teamNo" (click)="OpenSurveyWrite()">설문조사</button>
+
     <table class="roomDetailTable">
         <tr>
             <td rowspan="7"><img src="assets/img/book/python.png" /></td>
@@ -139,9 +143,6 @@
         <button ion-button class="teamNo" (click)="reject()">개설거절</button>
     </ion-item>
     
-    <!--멘토/멘티 인터페이스-->
-
-    <button ion-button class="teamNo" (click)="OpenSurveyWrite()">설문조사</button>
     
     <!-- <ion-list-header>
             설문조사                

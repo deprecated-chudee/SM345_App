@@ -11,6 +11,7 @@ import { CommentService } from '../services/comment.service';
 import { LoginService } from '../services/login.service';
 import { ArticleService } from '../services/article.service';
 import { XlsxToJsonService } from '../services/xlsx-to-json.service';
+import { SurveyService } from '../services/survey.service';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -94,6 +95,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     LoginService,
     ArticleService,
     XlsxToJsonService,
+    SurveyService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
