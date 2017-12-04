@@ -69,7 +69,7 @@
               <ion-option value="50">50명</ion-option>
             </ion-select>
           </ion-item>
-          <ion-item>
+          <ion-item no-lines>
             <ion-label>최대 멘티인원</ion-label>
             <ion-select [(ngModel)]="mentoroomInfo.max_menti">
               <ion-option value="3">3명</ion-option>
@@ -126,10 +126,7 @@
 
       <!-- 멘토방 목록 -->
       <ion-list *ngSwitchCase="'roomList'">
-        <ion-item>
-            <ion-label> 검색 </ion-label>
-            <ion-input type="text" [(ngModel)]="searchRoomname" (ionChange)="roomSearch($event)" ></ion-input>
-        </ion-item>
+        <ion-searchbar [(ngModel)]="searchRoomname" (ionChange)="roomSearch($event)"></ion-searchbar>
         <ion-item>
             <ion-label>  검색기간 </ion-label>
             <ion-select [(ngModel)]="selectDefualtYear" (ionChange)="getMentoroomListByYear($event)">
@@ -206,10 +203,7 @@
 
       <!--사용자 관리-->
       <ion-list *ngSwitchCase="'users'">
-        <ion-item>
-            <ion-label> 검색 </ion-label>
-            <ion-input type="text" [(ngModel)]="searchUsername" (ionChange)="userSearch($event)" ></ion-input>
-        </ion-item>
+          <ion-searchbar [(ngModel)]="searchUsername" (ionChange)="userSearch($event)"></ion-searchbar>
           <ion-item>
               <ion-label> 사용자 목록 </ion-label>
               <ion-select [(ngModel)]="selectDefualtAuth" (ionChange)="userList($event)">
