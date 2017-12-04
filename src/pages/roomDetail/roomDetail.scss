@@ -404,4 +404,26 @@
     ion-icon.icon.icon-ios.ion-md-download {
         color: #488aff;
     }
+
+    .teamOk {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: #91A0AB;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 6px;
+    }
+
+    .teamNo {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: indianred;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 6px;
+    }
 }

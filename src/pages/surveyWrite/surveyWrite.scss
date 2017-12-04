@@ -1,0 +1,46 @@
+.page-surveyWrite {
+    .item-md.item-block .item-inner,
+    .item-ios.item-block .item-inner {
+        padding-right: 8px;
+        border-bottom: none;
+    }
+
+    .text-input-ios,
+    .text-input-md  {
+        margin: 11px 8px 11px 0;
+        padding: 0;
+        width: calc(100% - 8px);
+        font-size: 16px;
+        padding-bottom: 5px;
+        text-align: center;
+        border-bottom: 1px solid gray;
+    }
+
+    h5 {
+        font-size: 1.8rem;
+        color: gray;
+    }
+
+    .swiper-pagination-fraction, .swiper-pagination-custom,
+    .swiper-container-horizontal > .swiper-pagination-bullets {
+        display: none;
+    }
+
+    .button-ios,
+    .button-md {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background-color: #91A0AB;
+        margin: 0.4rem 0.2rem;
+        padding: 0 1em;
+    }
+
+    button.finishButton.disable-hover.button.button-ios.button-default.button-default-ios,
+    button.finishButton.disable-hover.button.button-md.button-default.button-default-md {
+        background-color: indianred;
+        border-radius: 500px;
+        padding: 30px;
+    }
+}

@@ -2,29 +2,73 @@
     <ion-toolbar>
         <ion-title>
             설문조사
-        </ion-title> 
-        <ion-buttons end>
-            <button ion-button (click)="openRoomDetailPage()">
-                <span ion-text><ion-icon name="close"></ion-icon></span>
-            </button>
-        </ion-buttons>
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 
+
 <ion-content class="page-surveyWrite">
+
     <ion-slides pager>
-
-        <ion-slide style="background-color: #ADBDDF">
-            <h2>설문조사 1</h2>
+        <!--객관식-->
+        <ion-slide>
+            <h5>객관식 Q1.</h5>
+            <h4>멘토 및 멘티활동이 도움이 되었나요?</h4>
+            <ion-item>
+                <ion-range min="1" max="5" pin="true" step="1" snaps="true">
+                    <ion-icon range-left name="md-sad"></ion-icon>
+                    <ion-icon range-right name="md-happy"></ion-icon>
+                </ion-range>
+            </ion-item>
+            <button ion-button (click)="gotoNextSlide()">NEXT</button>
         </ion-slide>
 
-        <ion-slide style="background-color: #ADBDDF">
-            <h2>설문조사 2</h2>
+        <ion-slide>
+            <h5>객관식 Q2.</h5>
+            <h4>얼마나 만족하나요?</h4>
+            <ion-item>
+                <ion-range min="1" max="5" pin="true" step="1" snaps="true">
+                    <ion-icon range-left name="md-sad"></ion-icon>
+                    <ion-icon range-right name="md-happy"></ion-icon>
+                </ion-range>
+            </ion-item>
+            <button ion-button (click)="gotoNextSlide()">NEXT</button>
         </ion-slide>
 
-        <ion-slide style="background-color: #ADBDDF">
-            <h2>설문조사 3</h2>
+        <ion-slide>
+            <h5>객관식 Q3.</h5>
+            <h4>다른 학우에게 추천 할만한가요?</h4>
+            <ion-item>
+                <ion-range min="1" max="5" pin="true" step="1" snaps="true">
+                    <ion-icon range-left name="md-sad"></ion-icon>
+                    <ion-icon range-right name="md-happy"></ion-icon>
+                </ion-range>
+            </ion-item>
+            <button ion-button (click)="gotoNextSlide()">NEXT</button>
         </ion-slide>
 
+        <!-- 주관식 -->
+        <ion-slide>
+            <h5>주관식 Q1.</h5>
+            <h4>멘토 및 멘티 활동의 좋은 점은?</h4>
+            <ion-item>
+                <ion-input placeholder="답변을 입력해주세요."></ion-input>
+            </ion-item>
+            <button ion-button (click)="gotoNextSlide()">NEXT</button>
+        </ion-slide>
+
+        <ion-slide>
+            <h5>주관식 Q2.</h5>
+            <h4>멘토 및 멘티 활동의 부족한 점은?</h4>
+            <ion-item>
+                <ion-input placeholder="답변을 입력해주세요."></ion-input>
+            </ion-item>
+            <button ion-button (click)="gotoNextSlide()">NEXT</button>
+        </ion-slide>
+
+        <!-- 설문조사 마지막 페이지 -->
+        <ion-slide>
+            <button ion-button class="finishButton" (click)="finishSlide()">Finish</button>
+        </ion-slide>
     </ion-slides>
 </ion-content>
