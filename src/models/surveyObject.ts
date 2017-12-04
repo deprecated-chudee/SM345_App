@@ -1,5 +1,4 @@
 export class SurveyObject {
-    id: number;
     question_id: number;
     object_question: string;
     object_answer1: number;
@@ -10,8 +9,7 @@ export class SurveyObject {
     survey_year: number;
     survey_semestar: number;
 
-    constructor(question_id, object_question){
-        this.question_id = question_id;
+    constructor(object_question){
         this.object_question = object_question;
     }
 }
