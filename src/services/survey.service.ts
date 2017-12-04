@@ -24,10 +24,28 @@ export class SurveyService {
 
     //관리자 - 주관식 설문조사 항목등록
     createSurveySubj(surveySubj: Array<string>) {
-        let url = this.URL + 'surveySQ /insert';
+        let url = this.URL + 'surveySQ/insert';
         return this.http.post(url, surveySubj)
             .toPromise()
             .catch(this.handleError);
+    }
+
+    //멘토, 멘티 - 객관식 설문조사 목록
+    surveyObjList() {
+        let url = this.URL + 'surveyOB/list';
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError)
+    }
+
+    //멘토, 멘티 - 주관식 설문조사 목록
+    surveySubjList() {
+        let url = this.URL + 'surveySQ/list';
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError)
     }
 
     private handleError(error: any): Promise<any> {
