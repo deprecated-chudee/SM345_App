@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 import { Mentoroom } from '../models/mentoroom';
 import { Menti } from '../models/menti';
 import { Upload } from '../models/upload';
-import { MentoCreate } from '../models/mentoCreate';
+import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class MentoroomService {
   
@@ -15,19 +15,27 @@ export class MentoroomService {
     constructor(private http: Http) { 
     }
 
-    // 멘토방 생성
-    createMentoroom(mentoCreate: MentoCreate): Promise<Mentoroom>{
+    // 멘토방 생성 첫 번째 (멘토방)
+    createMentoroom1(mentoroom: Mentoroom): Promise<number>{
         let url = this.URL + 'mentoroom/create';
+        return this.http.post(url, mentoroom)
+            .toPromise()
+            .then(res => res.text())
+            .catch(this.handleError)
+    }
+
+    // 멘토방 생성 두 번째 (사진, 파일)
+    createMentoroom2(r_id: number, kind: number, upload: FormData): Promise<any> {
         let headers = new Headers();
         headers.append('enctype', 'multipart/form-data');
         headers.append('Accept', 'application/json');
         let options = new RequestOptions({headers: headers});
-        console.log(mentoCreate)
-
-        return this.http.post(url, mentoCreate, options)
+        
+        let url = `${this.URL}mentoroom/create/${r_id}/${kind}`;
+        return this.http.post(url, upload, options)
             .toPromise()
             .then(res => res.text())
-            .catch(this.handleError);
+            .catch(this.handleError)
     }
 
     // 연도별 멘토방 목록 가져오기 
