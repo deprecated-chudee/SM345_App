@@ -21,9 +21,14 @@
         color: gray;
     }
 
-    .swiper-pagination-fraction, .swiper-pagination-custom,
-    .swiper-container-horizontal > .swiper-pagination-bullets {
-        display: none;
+    // .swiper-pagination-fraction, .swiper-pagination-custom,
+    // .swiper-container-horizontal > .swiper-pagination-bullets {
+    //     display: none;
+    // }
+
+    .swiper-pagination-bullet-active {
+        background: indianred;
+        opacity: 1;
     }
 
     .button-ios,
