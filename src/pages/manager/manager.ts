@@ -117,6 +117,7 @@ export class ManagerPage implements OnInit{
         this.reportList(this.selectDefualtYear);
     }
 
+
     //관리자 - 객관식 설문조사 저장
     createSurveyObj() {
         console.log('object: ' + this.object_question);

@@ -73,6 +73,25 @@ export class SurveyService {
             .catch(this.handleError)
     }
 
+    //관리자 - 객관식 설문조사 결과 조회
+    surveyObjResult() {
+        let url = `${this.URL}survey/object/result`;
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError)
+    }
+
+
+    //관리자 - 주관식 설문조사 결과 조회
+    surveySubjResult() {
+        let url = `${this.URL}survey/subject/result`;
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError)
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

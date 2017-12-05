@@ -10,36 +10,20 @@
 </ion-header>
 
 <ion-content class="page-survey">
-    <ion-list>
+    <ion-list *ngFor="let so of surveyObjs">
         <ion-list-header class="survey-result-header">
-            Q1. 멘토링 활동에 만족하셨나요?           
+            {{ so.object_question }}        
         </ion-list-header>
         <ion-item padding>
-            ① 23%&nbsp;&nbsp;② 20%&nbsp;&nbsp;③ 43%&nbsp;&nbsp;④ 4%&nbsp;&nbsp;⑤ 10%
+            ① {{ so.object_answer1 }}%&nbsp;&nbsp;② {{ so.object_answer2 }}%&nbsp;&nbsp;③ {{ so.object_answer3 }}%&nbsp;&nbsp;④ {{ so.object_answer4 }}%&nbsp;&nbsp;⑤ {{ so.object_answer5 }}%
         </ion-item> 
+    </ion-list>
+    <ion-list *ngFor="let ss of surveySubjs">
         <ion-list-header class="survey-result-header">
-            Q2. 멘토링 활동에 만족하셨나요?           
+            <b>[주관식]</b> {{ ss.subject_question }}        
         </ion-list-header>
-        <ion-item padding>
-            ① 23%&nbsp;&nbsp;② 20%&nbsp;&nbsp;③ 43%&nbsp;&nbsp;④ 4%&nbsp;&nbsp;⑤ 10%
-        </ion-item> 
-        <ion-list-header class="survey-result-header">
-            Q3. 멘토링 활동에 만족하셨나요?           
-        </ion-list-header>
-        <ion-item padding>
-            ① 23%&nbsp;&nbsp;② 20%&nbsp;&nbsp;③ 43%&nbsp;&nbsp;④ 4%&nbsp;&nbsp;⑤ 10%
-        </ion-item> 
-        <ion-list-header class="survey-result-header">
-            Q4. 멘토링 활동에 만족하셨나요?           
-        </ion-list-header>
-        <ion-item padding>
-            ① 23%&nbsp;&nbsp;② 20%&nbsp;&nbsp;③ 43%&nbsp;&nbsp;④ 4%&nbsp;&nbsp;⑤ 10%
-        </ion-item> 
-        <ion-list-header class="survey-result-header">
-            Q5. 멘토링 활동에 만족하셨나요?           
-        </ion-list-header>
-        <ion-item padding>
-            ① 23%&nbsp;&nbsp;② 20%&nbsp;&nbsp;③ 43%&nbsp;&nbsp;④ 4%&nbsp;&nbsp;⑤ 10%
-        </ion-item> 
+        <ion-list *ngFor="let ssc of surveySubjCons" padding class="survey_answer">
+            {{ ssc.survey_answer }}
+        </ion-list>
     </ion-list>
 </ion-content>

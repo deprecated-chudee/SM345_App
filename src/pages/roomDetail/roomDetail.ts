@@ -72,8 +72,8 @@ export class RoomDetailPage implements OnInit {
     .then(menti => this.mentis = menti);
   
     this.fileList()
-    this.surveyCheck();
-    console.log('survey_check: ' + this.survey_check);
+    // this.surveyCheck();
+    // console.log('survey_check: ' + this.survey_check);
   }
 
   //설문조사 참여여부

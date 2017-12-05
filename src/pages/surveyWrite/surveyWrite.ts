@@ -18,8 +18,6 @@ export class SurveyWritePage implements OnInit {
     private surveySubj: SurveySubject;
     private surveyObjs: SurveyObject[] =[];
     private surveySubjs: SurveySubject[] =[];
-    private lengthObj: number;
-    private lengthSubj: number;
     
     private surveyObjWrites: number[] = []; //객관식 설문조사 답변 배열
     private surveySubjWrites: string[] = []; //주관식 설문조사 답변 배열
@@ -44,13 +42,9 @@ export class SurveyWritePage implements OnInit {
 
     ngOnInit() {
         this.surveyService.surveyObjList()
-        .then(surveyObj => { this.surveyObjs = surveyObj;
-                             this.lengthObj = this.surveyObjs.length;
-        });
+        .then(surveyObj => this.surveyObjs = surveyObj);
         this.surveyService.surveySubjList()
-        .then(surveySubj => { this.surveySubjs = surveySubj;
-                              this.lengthSubj = this.surveySubjs.length;
-        });
+        .then(surveySubj => this.surveySubjs = surveySubj);
     }
 
     numPlus1() {
