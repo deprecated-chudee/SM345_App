@@ -5,5 +5,8 @@ export class ReportDate {
     report_year: number;
     report_semester: number;
 
-    constructor() {}
+    constructor() {
+        this.report_start = '',
+        this.report_end = ''
+    }
 }

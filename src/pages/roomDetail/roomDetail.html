@@ -14,8 +14,10 @@
 <ion-content class="page-roomDetail">
 
     <!--설문조사 버튼-->
-    <button ion-button class="teamNo" (click)="OpenSurveyWrite()">설문조사</button>
-
+    <div *ngIf="((survey_start - date) < 0 && (survey_end - date) > 0)">
+        <button ion-button class="teamNo" (click)="OpenSurveyWrite()">설문조사</button>
+    </div>
+ 
     <table class="roomDetailTable">
         <tr>
             <td rowspan="7"><img src="assets/img/book/python.png" /></td>
@@ -127,13 +129,20 @@
    
     <!-- 멘티 신청 인터페이스 -->
     <ion-item no-lines *ngIf="USERAUTH === 0" class="menteeButton"> 
-        <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
+        <div *ngIf="((mente_start - date) < 0 && (mente_end - date) > 0);else check">
+            <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
+        </div>
+        <ng-template #check>
+            <button ion-button color="danger" full> 멘티 신청 기간이 아닙니다. </button>
+        </ng-template>
     </ion-item>
 
     <!-- 멘티 신청 취소 인터페이스 -->
     <div *ngFor="let m of mentis">
         <ion-item no-lines *ngIf="USERAUTH === 2 && m.menti_id==USERID" class="menteeButton"> 
-            <button ion-button class="teamNo" (click)="cancelMentee()">멘티 신청취소</button>
+            <div *ngIf="((mente_start - date) < 0 && (mente_end - date) > 0)">
+                <button ion-button class="teamNo" (click)="cancelMentee()">멘티 신청취소</button>
+            </div>
         </ion-item>
     </div>
 

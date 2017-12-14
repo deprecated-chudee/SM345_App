@@ -43,6 +43,12 @@ export class RoomDetailPage implements OnInit {
   private formData;
   private fileLabel: string = '';
   private files: Upload[] = [];
+
+  private mente_start;
+  private mente_end;
+  private survey_start;
+  private survey_end;
+  private date: Date;
   
   constructor(
     public app: App, 
@@ -279,5 +285,15 @@ export class RoomDetailPage implements OnInit {
 
   OpenSurveyWrite() {
     this.appCtrl.getRootNav().setRoot(SurveyWritePage);
+  }
+
+  getMentoRoomInfo() {
+    this.adminService.getMentoRoomInfo()
+      .then(res => {
+        this.mente_start = new Date(res.menti_end);
+        this.mente_end = new Date(res.menti_end);
+        this.survey_start = new Date(res.survey_start);
+        this.survey_end = new Date(res.survey_end);
+    })
   }
 }
