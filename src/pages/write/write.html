@@ -6,6 +6,11 @@
     <div class="home_logo_wrapper" (click)="openHomePage()">
       <img src="assets/img/Logo2.png" class="home-logo"/>
     </div>
+    <ion-buttons end>
+        <button ion-button (click)="writeSubmit()">
+            <span ion-text><ion-icon name="md-checkmark-circle-outline"></ion-icon></span>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -20,7 +25,6 @@
         <ion-item>
             <input type="file" id="upload" name="uploadFile" file-upload multiple/>
         </ion-item>
-        <button ion-button block (click)="writeSubmit()">등록</button>
     </ion-list>
     
 </ion-content>

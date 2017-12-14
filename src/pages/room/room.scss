@@ -55,7 +55,7 @@
     }
 
     .roomTable tr:last-child td {
-        padding: 5px 15px 15px;
+        padding: 7px 15px 15px;
     }
 
     .roomTableButton {
@@ -134,6 +134,11 @@
     button.fileButton4 span.button-inner {
         font-size: 10px;
     }
+
+    button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
+    button.fileButton.disable-hover.button.button-ios.button-default.button-default-ios {
+        box-shadow: none;
+    }
 }
 
 .alert-ios .alert-radio-group, .alert-ios .alert-checkbox-group {
@@ -141,4 +146,14 @@
     max-height: 240px;
     border-top: 0.55px solid #dbdbdf;
     -webkit-overflow-scrolling: touch;
+}
+
+.room-header {
+    .home_logo_wrapper {
+        text-align: center;
+    }
+    .navbar-btn {
+        position: absolute;
+        //top: 12px;
+    }
 }

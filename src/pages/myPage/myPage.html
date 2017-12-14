@@ -1,0 +1,27 @@
+<ion-header class="myPage-header">
+  <ion-navbar>
+    <button ion-button menuToggle class="navbar-btn">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <div class="home_logo_wrapper" (click)="openHomePage()">
+      <img src="assets/img/Logo2.png" class="home-logo"/>
+    </div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="page-myPage">
+    <ion-list class="login_list">
+      <img src = "assets/img/user_blue.png" width="30%" class="userImg"/>
+      <ion-item class="userInfo">
+        <span class="account_user"><b>{{currentUser.USERID}}</b></span>
+        <span *ngIf="currentUser.USERAUTH === 0" class="account_user"><b>{{currentUser.USERNAME}}</b></span>
+        <span *ngIf="currentUser.USERAUTH === 1" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘토</span>
+        <span *ngIf="currentUser.USERAUTH === 2" class="account_user"><b>{{currentUser.USERNAME}}</b>&nbsp;멘티</span>
+        <span *ngIf="currentUser.USERAUTH === 3" class="account_user"><b>{{currentUser.USERNAME}}</b><img src="assets/img/crown.png" class="account-icon"/></span>
+      </ion-item>
+      <ion-item *ngIf="currentUser.USERAUTH === 3" class="account_list" (click)="openManagerPage()"><ion-icon name="md-settings"></ion-icon><br/>관리자 페이지</ion-item>
+      <ion-item class="account_list" (click)="openMessage()"><ion-icon name="md-mail"></ion-icon><br/>쪽지함</ion-item>      
+      <ion-item class="account_list" (click)="showPasswordAlert()"><ion-icon name="ios-key"></ion-icon><br/>비밀번호 변경</ion-item>
+      <ion-item class="account_list" (click)="openLogout()"><ion-icon name="md-log-out"></ion-icon><br/>로그아웃</ion-item>
+    </ion-list>
+</ion-content>

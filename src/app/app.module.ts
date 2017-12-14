@@ -3,18 +3,21 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { ServerService } from './server.service';
-import { AdminService } from './admin.service';
-import { MessageService } from './message.service';
-import { MentoroomService } from './mentoroom.service';
-import { CommentService } from './comment.service';
+
+import { AdminService } from '../services/admin.service';
+import { MessageService } from '../services/message.service';
+import { MentoroomService } from '../services/mentoroom.service';
+import { CommentService } from '../services/comment.service';
+import { LoginService } from '../services/login.service';
+import { ArticleService } from '../services/article.service';
+import { XlsxToJsonService } from '../services/xlsx-to-json.service';
+import { SurveyService } from '../services/survey.service';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { SmPage } from '../pages/sm/sm';
 import { NoticePage } from '../pages/notice/notice';
-//import { EditPage } from '../pages/edit/edit';
 import { QuestionPage } from '../pages/question/question';
 import { ManagerPage } from '../pages/manager/manager';
 import { RoomPage } from '../pages/room/room';
@@ -26,11 +29,11 @@ import { WritePage } from '../pages/write/write';
 import { MessageAddPage } from '../pages/messageAdd/messageAdd';
 import { SurveyPage } from '../pages/survey/survey';
 import { SmEditPage } from '../pages/smEdit/smEdit';
+import { MyPage } from '../pages/myPage/myPage';
+import { SurveyWritePage } from '../pages/surveyWrite/surveyWrite';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-//import { CoolStorageModule } from 'angular2-cool-storage';
-//import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MessageAddPage,
     SurveyPage,
     SmEditPage,
+    MyPage,
+    SurveyWritePage
    // EditPage,
   ],
   imports: [
@@ -77,16 +82,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MessageAddPage,
     SurveyPage,
     SmEditPage,
+    MyPage,
+    SurveyWritePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    ServerService,
     AdminService,
     MessageService,
     MentoroomService,
     CommentService,
-    //CoolStorageModule,
+    LoginService,
+    ArticleService,
+    XlsxToJsonService,
+    SurveyService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

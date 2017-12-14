@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>
-            [{{selectedRoom.team_name}}]
+            {{selectedRoom.team_name}}
         </ion-title> 
         <ion-buttons end>
             <button ion-button (click)="dismiss()">
@@ -12,6 +12,10 @@
 </ion-header>
 
 <ion-content class="page-roomDetail">
+
+    <!--설문조사 버튼-->
+    <button ion-button class="teamNo" (click)="OpenSurveyWrite()">설문조사</button>
+
     <table class="roomDetailTable">
         <tr>
             <td rowspan="7"><img src="assets/img/book/python.png" /></td>
@@ -39,7 +43,6 @@
             <td>
                 <b>현재팀원 : </b>
                 {{selectedRoom.person_count}}명
-                <button ion-button class="fileButton2" (click)="mentiListCheck()">팀원보기</button>
             </td>
         </tr>
         <tr>
@@ -56,99 +59,98 @@
     <ion-list-header>
             팀 소개 및 설명                
     </ion-list-header>
-    <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon><span class="youtube-span">팀 소개 영상보기</span>
+    
+    <div *ngIf="selectedRoom.team_link != null" class="teamLink">
+        <ion-icon name="logo-youtube" class="youtube-icon"></ion-icon>
+        <a href="{{selectedRoom.team_link}}">
+            <span class="youtube-span">팀 소개 영상보기</span>
+        </a>
+    </div>
+
     <div padding class="teamInfo"> 
         {{selectedRoom.team_about}}
     </div>
 
-    <!--멘토/관리자 인터페이스-->
-    <div class="noAlarm" *ngIf= "USERAUTH == 1 || USERAUTH == 3"> <!--멘토 및 관리자만 볼 수 있음-->
     <ion-list-header>
-            모임 결과보고서
-            <ion-icon item-end *ngIf="USERAUTH === 1" name="md-add-circle" class="link-icon" (click)="openReport()"></ion-icon>            
+            팀원 목록              
     </ion-list-header>
 
-    <!-- 결과보고서 파일업로드 -->
-    <ion-item *ngIf="sort==true" class="file-item">
-            <input type="file" id="upload" name="uploadFile" file-upload multiple/>
-            <button ion-button class="submitButton" (click)="reportSave()">제출하기</button>
+    <ion-item class="menti_list">
+        <li>
+            {{mento_id}} {{mento_name}} <b>(멘토)</b>
+        </li>
     </ion-item>
 
-    <!-- 파일업로드 저장버튼 -->
+    <ion-item *ngFor="let m of mentis" class="menti_list">
+        <li>
+            {{m.menti_id}} {{m.user_name}}
+        </li>
+    </ion-item>
 
+    <!--멘토/관리자 인터페이스-->
+    <div class="noAlarm" *ngIf= "USERAUTH == 1 || USERAUTH == 3"> <!--멘토 및 관리자만 볼 수 있음-->
+        <ion-list-header>
+            모임 결과보고서           
+        </ion-list-header>
 
-    <table class="reportTable">
-            <tr>
-                <td>{{selectedRoom.team_name}} 결과보고서</td>
-                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-                <td rowspan="2" class="report-ing">확인중</td>
-            </tr>
-            <tr>
-                <td><span class="reportTime">2017-10-04</span></td>
-            </tr>
-    </table>
-    <table class="reportTable">
-            <tr>
-                <td>{{selectedRoom.team_name}} 결과보고서</td>
-                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-                <td rowspan="2" class="report-reject">반려</td>
-            </tr>
-            <tr>
-                <td><span class="reportTime">2017-09-20</span></td>
-            </tr>
-    </table>
-    <table class="reportTable">
-            <tr>
-                <td>{{selectedRoom.team_name}} 결과보고서</td>
-                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-                <td rowspan="2" class="report-end">확인<br/>완료</td>
-            </tr>
-            <tr>
-                <td><span class="reportTime">2017-09-20</span></td>
-            </tr>
-    </table>
-    <table class="reportTable">
-            <tr>
-                <td>{{selectedRoom.team_name}} 결과보고서</td>
-                <td rowspan="2"><ion-icon name="md-download"></ion-icon></td>
-                <td rowspan="2" class="report-end">확인<br/>완료</td>
-            </tr>
-            <tr>
-                <td><span class="reportTime">2017-09-20</span></td>
-            </tr>
-    </table>
+        <!-- 결과보고서 파일 업로드 -->
+        <div class="uploadWrapper" *ngIf="selectedRoom.mento_id == USERID"> <!-- 해당 방 멘토만 업로드 -->
+            <input type="file" class="inputfile" id="upload" name="uploadFile" (change)="onChange($event)"  accept="application/*" file-upload multiple />
+            <label for="upload" class="inputLabel"><strong>{{ fileLabel ? fileLabel : 'Choose a file' }}</strong></label>
+            <button ion-button class="button" (click)="save()"> 제출하기 </button>
+        </div>
+
+        <!-- <div *ngIf="USERAUTH === 3" (press)="actionSheet()"> -->
+            <table class="reportTable" *ngFor="let file of files">
+                <tr (press)="actionSheet(file.id, file.file_state)">
+                    <td>{{ file.file_name }}</td>
+                    <td rowspan="2" *ngIf="selectedRoom.mento_id == USERID">  <!-- 해당 방 멘토만 삭제 -->
+                        <a (click)="fileDelete(file.id)" >
+                            <ion-icon name="md-trash"></ion-icon>
+                        </a>
+                    </td>
+                    <td rowspan="2">
+                        <a (click)="download(file.file_name, file.file_data, file.file_type)" >
+                            <ion-icon name="md-download"></ion-icon>
+                        </a>
+                    </td>
+                    <td rowspan="2" class="report-ing" *ngIf="file.file_state === 0"> 확인중 </td>
+                    <td rowspan="2" class="report-end" *ngIf="file.file_state === 1"> 승인완료 </td>
+                    <td rowspan="2" class="report-reject" *ngIf="file.file_state === 2"> 반려 </td>
+                </tr>
+                <tr>
+                    <td><span class="reportTime">{{ file.timestamp | date:'yyyy-MM-dd HH:mm' }}</span></td>
+                </tr>
+            </table>
+        <!-- </div> -->
     </div>
-
+   
     <!-- 멘티 신청 인터페이스 -->
-    <ion-item no-lines *ngIf="USERAUTH === 0"> <!--*ngIf="USERAUTH === 0"-->
+    <ion-item no-lines *ngIf="USERAUTH === 0" class="menteeButton"> 
         <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
     </ion-item>
 
     <!-- 멘티 신청 취소 인터페이스 -->
-    <ion-item no-lines *ngIf="USERAUTH === 2"> <!--*ngIf="USERAUTH === 2"-->
-        <button ion-button class="teamNo" >멘티 신청취소</button>
-    </ion-item>
+    <div *ngFor="let m of mentis">
+        <ion-item no-lines *ngIf="USERAUTH === 2 && m.menti_id==USERID" class="menteeButton"> 
+            <button ion-button class="teamNo" (click)="cancelMentee()">멘티 신청취소</button>
+        </ion-item>
+    </div>
 
     <!-- 관리자 인터페이스 -->
     <ion-item no-lines  *ngIf="USERAUTH === 3 && selectedRoom.team_confirm === 0" >
         <button ion-button class="teamOk" (click)="confirm()">개설승낙</button>
         <button ion-button class="teamNo" (click)="reject()">개설거절</button>
     </ion-item>
-
-
-    <!--멘티 인터페이스-->
-    <!--
-    <button ion-button block class="menteeButton" (click)="showMenteeAlert()">멘티신청</button>
-    -->
-
-    <!--멘티 인터페이스-->
-    <!--
-    <button ion-button block class="menteeButton" (click)="showMenteeAlert()">멘티신청취소</button>
-    -->
     
+<<<<<<< HEAD
     <!--멘토/멘티 인터페이스-->
     
     <ion-list-header>
+=======
+    
+    <!-- <ion-list-header>
+>>>>>>> 4d05f59c78a4e3241ae90c15c3497c95e138a245
             설문조사                
     </ion-list-header>
     <div class="poll">
@@ -183,7 +185,11 @@
 
     <ion-item no-lines>
             <button ion-button class="teamOk" (click)="openRoomPage()">설문 완료</button>
+<<<<<<< HEAD
     </ion-item>
+=======
+    </ion-item> -->
+>>>>>>> 4d05f59c78a4e3241ae90c15c3497c95e138a245
 
     <br/>
     <br/>

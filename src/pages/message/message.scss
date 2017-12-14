@@ -41,13 +41,13 @@ ion-icon.icon.icon-md.ion-md-mail {
         margin-left: 10px;
         margin-right: 10px;
         width: calc(100% - 20px);
-        border-bottom: 0.55px solid #F0F0F0;
+        border-bottom: 0.55px solid #E0E0E0;
     }
 
     .noticeTable-in tr:nth-child(2) td{
         color: #A9A9A9;
         font-size: 12px;
-        padding-bottom: 15px;
+        padding-bottom: 10px;
     }
 
     .label-ios {
@@ -63,5 +63,27 @@ ion-icon.icon.icon-md.ion-md-mail {
         float: right;
         font-size: 1.5em;
         margin-right: 10px;
+    }
+
+    .empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+
+    h2 {
+    margin-top: 1.8rem;
+    font-size: 2.4rem;
+    color: gray;
+    }
+   
+    .noticeTable-in tr:nth-child(3) td {
+        padding-bottom: 15px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }

@@ -1,14 +1,9 @@
 <ion-header>
     <ion-toolbar>
-        <ion-buttons left>
-        <button ion-button (click)="dismiss()">
-                <span ion-text><ion-icon name="ios-close-circle-outline"></ion-icon></span>  
-        </button>
-        </ion-buttons>
         <ion-title>멘토신청</ion-title> 
         <ion-buttons end>
-            <button ion-button (click)="openRoomPage()">
-                <span ion-text><ion-icon name="ios-checkmark-circle-outline"></ion-icon></span>
+            <button ion-button (click)="dismiss()">
+                <span ion-text><ion-icon name="ios-close-circle-outline"></ion-icon></span>  
             </button>
         </ion-buttons>
     </ion-toolbar>
@@ -19,12 +14,12 @@
         
         <!--팀명-->
         <ion-item>
-                <ion-input type="text" name="팀명" placeholder="팀명" [(ngModel)]="mentoroom.team_name"></ion-input> 
+            <ion-input type="text" name="팀명" placeholder="팀명" [(ngModel)]="mentoroom.team_name"></ion-input> 
         </ion-item>
 
         <!--주제-->
         <ion-item>
-                <ion-input type="text" placeholder="주제" [(ngModel)]="mentoroom.team_theme"></ion-input> 
+            <ion-input type="text" placeholder="주제" [(ngModel)]="mentoroom.team_theme"></ion-input>
         </ion-item>
 
         <!--첨부-->
@@ -36,25 +31,34 @@
 
         <!--동영상 링크-->
         <ion-item *ngIf="sortArray[0]==true">
-                <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>
-                <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input" [(ngModel)]="mentoroom.team_link"></ion-input>
+            <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>
+            <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input" [(ngModel)]="mentoroom.team_link"></ion-input>
         </ion-item>
 
         <!--팀 광고사진-->
-        <ion-item *ngIf="sortArray[1]==true">
-                <ion-icon name="md-photos" class="photos-icon"></ion-icon>
-                <input type="file" id="upload" name="uploadFile" file-upload multiple/>
+        <ion-item *ngIf="sortArray[1] == true" class="test">
+            <ion-icon name="md-photos" class="photos-icon"></ion-icon>
+            <input type="file" id="image" class="inputfile" name="uploadImage" (change)="onChangeImage($event)"  accept="image/*" file-upload multiple/>
+            <label for="image" class="inputLabel"><strong>{{ imageLabel ? imageLabel : 'Choose a image' }}</strong></label>
         </ion-item>
 
         <!--자격증명파일-->
-        <ion-item *ngIf="sortArray[2]==true">
-                <ion-icon name="ios-link" class="link-icon"></ion-icon>
-                <input type="file" id="upload" name="uploadFile" file-upload multiple/>
+        <ion-item *ngIf="sortArray[2] == true" class="test">
+            <ion-icon name="ios-link" class="link-icon"></ion-icon>
+            <input type="file" id="file" class="inputfile" name="uploadCredentialsFile" (change)="onChangeFile($event)" accept=".doc, .docx, .pdf, .hwp" file-upload multiple/>
+            <label for="file" class="inputLabel"><strong>{{ credentialsFileLabel ? credentialsFileLabel : 'Choose a file' }}</strong></label>
         </ion-item>
 
         <!--팀 소개 및 설명-->
         <ion-item>
-                <ion-textarea placeholder="팀 소개 및 설명" [(ngModel)]="mentoroom.team_about"></ion-textarea>
+            <ion-textarea placeholder="팀 소개 및 설명" [(ngModel)]="mentoroom.team_about"></ion-textarea>
+        </ion-item>
+
+        <!-- 신청 완료 -->
+        <ion-item>
+            <button ion-button (click)="save()">
+                신청 완료
+            </button>
         </ion-item>
 
     </ion-list>

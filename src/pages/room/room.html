@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header class="room-header">
     <ion-navbar>
-      <button ion-button menuToggle>
+      <button ion-button menuToggle class="navbar-btn">
         <ion-icon name="menu"></ion-icon>
       </button>
       <div class="home_logo_wrapper" (click)="openHomePage()">
@@ -10,8 +10,6 @@
   </ion-header>
   
   <ion-content padding class="page-room">
-      
-
       <table class="roomTable" *ngFor="let m of mentorooms">
         <tr *ngIf= "m.team_confirm != 2">
           <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>
@@ -71,7 +69,7 @@
         </tr>
       </table>
     -->
-    <div *ngIf="currentUser.USERAUTH != 3">
+    <div *ngIf="currentUser.USERAUTH == 0">
       <button ion-button block (click)="openMentorAddPage()">멘토신청</button>
     </div>
 

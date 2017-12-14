@@ -1,29 +1,56 @@
 <ion-header class="header-sm">
 <ion-navbar>
-  <button ion-button menuToggle>
+  <button ion-button menuToggle class="navbar-btn" *ngIf="toggleSmEdit === false">
     <ion-icon name="menu"></ion-icon>
   </button>
-  <div class="home_logo_wrapper" (click)="openHomePage()">
+  <ion-buttons left>
+      <button ion-button *ngIf="toggleSmEdit === true" (click)="openSmPage()">
+          <ion-icon name="md-close"></ion-icon>
+      </button>
+  </ion-buttons>
+  <ion-title *ngIf="toggleSmEdit === true">SM사업소개 추가</ion-title>
+  <div *ngIf="toggleSmEdit === false && USERAUTH == 3" class="home_logo_wrapper" (click)="openHomePage()">
+    <img src="assets/img/Logo2.png" class="home-logo"/>
+  </div>
+  <div *ngIf="toggleSmEdit === false && USERAUTH != 3" class="home_logo_wrapper2" (click)="openHomePage()">
     <img src="assets/img/Logo2.png" class="home-logo"/>
   </div>
   <ion-buttons end> <!-- 네비게이션 바에 가장 오른쪽에 만들겠다는 뜻 -->
-    <button ion-button icon-only (click)="OpenSmEditPage(1)" *ngIf="USERAUTH == 3">
+    <button ion-button icon-only (click)="OpenSmEditPage(1)" *ngIf="USERAUTH == 3 && toggleSmEdit === false">
         <ion-icon name='md-create'></ion-icon>
+    </button>
+    <button ion-button (click)="editArticle(article)" *ngIf= "toggleSmEdit === true && USERAUTH == 3">
+        <ion-icon name="md-checkmark-circle-outline"></ion-icon>
     </button>
   </ion-buttons>
 </ion-navbar>
 </ion-header>
 
-<ion-content class="page-sm">
-    <ion-list>
-        <div *ngFor="let a of articles">
+<!--sm사업소개서 페이지-->
+<ion-content *ngIf="toggleSmEdit === false" class="page-sm">
+    <ion-list class="container">
+        <div *ngFor="let a of articles" class="item">
             <ion-list-header>
                     {{a.article_title}}
-                    <ion-icon item-end name="ios-remove-circle-outline" (click)="showEditDelete(a)" *ngIf= "USERAUTH == 3"></ion-icon>           
+                    <ion-icon item-end name="ios-more-outline" (click)="presentSmSheet(a)" *ngIf= "USERAUTH == 3"></ion-icon><!--more버튼 - 수정,삭제-->
             </ion-list-header>
             <div padding id="commentDiv">
                     {{a.article_content}}
             </div>   
         </div>
     </ion-list>
+</ion-content>
+
+<!--수정페이지-->
+<ion-content *ngIf="toggleSmEdit === true" style="margin-top: 59px;" class="page-smEdit">   
+    <div class="addBox">
+        <ion-item>
+            <ion-label>제목</ion-label>
+            <ion-input type="text" [(ngModel)]="article.article_title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>내용</ion-label>
+            <ion-textarea [(ngModel)]="article.article_content"></ion-textarea>
+        </ion-item>
+    </div>
 </ion-content>

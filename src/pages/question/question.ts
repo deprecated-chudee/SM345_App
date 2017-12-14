@@ -3,24 +3,26 @@ import { NavController, AlertController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { ReadingPage } from '.././reading/reading';
 import { WritePage } from '../write/write';
-import { ServerService } from '../../app/server.service';
+
+import { ArticleService } from '../../services/article.service';
+
 import { Article } from '../../models/article';
 
 @Component({
   templateUrl: 'question.html'
 })
 export class QuestionPage implements OnInit  {
-  serverService: ServerService;
   private articles: Article[] =[];
 
-  constructor(serverService: ServerService, public navCtrl: NavController, public alertCtrl: AlertController) {
-    this.serverService = serverService;
-  }
+  constructor(
+    private articleService: ArticleService, 
+    public navCtrl: NavController, 
+    public alertCtrl: AlertController
+  ) { }
 
   ngOnInit() {
-    this.serverService.getList(3).then(
-      article => { this.articles = article;
-    });
+    this.articleService.getArticleList(3)
+      .then(article => this.articles = article);
   }
 
   openHomePage() {

@@ -3,7 +3,9 @@ import { NavController, ModalController, ViewController } from 'ionic-angular';
 import { HomePage } from '.././home/home';
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
 import { MentorAddPage } from '.././mentorAdd/mentorAdd';
-import { MentoroomService } from '../../app/mentoroom.service';
+
+import { MentoroomService } from '../../services/mentoroom.service';
+
 import { Mentoroom } from '../../models/mentoroom';
 
 @Component({
@@ -34,10 +36,8 @@ export class RoomPage  implements OnInit {
 
   openRoomDetailPage(selectedRoom) {
     this.navCtrl.push(RoomDetailPage, {
-      selectedRoom: selectedRoom, room: 0
+      selectedRoom: selectedRoom
     });
-    //let modal = this.modalCtrl.create(RoomDetailPage);
-   // modal.present();
   }
 
   openMentorAddPage() {

@@ -49,13 +49,13 @@
     div.teamInfo {
         padding-top: 0px;
         white-space: pre-line;
-        font-size: 14px;
         line-height: 20px;
+        margin-bottom: 7px;
     }
 
     button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
     button.fileButton.disable-hover.button.button-ios.button-default.button-default-ios {
-        background: lightcoral;
+        background: #488aff;
         height: 20px;
         vertical-align: middle;
         font-size: 10px;
@@ -69,7 +69,7 @@
 
     button.fileButton2.disable-hover.button.button-md.button-default.button-default-md,
     button.fileButton2.disable-hover.button.button-ios.button-default.button-default-ios {
-        background: #61A5FF;
+        background: #488aff;
         height: 20px;
         vertical-align: middle;
         font-size: 10px;
@@ -80,29 +80,7 @@
     ion-item.item.item-block.item-ios {
         padding-left: 0px;
         text-align: right;
-        margin-bottom: 5px;
-    }
-
-    .teamOk {
-        border-radius: 4px;
-        height: 2.8em;
-        font-size: 1.6rem;
-        color: #fff;
-        background: #91A0AB;
-        margin-left: 16px;
-        margin-right: 16px;
-        width: calc(100% - 16px);
-    }
-
-    .teamNo {
-        border-radius: 4px;
-        height: 2.8em;
-        font-size: 1.6rem;
-        color: #fff;
-        background: indianred;
-        margin-left: 16px;
-        margin-right: 16px;
-        width: calc(100% - 16px);
+        border-bottom: 0.55px;
     }
 
     .menteeButton.button-ios, 
@@ -116,11 +94,9 @@
     }
 
     table.reportTable {
-        width: calc(100% - 16px - 16px);
-        margin-left: 16px;
-        margin-right: 16px;
-        border: 0.55px solid black;
+        width: 100%;
         margin-top: -1px;
+        border-bottom: 1px solid lightgray;
     }
 
     .reportTable td {
@@ -130,13 +106,13 @@
     .reportTable tr:first-child td:first-child {
         padding-top: 10px;
         padding-bottom: 2px;
-        padding-left: 10px;
+        padding-left: 16px;
     }
 
     .reportTable tr:last-child td {
         padding-top: 2px;
         padding-bottom: 10px;
-        padding-left: 10px;
+        padding-left: 16px;
     }
 
     .reportTable td span.reportTime {
@@ -186,7 +162,7 @@
     
     .range-md [range-right] {
         margin: 5px 0 0 12px;
-        color: #0883F7;
+        color: #488aff;
     }
 
     .poll {
@@ -206,17 +182,10 @@
     span.youtube-span {
         vertical-align: middle;
         font-size: 14px;
-        color: cornflowerblue;
+        color: #488aff;
         text-decoration: underline;
     }
 
-    .item-md.item-block .item-inner,
-    .item-ios.item-block .item-inner {
-        margin-left: 16px;
-        text-align: left;
-        margin-bottom: 10px;
-        border-bottom: none;
-    }
 
     ion-icon.link-icon.icon.icon-md.ion-md-add-circle.item-icon {
         vertical-align: middle;
@@ -240,6 +209,61 @@
         color: #38484f;
     }
 
+    ion-list-header.item.item-md.list-header.list-header-md {
+        background: #EBEBEB;
+    }
+
+    div.teamLink {
+        margin-top: 20px;
+        margin-bottom: -15px;
+    }
+    
+    .menteeButton .item-inner {
+        margin-left: 0px;
+    }
+
+    .menteeButton ion-label.label.label-md {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .teamOk {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: #91A0AB;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 6px;
+    }
+
+    .teamNo {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: indianred;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 6px;
+    }
+
+    ion-item.menteeButton.item.item-block.item-md,
+    ion-item.menteeButton.item.item-block.item-ios {
+        border-bottom: none;
+    }
+
+    .menti_list {
+        text-align: left;
+    }
+
+    ion-item.menti_list.item.item-block.item-md,
+    ion-item.menti_list.item.item-block.item-ios {
+        text-align: left;
+        border-bottom: 0.55px;
+    }
+    
     .label-ios,
     .lebel-md {
         margin: 11px 8px 11px 16px;
@@ -253,5 +277,153 @@
     .file-item .label-md {
         margin: 13px 8px 13px 0px;
     }
+
+
+    ion-list-header.item.item-md.list-header.list-header-md {
+        background: #EBEBEB;
+        margin-top: 0px;
+    }
+
+    div.teamLink {
+        margin-top: 20px;
+        margin-bottom: -15px;
+    }
     
+    .menteeButton .item-inner {
+        margin-left: 0px;
+    }
+
+    .menteeButton ion-label.label.label-md {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .teamOk {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: #91A0AB;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 10px;
+    }
+
+    .teamNo {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: indianred;
+        width: calc(100% - 13px);
+        text-align: center;
+    }
+
+    ion-item.menteeButton.item.item-block.item-md,
+    ion-item.menteeButton.item.item-block.item-ios {
+        border-bottom: none;
+    }
+
+    .menti_list {
+        text-align: left;
+    }
+
+    ion-item.menti_list.item.item-block.item-md,
+    ion-item.menti_list.item.item-block.item-ios {
+        text-align: left;
+        border-bottom: 0.55px;
+    }
+
+    ion-list-header.item.item-ios.list-header.list-header-ios, ion-list-header.item.item-md.list-header.list-header-md {
+        padding-left: 0px;
+        background: #E6E6E6;
+        margin-top: 0px;
+    }
+
+    // 보고서 제출 업로드 버튼 스타일
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .inputfile + label {
+        font-size: 1.25em;
+        font-weight: 700;
+        color: white;
+        background-color: black;
+        display: inline-block;
+    }
+
+    .inputfile:focus + label,
+    .inputfile + label:hover {
+        background-color: red;
+    }
+
+    .inputfile + label {
+        cursor: pointer; /* "hand" cursor */
+    }
+
+    .inputfile + label * {
+        pointer-events: none;
+    }
+
+    .uploadWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .inputLabel {
+        flex: 5;
+        line-height: 40px;
+        text-align: center;
+        height: 45px;
+        border-radius: 4px;
+    }
+
+    .button {
+        margin-left: 10px;
+        flex: 1;
+    }
+
+    table.reportTable td:first-child {
+        width: 58%;
+    }
+
+    ion-icon.icon.icon-md.ion-md-trash,
+    ion-icon.icon.icon-ios.ion-md-trash {
+        color: indianred;
+    }
+
+    ion-icon.icon.icon-md.ion-md-download,
+    ion-icon.icon.icon-ios.ion-md-download {
+        color: #488aff;
+    }
+
+    .teamOk {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: #91A0AB;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 6px;
+    }
+
+    .teamNo {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background: indianred;
+        width: calc(100% - 13px);
+        text-align: center;
+        margin-left: 6px;
+    }
 }

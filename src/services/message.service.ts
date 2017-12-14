@@ -11,6 +11,7 @@ export class MessageService {
     constructor(private http: Http) {
     }
 
+    // 쪽지 목록 가져오기
     messageList(user_id: number): Promise<any> {
         let url = this.URL + 'message/list/' + user_id;
         return this.http.get(url)
@@ -19,7 +20,8 @@ export class MessageService {
             .catch(this.handleError);
     }
 
-    messageRead(message_id: number): Promise<any> {
+    // 쪽지 읽기
+    messageRead(message_id: number): Promise<number> {
         let url = this.URL + 'message/' + message_id;
         return this.http.get(url)
             .toPromise()
@@ -27,27 +29,28 @@ export class MessageService {
             .catch(this.handleError)
     }
 
-    getUsername(u_id: number): Promise<any> {
+    // 사용자 이름 가져오기
+    getUsername(u_id: number): Promise<string> {
         let url = this.URL + 'message/username/' + u_id;
-        return this.http.post(url, null)
+        return this.http.get(url)
             .toPromise()
             .then(res => res.json())
             .catch(this.handleError)
     }
 
-    createMessage(message): Promise<string> {
+    // 쪽지 보내기
+    createMessage(message) {
         let url = this.URL + 'message/create';
         return this.http.post(url, message)
             .toPromise()
-            .then(res => res)
             .catch(this.handleError)
     }
 
-    removeMessage(m_id): Promise<any> {
+    // 쪽지 삭제
+    removeMessage(m_id) {
         let url = this.URL + 'message/'+ m_id + '/delete';
-        return this.http.post(url, m_id)
+        return this.http.get(url)
             .toPromise()
-            .then()
             .catch(this.handleError)
     }
 

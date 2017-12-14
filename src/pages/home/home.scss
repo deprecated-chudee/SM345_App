@@ -161,7 +161,7 @@
     ion-icon.icon.icon-md.ion-ios-add-circle-outline  {
         margin-right: 5px;
         line-height: 10px;
-        vertical-align: middle;
+        vertical-align: middle !important;
         color: gray;
     }
 
@@ -226,6 +226,10 @@
         font-size: 13px;
     }
 
+    .home_logo_wrapper {
+        text-align: center;
+    }
+
 }
 
 .toolbar-background.toolbar-background-md,
@@ -241,12 +245,14 @@
 }
 
 img.home-logo {
-    width: 50%;
+    max-height: 45px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.home_logo_wrapper {
-    text-align: center;
-    width: 88%;
+.navbar-btn {
+    position: absolute;
+    //top: 12px;
 }
 
 .toolbar-title.toolbar-title-ios,
@@ -267,4 +273,7 @@ img.home-logo {
     width: 30%;
   }
 
-  
+.home_logo_wrapper {
+    text-align: center;
+    height: 48px;
+}

@@ -6,6 +6,11 @@
     <div class="home_logo_wrapper" (click)="openHomePage()">
       <img src="assets/img/Logo2.png" class="home-logo"/>
     </div>
+    <ion-buttons end>
+        <button ion-button (click)="editArticle()" *ngIf= "toggleEdit === true && (article.article_writer == USERID || USERAUTH == 3)">
+            <span ion-text><ion-icon name="md-checkmark-circle-outline"></ion-icon></span>
+        </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -29,7 +34,7 @@
 
     <!-- Q&A게시판 덧글 -->
     <section class="commentTableWrapper" *ngIf="article.board_id == 3">
-        <ion-list *ngFor="let comment of comments" (press)="presentCommentSheet()">
+        <ion-list *ngFor="let comment of comments" (press)="presentCommentSheet(comment.id)">
             <table class="commentListTable">
                 <tr>
                     <td>
@@ -41,8 +46,14 @@
                 </tr>         
                 <tr>	
                     <td colspan="2">
-                        <div id="commentDiv">
+                        <div id="commentDiv" *ngIf="toggleCommentEdit === false">
                             {{ comment.comment_content }}
+                        </div>
+                        <div id="commentDiv" *ngIf="toggleCommentEdit === true">
+                            <ion-textarea [(ngModel)]="comment.comment_content"></ion-textarea>
+                            <button ion-button (click)="handleCommentEdit(comment.comment_content)">
+                                수정
+                            </button>
                         </div>
                     </td>		
                 </tr>
@@ -115,14 +126,7 @@
           </tr>
         </table>
         <hr/>
-        <div id="contentDiv">
-            <ion-textarea [(ngModel)]="article.article_content"></ion-textarea>
-        </div>
-    
-      <div class="buttonWrapper"> 
-        <button ion-button block class="editButton" (click)="editArticle()" *ngIf= "article.article_writer == USERID || USERAUTH == 3"> 수정 완료 </button>
-        </div>
-    
+            <ion-textarea id="contentDiv" [(ngModel)]="article.article_content"></ion-textarea>    
         <br/>
         <br/>
-    </ion-content>
+</ion-content>

@@ -5,7 +5,7 @@ import {
     LoadingController, 
     NavController } from 'ionic-angular';
 
-import { MessageService } from '../../app/message.service';
+import { MessageService } from '../../services/message.service';
 
 @Component({
   templateUrl: 'message.html'
