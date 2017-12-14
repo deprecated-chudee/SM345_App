@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MessageService {
@@ -20,21 +21,12 @@ export class MessageService {
             .catch(this.handleError);
     }
 
-    // 쪽지 읽기
-    messageRead(message_id: number): Promise<number> {
-        let url = this.URL + 'message/' + message_id;
-        return this.http.get(url)
-            .toPromise()
-            .then(res => res.json())
-            .catch(this.handleError)
-    }
-
     // 사용자 이름 가져오기
     getUsername(u_id: number): Promise<string> {
         let url = this.URL + 'message/username/' + u_id;
         return this.http.get(url)
             .toPromise()
-            .then(res => res.json())
+            .then(res => res.text())
             .catch(this.handleError)
     }
 

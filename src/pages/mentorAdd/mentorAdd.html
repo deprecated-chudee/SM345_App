@@ -38,7 +38,7 @@
         <!--팀 광고사진-->
         <ion-item *ngIf="sortArray[1] == true" class="test">
             <ion-icon name="md-photos" class="photos-icon"></ion-icon>
-            <input type="file" id="image" class="inputfile" name="uploadImage" (change)="onChangeImage($event)"  accept="image/*" file-upload multiple/>
+            <input type="file" id="image" class="inputfile" name="uploadImage" (change)="onChangeImage($event)" accept="image/*" file-upload multiple/>
             <label for="image" class="inputLabel"><strong>{{ imageLabel ? imageLabel : 'Choose a image' }}</strong></label>
         </ion-item>
 

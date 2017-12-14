@@ -13,9 +13,14 @@
     <ion-list>
         <ion-item>
             수신인 :
-            <span *ngFor="let username of selectedUsername">
-                {{ username.user_name }}
+            <span *ngIf="selectedUsername.length > 6 ; else elseBlock">
+                {{ selectedUsername[0].__zone_symbol__value }}외 {{ selectedUsername.length }}명
             </span>
+            <ng-template #elseBlock>
+                <span *ngFor="let username of selectedUsername">
+                    {{ username.__zone_symbol__value }},
+                </span>
+            </ng-template>
         </ion-item>
         <ion-item>
             <ion-input type="text" [(ngModel)]="message.title" placeholder="제목을 입력해주세요."></ion-input>

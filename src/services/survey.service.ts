@@ -40,8 +40,52 @@ export class SurveyService {
     }
 
     //멘토, 멘티 - 주관식 설문조사 목록
-    surveySubjList() {
+    surveySubjList(){
         let url = this.URL + 'surveySQ/list';
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError)
+    }
+
+    //설문조사 참여 여부
+    surveyCheck(user_id: number) {
+        let url = `${this.URL}${user_id}/survey_check`;
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError);
+    }
+
+    //멘토, 멘티 - 객관식 설문조사 답변 등록
+    surveyObjWrite(u_id: number, surveyObjWrite: Array<number>) {
+        let url = `${this.URL}surveyOB/insert/${u_id}`;
+        return this.http.post(url, surveyObjWrite)
+            .toPromise()
+            .catch(this.handleError)
+    }
+
+    //멘토, 멘티 - 주관식 설문조사 답변 등록
+    surveySubjWrite(u_id: number, surveySubjWrite: Array<string>) {
+        let url = `${this.URL}surveySC/insert/${u_id}`;
+        return this.http.post(url, surveySubjWrite)
+            .toPromise()
+            .catch(this.handleError)
+    }
+
+    //관리자 - 객관식 설문조사 결과 조회
+    surveyObjResult() {
+        let url = `${this.URL}survey/object/result`;
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
+            .catch(this.handleError)
+    }
+
+
+    //관리자 - 주관식 설문조사 결과 조회
+    surveySubjResult() {
+        let url = `${this.URL}survey/subject/result`;
         return this.http.get(url)
             .toPromise()
             .then(res => res.json())

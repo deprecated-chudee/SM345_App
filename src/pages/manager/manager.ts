@@ -29,6 +29,7 @@ import { SurveySubject } from '../../models/surveySubject';
 import { SurveyObject } from '../../models/surveyObject';
 
 import * as _ from 'lodash';
+import * as FileSaver from 'file-saver';
 
 @Component({
     templateUrl: 'manager.html'
@@ -38,12 +39,6 @@ export class ManagerPage implements OnInit{
     isAndroid: boolean = false;
     private count:number = 1;
     private count1:number = 1;
-    private mentorooms: Mentoroom[] = [];
-    private users: User[] = [];
-    private reports = [];
-    private selectedUser = [];
-    private selectedSearchedUser = [];
-    private selectedRoom = '';
 
     //설문조사
     private surveyObjs: SurveyObject[] = [];
@@ -51,28 +46,47 @@ export class ManagerPage implements OnInit{
     private object_question: string[] = []; //객관식 설문조사 질문 내용들 배열
     private subject_question: string[] = []; //주관식 설문조사 질문 내용들 배열
 
-    selectedAllUser: boolean = false; //사용자관리 전체선택
-    selectedAllSearchedUser: boolean = false; // 검색된 사용자관리 전체선택
-    selectedAllReport: boolean = false; //보고서목록 전체선택
-
-    selectDefualtAuth: number = 1;
-    selectDefualtYear: number = 20172;
-    private mentoroomInfo: MentoroomInfo; //멘토방 설정
-    // private reportDates: ReportDate[] = []; // 보고서 설정
+    // 로컬 스토리지
     USERID: number;
     USERNAME: string;
     USERAUTH: number;
     private currentUser;
-    private roomListChecked: boolean[] = [];
 
-    // 엑셀 데이터
-    public result: any;
+    // 멘토방 설정
+    private mentoroomInfo: MentoroomInfo; 
 
-    // 검색
-    private searchUsername: string = '';
-    private searchedUsers: User[] = [];
+    // 멘토방
+    private mentorooms: Mentoroom[] = [];
+    private selectedRoom = '';
     private searchRoomname: string = '';
     private searchedRooms: Mentoroom[] = [];
+
+    // 사용자
+    private users: User[] = [];
+    private selectedUser = [];
+    private selectedSearchedUser = [];
+    private selectedAllUser: boolean = false; //사용자관리 전체선택
+    private selectedAllSearchedUser: boolean = false; // 검색된 사용자관리 전체선택
+    private searchUsername: string = '';
+    private searchedUsers: User[] = [];
+
+    // 보고서
+    private reports = [];
+    private selectedReport = [];
+    private selectedReportData = [];
+    private selectedSearchedReport = [];
+    private selectedSearchedReportData = [];
+    private selectedAllReport: boolean = false; //보고서목록 전체선택
+    private selectedAllSearchedReport: boolean = false; 
+    private searchReportname: string = '';
+    private searchedReports = [];
+    // private reportDates: ReportDate[] = []; // 보고서 설정
+
+    selectDefualtAuth: number = 0;
+    selectDefualtYear: number = 20172;
+    
+    // 엑셀 데이터
+    public result: any;
 
     // reportData init
     range: number
@@ -98,10 +112,11 @@ export class ManagerPage implements OnInit{
 
     ngOnInit() {
         this.getMentoRoomInfo();
-        this.getMentoroomListByYear(20172);
-        this.userList(0);
-        this.reportList(20172);
+        this.getMentoroomListByYear(this.selectDefualtYear);
+        this.userList(this.selectDefualtAuth);
+        this.reportList(this.selectDefualtYear);
     }
+
 
     //관리자 - 객관식 설문조사 저장
     createSurveyObj() {
@@ -115,15 +130,18 @@ export class ManagerPage implements OnInit{
         console.log('subject: ' + this.subject_question);
         this.surveyService.createSurveySubj(this.subject_question);
     }
-
-    changeRange(index) {
-        this.range = _.range(index)
-    }
+    
     /**
      *  멘토방 설정
      */
 
-    // 멘토방 설정시킨 것 불러오기
+    // 보고서 제출 기한 핸들러
+    changeRange(index) {
+        this.mentoroomInfo.meeting_number = index
+        this.range = _.range(index)
+    }
+
+    // 멘토방 설정 불러오기
     getMentoRoomInfo() {
         this.adminService.getMentoRoomInfo()
             .then(mentoroomInfo => {
@@ -134,7 +152,7 @@ export class ManagerPage implements OnInit{
     }
 
     // 멘토방 설정 저장
-    mentoRoomInfoSave() {
+    mentoroomInfoSave() {
         try {
             this.adminService.createMentoRoomInfo(this.mentoroomInfo)
                 .then(() => this.Toast('멘토방 설정이 저장 되었습니다.'));
@@ -178,12 +196,14 @@ export class ManagerPage implements OnInit{
      */
     // 사용자 리스트 불러오기
     userList(e) {
+        this.searchedUsers = [];
         this.selectedUser = [];
         this.selectedAllUser = false;
         this.selectedSearchedUser = [];
         this.selectedAllSearchedUser = false;
         this.adminService.userList(e)
             .then(users => this.users = users)
+            .catch(() => this.Toast('error'))
     }
 
     // 사용자 선택
@@ -242,6 +262,7 @@ export class ManagerPage implements OnInit{
         }
     }
 
+    // 멘토방 리스트 불러오기
     getMentoroomListByYear(e){
         this.searchedRooms = [];
         this.searchRoomname = '';
@@ -255,15 +276,91 @@ export class ManagerPage implements OnInit{
      *  보고서
      */
 
+    // 보고서 리스트 불러오기
     reportList(year: number) {
+        this.searchedReports = [];
+        this.selectedReport = [];
+        this.selectedAllReport = false;
+        this.selectedSearchedReport = [];
+        this.selectedSearchedReportData = [];
+        this.selectedAllSearchedReport = false;
         this.adminService.reportList(year)
-            .then(reports => {
-                console.log(reports)
-                this.reports = reports
-            })
-            .catch(() => {
-                this.Toast('error')
-            })
+            .then(reports => this.reports = reports)
+            .catch(() => this.Toast('error'))
+    }
+
+    // 보고서 선택
+    handleSelectedReport(e, r) {
+        if(e.checked) {
+            this.selectedReport.push(r.id)
+            this.selectedReportData.push([r.id, r.file_name, r.file_data, r.file_type])
+        } else {
+            let index = this.selectedReport.indexOf(r.id)
+            this.selectedReport.splice(index, 1)
+            this.selectedReportData.splice(index, 1)
+        }
+    }
+
+    // 보고서 전체 선택
+    handleSelectedAllReport(e) {
+        this.selectedAllReport = !this.selectedAllReport; 
+
+        if(e.checked) {
+            this.selectedReport = _.map(this.reports, (e) => e.id)
+            this.selectedReportData = _.map(this.reports, (e) => [e.id, e.file_name, e.file_data, e.file_type])
+        } else {
+            this.selectedReport = [];
+            this.selectedReportData = [];
+        }
+    }
+
+    // 보고서 검색
+    reportSearch(event) {
+        this.selectedReport = [];
+        this.selectedReportData = [];
+        this.selectedAllReport = false;
+        this.selectedSearchedReport = [];
+        this.selectedSearchedReportData = [];
+        this.selectedAllSearchedReport = false;
+        this.searchedReports = _.filter(this.reports, (report) => {
+            if(report.team_name.indexOf(this.searchReportname) > -1) {
+                return report;
+            }
+        });
+    }
+
+    // 검색된 보고서 선택
+    handleSelectedSearchedReport(e, r) {
+        if(e.checked) {
+            this.selectedSearchedReport.push(r.id)
+            this.selectedSearchedReportData.push([r.id, r.file_name, r.file_data, r.file_type])
+        } else {
+            let index = this.selectedSearchedReport.indexOf(r.id)
+            this.selectedSearchedReport.splice(index, 1)
+            this.selectedSearchedReportData.splice(index, 1)
+        }
+    }
+
+    // 검색된 보고서 전체 선택
+    handleSelectedAllSearchedReport(e) {
+        this.selectedAllSearchedReport = !this.selectedAllSearchedReport;
+
+        if(e.checked) {
+            this.selectedSearchedReport = _.map(this.searchedReports, (e) => e.id)
+            this.selectedSearchedReportData = _.map(this.searchedReports, (e) => [e.id, e.file_name, e.file_data, e.file_type])
+        } else {
+            this.selectedSearchedReport = [];
+            this.selectedSearchedReportData = [];
+        }
+    }
+
+    // 보고서 다운로드
+    download(name, data, type) {
+        let binary = atob(data);
+        var byteArray = new Uint8Array(new ArrayBuffer(binary.length));
+        for (var i = 0; i < binary.length; i++) byteArray[i] = binary.charCodeAt(i);
+        let blob = new Blob([byteArray], {type: type})
+        FileSaver.saveAs(blob, name)
     }
 
     /**
@@ -333,7 +430,7 @@ export class ManagerPage implements OnInit{
         })
     }
 
-    showReportDeleteAlert() {
+    showReportDeleteAlert(reports) {
         let alert = this.alertCtrl.create({
             title: '보고서 삭제',
             subTitle: '선택한 보고서를 삭제하시겠습니까?',
@@ -346,7 +443,14 @@ export class ManagerPage implements OnInit{
                 {
                     text: '확인',
                     handler: data => {
-                        this.Toast('보고서가 삭제되었습니다.');
+                        try {
+                            reports.forEach(e => this.adminService.reportRemove(e))
+                            this.Toast('보고서가 삭제되었습니다.');
+                            this.navCtrl.setRoot(ManagerPage);
+                        }
+                        catch(e){
+                            this.Toast(e);
+                        }
                     }
                 }
             ]
@@ -354,21 +458,27 @@ export class ManagerPage implements OnInit{
         alert.present();
     }
 
-    showReportDownloardAlert() {
+    showReportDownloardAlert(reports) {
         let alert = this.alertCtrl.create({
             title: '보고서 다운로드',
             subTitle: '선택한 보고서를 다운로드 하시겠습니까?',
             buttons: [
                 {
-                  text: '취소',
-                  handler: data => {
-                  }
+                    text: '취소',
+                    handler: data => {
+                    }
                 },
                 {
-                  text: '확인',
-                  handler: data => {
-                      this.Toast('보고서가 다운로드 되었습니다.');
-                  }
+                    text: '확인',
+                    handler: data => {
+                        try {
+                            reports.forEach(e => this.download(e[1], e[2], e[3]));
+                            this.Toast('보고서가 다운로드 되었습니다.');
+                        }
+                        catch(e) {
+                            this.Toast(e);
+                        }
+                    }
                 }
             ]
         });
@@ -420,32 +530,6 @@ export class ManagerPage implements OnInit{
         modal.present();
     }
 
-    // 보고서 선택
-    handleSelectedReport(e, user_id) {
-        if(e.checked) {
-            this.selectedUser.push(user_id)
-        } else {
-            let index = this.selectedUser.indexOf(user_id)
-            this.selectedUser.splice(index, 1)
-        }
-    }
-
-    // 보고서 선택 전체
-    handleSelectedAllReport(e) {
-        this.selectedAllUser = !this.selectedAllUser;
-        if(e.checked) {
-            this.selectedUser = [];
-
-            this.users.forEach(e => {
-                this.selectedUser.push(e.user_id)
-            })
-        } else {
-            this.selectedUser = [];
-        }
-    }
-
-    
-
     // 멘토방 삭제
     handleRemoveRoom() {
         if(this.selectedRoom) {
@@ -472,8 +556,8 @@ export class ManagerPage implements OnInit{
             this.xlsxToJsonService.processFileToJson({}, file)
                 .subscribe(data => {
                     data = _.map(data['sheets']['신입생등록'], (student) => {
-                        student['주전공'] = this.changeMajor(student['주전공'])
-                        student['부전공/복수전공'] = this.changeMinor(student['부전공/복수전공'])
+                        student.student_major = this.changeMajor(student.student_major)
+                        student.student_minor = this.changeMinor(student.student_minor)
                         console.log(student)
                         return student;
                     })
@@ -497,6 +581,21 @@ export class ManagerPage implements OnInit{
                 return 2;
             case '없음':
                 return 0;
+        }
+    }
+
+    // 신입생 엑셀 등록
+    excelEnter() {
+        if(this.result) {
+            this.adminService.excelEnter(this.result)
+                .then(() => {
+                    this.Toast('신입생 등록이 완료 되었습니다.')
+                })
+                .catch(() => {
+                    this.Toast('Error')
+                })
+        } else {
+            this.Toast('파일이 없습니다.')
         }
     }
 }

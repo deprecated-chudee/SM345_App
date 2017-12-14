@@ -11,26 +11,26 @@
 
     <ion-slides pager>
         <!--객관식-->
-        <ion-slide *ngFor="let so of surveyObjs">
+        <ion-slide *ngFor="let so of surveyObjs" padding>
             <h5>객관식 질문</h5>
             <h4>{{so.object_question}}</h4>
             <ion-item>
-                <ion-range min="1" max="5" pin="true" step="1" snaps="true">
+                <ion-range min="1" max="5" pin="true" step="1" snaps="true" [(ngModel)]="surveyObjWrites[num1]">
                     <ion-icon small range-left name="md-sad" color="danger"></ion-icon>
                     <ion-icon range-right name="md-happy" color="primary"></ion-icon>
                 </ion-range>
             </ion-item>
-            <button ion-button (click)="gotoNextSlide()">NEXT</button>
+            <button ion-button (click)="gotoNextSlide()" (click)="numPlus1()">NEXT</button>
         </ion-slide>
 
         <!-- 주관식 -->
-        <ion-slide *ngFor="let ss of surveySubjs">
+        <ion-slide *ngFor="let ss of surveySubjs" padding>
             <h5>주관식 질문</h5>
             <h4>{{ss.subject_question}}</h4>
             <ion-item>
-                <ion-input placeholder="답변을 입력해주세요."></ion-input>
+                <ion-input placeholder="답변을 입력해주세요." [(ngModel)]="surveySubjWrites[num2]"></ion-input>
             </ion-item>
-            <button ion-button (click)="gotoNextSlide()">NEXT</button>
+            <button ion-button (click)="gotoNextSlide()" (click)="numPlus2()">NEXT</button>
         </ion-slide>
 
         <!-- 설문조사 마지막 페이지 -->

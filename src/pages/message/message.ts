@@ -34,14 +34,6 @@ export class MessagePage implements OnInit {
           .then(messages => this.messages = messages)
     }
 
-    handleRead(m_id: number) {
-        this.messageService.messageRead(m_id)
-            .then(() => {
-                this.toast('해당 쪽지를 읽었습니다.')
-                this.loading()
-            })
-    }
-
     handleRemove(m_id: number) {
         this.messageService.removeMessage(m_id)
             .then(() => {
