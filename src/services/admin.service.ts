@@ -91,6 +91,24 @@ export class AdminService {
             .catch(this.handleError);
     }
 
+    // 리포트 날짜 리스트 저장하기
+    createReportList(reports) {
+        let url = this.URL + 'admin/report_date/create';
+        return this.http.post(url, reports)
+            .toPromise()
+            .then(res => console.log(res))
+            .catch(this.handleError)
+    }
+
+    // 리포트 날짜 리스트 불러오기
+    getReportList() {
+        let url = this.URL + 'admin/report_date';
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError)
+    }
+
     // 보고서 승인
     reportConfirm(f_id: number) {
         let url = this.URL + 'admin/report_confirm/' + f_id;
