@@ -7,14 +7,20 @@ import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoroomInfo';
 import { Observable } from 'rxjs/Observable';
 import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
+import { XlsxToJsonService } from './xlsx-to-json.service';
+import * as _ from 'lodash';
+import * as FileSaver from 'file-saver';
 
 @Injectable()
 export class AdminService {
   
     // private URL = 'http://localhost:8085/sm345/api/';
     private URL = 'http://220.230.112.31:8081/sm345/api/';
+    public result: any; //엑셀 데이터
+    private xlsxToJsonService: XlsxToJsonService;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, xlsxToJsonService: XlsxToJsonService) {
+        this.xlsxToJsonService = xlsxToJsonService;
     }
 
     // 사용자 목록
@@ -124,6 +130,28 @@ export class AdminService {
             .catch(this.handleError)
     }
 
+    // 엑셀 업로드
+   handleFile(event) {
+    let file = event.target.files[0];
+        this.xlsxToJsonService.processFileToJson({}, file)
+            .subscribe(data => {
+                data = _.map(data['sheets']['수강학생목록_데이터베이스실습'], (user) => {
+                  console.log(user)
+                  return {
+                    user_id: user['학번'],
+                    user_major: user['학과'],
+                    user_manor: user['복수/부전공'],
+                    user_name: user['이름'],
+                    user_email: user['이메일'],
+                    user_security: user['주민번호'],
+                    user_phone: user['휴대폰'],
+                  }
+                  // console.log(user)
+                })
+                this.result = JSON.stringify(data)
+                console.log(this.result);
+            })
+    }
     // 신입생 엑셀 등록
     excelEnter(excel: Array<Object>) {
         let headers = new Headers();
