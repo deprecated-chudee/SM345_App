@@ -90,7 +90,7 @@ export class ManagerPage implements OnInit{
 
     // 멘토방 report 설정
     range: number;
-    private reportDataList: ReportDate[] = [];
+    private reportDateList: ReportDate[] = [];
     
     constructor(
         private mentoroomService: MentoroomService, 
@@ -139,9 +139,9 @@ export class ManagerPage implements OnInit{
 
     // 보고서 제출 기한 핸들러
     changeRange(index: number) {
-        this.reportDataList = [];
+        this.reportDateList = [];
         for (let i = 0; i < index; i++) {
-            this.reportDataList.push(new ReportDate())
+            this.reportDateList.push(new ReportDate())
         }
         this.mentoroomInfo.meeting_number = index;
         this.range = _.range(index);
@@ -173,7 +173,7 @@ export class ManagerPage implements OnInit{
     getReportList() {
         try {
             this.adminService.getReportList()
-                .then(reportDataList => this.reportDataList = reportDataList);
+                .then(reportDateList => this.reportDateList = reportDateList);
         }
         catch(e) {
             this.Toast('에러 발생')
@@ -183,7 +183,7 @@ export class ManagerPage implements OnInit{
     // 리포트 날짜 리스트 저장하기
     createReportList() {
         try {
-            this.adminService.createReportList(this.reportDataList);
+            this.adminService.createReportList(this.reportDateList);
         }
         catch(e) {
             this.Toast('에러 발생')

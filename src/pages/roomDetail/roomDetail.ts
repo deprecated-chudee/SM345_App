@@ -77,9 +77,8 @@ export class RoomDetailPage implements OnInit {
     this.mentoroomService.menti_list(this.mento_id)
     .then(menti => this.mentis = menti);
   
-    this.fileList()
-    // this.surveyCheck();
-    // console.log('survey_check: ' + this.survey_check);
+    this.fileList();
+    this.getMentoRoomInfo();
   }
 
   //설문조사 참여여부

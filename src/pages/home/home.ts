@@ -8,6 +8,7 @@ import { NoticePage } from '../notice/notice';
 
 import { ArticleService } from '../../services/article.service';
 import { MentoroomService } from '../../services/mentoroom.service';
+import { AdminService } from '../../services/admin.service';
 
 import { Article } from '../../models/article';
 import { Mentoroom } from '../../models/mentoroom';
@@ -21,11 +22,14 @@ export class HomePage implements OnInit {
   private articles: Article[] =[];
   private mentorooms: Mentoroom[];
   private currentUser;
+  private setting;
+  private reportDateList;
 
   constructor(
     public navCtrl: NavController,
     private articleService: ArticleService,
     private mentoroomService: MentoroomService,
+    private adminService: AdminService
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if(!this.currentUser) this.navCtrl.setRoot(LoginPage)
@@ -38,6 +42,8 @@ export class HomePage implements OnInit {
       this.mentoroomService.getMentoroomList()
         .then(mentorooms => this.mentorooms = mentorooms);
     }
+    this.getMentoRoomInfo()
+    this.getReportList()
   }
 
   openReadingPage(article){
@@ -57,4 +63,13 @@ export class HomePage implements OnInit {
     this.navCtrl.setRoot(NoticePage);
   }
 
+  getMentoRoomInfo() {
+    this.adminService.getMentoRoomInfo()
+        .then(res => this.setting = res)
+  }
+
+  getReportList() {
+    this.adminService.getReportList()
+      .then(reportDateList => this.reportDateList = reportDateList);
+  }
 }
