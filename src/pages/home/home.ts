@@ -44,7 +44,6 @@ export class HomePage implements OnInit {
     }
     this.getMentoRoomInfo()
     this.getReportList()
-    this.getThumbnail()
   }
 
   openReadingPage(article){
@@ -72,19 +71,5 @@ export class HomePage implements OnInit {
   getReportList() {
     this.adminService.getReportList()
       .then(reportDateList => this.reportDateList = reportDateList);
-  }
-
-  getThumbnail() {
-    this.mentoroomService.getThumbnail()
-      .then(thumbnail => {
-        if(this.mentorooms) {
-          this.mentorooms = this.mentorooms.map( (e, i) => {
-            return {
-              ...e,
-              picture: `data:image/jpeg;base64,${thumbnail[thumbnail.length - (i+1)].file_data}`
-            }
-          })
-        }
-      })
   }
 }

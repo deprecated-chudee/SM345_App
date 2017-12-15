@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 
 import { SurveyService } from '../../services/survey.service';
 import { SurveySubject } from '../../models/surveySubject';

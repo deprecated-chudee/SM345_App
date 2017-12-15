@@ -41,8 +41,8 @@ export class ManagerPage implements OnInit{
     private count1:number = 1;
 
     //설문조사
-    private surveyObjs: SurveyObject[] = [];
-    private surveySubjs: SurveySubject[] = [];
+    // private surveyObjs: SurveyObject[] = [];
+    // private surveySubjs: SurveySubject[] = [];
     private object_question: string[] = []; //객관식 설문조사 질문 내용들 배열
     private subject_question: string[] = []; //주관식 설문조사 질문 내용들 배열
 
@@ -294,8 +294,13 @@ export class ManagerPage implements OnInit{
         this.searchedRooms = [];
         this.searchRoomname = '';
         this.selectedRoom = '';
-        this.mentoroomService.getMentoroomListByYear(e)
-            .then(mentoroom => this.mentorooms = mentoroom);
+        this.mentoroomService.getMentoroomList()
+            .then(mentorooms => this.mentorooms = mentorooms)
+        // this.mentoroomService.getMentoroomListByYear(e) 2017년 도 껄로 뽑으면 사진이 안들어가있음
+        //     .then(mentoroom => {
+        //         this.mentorooms = mentoroom
+        //         console.log(this.mentorooms)
+        //     });
     }
 
 

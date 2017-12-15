@@ -35,7 +35,6 @@ export class RoomPage  implements OnInit {
         this.mentoroomService.getMentoroomList()
             .then(mentorooms => this.mentorooms = mentorooms);
         this.getMentoRoomInfo()
-        this.getThumbnail()
     }
 
     openHomePage() {
@@ -58,20 +57,6 @@ export class RoomPage  implements OnInit {
             .then(res => {
                 this.mento_start = new Date(res.mento_start);
                 this.mento_end = new Date(res.mento_end);
-        })
-    }
-
-    getThumbnail() {
-        this.mentoroomService.getThumbnail()
-          .then(thumbnail => {
-              if(this.mentorooms) {
-                  this.mentorooms = this.mentorooms.map( (e, i) => {
-                      return {
-                          ...e,
-                          picture: `data:image/jpeg;base64,${thumbnail[thumbnail.length - (i+1)].file_data}`
-                      }
-                  })
-              }
         })
     }
 }

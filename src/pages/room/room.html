@@ -13,7 +13,7 @@
       <table class="roomTable" *ngFor="let m of mentorooms">
         <tr *ngIf= "m.team_confirm != 2">
           <td rowspan="3" class="roomTableImg">
-            <img [src]="m.picture" />
+            <img src="data:image/jpeg;base64,{{m.file_data}}" />
           </td>
           <td>[팀명] {{m.team_name}}&nbsp;&nbsp;
             <button ion-button class="fileButton4" *ngIf= "m.team_confirm == 0">대기중</button>
