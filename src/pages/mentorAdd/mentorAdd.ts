@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { App, NavController, ViewController, ToastController } from 'ionic-angular';
 
 import { Mentoroom } from '../../models/mentoroom';
-
+import { Upload } from '../../models/upload';
+import { RoomPage } from '.././room/room';
 import { MentoroomService } from '../../services/mentoroom.service';
 
 @Component({
@@ -17,11 +18,15 @@ export class MentorAddPage implements OnInit {
   private imageLabel = '';
   private credentialsFile;
   private credentialsFileLabel = '';
+  private mentoroom_id: number;
 
   USERID: number;
   USERNAME: string;
   USERAUTH: number;
   private currentUser;
+
+  private files: Upload[] = [];
+  
 
   constructor(
     public app: App, 
@@ -34,6 +39,7 @@ export class MentorAddPage implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
     this.USERAUTH = this.currentUser.USERAUTH;
+    this.USERNAME = this.currentUser.USERNAME;
     this.mentoroom = new Mentoroom('', '', '', '');
   }
 
@@ -80,6 +86,7 @@ export class MentorAddPage implements OnInit {
     }
   }
 
+  
   // 이미지 업로드
   onChangeImage(event) {
     if(event.target.files && event.target.files.length > 0) {
@@ -105,6 +112,7 @@ export class MentorAddPage implements OnInit {
       this.credentialsFileLabel = '';
     }
   }
+  
 
   fileClick(sort) {
     this.sortArray[sort] = !this.sortArray[sort];

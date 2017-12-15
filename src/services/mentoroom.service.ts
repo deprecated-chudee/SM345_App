@@ -19,7 +19,7 @@ export class MentoroomService {
         let url = this.URL + 'mentoroom/create';
         return this.http.post(url, mentoroom)
             .toPromise()
-            .then(res => res.text())
+            .then(response => response.json() as number)
             .catch(this.handleError)
     }
 

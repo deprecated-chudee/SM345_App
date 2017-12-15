@@ -587,11 +587,19 @@ export class ManagerPage implements OnInit{
         let file = event.target.files[0];
             this.xlsxToJsonService.processFileToJson({}, file)
                 .subscribe(data => {
-                    data = _.map(data['sheets']['신입생등록'], (student) => {
+                    data = _.map(data['sheets']['신입생목록'], (student) => {
                         student.student_major = this.changeMajor(student.student_major)
                         student.student_minor = this.changeMinor(student.student_minor)
                         console.log(student)
-                        return student;
+                        return {
+                            student_id: student['학번'],
+                            student_major: student['학과'],
+                            student_minor: student['복수/부전공'],
+                            student_name: student['이름'],
+                            student_email: student['이메일'],
+                            student_number: student['주민번호'],
+                            student_phone: student['휴대폰'],
+                          }
                     })
                     this.result = JSON.stringify(data)
                 })
@@ -609,10 +617,12 @@ export class ManagerPage implements OnInit{
         switch(minor) {
             case '소프트웨어공학과':
                 return 1;
-            case '경영학과':
-                return 2;
-            case '없음':
+            case '영어학과':
+                return 5;
+            case '-':
                 return 0;
+            case '경영학부':
+                return 11;
         }
     }
 

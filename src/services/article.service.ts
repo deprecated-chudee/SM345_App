@@ -56,6 +56,15 @@ export class ArticleService {
             .catch(this.handleError);
     }
 
+     // 공지사항 목록 가져오기
+     getNoticeList(): Promise<Article[]> {
+        let url = this.URL + 'home/notice';
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as Article[])
+            .catch(this.handleError);
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

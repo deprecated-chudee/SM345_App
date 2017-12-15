@@ -15,7 +15,7 @@
 
     <!--설문조사 버튼-->
     <div *ngIf="((survey_start - date) < 0 && (survey_end - date) > 0)">
-        <button ion-button class="teamNo" (click)="OpenSurveyWrite()">설문조사</button>
+        <button ion-button class="teamNo" *ngIf= "survey_check == 0" (click)="OpenSurveyWrite()">설문조사</button>
     </div>
  
     <table class="roomDetailTable">
