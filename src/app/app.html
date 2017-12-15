@@ -1,12 +1,5 @@
-<ion-menu [content]="content">
+<ion-menu class="menu" [content]="content">
     <ion-content class="side">
-        <section class="sideAccount">
-            <ion-item no-lines style="height: 56px;">
-                <button menuClose clear ion-button item-right>
-                <ion-icon name="ios-arrow-back" class="account-icon"></ion-icon>
-                </button>
-            </ion-item>
-        </section>
         <table class="sideTable">
             <tr>
                 <td menuClose (click)="openPage(pages[5])"><img src="assets/img/user.png"/></td>

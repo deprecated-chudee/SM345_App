@@ -32,12 +32,10 @@
     -->
 
         <!--동영상 링크-->
-        <!--
-        <ion-item *ngIf="sortArray[0]==true">
+        <ion-item>
             <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>
             <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input" [(ngModel)]="mentoroom.team_link"></ion-input>
         </ion-item>
-    -->
 
         <!--팀 광고사진-->
         <!--
@@ -67,13 +65,13 @@
         </ion-item> -->
 
          <!--팀 광고사진-->
-       <div> 팀 광고사진 <br>
+       <div>
             <input type="file"name="uploadFile" (change)="onChange1($event)"  accept="image/*" file-upload multiple />
           
         </div>
 
 
-        <div > 자격증명파일 <br>
+        <div>
             <input type="file" name="uploadFile" (change)="onChange2($event)"  accept="application/*" file-upload multiple />
           
         </div>

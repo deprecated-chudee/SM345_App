@@ -96,13 +96,15 @@
             <div style="display: flex;" *ngFor="let i of range">
                 <ion-item style="flex: 1;">
                     <ion-datetime style="flex: 1;" placeholder="{{ i+1 }} 주차 시작일" 
-                        displayFormat="YYYY/MM/DD">
-                    </ion-datetime>
+                        displayFormat="YYYY/MM/DD"
+                        [(ngModel)]="reportDateList[i].report_start"
+                    ></ion-datetime>
                 </ion-item>
                 <ion-item style="flex: 1;">
                     <ion-datetime style="flex: 1;" placeholder="{{ i+1 }} 주차 종료일" 
-                        displayFormat="YYYY/MM/DD" >
-                    </ion-datetime>
+                        displayFormat="YYYY/MM/DD"
+                        [(ngModel)]="reportDateList[i].report_end"
+                    ></ion-datetime>
                 </ion-item>
             </div>
 

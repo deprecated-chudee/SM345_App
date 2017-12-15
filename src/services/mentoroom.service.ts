@@ -122,13 +122,13 @@ export class MentoroomService {
             .catch(this.handleError)
     }
 
-     // 홈화면 사진 목록 가져오기
-     getPictureList(): Promise<Upload[]> {
-        let url = this.URL + 'home/filelist'
+    // ?? 
+    getThumbnail() {
+        let url = this.URL + "home/filelist";
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json() as Upload[])
-            .catch(this.handleError);
+            .then(res => res.json())
+            .catch(this.handleError)
     }
 
     private handleError(error: any): Promise<any> {

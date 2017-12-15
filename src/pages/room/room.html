@@ -12,7 +12,9 @@
   <ion-content padding class="page-room">
       <table class="roomTable" *ngFor="let m of mentorooms">
         <tr *ngIf= "m.team_confirm != 2">
-          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/c.png" /></td>
+          <td rowspan="3" class="roomTableImg">
+            <img [src]="m.picture" />
+          </td>
           <td>[팀명] {{m.team_name}}&nbsp;&nbsp;
             <button ion-button class="fileButton4" *ngIf= "m.team_confirm == 0">대기중</button>
             <button ion-button class="fileButton" *ngIf= "m.team_confirm == 1">개설완료</button>
@@ -26,51 +28,12 @@
           <td>[현재팀원] {{m.person_count}}명</td>
         </tr>
       </table>
-<!--
-      <table class="roomTable">
-        <tr>
-          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/java.png" /></td>
-          <td>[팀명] 자바를 잡아&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>
-          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>
-        </tr>
-        <tr>
-          <td>[주제] JAVA</td>
-        </tr>
-        <tr>
-          <td>[현재팀원] 3명</td>
-        </tr>
-      </table>
-
-      <table class="roomTable">
-        <tr>
-          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/algo.png" /></td>
-          <td>[팀명] ALGO&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>
-          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>
-        </tr>
-        <tr>
-          <td>[주제] 알고리즘</td>
-        </tr>
-        <tr>
-          <td>[현재팀원] 2명</td>
-        </tr>
-      </table>
-
-      <table class="roomTable">
-        <tr>
-          <td rowspan="3" class="roomTableImg"><img src="assets/img/book/python.png" /></td>
-          <td>[팀명] 썬&nbsp;&nbsp;<button ion-button class="fileButton">개설완료</button></td>
-          <td rowspan="3" class="roomTableButton" (click)="openRoomDetailPage()"><ion-icon name="ios-arrow-dropright-outline"></ion-icon></td>
-        </tr>
-        <tr>
-          <td>[주제] Python</td>
-        </tr>
-        <tr>
-          <td>[현재팀원] 1명</td>
-        </tr>
-      </table>
-    -->
-    <div *ngIf="currentUser.USERAUTH == 0">
-      <button ion-button block (click)="openMentorAddPage()">멘토신청</button>
-    </div>
-
+      <div *ngIf="currentUser.USERAUTH == 0">
+        <div *ngIf="((mento_start - date) < 0 && (mento_end - date) > 0);else check">
+          <button ion-button block (click)="openMentorAddPage()">멘토신청</button>
+        </div>
+        <ng-template #check>
+          <button ion-button color="danger" full> 멘토 신청 기간이 아닙니다. </button>
+        </ng-template>
+      </div>
   </ion-content>

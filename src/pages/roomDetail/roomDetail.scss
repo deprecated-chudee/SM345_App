@@ -5,6 +5,14 @@
         margin-bottom: 15px;
     }
 
+    .button-ios, .button-md {
+        border-radius: 4px;
+        height: 2.8em;
+        font-size: 1.6rem;
+        color: #fff;
+        background : #38484f;
+    }
+
     .roomDetailTable tr td {
         padding-left:15px;
         font-size: 14px;
@@ -16,7 +24,7 @@
     }
 
     .roomDetailTable tr:first-child td:first-child {
-        width:40%;
+        width: 45%;
         padding-left: 5%;
     }
 
@@ -384,11 +392,6 @@
         text-align: center;
         height: 45px;
         border-radius: 4px;
-    }
-
-    .button {
-        margin-left: 10px;
-        flex: 1;
     }
 
     table.reportTable td:first-child {

@@ -146,8 +146,12 @@ export class MentorAddPage implements OnInit {
   // 파일 서버에 저장
   save() {
     this.mentoroom.mento_id = this.USERID;
+    console.log(this.USERID)
+    console.log('뭐지')
     this.mentoroomService.createMentoroom1(this.mentoroom)
     .then ( mentoroom_id => { this.mentoroom_id = mentoroom_id;
+      console.log('읭')
+      console.log(this.mentoroom_id);
                               if(this.formData1) {
                                 this.mentoroomService.fileUpload(this.formData1, this.mentoroom_id, 2)
                                 .then(() => {

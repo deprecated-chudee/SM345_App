@@ -9,8 +9,7 @@ export class Mentoroom {
     mento_id: number;
     mento_name: string;
     team_confirm: number;
-    picture: FormData;
-    file: FormData;
+    picture: string;
 
     constructor(team_name, team_theme, team_link, team_about) {
         this.team_name = team_name;

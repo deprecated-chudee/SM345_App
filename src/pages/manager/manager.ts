@@ -88,8 +88,9 @@ export class ManagerPage implements OnInit{
     // 엑셀 데이터
     public result: any;
 
-    // reportData init
-    range: number
+    // 멘토방 report 설정
+    range: number;
+    private reportDateList: ReportDate[] = [];
     
     constructor(
         private mentoroomService: MentoroomService, 
@@ -115,6 +116,7 @@ export class ManagerPage implements OnInit{
         this.getMentoroomListByYear(this.selectDefualtYear);
         this.userList(this.selectDefualtAuth);
         this.reportList(this.selectDefualtYear);
+        this.getReportList();
     }
 
 
@@ -136,9 +138,13 @@ export class ManagerPage implements OnInit{
      */
 
     // 보고서 제출 기한 핸들러
-    changeRange(index) {
-        this.mentoroomInfo.meeting_number = index
-        this.range = _.range(index)
+    changeRange(index: number) {
+        this.reportDateList = [];
+        for (let i = 0; i < index; i++) {
+            this.reportDateList.push(new ReportDate())
+        }
+        this.mentoroomInfo.meeting_number = index;
+        this.range = _.range(index);
     }
 
     // 멘토방 설정 불러오기
@@ -154,9 +160,30 @@ export class ManagerPage implements OnInit{
     // 멘토방 설정 저장
     mentoroomInfoSave() {
         try {
-            this.adminService.createMentoRoomInfo(this.mentoroomInfo)
-                .then(() => this.Toast('멘토방 설정이 저장 되었습니다.'));
-            // this.adminService.
+            this.adminService.createMentoRoomInfo(this.mentoroomInfo);
+            this.createReportList();
+            this.Toast('멘토방 설정이 저장 되었습니다.');
+        }
+        catch(e) {
+            this.Toast('에러 발생')
+        }
+    }
+
+    // 리포트 날짜 리스트 불러오기
+    getReportList() {
+        try {
+            this.adminService.getReportList()
+                .then(reportDateList => this.reportDateList = reportDateList);
+        }
+        catch(e) {
+            this.Toast('에러 발생')
+        }
+    }
+
+    // 리포트 날짜 리스트 저장하기
+    createReportList() {
+        try {
+            this.adminService.createReportList(this.reportDateList);
         }
         catch(e) {
             this.Toast('에러 발생')

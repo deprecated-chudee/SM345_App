@@ -71,18 +71,15 @@
     }
 
     .roomTableImg {
-        width: 20%;
-        padding-left:15px;
+        width: 25%;
+        padding-left: 5px;
     }
 
     .roomTableImg img {
-        width: 50px;
-        height: 62.66px;
-        min-width: 50px;
-        min-height: 62.66px;
-        max-width: 50px;
-        max-height: 62.66px;
+        width: 80px;
+        height: 80px;
     }
+
     button.fileButton.disable-hover.button.button-md.button-default.button-default-md,
     button.fileButton.disable-hover.button.button-ios.button-default.button-default-ios {
         background: #61A5FF;

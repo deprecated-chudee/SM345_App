@@ -17,39 +17,48 @@
           SCHEDULE
       </td>
     </tr>
-    <tr>
-        <td>
-          2017.09.01 ~ 09.10
-        </td>
-        <td>
-          2학기 멘토 신청기간
-        </td>
-      </tr>
-    <tr>
-      <td>
-        2017.09.11 ~ 09.20
-      </td>
-      <td>
-        2학기 멘티 신청기간
-      </td>
-    </tr>
-    <tr>
-        <td>
-          2017.09.21 ~ 12.10
-        </td>
-        <td>
-          멘토링 활동기간
-        </td>
-      </tr>
-    <tr>
-        <td>
-          2017.12.11 ~ 12.20
-        </td>
-        <td>
-          2학기 설문조사 기간
-        </td>
-    </tr>
   </table>
+  <ion-slides style="height: 130px;">
+    <ion-slide *ngIf="setting">
+      <ion-item class="center">
+        {{ setting.mento_start | date: 'yyyy.MM.dd' }} ~ {{ setting.mento_end | date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 2학기 멘토 신청기간
+      </ion-item>
+      <ion-item class="center">
+        {{ setting.menti_start | date: 'yyyy.MM.dd' }} ~ {{ setting.menti_end | date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 2학기 멘티 신청기간
+      </ion-item>
+      <ion-item class="center">
+        {{ setting.survey_start | date: 'yyyy.MM.dd' }} ~ {{ setting.survey_end | date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 2학기 설문조사 기간
+      </ion-item>
+    </ion-slide>
+    <div *ngIf="reportDateList">
+      <div *ngIf="reportDateList.length > 0">
+        <ion-slide>
+          <ion-item class="center">
+            {{ reportDateList[0].report_start | date: 'yyyy.MM.dd' }} ~ {{ reportDateList[0].report_end| date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 1차 보고서 제출기간
+          </ion-item>
+          <ion-item class="center">
+            {{ reportDateList[1].report_start | date: 'yyyy.MM.dd' }} ~ {{ reportDateList[1].report_end| date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 2차 보고서 제출기간
+          </ion-item>
+          <ion-item class="center">
+            {{ reportDateList[2].report_start | date: 'yyyy.MM.dd' }} ~ {{ reportDateList[2].report_end| date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 3차 보고서 제출기간
+          </ion-item>
+        </ion-slide>
+      </div>
+      <div *ngIf="reportDateList.length > 3">
+        <ion-slide>
+          <ion-item class="center">
+            {{ reportDateList[3].report_start | date: 'yyyy.MM.dd' }} ~ {{ reportDateList[3].report_end| date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 4차 보고서 제출기간
+          </ion-item>
+          <ion-item class="center">
+            {{ reportDateList[4].report_start | date: 'yyyy.MM.dd' }} ~ {{ reportDateList[4].report_end| date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 5차 보고서 제출기간
+          </ion-item>
+          <ion-item class="center">
+            {{ reportDateList[5].report_start | date: 'yyyy.MM.dd' }} ~ {{ reportDateList[5].report_end| date: 'MM.dd' }} &nbsp;&nbsp;&nbsp; 6차 보고서 제출기간
+          </ion-item>
+        </ion-slide>
+      </div>
+    </div>
+  </ion-slides>
 
   <!--공지사항-->
   <table class="noticeTable">
@@ -84,27 +93,27 @@
   </table>
 
   <table class="mentor-banner" >
-      <tr>
-          <ion-slides  *ngIf="mentorooms && mentorooms.length" pager="true" loop="true" autoplay="5000" speed="500" slidesPerView="3">
-              <ion-slide *ngFor="let m of mentorooms">
-                <div *ngIf= "m.team_confirm != 2">
-                    <table class="mentor-banner-in">
-                      <tr>
-                        <td>
-                          <img src="assets/img/book/algo.png" /> 
-                        </td>
-                      </tr>
-                      <tr>
-                        <td><b>[{{m.team_name}}]</b></td>
-                      </tr>
-                      <tr>
-                        <td>{{m.team_theme}}</td>
-                      </tr>
-                    </table>
-                </div>
-              </ion-slide>
-          </ion-slides>
-      </tr>
+    <tr>
+      <ion-slides  *ngIf="mentorooms && mentorooms.length" pager="true" loop="true" autoplay="5000" speed="500" slidesPerView="3">
+          <ion-slide *ngFor="let m of mentorooms">
+            <div *ngIf= "m.team_confirm != 2">
+                <table class="mentor-banner-in">
+                  <tr>
+                    <td>
+                      <img [src]="m.picture" /> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><b>[{{m.team_name}}]</b></td>
+                  </tr>
+                  <tr>
+                    <td>{{m.team_theme}}</td>
+                  </tr>
+                </table>
+            </div>
+          </ion-slide>
+      </ion-slides>
+    </tr>
   </table>
 
     <!--설명서 바로가기-->

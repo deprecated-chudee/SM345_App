@@ -43,6 +43,12 @@ export class RoomDetailPage implements OnInit {
   private formData;
   private fileLabel: string = '';
   private files: Upload[] = [];
+
+  private mente_start;
+  private mente_end;
+  private survey_start;
+  private survey_end;
+  private date: Date;
   
   constructor(
     public app: App, 
@@ -71,9 +77,10 @@ export class RoomDetailPage implements OnInit {
     this.mentoroomService.menti_list(this.mento_id)
     .then(menti => this.mentis = menti);
   
-    this.fileList()
     this.surveyCheck();
-
+    this.fileList();
+    this.getMentoRoomInfo();
+    
   }
 
   //설문조사 참여여부
@@ -88,9 +95,13 @@ export class RoomDetailPage implements OnInit {
   fileList() {
     this.mentoroomService.fileList(this.selectedRoom.mentoroom_id)
       .then(files => {
-        this.files = files
-        console.log(files)
-      })
+        this.files = files;
+        let preview = document.getElementById('preview');
+        preview.style.width = '100%';
+        preview.style.backgroundSize = 'cover';
+        preview.style.height = '150px';
+        preview.style.backgroundImage = `url(data:image/jpeg;base64,${files[0].file_data})`;
+    })
   }
 
   // 파일 업로드 버튼 클릭 핸들러
@@ -282,5 +293,15 @@ export class RoomDetailPage implements OnInit {
 
   OpenSurveyWrite() {
     this.appCtrl.getRootNav().setRoot(SurveyWritePage);
+  }
+
+  getMentoRoomInfo() {
+    this.adminService.getMentoRoomInfo()
+      .then(res => {
+        this.mente_start = new Date(res.menti_end);
+        this.mente_end = new Date(res.menti_end);
+        this.survey_start = new Date(res.survey_start);
+        this.survey_end = new Date(res.survey_end);
+    })
   }
 }
