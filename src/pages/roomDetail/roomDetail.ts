@@ -79,6 +79,7 @@ export class RoomDetailPage implements OnInit {
   
     this.fileList();
     this.getMentoRoomInfo();
+    
   }
 
   //설문조사 참여여부
@@ -90,9 +91,13 @@ export class RoomDetailPage implements OnInit {
   fileList() {
     this.mentoroomService.fileList(this.selectedRoom.mentoroom_id)
       .then(files => {
-        this.files = files
-        console.log(files)
-      })
+        this.files = files;
+        let preview = document.getElementById('preview');
+        preview.style.width = '100%';
+        preview.style.backgroundSize = 'cover';
+        preview.style.height = '150px';
+        preview.style.backgroundImage = `url(data:image/jpeg;base64,${files[0].file_data})`;
+    })
   }
 
   // 파일 업로드 버튼 클릭 핸들러
