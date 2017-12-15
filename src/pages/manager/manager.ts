@@ -608,11 +608,12 @@ export class ManagerPage implements OnInit{
                           }
                     })
                     this.result = JSON.stringify(data)
-                })
+                
                 this.result = JSON.stringify(data)
                 console.log(this.result);
-            })
-  }
+        })
+    }
+  
 
     // 주 전공 변환
     changeMajor(major) {
@@ -621,6 +622,7 @@ export class ManagerPage implements OnInit{
                 return 1;
         }
     }
+
     // 부 전공 / 복수 전공 변환
     changeMinor(minor) {
         switch(minor) {
