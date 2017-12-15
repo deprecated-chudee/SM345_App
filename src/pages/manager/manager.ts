@@ -13,7 +13,6 @@ import { HomePage } from '.././home/home';
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
 import { MessageAddPage } from '.././messageAdd/messageAdd';
 import { SurveyPage } from '.././survey/survey';
-import { ManagerPage } from '.././roomDetail/roomDetail';
 
 import { MentoroomService } from '../../services/mentoroom.service';
 import { AdminService } from '../../services/admin.service';
@@ -31,6 +30,7 @@ import { SurveyObject } from '../../models/surveyObject';
 
 import * as _ from 'lodash';
 import * as FileSaver from 'file-saver';
+import { read } from 'xlsx';
 
 @Component({
     templateUrl: 'manager.html'
@@ -574,32 +574,34 @@ export class ManagerPage implements OnInit{
         }
     }
     //멘토방 폐설
-    handleDeleteRoom() {
-        if(this.selectedRoom) {
-            this.adminService.mentoroom_close()
-                .then(() =>
-        }
+    handleDeleteRoom(room_id) {
+        this.adminService.mentoroom_close(room_id)
+        this.app.getRootNav().setRoot(ManagerPage);
+        
     }
     dismiss() {
         this.viewCtrl.dismiss();
     }
 
-    // 엑셀 업로드
+    // 엑셀 업로드 int가 유효하지 않은게 뭐야
    handleFile(event) {
     let file = event.target.files[0];
         this.xlsxToJsonService.processFileToJson({}, file)
             .subscribe(data => {
-                data = _.map(data['sheets']['수강학생목록_데이터베이스실습'], (user) => {
-                  console.log(user)
-                  return {
-                    user_id: user['학번'],
-                    user_major: user['학과'],
-                    user_minor: user['복수/부전공'],
-                    user_name: user['이름'],
-                    user_email: user['이메일'],
-                    user_security: user['주민번호'],
-                    user_phone: user['휴대폰'],
-                  }
+                data = _.map(data['sheets']['수강학생목록_데이터베이스실습'], (student) => {
+                  console.log(student['복수/부전공'].indexOf('-'))
+                  //if(student['복수/부전공'].indexOf('-')) {
+                  //} 
+                  console.log(student['학과'])
+                    return {   
+                    student_id: student['학번'],
+                    //student_major: student['학과'],
+                    //student_minor: student['복수/부전공'].replace('-', '0'),
+                    student_name: student['이름'],
+                    student_email: student['이메일'],
+                    student_security: student['주민번호'],
+                    student_phone: student['휴대폰'],
+                    }
                   // console.log(user)
                 })
                 this.result = JSON.stringify(data)
