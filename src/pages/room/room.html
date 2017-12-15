@@ -29,11 +29,8 @@
         </tr>
       </table>
       <div *ngIf="currentUser.USERAUTH == 0">
-        <div *ngIf="((mento_start - date) < 0 && (mento_end - date) > 0);else check">
+        <div *ngIf="((mento_start - date) < 0 && (mento_end - date) > 0)">
           <button ion-button block (click)="openMentorAddPage()">멘토신청</button>
         </div>
-        <ng-template #check>
-          <button ion-button color="danger" full> 멘토 신청 기간이 아닙니다. </button>
-        </ng-template>
       </div>
   </ion-content>

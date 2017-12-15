@@ -5,7 +5,6 @@ import 'rxjs/add/operator/toPromise';
 import { Mentoroom } from '../models/mentoroom';
 import { Menti } from '../models/menti';
 import { Upload } from '../models/upload';
-import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class MentoroomService {
   

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 
 import { LoginPage } from '../login/login';
 import { SmPage } from '../sm/sm';
@@ -82,12 +82,14 @@ export class HomePage implements OnInit {
   getThumbnail() {
     this.mentoroomService.getThumbnail()
       .then(thumbnail => {
-        this.mentorooms = this.mentorooms.map( (e, i) => {
-          return {
-            ...e,
-            picture: `data:image/jpeg;base64,${thumbnail[thumbnail.length - (i+1)].file_data}`
-          }
-        })
+        if(this.mentorooms) {
+          this.mentorooms = this.mentorooms.map( (e, i) => {
+            return {
+              ...e,
+              picture: `data:image/jpeg;base64,${thumbnail[thumbnail.length - (i+1)].file_data}`
+            }
+          })
+        }
       })
   }
 }

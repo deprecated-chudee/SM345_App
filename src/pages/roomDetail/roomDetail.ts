@@ -17,10 +17,8 @@ import { AdminService } from '../../services/admin.service';
 import { MentoroomService } from '../../services/mentoroom.service';
 import { SurveyService } from '../../services/survey.service';
 import { Mentoroom } from '../../models/mentoroom';
-import { MyApp } from '../../app/app.component';
 import { Menti } from '../../models/menti';
 import { Upload } from '../../models/upload';
-import { Student } from '../../models/student';
 
 import * as FileSaver from 'file-saver';
 @Component({
@@ -37,8 +35,6 @@ export class RoomDetailPage implements OnInit {
   private mento_id;
   private mento_name;
   sort: boolean = false;
-  private student: Student;
-  private survey_check: number;
 
   private formData;
   private fileLabel: string = '';
@@ -48,7 +44,6 @@ export class RoomDetailPage implements OnInit {
   private mente_end;
   private survey_start;
   private survey_end;
-  private date: Date;
   
   constructor(
     public app: App, 
@@ -97,7 +92,8 @@ export class RoomDetailPage implements OnInit {
       .then(files => {
         this.files = files;
         let preview = document.getElementById('preview');
-        preview.style.width = '100%';
+        preview.style.width = '150px';
+        preview.style.display = 'block';
         preview.style.backgroundSize = 'cover';
         preview.style.height = '150px';
         preview.style.backgroundImage = `url(data:image/jpeg;base64,${files[0].file_data})`;
