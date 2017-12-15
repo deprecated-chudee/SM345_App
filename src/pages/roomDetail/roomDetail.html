@@ -14,7 +14,7 @@
 <ion-content class="page-roomDetail">
 
     <!--설문조사 버튼-->
-    <button ion-button class="teamNo" (click)="OpenSurveyWrite()">설문조사</button>
+    <button ion-button class="teamNo" *ngIf= "survey_check == 0" (click)="OpenSurveyWrite()">설문조사</button>
 
     <table class="roomDetailTable">
         <tr>

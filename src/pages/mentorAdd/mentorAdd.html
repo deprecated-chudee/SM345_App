@@ -23,31 +23,62 @@
         </ion-item>
 
         <!--첨부-->
+        <!--
         <ion-item class="fileTitle">
             <ion-icon name="logo-youtube" class="youtube-icon" (click)="fileClick(0)"></ion-icon><p (click)="fileClick(0)">영상링크</p>
             <ion-icon name="md-photos" class="photos-icon" (click)="fileClick(1)"></ion-icon><p (click)="fileClick(1)">팀광고사진</p>
             <ion-icon name="ios-link" class="link-icon" (click)="fileClick(2)"></ion-icon><p (click)="fileClick(2)">자격증명파일</p>
         </ion-item>
+    -->
 
         <!--동영상 링크-->
+        <!--
         <ion-item *ngIf="sortArray[0]==true">
             <ion-label><ion-icon name="logo-youtube" class="youtube-icon"></ion-icon></ion-label>
             <ion-input placeholder="영상 링크 주소를 입력해주세요." class="youtube-input" [(ngModel)]="mentoroom.team_link"></ion-input>
         </ion-item>
+    -->
 
         <!--팀 광고사진-->
+        <!--
         <ion-item *ngIf="sortArray[1] == true" class="test">
             <ion-icon name="md-photos" class="photos-icon"></ion-icon>
             <input type="file" id="image" class="inputfile" name="uploadImage" (change)="onChangeImage($event)" accept="image/*" file-upload multiple/>
             <label for="image" class="inputLabel"><strong>{{ imageLabel ? imageLabel : 'Choose a image' }}</strong></label>
-        </ion-item>
+        </ion-item>-->
 
         <!--자격증명파일-->
+        <!--
         <ion-item *ngIf="sortArray[2] == true" class="test">
             <ion-icon name="ios-link" class="link-icon"></ion-icon>
             <input type="file" id="file" class="inputfile" name="uploadCredentialsFile" (change)="onChangeFile($event)" accept=".doc, .docx, .pdf, .hwp" file-upload multiple/>
             <label for="file" class="inputLabel"><strong>{{ credentialsFileLabel ? credentialsFileLabel : 'Choose a file' }}</strong></label>
-        </ion-item>
+        </ion-item>-->
+
+
+         <!-- 파일 업로드 -->
+         <!-- <ion-item class="uploadWrapper">
+            <input type="file" class="inputfile" id="upload" name="uploadFile" (change)="onChange1($event)"  accept="application/*" file-upload multiple />
+        </ion-item>> -->
+
+         <!-- 결과보고서 파일 업로드 -->
+         <!-- <ion-item class="uploadWrapper">
+            <input type="file" class="inputfile" id="upload" name="uploadFile" (change)="onChange2($event)"  accept="application/*" file-upload multiple />
+        </ion-item> -->
+
+         <!--팀 광고사진-->
+       <div> 팀 광고사진 <br>
+            <input type="file"name="uploadFile" (change)="onChange1($event)"  accept="image/*" file-upload multiple />
+          
+        </div>
+
+
+        <div > 자격증명파일 <br>
+            <input type="file" name="uploadFile" (change)="onChange2($event)"  accept="application/*" file-upload multiple />
+          
+        </div>
+    
+
 
         <!--팀 소개 및 설명-->
         <ion-item>

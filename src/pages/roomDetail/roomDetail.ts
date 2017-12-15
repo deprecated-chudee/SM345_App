@@ -72,13 +72,16 @@ export class RoomDetailPage implements OnInit {
     .then(menti => this.mentis = menti);
   
     this.fileList()
-    // this.surveyCheck();
-    // console.log('survey_check: ' + this.survey_check);
+    this.surveyCheck();
+
   }
 
   //설문조사 참여여부
   surveyCheck() {
-    this.surveyService.surveyCheck(this.USERID);
+    if(this.USERAUTH == 1 || this.USERAUTH == 2){
+    this.surveyService.surveyCheck(this.USERID)
+    .then( check => this.survey_check = check);
+    }
   }
 
   // 파일 리스트 가져오기
@@ -107,7 +110,7 @@ export class RoomDetailPage implements OnInit {
   // 파일 서버에 저장
   save() {
     if(this.formData) {
-      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id)
+      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id, 1)
       .then(() => {
         this.Toast('업로드 성공');
         this.dismiss();

@@ -11,6 +11,7 @@ import { MentoroomService } from '../../services/mentoroom.service';
 
 import { Article } from '../../models/article';
 import { Mentoroom } from '../../models/mentoroom';
+import { Upload } from '../../models/upload';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class HomePage implements OnInit {
   private articles: Article[] =[];
   private mentorooms: Mentoroom[];
   private currentUser;
+  private pictures: Upload[] = [];
 
   constructor(
     public navCtrl: NavController,
@@ -33,11 +35,16 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     if(this.currentUser){
-      this.articleService.getArticleList(2)
-        .then(article => this.articles = article);
+      
+      // this.articleService.getNoticeList()
+      //   .then(article => this.articles = article);
+
       this.mentoroomService.getMentoroomList()
-        .then(mentorooms => this.mentorooms = mentorooms);
+        .then(mentorooms => { this.mentorooms = mentorooms;      
+        });
     }
+
+
   }
 
   openReadingPage(article){

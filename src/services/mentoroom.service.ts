@@ -20,7 +20,7 @@ export class MentoroomService {
         let url = this.URL + 'mentoroom/create';
         return this.http.post(url, mentoroom)
             .toPromise()
-            .then(res => res.text())
+            .then(response => response.json() as number)
             .catch(this.handleError)
     }
 
@@ -93,13 +93,13 @@ export class MentoroomService {
     }
 
     // 보고서 업로드
-    fileUpload(upload: FormData, room_id: number) {
+    fileUpload(upload: FormData, room_id: number, kind: number) {
         let headers = new Headers();
         headers.append('enctype', 'multipart/form-data');
         headers.append('Accept', 'application/json');
         let options = new RequestOptions({headers: headers});
 
-        let url = `${this.URL}mentoroom/fileupload/${room_id}`; 
+        let url = `${this.URL}mentoroom/fileupload/${room_id}/${kind}`; 
         return this.http.post(url, upload, options)
             .toPromise()
             .catch(this.handleError)
@@ -120,6 +120,15 @@ export class MentoroomService {
         return this.http.get(url)
             .toPromise()
             .catch(this.handleError)
+    }
+
+     // 홈화면 사진 목록 가져오기
+     getPictureList(): Promise<Upload[]> {
+        let url = this.URL + 'home/filelist'
+        return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as Upload[])
+            .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

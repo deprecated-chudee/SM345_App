@@ -4,6 +4,8 @@ import 'rxjs/add/operator/toPromise';
 
 import { SurveyObject } from '../models/surveyObject';
 import { SurveySubject } from '../models/surveySubject';
+import { SurveyWritePage } from '../pages/surveyWrite/surveyWrite';
+import { SurveySubjectContent } from '../models/surveySubjectContent';
 
 @Injectable()
 export class SurveyService {
@@ -40,20 +42,20 @@ export class SurveyService {
     }
 
     //멘토, 멘티 - 주관식 설문조사 목록
-    surveySubjList(){
+    surveySubjList(): Promise<SurveySubject[]>{
         let url = this.URL + 'surveySQ/list';
         return this.http.get(url)
             .toPromise()
-            .then(res => res.json())
+            .then(res => res.json() as SurveySubject[])
             .catch(this.handleError)
     }
 
     //설문조사 참여 여부
-    surveyCheck(user_id: number) {
+    surveyCheck(user_id: number): Promise<number> {
         let url = `${this.URL}${user_id}/survey_check`;
         return this.http.get(url)
             .toPromise()
-            .then(res => res.json())
+            .then(res => res.json() as number)
             .catch(this.handleError);
     }
 
@@ -74,21 +76,20 @@ export class SurveyService {
     }
 
     //관리자 - 객관식 설문조사 결과 조회
-    surveyObjResult() {
+    surveyObjResult(): Promise<SurveyObject[]> {
         let url = `${this.URL}survey/object/result`;
         return this.http.get(url)
             .toPromise()
-            .then(res => res.json())
+            .then(res => res.json() as SurveyObject[])
             .catch(this.handleError)
     }
 
-
     //관리자 - 주관식 설문조사 결과 조회
-    surveySubjResult() {
+    surveySubjResult(): Promise<SurveySubjectContent[]>  {
         let url = `${this.URL}survey/subject/result`;
         return this.http.get(url)
             .toPromise()
-            .then(res => res.json())
+            .then(res => res.json() as SurveySubjectContent[])
             .catch(this.handleError)
     }
 

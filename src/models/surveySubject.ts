@@ -1,4 +1,5 @@
 export class SurveySubject {
+    id: number;
     question_id: number;
     subject_question: string;
     survey_year: number;
