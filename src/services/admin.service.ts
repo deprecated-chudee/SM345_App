@@ -182,6 +182,14 @@ export class AdminService {
             .catch(this.handleError)
     }
 
+    //멘토방 폐설
+    mentoroom_close(r_id: number) {
+        let url = this.URL + 'admin/mentoroom/' + r_id + '/close';
+        return this.http.get(url)
+            .toPromise()
+            .catch(this.handleError)
+    }
+
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);

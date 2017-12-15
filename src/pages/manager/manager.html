@@ -96,15 +96,13 @@
             <div style="display: flex;" *ngFor="let i of range">
                 <ion-item style="flex: 1;">
                     <ion-datetime style="flex: 1;" placeholder="{{ i+1 }} 주차 시작일" 
-                        displayFormat="YYYY/MM/DD"
-                        [(ngModel)]="reportDataList[i].report_start"
-                    ></ion-datetime>
+                        displayFormat="YYYY/MM/DD">
+                    </ion-datetime>
                 </ion-item>
                 <ion-item style="flex: 1;">
                     <ion-datetime style="flex: 1;" placeholder="{{ i+1 }} 주차 종료일" 
-                        displayFormat="YYYY/MM/DD"
-                        [(ngModel)]="reportDataList[i].report_end"
-                    ></ion-datetime>
+                        displayFormat="YYYY/MM/DD" >
+                    </ion-datetime>
                 </ion-item>
             </div>
 
@@ -200,6 +198,7 @@
         </div>
            
         <button ion-button block class="mentorRoomButton" (click)="handleRemoveRoom()">목록에서 삭제</button>
+        <button ion-button block class="mentorRoomButton" (click)="handleDeleteRoom()">멘토방 폐설</button>
 
       </ion-list> 
 

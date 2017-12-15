@@ -13,6 +13,7 @@ import { HomePage } from '.././home/home';
 import { RoomDetailPage } from '.././roomDetail/roomDetail';
 import { MessageAddPage } from '.././messageAdd/messageAdd';
 import { SurveyPage } from '.././survey/survey';
+import { ManagerPage } from '.././roomDetail/roomDetail';
 
 import { MentoroomService } from '../../services/mentoroom.service';
 import { AdminService } from '../../services/admin.service';
@@ -572,25 +573,39 @@ export class ManagerPage implements OnInit{
             this.app.getRootNav().setRoot(ManagerPage);
         }
     }
-
+    //멘토방 폐설
+    handleDeleteRoom() {
+        if(this.selectedRoom) {
+            this.adminService.mentoroom_close()
+                .then(() =>
+        }
+    }
     dismiss() {
         this.viewCtrl.dismiss();
     }
 
-    // 엑셀 업로드 아직 대충 구현함
-    handleFile(event) {
-        let file = event.target.files[0];
-            this.xlsxToJsonService.processFileToJson({}, file)
-                .subscribe(data => {
-                    data = _.map(data['sheets']['신입생등록'], (student) => {
-                        student.student_major = this.changeMajor(student.student_major)
-                        student.student_minor = this.changeMinor(student.student_minor)
-                        console.log(student)
-                        return student;
-                    })
-                    this.result = JSON.stringify(data)
+    // 엑셀 업로드
+   handleFile(event) {
+    let file = event.target.files[0];
+        this.xlsxToJsonService.processFileToJson({}, file)
+            .subscribe(data => {
+                data = _.map(data['sheets']['수강학생목록_데이터베이스실습'], (user) => {
+                  console.log(user)
+                  return {
+                    user_id: user['학번'],
+                    user_major: user['학과'],
+                    user_minor: user['복수/부전공'],
+                    user_name: user['이름'],
+                    user_email: user['이메일'],
+                    user_security: user['주민번호'],
+                    user_phone: user['휴대폰'],
+                  }
+                  // console.log(user)
                 })
-    }
+                this.result = JSON.stringify(data)
+                console.log(this.result);
+            })
+  }
 
     // 주 전공 변환
     changeMajor(major) {
