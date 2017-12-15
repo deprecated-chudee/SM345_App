@@ -44,6 +44,7 @@ export class RoomDetailPage implements OnInit {
   private mente_end;
   private survey_start;
   private survey_end;
+  private survey_check: number;
   
   constructor(
     public app: App, 
