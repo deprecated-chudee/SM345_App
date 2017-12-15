@@ -24,7 +24,7 @@
     }
 
     .roomDetailTable tr:first-child td:first-child {
-        width:40%;
+        width: 45%;
         padding-left: 5%;
     }
 
@@ -429,4 +429,12 @@
         text-align: center;
         margin-left: 6px;
     }
+}
+
+.preview {
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: block;
 }

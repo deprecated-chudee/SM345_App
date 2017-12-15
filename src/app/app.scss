@@ -21,6 +21,10 @@ ion-content.side.content.content-wp {
     background: #38484f;
 }
 
+.menu {
+    width: 200px;
+}
+
 .sideTable {
     margin: 10%;
     width: 80%;
@@ -43,44 +47,4 @@ ion-content.side.content.content-wp {
     margin: 10px;
     padding-bottom: 30px;
     color: #A4AAAB;
-}
-
-.sideAccount {
-    background: #273338;
-
-    ion-item.item.item-block.item-ios,
-    ion-item.item.item-block.item-md {
-        background: none;
-    }
-
-    table.sideAccountTable {
-        margin-left: 10%;
-        width: 20%;
-    }
-
-    .sideAccountTable td{
-        color: white;
-    }
-
-    .account-icon {
-        color: #2dfffe;
-    }
-
-    .item-ios .item-button,
-    .item-md .item-button {
-        padding: 3px;
-        height: 24px;
-        font-size: 15px;
-    }
-
-    td.account_user {
-        width: 70%;
-        font-weight: bold;
-    }
-
-    img.account-icon {
-        margin-left: 10px;
-        width: 18px;
-        vertical-align: top;
-    }
 }

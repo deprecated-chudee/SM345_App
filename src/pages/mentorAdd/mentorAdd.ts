@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { App, NavController, ViewController, ToastController } from 'ionic-angular';
-import { RoomPage } from '.././room/room';
-import { Mentoroom } from '../../models/mentoroom';
 
+import { Mentoroom } from '../../models/mentoroom';
+import { Upload } from '../../models/upload';
+import { RoomPage } from '.././room/room';
 import { MentoroomService } from '../../services/mentoroom.service';
 
 @Component({
@@ -17,11 +18,15 @@ export class MentorAddPage implements OnInit {
   private imageLabel = '';
   private credentialsFile;
   private credentialsFileLabel = '';
+  private mentoroom_id: number;
 
   USERID: number;
   USERNAME: string;
   USERAUTH: number;
   private currentUser;
+
+  private files: Upload[] = [];
+  
 
   constructor(
     public app: App, 
@@ -34,6 +39,7 @@ export class MentorAddPage implements OnInit {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
     this.USERAUTH = this.currentUser.USERAUTH;
+    this.USERNAME = this.currentUser.USERNAME;
     this.mentoroom = new Mentoroom('', '', '', '');
   }
 
@@ -44,7 +50,7 @@ export class MentorAddPage implements OnInit {
     this.viewCtrl.dismiss();
   }
 
-  // 멘토 신청 아 왜안댐 ㅜㅜ
+  // 파일 서버에 저장
   async save() {
     let { team_name, team_theme, team_about } = await this.mentoroom;
     if(!team_name) { this.Toast('팀 이름을 작성해 주세요.'); return false; }
@@ -52,37 +58,42 @@ export class MentorAddPage implements OnInit {
     if(!team_about) { this.Toast('팀 소개 및 설명을 작성해 주세요.'); return false; }
     if(!this.image) { this.Toast('팀 사진을 업로드 해주세요.'); return false; }
     if(!this.credentialsFile) { this.Toast('자격증명 파일을 업로드 해주세요.'); return false; }
-    this.mentoroom.mento_id = await this.USERID;
-    await console.log(this.image)
-    await console.log(this.credentialsFile)
-    let r_id = await this.mentoroomService.createMentoroom1(this.mentoroom).then(r_id => r_id)
-    await this.mentoroomService.createMentoroom2(r_id, 2, this.image)
-      .then(res => {
-        console.log(res)
-      })
-    await this.mentoroomService.createMentoroom2(r_id, 3, this.credentialsFile)
-      .then(res => {
-        console.log(res)
-      })
+    
+    try {
+      this.mentoroom.mento_id = await this.USERID;
+      let r_id = await this.mentoroomService.createMentoroom1(this.mentoroom).then(r_id => r_id);
+  
+      if(this.image) {
+        await this.mentoroomService.fileUpload(this.image, r_id, 2)
+      }
+      if(this.credentialsFile) {
+        await this.mentoroomService.fileUpload(this.credentialsFile, r_id, 3)               
+      }
       
-    await this.Toast('멘토 신청이 완료되었습니다.')
-    
-    
-    //this.navCtrl.setRoot(RoomPage);
-    // setTimeout(() => { 
-    //     this.app.getRootNav().setRoot(RoomPage);
-    //   }, 300);
-    //   this.dismiss();
+      await this.Toast('멘토신청이 완료되었습니다');
+      await localStorage.setItem('currentUser', JSON.stringify({ 
+        USERID: this.USERID,
+        USERNAME: this.USERNAME,
+        USERAUTH: 1
+      }));
+      
+      await this.dismiss();
+  
+    }
+    catch(e) {
+      this.Toast('업로드 실패');
+      this.dismiss();
+    }
   }
 
+  
   // 이미지 업로드
   onChangeImage(event) {
     if(event.target.files && event.target.files.length > 0) {
       let file: File = event.target.files[0];
       this.image = new FormData();
-      this.image.append(event.target.name, file, file.name);
+      this.image.append('uploadFile', file, file.name);
       this.imageLabel = file.name;
-      console.log(this.image.getAll(event.target.name))
     } else {
       this.image = undefined;
       this.imageLabel = '';
@@ -94,14 +105,14 @@ export class MentorAddPage implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       let file: File = event.target.files[0];
       this.credentialsFile = new FormData();
-      this.credentialsFile.append(event.target.name, file, file.name);
+      this.credentialsFile.append('uploadFile', file, file.name);
       this.credentialsFileLabel = file.name;
-      console.log(this.credentialsFile.getAll(event.target.name))
     } else {
       this.credentialsFile = undefined;
       this.credentialsFileLabel = '';
     }
   }
+  
 
   fileClick(sort) {
     this.sortArray[sort] = !this.sortArray[sort];

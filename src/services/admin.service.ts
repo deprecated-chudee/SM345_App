@@ -5,12 +5,15 @@ import 'rxjs/add/operator/toPromise';
 import { User } from '../models/user';
 import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoroomInfo';
+<<<<<<< HEAD
 import { Observable } from 'rxjs/Observable';
 import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 import { XlsxToJsonService } from './xlsx-to-json.service';
 import * as _ from 'lodash';
 import * as FileSaver from 'file-saver';
 import { Student } from '../models/student';
+=======
+>>>>>>> a11bf1287ee8ea5dce0b12706e211fd65b80edbb
 
 @Injectable()
 export class AdminService {

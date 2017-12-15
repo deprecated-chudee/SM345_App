@@ -5,7 +5,6 @@ import 'rxjs/add/operator/toPromise';
 import { Mentoroom } from '../models/mentoroom';
 import { Menti } from '../models/menti';
 import { Upload } from '../models/upload';
-import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class MentoroomService {
   
@@ -20,7 +19,7 @@ export class MentoroomService {
         let url = this.URL + 'mentoroom/create';
         return this.http.post(url, mentoroom)
             .toPromise()
-            .then(res => res.text())
+            .then(response => response.json() as number)
             .catch(this.handleError)
     }
 
@@ -93,15 +92,16 @@ export class MentoroomService {
     }
 
     // 보고서 업로드
-    fileUpload(upload: FormData, room_id: number) {
+    fileUpload(uploadFile: FormData, room_id: number, kind: number) {
         let headers = new Headers();
         headers.append('enctype', 'multipart/form-data');
         headers.append('Accept', 'application/json');
         let options = new RequestOptions({headers: headers});
 
-        let url = `${this.URL}mentoroom/fileupload/${room_id}`; 
-        return this.http.post(url, upload, options)
+        let url = `${this.URL}mentoroom/fileupload/${room_id}/${kind}`; 
+        return this.http.post(url, uploadFile, options)
             .toPromise()
+            .then(() => console.log('good'))
             .catch(this.handleError)
     }
 
@@ -119,6 +119,15 @@ export class MentoroomService {
         let url = `${this.URL}mentoroom/filedelete/${room_id}/${file_id}`;
         return this.http.get(url)
             .toPromise()
+            .catch(this.handleError)
+    }
+
+    // ?? 
+    getThumbnail() {
+        let url = this.URL + "home/filelist";
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json())
             .catch(this.handleError)
     }
 

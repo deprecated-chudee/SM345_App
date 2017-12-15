@@ -17,10 +17,8 @@ import { AdminService } from '../../services/admin.service';
 import { MentoroomService } from '../../services/mentoroom.service';
 import { SurveyService } from '../../services/survey.service';
 import { Mentoroom } from '../../models/mentoroom';
-import { MyApp } from '../../app/app.component';
 import { Menti } from '../../models/menti';
 import { Upload } from '../../models/upload';
-import { Student } from '../../models/student';
 
 import * as FileSaver from 'file-saver';
 @Component({
@@ -37,8 +35,6 @@ export class RoomDetailPage implements OnInit {
   private mento_id;
   private mento_name;
   sort: boolean = false;
-  private student: Student;
-  private survey_check: number;
 
   private formData;
   private fileLabel: string = '';
@@ -48,7 +44,7 @@ export class RoomDetailPage implements OnInit {
   private mente_end;
   private survey_start;
   private survey_end;
-  private date: Date;
+  private survey_check: number;
   
   constructor(
     public app: App, 
@@ -77,23 +73,24 @@ export class RoomDetailPage implements OnInit {
     this.mentoroomService.menti_list(this.mento_id)
     .then(menti => this.mentis = menti);
   
-    this.fileList()
-    // this.surveyCheck();
-    // console.log('survey_check: ' + this.survey_check);
+    this.surveyCheck();
+    this.fileList();
+    this.getMentoRoomInfo();
+    
   }
 
   //설문조사 참여여부
   surveyCheck() {
-    this.surveyService.surveyCheck(this.USERID);
+    if(this.USERAUTH == 1 || this.USERAUTH == 2){
+    this.surveyService.surveyCheck(this.USERID)
+    .then( check => this.survey_check = check);
+    }
   }
 
   // 파일 리스트 가져오기
   fileList() {
     this.mentoroomService.fileList(this.selectedRoom.mentoroom_id)
-      .then(files => {
-        this.files = files
-        console.log(files)
-      })
+      .then(files => this.files = files)
   }
 
   // 파일 업로드 버튼 클릭 핸들러
@@ -101,9 +98,8 @@ export class RoomDetailPage implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       let file: File = event.target.files[0];
       this.formData = new FormData();
-      this.formData.append(event.target.name, file, file.name);
+      this.formData.append('uploadFile', file, file.name);
       this.fileLabel = file.name;
-      console.log(this.formData.entries())
     } else {
       this.formData = undefined;
       this.fileLabel = '';
@@ -113,7 +109,7 @@ export class RoomDetailPage implements OnInit {
   // 파일 서버에 저장
   save() {
     if(this.formData) {
-      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id)
+      this.mentoroomService.fileUpload(this.formData, this.selectedRoom.mentoroom_id, 1)
       .then(() => {
         this.Toast('업로드 성공');
         this.dismiss();

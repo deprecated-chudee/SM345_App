@@ -10,7 +10,7 @@
 </ion-header>
 
 <ion-content class="page-survey">
-    <ion-list *ngFor="let so of surveyObjs">
+    <ion-list *ngFor="let so of surveyobList">
         <ion-list-header class="survey-result-header">
             {{ so.object_question }}        
         </ion-list-header>
@@ -18,12 +18,19 @@
             ① {{ so.object_answer1 }}%&nbsp;&nbsp;② {{ so.object_answer2 }}%&nbsp;&nbsp;③ {{ so.object_answer3 }}%&nbsp;&nbsp;④ {{ so.object_answer4 }}%&nbsp;&nbsp;⑤ {{ so.object_answer5 }}%
         </ion-item> 
     </ion-list>
-    <ion-list *ngFor="let ss of surveySubjs">
+    <ion-list>
         <ion-list-header class="survey-result-header">
-            <b>[주관식]</b> {{ ss.subject_question }}        
+          <b>[주관식]</b> {{ sbq1 }}     
         </ion-list-header>
-        <ion-list *ngFor="let ssc of surveySubjCons" padding class="survey_answer">
-            {{ ssc.survey_answer }}
+        <ion-list *ngFor="let sb1 of surveysbList1" padding class="survey_answer">
+                {{ sb1.survey_answer }}
+        </ion-list>
+
+        <ion-list-header class="survey-result-header">
+         <b>[주관식]</b> {{ sbq2 }}
+        </ion-list-header>
+        <ion-list *ngFor="let sb2 of surveysbList2" padding class="survey_answer">
+                {{ sb2.survey_answer }}
         </ion-list>
     </ion-list>
 </ion-content>

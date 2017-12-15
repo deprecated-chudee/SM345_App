@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ViewController } from 'ionic-angular';
+import { ViewController } from 'ionic-angular';
 
 import { SurveyService } from '../../services/survey.service';
 import { SurveySubject } from '../../models/surveySubject';
@@ -10,14 +10,15 @@ import { SurveySubjectContent } from '../../models/surveySubjectContent';
   templateUrl: 'survey.html'
 })
 export class SurveyPage implements OnInit{
-  //설문조사
-  private surveyObj: SurveyObject;
-  private surveySubj: SurveySubject;
-  private surveyObjs: SurveyObject[] = [];
+  
   private surveySubjs: SurveySubject[] = [];
-
-  private surveySubjCon: SurveySubjectContent;
-  private surveySubjCons: SurveySubjectContent[] = [];
+  private surveyobList: SurveyObject[] = [];
+  private surveysbList1: SurveySubjectContent[] = [];
+  private surveysbList2: SurveySubjectContent[] = [];
+  private sbq1: string;
+  private sbq2: string;
+  private sbid1: number;
+  private sbid2: number;
 
   private currentUser;
   private USERID;
@@ -32,16 +33,33 @@ export class SurveyPage implements OnInit{
   }
 
   ngOnInit() {
-    this.surveyService.surveyObjList()
-      .then(surveyObj => this.surveyObjs = surveyObj);
+  
     this.surveyService.surveySubjList()
-      .then(surveySubj => this.surveySubjs = surveySubj);
+      .then(surveySubj => { this.surveySubjs = surveySubj;
+                            this.sbq1 = surveySubj[0].subject_question;
+                            this.sbq2 = surveySubj[1].subject_question;
+                            this.sbid1 = surveySubj[0].id;
+                            this.sbid2 = surveySubj[1].id;
+                         });
 
-    this.surveyService.surveyObjResult();
+    this.surveyService.surveyObjResult()
+    .then( surveyobresult => this.surveyobList = surveyobresult);
+
+
     this.surveyService.surveySubjResult()
-      .then(surveySubjCon => this.surveySubjCons = surveySubjCon);
+      .then(surveysbresult => { for(let s of surveysbresult){
+                                  if(s.question_id == this.sbid1){
+                                    this.surveysbList1.push(s);
+                                  }
+                                  if(s.question_id == this.sbid2){
+                                    this.surveysbList2.push(s);
+                                  }
+                                  console.log(this.sbid1);
+                                  console.log(this.sbid2);
+                                  console.log(this.surveysbList1)
+                                  console.log(this.surveysbList2)
+      } });
   }
-
 
   dismiss() {
     this.viewCtrl.dismiss();

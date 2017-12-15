@@ -42,8 +42,8 @@ export class ManagerPage implements OnInit{
     private count1:number = 1;
 
     //설문조사
-    private surveyObjs: SurveyObject[] = [];
-    private surveySubjs: SurveySubject[] = [];
+    // private surveyObjs: SurveyObject[] = [];
+    // private surveySubjs: SurveySubject[] = [];
     private object_question: string[] = []; //객관식 설문조사 질문 내용들 배열
     private subject_question: string[] = []; //주관식 설문조사 질문 내용들 배열
 
@@ -91,7 +91,7 @@ export class ManagerPage implements OnInit{
 
     // 멘토방 report 설정
     range: number;
-    private reportDataList: ReportDate[] = [];
+    private reportDateList: ReportDate[] = [];
     
     constructor(
         private mentoroomService: MentoroomService, 
@@ -140,9 +140,9 @@ export class ManagerPage implements OnInit{
 
     // 보고서 제출 기한 핸들러
     changeRange(index: number) {
-        this.reportDataList = [];
+        this.reportDateList = [];
         for (let i = 0; i < index; i++) {
-            this.reportDataList.push(new ReportDate())
+            this.reportDateList.push(new ReportDate())
         }
         this.mentoroomInfo.meeting_number = index;
         this.range = _.range(index);
@@ -174,7 +174,7 @@ export class ManagerPage implements OnInit{
     getReportList() {
         try {
             this.adminService.getReportList()
-                .then(reportDataList => this.reportDataList = reportDataList);
+                .then(reportDateList => this.reportDateList = reportDateList);
         }
         catch(e) {
             this.Toast('에러 발생')
@@ -184,7 +184,7 @@ export class ManagerPage implements OnInit{
     // 리포트 날짜 리스트 저장하기
     createReportList() {
         try {
-            this.adminService.createReportList(this.reportDataList);
+            this.adminService.createReportList(this.reportDateList);
         }
         catch(e) {
             this.Toast('에러 발생')
@@ -295,8 +295,13 @@ export class ManagerPage implements OnInit{
         this.searchedRooms = [];
         this.searchRoomname = '';
         this.selectedRoom = '';
-        this.mentoroomService.getMentoroomListByYear(e)
-            .then(mentoroom => this.mentorooms = mentoroom);
+        this.mentoroomService.getMentoroomList()
+            .then(mentorooms => this.mentorooms = mentorooms)
+        // this.mentoroomService.getMentoroomListByYear(e) 2017년 도 껄로 뽑으면 사진이 안들어가있음
+        //     .then(mentoroom => {
+        //         this.mentorooms = mentoroom
+        //         console.log(this.mentorooms)
+        //     });
     }
 
 
@@ -583,26 +588,26 @@ export class ManagerPage implements OnInit{
         this.viewCtrl.dismiss();
     }
 
-    // 엑셀 업로드 int가 유효하지 않은게 뭐야
-   handleFile(event) {
-    let file = event.target.files[0];
-        this.xlsxToJsonService.processFileToJson({}, file)
-            .subscribe(data => {
-                data = _.map(data['sheets']['수강학생목록_데이터베이스실습'], (student) => {
-                  console.log(student['복수/부전공'].indexOf('-'))
-                  //if(student['복수/부전공'].indexOf('-')) {
-                  //} 
-                  console.log(student['학과'])
-                    return {   
-                    student_id: student['학번'],
-                    //student_major: student['학과'],
-                    //student_minor: student['복수/부전공'].replace('-', '0'),
-                    student_name: student['이름'],
-                    student_email: student['이메일'],
-                    student_security: student['주민번호'],
-                    student_phone: student['휴대폰'],
-                    }
-                  // console.log(user)
+    // 엑셀 업로드 아직 대충 구현함
+    handleFile(event) {
+        let file = event.target.files[0];
+            this.xlsxToJsonService.processFileToJson({}, file)
+                .subscribe(data => {
+                    data = _.map(data['sheets']['신입생목록'], (student) => {
+                        student.student_major = this.changeMajor(student.student_major)
+                        student.student_minor = this.changeMinor(student.student_minor)
+                        console.log(student)
+                        return {
+                            student_id: student['학번'],
+                            student_major: student['학과'],
+                            student_minor: student['복수/부전공'],
+                            student_name: student['이름'],
+                            student_email: student['이메일'],
+                            student_number: student['주민번호'],
+                            student_phone: student['휴대폰'],
+                          }
+                    })
+                    this.result = JSON.stringify(data)
                 })
                 this.result = JSON.stringify(data)
                 console.log(this.result);
@@ -621,10 +626,12 @@ export class ManagerPage implements OnInit{
         switch(minor) {
             case '소프트웨어공학과':
                 return 1;
-            case '경영학과':
-                return 2;
-            case '없음':
+            case '영어학과':
+                return 5;
+            case '-':
                 return 0;
+            case '경영학부':
+                return 11;
         }
     }
 
