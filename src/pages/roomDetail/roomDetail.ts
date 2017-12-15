@@ -60,7 +60,6 @@ export class RoomDetailPage implements OnInit {
     private surveyService: SurveyService,
   ) {
     this.selectedRoom = this.navParams.get("selectedRoom");
-    console.log(this.selectedRoom)
     this.room = this.navParams.get("room");
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.USERID = this.currentUser.USERID;
@@ -91,10 +90,7 @@ export class RoomDetailPage implements OnInit {
   // 파일 리스트 가져오기
   fileList() {
     this.mentoroomService.fileList(this.selectedRoom.mentoroom_id)
-      .then(files => {
-        this.files = files;
-        console.log(this.files);
-    })
+      .then(files => this.files = files)
   }
 
   // 파일 업로드 버튼 클릭 핸들러
@@ -102,9 +98,8 @@ export class RoomDetailPage implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       let file: File = event.target.files[0];
       this.formData = new FormData();
-      this.formData.append(event.target.name, file, file.name);
+      this.formData.append('uploadFile', file, file.name);
       this.fileLabel = file.name;
-      console.log(this.formData.entries())
     } else {
       this.formData = undefined;
       this.fileLabel = '';

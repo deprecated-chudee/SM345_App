@@ -38,13 +38,12 @@ export class HomePage implements OnInit {
 
   ngOnInit() {
     if(this.currentUser){
-      
+      // 아직 서버 업로드 안됨
       // this.articleService.getNoticeList()
       //   .then(article => this.articles = article);
 
       this.mentoroomService.getMentoroomList()
-        .then(mentorooms => { this.mentorooms = mentorooms;      
-        });
+        .then(mentorooms => this.mentorooms = mentorooms);
     }
 
     this.getMentoRoomInfo()
