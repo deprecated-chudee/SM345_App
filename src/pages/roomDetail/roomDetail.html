@@ -131,7 +131,7 @@
    
     <!-- 멘티 신청 인터페이스 -->
     <ion-item no-lines *ngIf="USERAUTH === 0" class="menteeButton"> 
-        <div *ngIf="((mente_start - date) < 0 && (mente_end - date) > 0)>
+        <div *ngIf="((mente_start - date) < 0 && (mente_end - date) > 0)">
             <button ion-button block class="teamOk" (click)="joinMentee()">멘티 신청</button>
         </div>
     </ion-item>

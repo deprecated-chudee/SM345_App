@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastController, NavController, NavParams, ViewController, App, AlertController } from 'ionic-angular';
+import { ToastController, NavParams, ViewController, App, AlertController } from 'ionic-angular';
 import { SmPage } from '.././sm/sm';
 
 import { ArticleService } from '../../services/article.service';
@@ -14,7 +14,6 @@ export class SmEditPage {
     private board_id;
     private currentUser;
     private USERID;
-    private count:number=1;
 
     constructor(
         private articleService: ArticleService, 

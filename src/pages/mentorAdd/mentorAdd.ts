@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { App, NavController, ViewController, ToastController } from 'ionic-angular';
-import { RoomPage } from '.././room/room';
+
 import { Mentoroom } from '../../models/mentoroom';
 
 import { MentoroomService } from '../../services/mentoroom.service';
@@ -66,13 +66,6 @@ export class MentorAddPage implements OnInit {
       })
       
     await this.Toast('멘토 신청이 완료되었습니다.')
-    
-    
-    //this.navCtrl.setRoot(RoomPage);
-    // setTimeout(() => { 
-    //     this.app.getRootNav().setRoot(RoomPage);
-    //   }, 300);
-    //   this.dismiss();
   }
 
   // 이미지 업로드

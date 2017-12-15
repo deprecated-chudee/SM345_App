@@ -9,7 +9,6 @@ import {
   ViewController 
 } from 'ionic-angular';
 import { HomePage } from '.././home/home';
-import { WritePage } from '.././write/write';
 import { NoticePage } from '.././notice/notice'
 import { QuestionPage } from '.././question/question'
 
@@ -31,7 +30,6 @@ export class ReadingPage implements OnInit {
   private USERAUTH;
   private comments: Comment[] = [];
   private createContent: string = '';
-  private editComment: string = '';
   
   toggleEdit: boolean = false;
   toggleCommentEdit: boolean = false;

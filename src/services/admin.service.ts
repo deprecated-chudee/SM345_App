@@ -5,8 +5,6 @@ import 'rxjs/add/operator/toPromise';
 import { User } from '../models/user';
 import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoroomInfo';
-import { Observable } from 'rxjs/Observable';
-import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
 
 @Injectable()
 export class AdminService {
