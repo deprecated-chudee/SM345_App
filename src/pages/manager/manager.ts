@@ -25,12 +25,9 @@ import { ReportDate } from '../../models/reportDate';
 
 //설문조사
 import { SurveyService } from '../../services/survey.service';
-import { SurveySubject } from '../../models/surveySubject';
-import { SurveyObject } from '../../models/surveyObject';
 
 import * as _ from 'lodash';
 import * as FileSaver from 'file-saver';
-import { read } from 'xlsx';
 
 @Component({
     templateUrl: 'manager.html'
@@ -295,13 +292,8 @@ export class ManagerPage implements OnInit{
         this.searchedRooms = [];
         this.searchRoomname = '';
         this.selectedRoom = '';
-        this.mentoroomService.getMentoroomList()
-            .then(mentorooms => this.mentorooms = mentorooms)
-        // this.mentoroomService.getMentoroomListByYear(e) 2017년 도 껄로 뽑으면 사진이 안들어가있음
-        //     .then(mentoroom => {
-        //         this.mentorooms = mentoroom
-        //         console.log(this.mentorooms)
-        //     });
+        this.mentoroomService.getMentoroomListByYear(e)
+            .then(mentoroom => this.mentorooms = mentoroom);
     }
 
 
