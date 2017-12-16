@@ -200,6 +200,7 @@
         </div>
            
         <button ion-button block class="mentorRoomButton" (click)="handleRemoveRoom()">목록에서 삭제</button>
+        <button ion-button block class="mentorRoomButton" (click)="handleDeleteRoom(selectedRoom)">멘토방 폐설</button>
 
       </ion-list> 
 
@@ -402,7 +403,7 @@
 
       </ion-list>
 
-      <!-- 신입생 엑셀 등록 아직 대충 구현함 -->
+      <!-- 신입생 엑셀 등록  -->
       <ion-list *ngSwitchCase="'excel'">
         <div>
             <label for="">Select an .xlsx file to get json</label>

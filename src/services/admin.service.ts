@@ -5,14 +5,26 @@ import 'rxjs/add/operator/toPromise';
 import { User } from '../models/user';
 import { Mentoroom } from '../models/mentoroom';
 import { MentoroomInfo } from '../models/mentoroomInfo';
+<<<<<<< HEAD
+import { Observable } from 'rxjs/Observable';
+import { PACKAGE_ROOT_URL } from '@angular/core/src/application_tokens';
+import { XlsxToJsonService } from './xlsx-to-json.service';
+import * as _ from 'lodash';
+import * as FileSaver from 'file-saver';
+import { Student } from '../models/student';
+=======
+>>>>>>> a11bf1287ee8ea5dce0b12706e211fd65b80edbb
 
 @Injectable()
 export class AdminService {
   
     // private URL = 'http://localhost:8085/sm345/api/';
     private URL = 'http://220.230.112.31:8081/sm345/api/';
+    public result: any; //엑셀 데이터
+    private xlsxToJsonService: XlsxToJsonService;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, xlsxToJsonService: XlsxToJsonService) {
+        this.xlsxToJsonService = xlsxToJsonService;
     }
 
     // 사용자 목록
@@ -145,9 +157,16 @@ export class AdminService {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({headers: headers});
-
         let url = this.URL + 'admin/excel';
         return this.http.post(url, excel, options)
+            .toPromise()
+            .catch(this.handleError)
+    }
+
+    //멘토방 폐설
+    mentoroom_close(r_id: number) {
+        let url = this.URL + 'admin/mentoroom/' + r_id + '/close';
+        return this.http.get(url)
             .toPromise()
             .catch(this.handleError)
     }
