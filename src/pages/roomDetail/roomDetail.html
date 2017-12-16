@@ -49,10 +49,10 @@
                 {{selectedRoom.person_count}}명
             </td>
         </tr>
-        <tr *ngIf="files[1]">
+        <tr *ngIf="file">
             <td>
                 <b>자격증명 파일 : </b>
-                <button ion-button class="fileButton" (click)="download(files[1].file_name, files[1].file_data, files[1].file_type)">다운로드</button>
+                <button ion-button class="fileButton" (click)="download(file.file_name, file.file_data, file.file_type)">다운로드</button>
             </td>
         </tr>
         <tr>
@@ -105,28 +105,26 @@
         </div>
 
         <!-- <div *ngIf="USERAUTH === 3" (press)="actionSheet()"> -->
-            <table class="reportTable" *ngFor="let file of files; let i = index">
-                <div *ngIf="i !== 0 && i !== 1">
-                    <tr (press)="actionSheet(file.id, file.file_state)">
-                        <td>{{ file.file_name }}</td>
-                        <td rowspan="2" *ngIf="selectedRoom.mento_id == USERID">  <!-- 해당 방 멘토만 삭제 -->
-                            <a (click)="fileDelete(file.id)" >
-                                <ion-icon name="md-trash"></ion-icon>
-                            </a>
-                        </td>
-                        <td rowspan="2">
-                            <a (click)="download(file.file_name, file.file_data, file.file_type)" >
-                                <ion-icon name="md-download"></ion-icon>
-                            </a>
-                        </td>
-                        <td rowspan="2" class="report-ing" *ngIf="file.file_state === 0"> 확인중 </td>
-                        <td rowspan="2" class="report-end" *ngIf="file.file_state === 1"> 승인완료 </td>
-                        <td rowspan="2" class="report-reject" *ngIf="file.file_state === 2"> 반려 </td>
-                    </tr>
-                    <tr>
-                        <td><span class="reportTime">{{ file.timestamp | date:'yyyy-MM-dd HH:mm' }}</span></td>
-                    </tr>
-                </div>  
+            <table class="reportTable" *ngFor="let report of reports; let i = index">
+                <tr (press)="actionSheet(report.id, report.file_state)">
+                    <td>{{ report.file_name }}</td>
+                    <td rowspan="2" *ngIf="selectedRoom.mento_id == USERID">  <!-- 해당 방 멘토만 삭제 -->
+                        <a (click)="fileDelete(report.id)" >
+                            <ion-icon name="md-trash"></ion-icon>
+                        </a>
+                    </td>
+                    <td rowspan="2">
+                        <a (click)="download(report.file_name, report.file_data, report.file_type)" >
+                            <ion-icon name="md-download"></ion-icon>
+                        </a>
+                    </td>
+                    <td rowspan="2" class="report-ing" *ngIf="report.file_state === 0"> 확인중 </td>
+                    <td rowspan="2" class="report-end" *ngIf="report.file_state === 1"> 승인완료 </td>
+                    <td rowspan="2" class="report-reject" *ngIf="report.file_state === 2"> 반려 </td>
+                </tr>
+                <tr>
+                    <td><span class="reportTime">{{ report.timestamp | date:'yyyy-MM-dd HH:mm' }}</span></td>
+                </tr>
             </table>
         <!-- </div> -->
     </div>

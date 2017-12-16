@@ -105,29 +105,37 @@ export class MentoroomService {
             .catch(this.handleError)
     }
 
-    // 파일 리스트
-    fileList(room_id: number): Promise<Upload[]> {
-        let url = this.URL + 'mentoroom/filelist/' + room_id;
+    // 파일 리스트 kind = 1(보고서), 2(사진), 3(자격증명파일) / 보고서목록 때문에 return타입이 List<UploadFile>. 사진이나 자격증명파일도 List로 리턴한다는거 조심하세요
+    getReportList(room_id: number): Promise<Upload[]> {
+        let url = this.URL + 'mentoroom/filelist/' + room_id + '/1';
         return this.http.get(url)
             .toPromise()
             .then(res => res.json() as Upload[])
             .catch(this.handleError)
     }
 
+    getThumbnail(room_id: number): Promise<Upload[]> {
+        let url = this.URL + 'mentoroom/filelist/' + room_id + '/2';
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json() as Upload[])
+            .catch(this.handleError)
+    }
+
+    getFile(room_id: number): Promise<Upload[]> {
+        let url = this.URL + 'mentoroom/filelist/' + room_id + '/3';
+        return this.http.get(url)
+            .toPromise()
+            .then(res => res.json() as Upload[])
+            .catch(this.handleError)
+    }
+
+
     // 파일 삭제
     fileDelete(room_id: number, file_id: number) {
         let url = `${this.URL}mentoroom/filedelete/${room_id}/${file_id}`;
         return this.http.get(url)
             .toPromise()
-            .catch(this.handleError)
-    }
-
-    // ?? 
-    getThumbnail() {
-        let url = this.URL + "home/filelist";
-        return this.http.get(url)
-            .toPromise()
-            .then(res => res.json())
             .catch(this.handleError)
     }
 

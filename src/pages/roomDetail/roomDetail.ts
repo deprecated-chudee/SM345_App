@@ -38,7 +38,8 @@ export class RoomDetailPage implements OnInit {
 
   private formData;
   private fileLabel: string = '';
-  private files: Upload[] = [];
+  private reports: Upload[] = [];
+  private file: Upload;
 
   private mente_start;
   private mente_end;
@@ -74,7 +75,8 @@ export class RoomDetailPage implements OnInit {
     .then(menti => this.mentis = menti);
   
     this.surveyCheck();
-    this.fileList();
+    this.getReportList();
+    this.getFile();
     this.getMentoRoomInfo();
     
   }
@@ -87,10 +89,16 @@ export class RoomDetailPage implements OnInit {
     }
   }
 
-  // 파일 리스트 가져오기
-  fileList() {
-    this.mentoroomService.fileList(this.selectedRoom.mentoroom_id)
-      .then(files => this.files = files)
+  // 보고서 리스트 가져오기
+  getReportList() {
+    this.mentoroomService.getReportList(this.selectedRoom.mentoroom_id)
+      .then(reports => this.reports = reports)
+  }
+
+  // 자격증명파일 가져오기
+  getFile() {
+    this.mentoroomService.getFile(this.selectedRoom.mentoroom_id)
+      .then(file => this.file = file[0])
   }
 
   // 파일 업로드 버튼 클릭 핸들러
