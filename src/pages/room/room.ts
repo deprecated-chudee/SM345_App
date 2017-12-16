@@ -33,7 +33,10 @@ export class RoomPage  implements OnInit {
 
     ngOnInit() {
         this.mentoroomService.getMentoroomList()
-            .then(mentorooms => this.mentorooms = mentorooms);
+            .then(mentorooms => {
+                this.mentorooms = mentorooms
+                console.log(this.mentorooms)
+            });
         this.getMentoRoomInfo()
     }
 

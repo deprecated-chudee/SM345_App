@@ -92,7 +92,7 @@ export class MentorAddPage implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       let file: File = event.target.files[0];
       this.image = new FormData();
-      this.image.append('uploadFile', file, file.name);
+      this.image.append(event.target.name, file, file.name);
       this.imageLabel = file.name;
     } else {
       this.image = undefined;
@@ -105,7 +105,7 @@ export class MentorAddPage implements OnInit {
     if(event.target.files && event.target.files.length > 0) {
       let file: File = event.target.files[0];
       this.credentialsFile = new FormData();
-      this.credentialsFile.append('uploadFile', file, file.name);
+      this.credentialsFile.append(event.target.name, file, file.name);
       this.credentialsFileLabel = file.name;
     } else {
       this.credentialsFile = undefined;
